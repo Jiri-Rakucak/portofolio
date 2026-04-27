@@ -1,0 +1,253 @@
+:root {
+    --color-primary: #F5F7FA; /*stejna jako bg*/
+    --color-primary-hover: none;
+    --color-secondary: none;
+
+    --color-backroud: #F5F7FA; 
+    --color-backroud-secondary: #191919;
+    --color-surface: #FFFFFF;
+    --color-border: none;
+
+    --color-text: #111827;
+    --color-text-secondary: #6B7280;
+    --color-text-muted: none;
+
+    --color-accent: #007BFF; /*E600E6 nebo 2ECC40   */
+
+    --color-error: #FF0000;
+    --color-success: #00FF00;
+    --color-warning: #FFA500;
+    --color-info: #0000FF;
+
+    --color-protons: #c82f46;
+    --color-neutrons: #f5b041;
+    --color-electrons: #3498db;
+
+/* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+[data-theme="dark"] {
+    --color-primary: #1A1A2E; /*nebo 11121C*/
+    --color-primary-hover: none;
+    --color-secondary: none;
+
+    --color-backroud: #201d22;
+    --color-backroud-secondary: #ff0000;
+    --color-surface: #1B1F34;
+    --color-border: none;
+
+    --color-text: #EAEAEA;
+    --color-text-secondary: #8892B0;
+    --color-text-muted: none;
+
+    --color-accent: #3498db; /*nebo 00BFFF nebo 39FF14 nebo 3498db nebo FF00FF*/
+
+    --color-error: #FF0000;
+    --color-success: #00FF00;
+    --color-warning: #FFA500;
+    --color-info: #0000FF;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(255 255 255 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(255 255 255 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(255 255 255 / 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+    --color-primary: #1A1A2E; /*nebo 11121C*/
+    --color-primary-hover: none;
+    --color-secondary: none;
+
+    --color-backroud: #201d22;
+    --color-backroud-secondary: #191919;
+    --color-surface: #1B1F34;
+    --color-border: none;
+
+    --color-text: #EAEAEA;
+    --color-text-secondary: #8892B0;
+    --color-text-muted: none;
+
+    --color-accent: #3498db; /*nebo 00BFFF nebo 39FF14*/
+
+    --color-error: #FF0000;
+    --color-success: #00FF00;
+    --color-warning: #FFA500;
+    --color-info: #0000FF;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(255 255 255 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(255 255 255 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(255 255 255 / 0.1);
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* Zabrání horizontálnímu scrollu */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+#root{
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.ol-rotate-reset {
+    display: none !important;
+}
+  
+.ol-attribution {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+}
+.ol-attribution a{
+    color: #333333;
+    font-size: 12px;
+    padding-right: 5px;
+}
+.ol-attribution button{
+    display: none ;   
+}
+.ol-attribution ul{
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.logocontrol{
+    position: absolute;
+    bottom: 0;  
+    left: 0;
+}
+.ol-zoom{
+   display: flex;
+}
+
+.ol-zoom-in, .ol-zoom-out{
+    width: 25px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0;
+}
+
+.ol-zoom-in:hover, .ol-zoom-out:hover{
+    background-color: #C0A592;
+    border: none;
+}
+
+.slick-prev:before, .slick-next:before{
+    display: none !important;
+}
+
+/* Globální scrollbar - přidej do global.css */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-backroud-secondary);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+  filter: brightness(1.2);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--color-backroud);
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-accent) var(--color-backroud-secondary);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--color-backroud-secondary);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  opacity: 0.8;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  opacity: 1;
+}
+
+::selection {
+    background-color: var(--color-accent);
+    color: #ffffff;
+}
+
+::-moz-selection {
+    background: var(--color-accent);
+    color: #ffffff;
+}
+
+h1::selection,
+h2::selection,
+h3::selection,
+h4::selection,
+h5::selection,
+h6::selection {
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
+
+p::selection,
+span::selection,
+div::selection {
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
+
+input::selection,
+textarea::selection {
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
+
+code::selection,
+pre::selection {
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
+
+[data-theme="dark"] ::selection {
+  background-color: var(--color-accent);
+  color: #ffffff;
+  opacity: 0.8;
+}
+
+[data-theme="dark"] ::-moz-selection {
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
