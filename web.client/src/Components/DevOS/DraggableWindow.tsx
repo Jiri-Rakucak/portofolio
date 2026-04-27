@@ -1,9 +1,4 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import {
-  WindowWrapper, TitleBar, TitleText, WindowControls,
-  ControlButton, Content, ResizeHandle
-} from './DraggableWindow.styles';
-
 import * as S from './DraggableWindow.styles';
 
 interface DraggableWindowProps {
@@ -126,7 +121,7 @@ export const DraggableWindow: React.FC<DraggableWindowProps> = ({
       onResize(id, { width: newWidth, height: newHeight });
       onMove(id, { x: newX, y: newY });
     }
-  }, [isDragging, isResizing, dragStart, resizeInfo, size, minWidth, minHeight, isMaximized]);
+  }, [isDragging, isResizing, dragStart, resizeInfo, size, minWidth, minHeight, isMaximized, id, onMove, onResize]);
 
   useEffect(() => {
     window.addEventListener('mousemove', handleMouseMove);

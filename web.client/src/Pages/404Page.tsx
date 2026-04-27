@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import Text from '../Components/Shared/Typography';
 import Page404Image from '../Components/Desktop/Page404Image';
 
@@ -24,7 +24,11 @@ const Textarea = styled.div`
   text-align: left;
 `;
 
-const Message = styled(Text)`
+const Message = styled.p`
+  font-family: ${({ theme }) => theme.fonts.main};
+  font-size: ${({ theme }) => theme.typography.bodyL.fontSize};
+  font-weight: ${({ theme }) => theme.typography.bodyL.fontWeight};
+  line-height: 1.5;
   color: ${({ theme }) => theme.colors.textSecondary};
   max-width: 600px;
   margin-bottom: 3rem;
@@ -45,7 +49,7 @@ const Page404: React.FC = () => {
           Page Not Found
         </Text>
         
-        <Message variant="bodyL">
+        <Message>
           Oops! It seems like you've ventured into the void. 
           The page you are looking for doesn't exist or has been moved.
           Click anywhere to return home.

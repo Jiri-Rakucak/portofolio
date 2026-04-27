@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Text from '../../Components/Shared/Typography';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 const Container = styled.div`
     background: ${({ theme }) => theme.colors.background};

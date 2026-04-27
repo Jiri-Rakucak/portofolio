@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import Text from "../Shared/Typography";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 export interface Technology {
     name: string;
@@ -62,16 +61,21 @@ const Content = styled.div`
     pointer-events: none; /* Důležité: Text neblokuje kliknutí na StretchedLink */
 `;
 
-const Title = styled(Text).attrs({ variant: "h4" })<{ $vtName?: string }>`
+const Title = styled.h4<{ $vtName?: string }>`
+    font-family: ${({ theme }) => theme.fonts.main};
+    font-size: ${({ theme }) => theme.typography.h4.fontSize};
+    font-weight: ${({ theme }) => theme.typography.h4.fontWeight};
+    line-height: 1.5;
     margin-bottom: 12px;
     padding-top: ${({ theme }) => theme.spacing.small};
-    
-    /* Dynamicky přiřadíme jméno, pokud existuje */
     view-transition-name: ${({ $vtName }) => $vtName};
-    width: fit-content; /* Důležité pro správný morphing */
+    width: fit-content;
 `;
 
-const Description = styled(Text).attrs({ variant: "bodyS" })`
+const Description = styled.p`
+    font-family: ${({ theme }) => theme.fonts.main};
+    font-size: ${({ theme }) => theme.typography.bodyS.fontSize};
+    font-weight: ${({ theme }) => theme.typography.bodyS.fontWeight};
     color: ${({ theme }) => theme.colors.textSecondary};
     margin-bottom: 20px;
     line-height: 1.6;
@@ -87,8 +91,7 @@ const TechStack = styled.div`
     position: relative;
 `;
 
-// Tagy jsou nyní samostatné odkazy nebo tlačítka
-const TechTag = styled.a` /* Nebo Link z react-router-dom, pokud je to interní odkaz */
+const TechTag = styled.a`
     padding: 4px 12px;
     background: ${({ theme }) => theme.colors.accent};
     border-radius: 20px;
@@ -140,12 +143,6 @@ export const Card = ({ title, description, technologies, gradient, url, viewTran
                             href={`${tech.url}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            onClick={(e) => {
-                                // e.stopPropagation() není nutné díky z-indexu a struktuře, 
-                                // ale pro jistotu ho můžete nechat, pokud by se eventy chovaly divně.
-                                // e.stopPropagation(); 
-                                console.log(`Clicked tag: ${tech}`);
-                            }}
                         >
                             {tech.name}
                         </TechTag>

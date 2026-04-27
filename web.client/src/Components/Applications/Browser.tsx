@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { webProjects } from './ProjectData';
-import { useDevOs } from '../../Contexts/DevOsContext';
 
 const BrowserWrapper = styled.div`
 

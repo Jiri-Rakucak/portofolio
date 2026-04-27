@@ -1,9 +1,11 @@
-import AtomScene from './AtomScene';
+import { lazy, Suspense } from 'react';
 import { Card } from './Card';
 import {LaunchButton} from './LaunchButton';
 import styled from 'styled-components';
 import Text from '../Shared/Typography'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
+
+const AtomScene = lazy(() => import('./AtomScene'));
 
 const Container = styled.div`
     background: ${({ theme }) => theme.colors.backgroundSecondary}/*linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)*/;
@@ -46,6 +48,12 @@ const StyledHeroSection = styled.section`
     max-width: 1264px;
     width: 100%;
     padding: 0 2rem;
+`;
+
+const AtomSceneFallback = styled.div`
+    height: 550px;
+    width: 100%;
+    max-width: 1000px;
 `;
 
 const HeroText = styled.div`
@@ -180,7 +188,9 @@ export default function DesktopHomeLayout() {
             <StyledMain>
                 <StyledSectionBg>
                     <StyledHeroSection>
-                        <AtomScene />
+                        <Suspense fallback={<AtomSceneFallback />}>
+                            <AtomScene />
+                        </Suspense>
                         <HeroText>
                             {/*<h1>Jiří Rakučák</h1> */}
                             {/*<h2>Web & Unity Design-Developer </h2> */}

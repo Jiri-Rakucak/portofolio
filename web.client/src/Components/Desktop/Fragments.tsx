@@ -31,8 +31,6 @@ export const Fragments = () => {
         }
 
         const data: ParticleData[] = [];
-        let electronIndex = 0;
-        
         electronCounts.forEach((count, orbitIndex) => {
             for (let i = 0; i < count; i++) {
                 const t = (i / count) * Math.PI * 2;
@@ -56,22 +54,21 @@ export const Fragments = () => {
                     phase: (i / count) * Math.PI * 2,
                     trail: Array(trailLength).fill(null).map(() => new THREE.Vector3())
                 });
-                electronIndex++;
             }
         });
         return data;
     }, []);
 
-    useFrame(state => {
+    useFrame(() => {
         if (!ref.current || !trailRef.current) return;
 
         particles.forEach((particle, i) => {
             particle.t += particle.speed;
 
             // Základní orbitální pozice
-            let x = Math.cos(particle.t + particle.phase) * particle.radius;
-            let y = Math.sin(particle.t + particle.phase) * particle.radius;
-            let z = 0;
+            const x = Math.cos(particle.t + particle.phase) * particle.radius;
+            const y = Math.sin(particle.t + particle.phase) * particle.radius;
+            const z = 0;
 
             // Aplikace rotací
             const cosX = Math.cos(particle.rotationX);

@@ -8,6 +8,7 @@ import ExplorerIcon from '../Components/Icons/ExplorerIcon';
 import WebBrowser from '../Components/Applications/Browser';
 
 // --- Typy ---
+type WindowProps = Record<string, unknown>;
 
 export interface WindowState {
     id: string;
@@ -18,8 +19,8 @@ export interface WindowState {
     size: { width: number; height: number };
     state: 'normal' | 'minimized' | 'maximized';
     zIndex: number;
-    component: React.ComponentType<any>;
-    props?: any;
+    component: React.ElementType;
+    props?: WindowProps;
     previousState?: 'normal' | 'maximized';
     previousPosition?: { x: number; y: number };
     previousSize?: { width: number; height: number };

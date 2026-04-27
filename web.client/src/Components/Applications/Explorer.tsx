@@ -5,7 +5,6 @@ import { fileSystem } from './ProjectData';
 import { ProjectWindow } from './ProjectWindow';
 import FolderIcon from '../Icons/Folder';
 import FileIcon from '../Icons/File';
-import ExplorerIcon from '../Icons/ExplorerIcon';
 
 // --- Styled Components ---
 const ExplorerWrapper = styled.div`

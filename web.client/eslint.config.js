@@ -25,4 +25,15 @@ export default tseslint.config(
       ],
     },
   },
+  {
+    files: [
+      'src/Contexts/**/*.tsx',
+      'src/Components/Settings/SettingsAtoms.tsx',
+      'src/Routes/AppRoutes.tsx',
+      'src/styles/ThemeProvider.tsx',
+    ],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
 )

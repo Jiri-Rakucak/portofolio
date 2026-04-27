@@ -1,12 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { DraggableWindow } from './DraggableWindow';
 import { useDevOs } from '../../Contexts/DevOsContext';
 import { TaskBar } from './TaskBar';
 import { DesktopIcon } from './DesktopIcon';
-import HomeIcon from '../Icons/Home'; 
-import AtomScene from '../Desktop/AtomScene';
 
 
 // --- Styled Components ---
@@ -92,26 +90,30 @@ const UIRender: React.FC = () => {
                 {/* Renderuje pouze viditelná (ne minimalizovaná) okna */}
                 {state.windows
                     .filter(window => window.state !== 'minimized')
-                    .map(window => (
-                        <DraggableWindow
-                            key={window.id}
-                            id={window.id}
-                            title={window.title}
-                            zIndex={window.zIndex}
-                            position={window.position}
-                            size={window.size}
-                            isActive={state.activeWindowId === window.id}
-                            isMaximized={window.state === 'maximized'}
-                            onClose={() => actions.closeWindow(window.id)}
-                            onMinimize={() => actions.minimizeWindow(window.id)}
-                            onMaximize={() => actions.maximizeWindow(window.id)}
-                            onFocus={actions.focusWindow}
-                            onMove={actions.updateWindowPosition}
-                            onResize={actions.updateWindowSize}
-                        >
-                            <window.component {...window.props} />
-                        </DraggableWindow>
-                    ))
+                    .map(window => {
+                        const WindowComponent = window.component as React.ComponentType<Record<string, unknown>>;
+
+                        return (
+                            <DraggableWindow
+                                key={window.id}
+                                id={window.id}
+                                title={window.title}
+                                zIndex={window.zIndex}
+                                position={window.position}
+                                size={window.size}
+                                isActive={state.activeWindowId === window.id}
+                                isMaximized={window.state === 'maximized'}
+                                onClose={() => actions.closeWindow(window.id)}
+                                onMinimize={() => actions.minimizeWindow(window.id)}
+                                onMaximize={() => actions.maximizeWindow(window.id)}
+                                onFocus={actions.focusWindow}
+                                onMove={actions.updateWindowPosition}
+                                onResize={actions.updateWindowSize}
+                            >
+                                <WindowComponent {...(window.props ?? {})} />
+                            </DraggableWindow>
+                        );
+                    })
                 }
                 <DesktopGrid>
                     {/* Přidej další ikony na plochu podle potřeby */}

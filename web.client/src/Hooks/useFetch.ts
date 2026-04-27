@@ -14,8 +14,6 @@ const useFetch = <T>(url: string | null, options?: RequestInit): UseFetchResult<
 
     useEffect(() => {
         if (!url) {
-            setData(null);
-            setLoading(false);
             return;
         }
 
@@ -59,7 +57,12 @@ const useFetch = <T>(url: string | null, options?: RequestInit): UseFetchResult<
         };
     }, [url, options]);
 
-    return { data, loading, error, setData };
+    return {
+        data: url ? data : null,
+        loading: url ? loading : false,
+        error: url ? error : null,
+        setData,
+    };
 };
 
 export default useFetch;

@@ -1,5 +1,3 @@
-import { ProjectWindow } from "./ProjectWindow";
-
 export interface Project{
     id: string;
     name: string;

@@ -4,7 +4,6 @@ import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './theme';
 import type { Theme } from './theme';
 import { GlobalStyles } from './globalStyles';
-import type { Color } from 'three';
 
 type ThemeOverrides = Partial<Theme['colors']>;
 interface AppThemeContextProps {

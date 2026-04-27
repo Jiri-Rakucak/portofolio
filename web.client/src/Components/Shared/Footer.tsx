@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import GitHubIcon from '../Icons/Github';
 import Text from './Typography';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 
 const StyledFooter = styled.footer`
@@ -43,9 +43,13 @@ const StyledSection = styled.div`
     flex-direction: column;
 `;
 
-const SectionTitle = styled(Text).attrs({ variant: 'h4' })`
+const SectionTitle = styled.h4`
     margin-bottom: 20px;
     color: ${({ theme }) => theme.colors.text};
+    font-family: ${({ theme }) => theme.fonts.main};
+    font-size: ${({ theme }) => theme.typography.h4.fontSize};
+    font-weight: ${({ theme }) => theme.typography.h4.fontWeight};
+    line-height: 1.5;
     position: relative;
     &::after {
         content: '';
@@ -58,7 +62,10 @@ const SectionTitle = styled(Text).attrs({ variant: 'h4' })`
     }
 `;
 
-const SectionDescription = styled(Text).attrs({ variant: 'bodyS' })`
+const SectionDescription = styled.p`
+    font-family: ${({ theme }) => theme.fonts.main};
+    font-size: ${({ theme }) => theme.typography.bodyS.fontSize};
+    font-weight: ${({ theme }) => theme.typography.bodyS.fontWeight};
     line-height: 1.6;
     color: ${({ theme }) => theme.colors.textSecondary};
     margin-bottom: 20px;
@@ -125,7 +132,10 @@ const ContactItem = styled.div`
     color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
-const ContactLink = styled(Text).attrs({ as: 'a' })`
+const ContactLink = styled.a`
+    font-family: ${({ theme }) => theme.fonts.main};
+    font-size: ${({ theme }) => theme.typography.bodyS.fontSize};
+    font-weight: ${({ theme }) => theme.typography.bodyS.fontWeight};
     color: inherit;
     text-decoration: none;
     transition: color 0.3s ease;
@@ -156,7 +166,10 @@ const FooterBottomLinks = styled.div`
     }
 `;
 
-const FooterBottomLink = styled(Text).attrs({ as: 'a' })`
+const FooterBottomLink = styled.a`
+    font-family: ${({ theme }) => theme.fonts.main};
+    font-size: ${({ theme }) => theme.typography.bodyXS.fontSize};
+    font-weight: ${({ theme }) => theme.typography.bodyXS.fontWeight};
     color: ${({ theme }) => theme.colors.textSecondary};
     text-decoration: none;
     transition: color 0.3s ease;
@@ -165,7 +178,10 @@ const FooterBottomLink = styled(Text).attrs({ as: 'a' })`
     }
 `;
 
-const CopyrightText = styled(Text).attrs({ variant: 'bodyXS' })`
+const CopyrightText = styled.p`
+    font-family: ${({ theme }) => theme.fonts.main};
+    font-size: ${({ theme }) => theme.typography.bodyXS.fontSize};
+    font-weight: ${({ theme }) => theme.typography.bodyXS.fontWeight};
     color: ${({ theme }) => theme.colors.textMuted};
 `;
 
@@ -262,13 +278,13 @@ const Footer: React.FC = () => {
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                                 </svg>
-                                <ContactLink href="mailto:jiri@rakucak.cz" variant="bodyS">jiri@rakucak.cz</ContactLink>
+                                <ContactLink href="mailto:jiri@rakucak.cz">jiri@rakucak.cz</ContactLink>
                             </ContactItem>
                             <ContactItem>
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                                 </svg>
-                                <ContactLink href="tel:+420123456789" variant="bodyS">+420 123 456 789</ContactLink>
+                                <ContactLink href="tel:+420123456789">+420 123 456 789</ContactLink>
                             </ContactItem>
                             <ContactItem>
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -283,9 +299,9 @@ const Footer: React.FC = () => {
                 <FooterBottom>
                     <CopyrightText>&copy; 2025 Jiří Rakučák. Všechna práva vyhrazena.</CopyrightText>
                     <FooterBottomLinks>
-                        <FooterBottomLink href="#" variant="bodyXS">Ochrana soukromí</FooterBottomLink>
-                        <FooterBottomLink href="#" variant="bodyXS">Podmínky použití</FooterBottomLink>
-                        <FooterBottomLink href="#" variant="bodyXS">Sitemap</FooterBottomLink>
+                        <FooterBottomLink href="#">Ochrana soukromí</FooterBottomLink>
+                        <FooterBottomLink href="#">Podmínky použití</FooterBottomLink>
+                        <FooterBottomLink href="#">Sitemap</FooterBottomLink>
                     </FooterBottomLinks>
                 </FooterBottom>
             </Container>

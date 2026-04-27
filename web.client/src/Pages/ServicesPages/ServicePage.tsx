@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import Text from '../../Components/Shared/Typography';
 import { ContactForm, LoginForm, SignUpForm } from '../../Components/Shared/Forms';
 
@@ -19,12 +19,6 @@ const HeroSection = styled.section`
     flex-direction: column;
     align-items: center;
     text-align: center;
-`;
-
-const HeroTitleWrapper = styled.div`
-    view-transition-name: title-services;
-    width: fit-content;
-    display: inline-block;
 `;
 
 const ContentWrapper = styled.div`
@@ -116,7 +110,11 @@ const Marker = styled.span`
     background: ${({ theme }) => theme.colors.accent};
 `;
 
-const ServiceDescription = styled(Text).attrs({ variant: 'bodyS' })`
+const ServiceDescription = styled.p`
+    font-family: ${({ theme }) => theme.fonts.main};
+    font-size: ${({ theme }) => theme.typography.bodyS.fontSize};
+    font-weight: ${({ theme }) => theme.typography.bodyS.fontWeight};
+    line-height: 1.5;
     color: ${({ theme }) => theme.colors.textSecondary};
 `;
 

@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
-import Text from '../Shared/Typography';
 
 interface DesktopIconProps {
   id: string;
@@ -38,7 +37,10 @@ const IconImage = styled.div`
   margin-bottom: 8px;
 `;
 
-const IconTitle = styled(Text).attrs({ variant: 'bodyXS' })`
+const IconTitle = styled.p`
+  font-family: ${({ theme }) => theme.fonts.main};
+  font-size: ${({ theme }) => theme.typography.bodyXS.fontSize};
+  font-weight: ${({ theme }) => theme.typography.bodyXS.fontWeight};
   color: ${({ theme }) => theme.colors.text};
   text-align: center;
   white-space: normal;

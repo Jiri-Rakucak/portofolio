@@ -12,7 +12,7 @@ export const Atom = () => {
         config: { mass: 1, tension: 280, friction: 60 }
     }));
 
-    useFrame((state, delta) => {
+    useFrame((_, delta) => {
         if(groupRef.current) {
             groupRef.current.rotation.y += delta * rotationSpeed.get();
             groupRef.current.rotation.x += delta * rotationSpeed.get() * 0.3; // ještě pomalejší rotace kolem X

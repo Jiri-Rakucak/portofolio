@@ -27,6 +27,14 @@ const StyledTypography = styled.p<StyledProps>`
   color: inherit;
 `;
 
+const TypographyElement = StyledTypography as React.ComponentType<
+  StyledProps & {
+    as?: React.ElementType;
+    className?: string;
+    children: React.ReactNode;
+  }
+>;
+
 export const Text: React.FC<TypographyProps> = ({
   children,
   variant = 'bodyS',
@@ -34,13 +42,13 @@ export const Text: React.FC<TypographyProps> = ({
   className,
 }) => {
   return (
-    <StyledTypography 
+    <TypographyElement 
       $variant={variant} 
       as={as} 
       className={className}
     >
       {children}
-    </StyledTypography>
+    </TypographyElement>
   );
 };
 

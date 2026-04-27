@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDevOs } from '../../Contexts/DevOsContext';
-import AtomScene from '../Desktop/AtomScene';
-import DesktopHomeLayout from '../Desktop/DesktopHomeLayout';
 import HomeIcon from '../Icons/Home';
-import { TaskBarIcon } from './TaskBarIcon'; // Import nové komponenty
+import { TaskBarIcon } from './TaskBarIcon';
 
 // --- Styled Components pro TaskBar ---
 

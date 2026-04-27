@@ -20,12 +20,6 @@ const HeroSection = styled.section`
     text-align: center;
 `;
 
-const HeroTitleWrapper = styled.div`
-    view-transition-name: title-consulting;    
-    width: fit-content;
-    display: inline-block;
-`;
-
 const ContentWrapper = styled.div`
     margin: 0 auto;
     padding: 4rem 2rem;

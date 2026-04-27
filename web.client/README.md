@@ -1,54 +1,80 @@
-# React + TypeScript + Vite
+# Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Active React/Vite frontend for the portfolio project.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React 19
+- TypeScript 6
+- Vite 8
+- React Router 7
+- styled-components 6
+- Three.js, React Three Fiber, Drei
+- ESLint 10
 
-## Expanding the ESLint configuration
+## Requirements
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Node.js `>=20.19.0`
+- npm
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Commands
+
+```bash
+npm install
+npm run dev
+npm run lint
+npm run build
+npm audit
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The Vite dev server is configured for HTTPS and defaults to:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```text
+https://localhost:60522/
 ```
+
+## Routing
+
+Routes are defined in `src/Routes/AppRoutes.tsx`.
+
+The app uses React Router 7 in Data Mode:
+
+- `createBrowserRouter` from `react-router`
+- `RouterProvider` from `react-router/dom`
+- route elements remain component based for now
+
+The DevOS route is lazy-loaded through `src/Routes/DevOsRoute.tsx` so its window manager and Three.js dependencies do not inflate the initial application bundle.
+
+## Important Folders
+
+```text
+src/
+├── Auth/               # Route protection helpers
+├── Components/
+│   ├── Applications/   # DevOS window contents
+│   ├── Desktop/        # Desktop home and Three.js scene
+│   ├── DevOS/          # Window manager and taskbar UI
+│   ├── Mobile/         # Mobile home layout
+│   ├── Settings/       # Theme settings controls
+│   └── Shared/         # Header, footer, forms, typography
+├── Contexts/           # App and DevOS state
+├── Hooks/              # Shared React hooks
+├── Layout/             # Main app layout
+├── Pages/              # Route pages
+├── Routes/             # Router setup
+└── styles/             # Theme and global styles
+```
+
+## Performance Notes
+
+- `DesktopHomeLayout` is lazy-loaded from the home page.
+- `AtomScene` is lazy-loaded from the desktop layout.
+- `/DevOs` is lazy-loaded as a separate route.
+- The Three.js scene still creates a large chunk, but it is isolated from the main app bundle.
+
+## Current Known Gaps
+
+- Mobile home is placeholder content.
+- Dashboard, admin, login, browser, explorer, and project data still contain prototype/demo behavior.
+- Forms currently log data rather than submit to a backend.
+- Tests are not configured yet.

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, { useState, useEffect } from 'react';
+import type { ChangeEvent } from 'react';
 
 export const SettingRow = styled.div`
   display: flex;
@@ -107,35 +107,16 @@ const StyledColorInput = styled.input`
 `;
 
 export const ColorPicker = ({ value, onChange }: { value: string; onChange: (val: string) => void }) => {
-  const [localValue, setLocalValue] = useState(value);
-
-  useEffect(() => {
-    setLocalValue(value);
-  }, [value]);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLocalValue(e.target.value);
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    onChange(event.target.value);
   };
-
-  const handleBlur = () => {
-    // Aplikovat změnu do globálního tématu až při opuštění inputu (zavření pickeru)
-    if (localValue !== value) {
-      onChange(localValue);
-    }
-  };
-
-  // Pro jistotu můžeme použít i onChange, ale s debounce, nebo spoléhat na to, 
-  // že u type="color" se onChange volá až při potvrzení (v některých prohlížečích).
-  // Ale onBlur je jistota.
-  // Alternativně: onChange={handleChange} a onBlur={() => onChange(localValue)}
 
   return (
-    <ColorInputContainer style={{ backgroundColor: localValue }}>
+    <ColorInputContainer style={{ backgroundColor: value }}>
       <StyledColorInput 
         type="color" 
-        value={localValue} 
-        onChange={handleChange} // Mění jen lokální stav
-        onBlur={handleBlur}     // Propíše do globálního stavu až po dokončení
+        value={value} 
+        onChange={handleChange}
       />
     </ColorInputContainer>
   );
