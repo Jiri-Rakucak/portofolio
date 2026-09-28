@@ -1,0 +1,388 @@
+{
+  "projectStatusLabels": {
+    "live": "Live",
+    "in-progress": "In progress",
+    "concept": "Concept"
+  },
+  "projects": [
+    {
+      "id": "devos-portfolio",
+      "name": "DevOS Portfolio",
+      "shortDescription": "Interactive portfolio shell built as a desktop-inspired web experience.",
+      "description": "A modern React portfolio that presents services, project work, and experimental DevOS interactions through a responsive Vite application.",
+      "status": "in-progress",
+      "category": "Portfolio",
+      "role": "Design engineer / frontend developer",
+      "timeframe": "Active build",
+      "impact": "Creates a distinctive technical portfolio surface and a reusable content foundation.",
+      "technologies": ["React", "TypeScript", "Vite", "React Router", "styled-components"],
+      "highlights": [
+        "Lazy-loaded DevOS route and Three.js scene",
+        "Theme-aware component system",
+        "Centralized project and service content model"
+      ],
+      "route": "/",
+      "featured": true
+    },
+    {
+      "id": "atom-scene",
+      "name": "Interactive Atom Scene",
+      "shortDescription": "Three.js scene used as the visual anchor of the desktop homepage.",
+      "description": "A React Three Fiber scene with animated particles, trails, themed materials, and orbit controls. It is isolated into its own lazy-loaded chunk.",
+      "status": "in-progress",
+      "category": "3D Web",
+      "role": "Creative frontend developer",
+      "timeframe": "Prototype phase",
+      "impact": "Adds a memorable interactive signal without blocking the initial app bundle.",
+      "technologies": ["Three.js", "React Three Fiber", "Drei", "React Spring"],
+      "highlights": [
+        "Theme-driven 3D materials",
+        "Instanced particle rendering",
+        "Separated from the main bundle for better initial load"
+      ],
+      "route": "/",
+      "featured": true
+    },
+    {
+      "id": "service-pages",
+      "name": "Service Pages System",
+      "shortDescription": "Structured service pages for frontend, backend, design, 3D, and consulting work.",
+      "description": "A route-based service section that explains available work areas and links the homepage, footer, and service directory around shared content.",
+      "status": "concept",
+      "category": "Content System",
+      "role": "Information architecture / frontend implementation",
+      "timeframe": "Foundation phase",
+      "impact": "Reduces duplicated copy and prepares the project for future admin-managed content.",
+      "technologies": ["React Router", "TypeScript", "styled-components"],
+      "highlights": [
+        "Shared service catalog",
+        "Consistent routing metadata",
+        "Prepared for future admin-managed content"
+      ],
+      "route": "/services"
+    },
+    {
+      "id": "unity-graduation-game",
+      "name": "Unity Graduation Game",
+      "shortDescription": "Graduation project game built in Unity and C#, prepared for screenshots, gameplay notes, and a possible WebGL showcase later.",
+      "description": "A school graduation game project built with Unity. The portfolio entry is intentionally conservative until exact gameplay, scope, and media are added from the original project.",
+      "status": "concept",
+      "category": "Unity / Game Development",
+      "role": "Unity developer / C# gameplay programmer",
+      "timeframe": "Graduation project",
+      "impact": "Shows practical game-development work and creates a path toward a future WebGL DevOS showcase.",
+      "technologies": ["Unity", "C#", "Game Design", "Gameplay Programming"],
+      "highlights": [
+        "Built as a graduation project",
+        "Prepared for screenshots or gameplay video",
+        "Can later become a Unity WebGL DevOS window"
+      ],
+      "featured": true,
+      "caseStudy": {
+        "summary": "A Unity/C# graduation project reserved for a full portfolio case study. This entry is ready for original build notes, screenshots, gameplay description, and final project results.",
+        "problem": "Document the original assignment, game genre, target experience, constraints, and evaluation criteria from the graduation project.",
+        "solution": "Describe the actual gameplay loop, Unity scenes, C# systems, assets, UI, input handling, and build pipeline once the source project is reviewed.",
+        "outcome": "Add the final project state, school evaluation or presentation result, demo availability, and the strongest technical lessons learned.",
+        "lessons": [
+          "Add one concrete Unity or C# technical lesson.",
+          "Add one gameplay, level-design, or UX lesson.",
+          "Add one scope, delivery, or debugging lesson."
+        ],
+        "sections": [
+          {
+            "title": "Media to add",
+            "body": "Add screenshots, a short trailer, or gameplay capture before this becomes a public-facing featured case study."
+          },
+          {
+            "title": "WebGL note",
+            "body": "Keep the Unity WebGL embed as a later step after checking build size, input handling, loading time, and browser performance."
+          }
+        ],
+        "assets": [
+          {
+            "type": "image",
+            "label": "Gameplay screenshot placeholder",
+            "src": "",
+            "alt": "Gameplay screenshot to add"
+          },
+          {
+            "type": "video",
+            "label": "Gameplay video placeholder",
+            "src": "",
+            "alt": "Gameplay video to add"
+          }
+        ]
+      }
+    }
+  ],
+  "services": [
+    {
+      "id": "frontend-development",
+      "title": "Frontend Development",
+      "description": "Modern, responsive web applications built with a performance-first mindset.",
+      "route": "/services/frontend-development",
+      "tags": ["React", "TypeScript", "Vite"],
+      "technologies": [
+        { "name": "React", "url": "https://react.dev/" },
+        { "name": "TypeScript", "url": "https://www.typescriptlang.org/" },
+        { "name": "Vite", "url": "https://vite.dev/" },
+        { "name": "Three.js", "url": "https://threejs.org/" }
+      ],
+      "gradient": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      "featuredOnHome": true,
+      "viewTransitionName": "title-frontend-development",
+      "detail": {
+        "title": "Frontend Development",
+        "subtitle": "Modern React interfaces, interactive product surfaces, and fast user-facing workflows.",
+        "introTitle": "What I focus on",
+        "introBody": [
+          "I build frontend systems that feel polished, load quickly, and are practical to maintain. The goal is not just a good-looking interface, but a product surface that supports real users and real iteration.",
+          "This portfolio itself is an example of that direction: Vite, React Router, styled-components, 3D interaction, lazy-loaded experiences, and a content model that can grow into an admin-managed workflow."
+        ],
+        "capabilitiesTitle": "Key capabilities",
+        "capabilities": [
+          {
+            "title": "React application architecture",
+            "description": "Component structure, route boundaries, state flow, reusable UI patterns, and maintainable TypeScript foundations."
+          },
+          {
+            "title": "Interaction-rich UI",
+            "description": "Responsive layouts, transitions, theme-aware components, and interface details that make a product feel intentionally built."
+          },
+          {
+            "title": "Performance and delivery",
+            "description": "Bundle splitting, rendering discipline, Core Web Vitals awareness, and pragmatic build tooling around Vite."
+          },
+          {
+            "title": "3D and visual experiences",
+            "description": "Browser-based 3D scenes, WebGL concepts, and interactive previews when a project needs more than static content."
+          }
+        ],
+        "stackTitle": "Tools I reach for",
+        "stackDescription": "The stack changes with the project, but these are the tools that fit this portfolio direction well.",
+        "stack": ["React", "TypeScript", "Vite", "React Router", "styled-components", "Three.js", "React Three Fiber", "Vitest"],
+        "relatedTitle": "Related paths",
+        "relatedDescription": "Frontend work often connects directly with design, 3D interaction, and backend integration.",
+        "relatedLinks": [
+          { "label": "UI/UX Design", "route": "/services/ux-ui-design" },
+          { "label": "Game & 3D Graphics", "route": "/services/game-and-3d-graphics" },
+          { "label": "Backend & Systems", "route": "/services/backend-and-systems" },
+          { "label": "All services", "route": "/services" }
+        ]
+      }
+    },
+    {
+      "id": "game-and-3d-graphics",
+      "title": "Game & 3D Graphics",
+      "description": "Interactive experiences, realtime visuals, and immersive 3D concepts.",
+      "route": "/services/game-and-3d-graphics",
+      "tags": ["Unity", "C#", "WebGL"],
+      "technologies": [
+        { "name": "Unity", "url": "https://unity.com/" },
+        { "name": "C#", "url": "https://learn.microsoft.com/dotnet/csharp/" },
+        { "name": "Blender", "url": "https://www.blender.org/" },
+        { "name": "WebGL", "url": "https://get.webgl.org/" }
+      ],
+      "gradient": "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+      "featuredOnHome": true,
+      "viewTransitionName": "title-game-and-3d-graphics",
+      "detail": {
+        "title": "Game & 3D Graphics",
+        "subtitle": "Interactive 3D, realtime visuals, prototypes, and browser-friendly immersive concepts.",
+        "introTitle": "Where this fits",
+        "introBody": [
+          "3D and game-style interaction can make a portfolio, product demo, educational tool, or investor prototype easier to understand. I treat it as product communication first, not decoration.",
+          "The strongest use cases are focused: a clear visual concept, a responsive interaction model, and a build that still respects performance constraints."
+        ],
+        "capabilitiesTitle": "What I can build",
+        "capabilities": [
+          {
+            "title": "Interactive 3D scenes",
+            "description": "React Three Fiber scenes, camera controls, materials, particles, and lightweight visual systems for the web."
+          },
+          {
+            "title": "Game and simulation prototypes",
+            "description": "Playable mechanics, proof-of-concept loops, training concepts, and realtime interaction experiments."
+          },
+          {
+            "title": "3D asset workflow",
+            "description": "Model preparation, Blender-based iteration, basic animation setup, and assets optimized for realtime rendering."
+          },
+          {
+            "title": "Shader and visual polish",
+            "description": "Custom visual effects, material tuning, particle motion, and small details that make scenes feel alive."
+          }
+        ],
+        "stackTitle": "Tools I reach for",
+        "stackDescription": "I choose the rendering path based on target platform, performance budget, and how much interaction the project needs.",
+        "stack": ["Three.js", "React Three Fiber", "Drei", "Unity", "C#", "Blender", "WebGL", "GLSL"],
+        "relatedTitle": "Related paths",
+        "relatedDescription": "3D work is strongest when it is paired with a clear frontend shell and strong interface decisions.",
+        "relatedLinks": [
+          { "label": "Frontend Development", "route": "/services/frontend-development" },
+          { "label": "UI/UX Design", "route": "/services/ux-ui-design" },
+          { "label": "All services", "route": "/services" }
+        ]
+      }
+    },
+    {
+      "id": "backend-and-systems",
+      "title": "Backend & Systems",
+      "description": "Server-side architecture, APIs, data modeling, and maintainable systems.",
+      "route": "/services/backend-and-systems",
+      "tags": ["APIs", "Databases", "Architecture"],
+      "technologies": [
+        { "name": "Node.js", "url": "https://nodejs.org/" },
+        { "name": "C#", "url": "https://learn.microsoft.com/dotnet/csharp/" },
+        { "name": "SQL", "url": "https://www.postgresql.org/docs/current/tutorial-sql.html" },
+        { "name": "APIs", "url": "https://developer.mozilla.org/docs/Learn_web_development/Extensions/Client-side_APIs/Introduction" }
+      ],
+      "gradient": "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+      "featuredOnHome": true,
+      "viewTransitionName": "title-backend-and-systems",
+      "detail": {
+        "title": "Backend & Systems",
+        "subtitle": "APIs, data models, integrations, and system foundations that support the frontend product.",
+        "introTitle": "Current role in this project",
+        "introBody": [
+          "Backend work is intentionally parked for this portfolio until there is a concrete need. When it becomes necessary, I would upgrade the backend shell first and design the API around the same content shape the frontend already uses.",
+          "For client work, the backend goal is simple: reliable data flow, clear contracts, secure access, and enough architecture to grow without turning early development into ceremony."
+        ],
+        "capabilitiesTitle": "Core capabilities",
+        "capabilities": [
+          {
+            "title": "API design",
+            "description": "REST-style interfaces, endpoint contracts, validation boundaries, and frontend-friendly response models."
+          },
+          {
+            "title": "Data modeling",
+            "description": "Project-specific schema design, relational data structures, query planning, and pragmatic persistence decisions."
+          },
+          {
+            "title": "Authentication and admin flows",
+            "description": "Protected admin surfaces, role-aware access, session/token handling, and content editing workflows."
+          },
+          {
+            "title": "Integrations",
+            "description": "Connecting external services, form providers, content APIs, analytics, and operational tools without overcomplicating the app."
+          }
+        ],
+        "stackTitle": "Tools I reach for",
+        "stackDescription": "The current backend is not active, but these are the likely directions once real backend work starts.",
+        "stack": ["ASP.NET", "C#", "Node.js", "PostgreSQL", "SQL", "REST APIs", "Authentication", "Docker"],
+        "relatedTitle": "Related paths",
+        "relatedDescription": "Backend decisions should follow the frontend and admin workflows the product actually needs.",
+        "relatedLinks": [
+          { "label": "Frontend Development", "route": "/services/frontend-development" },
+          { "label": "Consulting", "route": "/services/consulting" },
+          { "label": "All services", "route": "/services" }
+        ]
+      }
+    },
+    {
+      "id": "ui-ux-design",
+      "title": "UI/UX Design",
+      "description": "Design systems, high-fidelity prototypes, and practical user experience work.",
+      "route": "/services/ux-ui-design",
+      "tags": ["Design Systems", "Figma", "Prototyping"],
+      "technologies": [
+        { "name": "Figma", "url": "https://www.figma.com/" },
+        { "name": "Design Systems", "url": "https://www.designsystems.com/" },
+        { "name": "Accessibility", "url": "https://www.w3.org/WAI/fundamentals/accessibility-intro/" }
+      ],
+      "gradient": "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
+      "viewTransitionName": "title-ui-ux-design",
+      "detail": {
+        "title": "UI/UX Design",
+        "subtitle": "Interface structure, product clarity, design systems, and prototypes that are ready to build.",
+        "introTitle": "Design as product structure",
+        "introBody": [
+          "I approach UI/UX as the bridge between what the product needs to say and what users need to do. The output should make implementation easier, not create a separate design artifact that fights the code.",
+          "For this portfolio, that means practical layouts, consistent interaction patterns, restrained visual language, and reusable content structures."
+        ],
+        "capabilitiesTitle": "Design capabilities",
+        "capabilities": [
+          {
+            "title": "Information architecture",
+            "description": "Page structure, navigation logic, content hierarchy, and flows that help users understand the offer quickly."
+          },
+          {
+            "title": "Interface design",
+            "description": "High-fidelity screens, responsive states, component behavior, and visual systems designed for implementation."
+          },
+          {
+            "title": "Prototyping",
+            "description": "Clickable flows, interaction concepts, and early validation before time is spent on deeper engineering."
+          },
+          {
+            "title": "Design system foundations",
+            "description": "Reusable component rules, theme tokens, typography, spacing, and patterns that keep the product coherent."
+          }
+        ],
+        "stackTitle": "Tools I reach for",
+        "stackDescription": "The design toolset stays focused on product decisions and implementation handoff.",
+        "stack": ["Figma", "Design Systems", "Wireframes", "Prototypes", "Accessibility", "Responsive Design", "Theme Tokens"],
+        "relatedTitle": "Related paths",
+        "relatedDescription": "Design work connects most directly with frontend implementation and consulting around product direction.",
+        "relatedLinks": [
+          { "label": "Frontend Development", "route": "/services/frontend-development" },
+          { "label": "Consulting", "route": "/services/consulting" },
+          { "label": "All services", "route": "/services" }
+        ]
+      }
+    },
+    {
+      "id": "consulting",
+      "title": "Consulting",
+      "description": "Audits, roadmap planning, architecture guidance, and hands-on mentoring.",
+      "route": "/services/consulting",
+      "tags": ["Architecture", "Mentoring", "Roadmaps"],
+      "technologies": [
+        { "name": "Architecture", "url": "https://learn.microsoft.com/azure/architecture/guide/" },
+        { "name": "Agile", "url": "https://agilemanifesto.org/" },
+        { "name": "DevOps", "url": "https://learn.microsoft.com/devops/what-is-devops" }
+      ],
+      "gradient": "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
+      "viewTransitionName": "title-consulting",
+      "detail": {
+        "title": "Consulting",
+        "subtitle": "Technical direction, architecture review, project planning, and hands-on support for decisions that matter.",
+        "introTitle": "Useful, practical guidance",
+        "introBody": [
+          "Consulting only helps when it creates clarity. I focus on concrete decisions: what to build first, which stack fits the team, what can be simplified, and where technical risk is actually hiding.",
+          "This can be a lightweight audit, a roadmap session, or hands-on pairing around architecture, frontend quality, DevOS-style interaction, or future admin/backend planning."
+        ],
+        "capabilitiesTitle": "Areas of focus",
+        "capabilities": [
+          {
+            "title": "Architecture review",
+            "description": "Reviewing app structure, routing, content flow, data contracts, and maintainability risks before they become expensive."
+          },
+          {
+            "title": "Roadmap planning",
+            "description": "Turning a rough idea into sequenced technical work with clear tradeoffs and realistic delivery stages."
+          },
+          {
+            "title": "Stack decisions",
+            "description": "Choosing libraries, frameworks, hosting paths, and backend timing based on the actual product constraints."
+          },
+          {
+            "title": "Hands-on mentoring",
+            "description": "Pairing on implementation, code review, frontend architecture, or design-to-code decisions."
+          }
+        ],
+        "stackTitle": "Topics I can cover",
+        "stackDescription": "The consulting scope depends on where the product is blocked and what decision needs to be made next.",
+        "stack": ["Architecture", "React", "TypeScript", "Vite", "Content Models", "Design Systems", "Admin Workflows", "Delivery Planning"],
+        "relatedTitle": "Related paths",
+        "relatedDescription": "Consulting can connect strategy with a concrete frontend, backend, or design implementation path.",
+        "relatedLinks": [
+          { "label": "Frontend Development", "route": "/services/frontend-development" },
+          { "label": "Backend & Systems", "route": "/services/backend-and-systems" },
+          { "label": "UI/UX Design", "route": "/services/ux-ui-design" },
+          { "label": "All services", "route": "/services" }
+        ]
+      }
+    }
+  ]
+}

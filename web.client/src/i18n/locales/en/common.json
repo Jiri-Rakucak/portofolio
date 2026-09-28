@@ -1,0 +1,129 @@
+{
+  "navigation": {
+    "home": "Home",
+    "services": "Services",
+    "frontend": "Frontend Dev",
+    "backend": "Backend & Systems",
+    "fullServices": "Full Services",
+    "dashboard": "Dashboard",
+    "admin": "Admin",
+    "preferences": "Preferences",
+    "projects": "Projects"
+  },
+  "home": {
+    "heroTitle": "DevOS",
+    "heroSubtitle": "Web operation system",
+    "launchDevos": "Launch DevOS",
+    "exploreServices": "Or Explore Services →",
+    "servicesTitle": "Comprehensive IT Services",
+    "servicesDescription": "I provide full-cycle development services ranging from responsive frontend interfaces to robust backend systems and immersive 3D experiences. Explore the specialized categories below to see how we can build your next project."
+  },
+  "settings": {
+    "title": "Preferences",
+    "intro": "Customize the look and feel of the website.",
+    "warning": "Some changes may break the UI. In that case, use the reset button below.",
+    "darkMode": {
+      "label": "Dark Mode",
+      "description": "Switch between light and dark theme",
+      "warning": "This may affect the visibility of some UI elements."
+    },
+    "language": {
+      "label": "Language",
+      "description": "Switch UI and portfolio content without changing the URL.",
+      "en": "English",
+      "cs": "Čeština"
+    },
+    "colors": {
+      "title": "Colors",
+      "accent": {
+        "label": "Accent Color",
+        "description": "Main highlight color for buttons and links"
+      },
+      "background": {
+        "label": "Background Color",
+        "description": "Main page background"
+      },
+      "surface": {
+        "label": "Surface Color",
+        "description": "Background for cards and modals"
+      },
+      "text": {
+        "label": "Text Color",
+        "description": "Primary text color"
+      }
+    },
+    "reset": "Reset to Defaults"
+  },
+  "servicesPage": {
+    "eyebrow": "Service directory",
+    "title": "Pick the right way to build",
+    "description": "A practical map of the ways I can help: product frontend, interactive 3D, design systems, backend foundations, and technical direction.",
+    "highlights": [
+      "Frontend-first product surfaces",
+      "3D when it adds clarity",
+      "Backend only when needed"
+    ],
+    "laneTitle": "Service tracks",
+    "laneDescription": "Each track opens into a focused detail page with capabilities, stack choices, and related paths.",
+    "trackCountLabel": "tracks",
+    "fitLabel": "Best fit",
+    "stackLabel": "Core stack",
+    "exploreDetails": "Explore details",
+    "notSureTitle": "Choose by project shape",
+    "notSureDescription": "If the category is not obvious yet, start from the outcome you need.",
+    "questions": [
+      "Need a single powerful landing page?",
+      "Building an interactive concept for investors?",
+      "Want to refresh your design system?",
+      "Looking for tech guidance for your internal team?"
+    ],
+    "contactTitle": "Ready to shape the brief?",
+    "contactDescription": "The form flow is intentionally hidden until the backend or admin workflow exists. For now, use direct contact links and we can turn the rough idea into the right track.",
+    "email": "Email me",
+    "serviceNotFound": "Service was not found."
+  },
+  "projectsPage": {
+    "title": "Projects",
+    "description": "A curated selection of projects I am working on or have built. Each one highlights a different part of what I can deliver.",
+    "highlights": [
+      "Interactive web applications",
+      "3D and game experiments",
+      "Content and system foundations"
+    ],
+    "featuredTitle": "Featured projects",
+    "featuredDescription": "Projects that best represent the current direction and capabilities.",
+    "otherTitle": "More work",
+    "otherDescription": "Smaller projects and system pieces that hold things together.",
+    "viewDetail": "View detail",
+    "openInDevos": "Open in DevOS",
+    "projectNotFound": "Project was not found.",
+    "overviewTitle": "Overview",
+    "highlightsTitle": "Highlights",
+    "technologiesTitle": "Technologies",
+    "metaStatus": "Status",
+    "metaRole": "Role",
+    "metaTimeframe": "Timeframe",
+    "metaImpact": "Impact",
+    "relatedTitle": "More projects",
+    "relatedDescription": "Explore more work from the portfolio.",
+    "backToProjects": "← All projects"
+  },
+  "footer": {
+    "bio": "Creative developer specializing in modern web applications, Unity development and 3D design. I combine technology with creativity.",
+    "services": "Services",
+    "technologies": "Technologies",
+    "contact": "Contact",
+    "location": "Prague, Czech Republic",
+    "copyright": "© 2026 Jiří Rakučák. All rights reserved.",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "sitemap": "Sitemap",
+    "serviceLinks": {
+      "web": "Web Development",
+      "unity": "Unity Development",
+      "threeD": "3D Design & Modeling",
+      "design": "UI/UX Design",
+      "consulting": "Consulting"
+    }
+  }
+}

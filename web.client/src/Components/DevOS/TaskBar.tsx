@@ -4,21 +4,18 @@ import { useDevOs } from '../../Contexts/DevOsContext';
 import HomeIcon from '../Icons/Home';
 import { TaskBarIcon } from './TaskBarIcon';
 
-// --- Styled Components pro TaskBar ---
-
 const StyledTaskBar = styled.div`
   width: 100%;
   height: 50px;
+  flex: 0 0 50px;
   background-color: ${({ theme }) => theme.colors.backgroundSecondary};
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 10px;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: 10000; /* Taskbar musí být vždy nahoře */
+  position: relative;
+  z-index: 10000;
 `;
 
 const StartButton = styled.button`
@@ -59,13 +56,10 @@ const Clock = styled.div`
   font-variant-numeric: tabular-nums;
 `;
 
-// --- Hlavní komponenta ---
-
 export const TaskBar: React.FC = () => {
     const { state, actions } = useDevOs();
     const [time, setTime] = useState(new Date());
 
-    // Efekt pro aktualizaci hodin každou vteřinu
     useEffect(() => {
         const timerId = setInterval(() => setTime(new Date()), 1000);
         return () => clearInterval(timerId);
@@ -79,7 +73,6 @@ export const TaskBar: React.FC = () => {
 
             <TaskArea>
                 {state.windows.map(window => {
-                    // ZMĚNA: Zajistíme, že ikona není undefined před předáním.
                     let IconComponent: React.ComponentType<{ size?: number }> = HomeIcon; 
                     if (typeof window.icon === 'function') {
                         IconComponent = window.icon;
@@ -87,7 +80,7 @@ export const TaskBar: React.FC = () => {
                     return (
                         <TaskBarIcon
                             key={window.id}
-                            icon={IconComponent} // Předáváme ověřenou komponentu
+                            icon={IconComponent}
                             onClick={() => actions.focusWindow(window.id)}
                             isActive={state.activeWindowId === window.id}
                             title={window.title}

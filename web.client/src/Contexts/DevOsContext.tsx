@@ -6,13 +6,19 @@ import AtomScene from '../Components/Desktop/AtomScene';
 import Explorer from '../Components/Applications/Explorer';
 import ExplorerIcon from '../Components/Icons/ExplorerIcon';
 import WebBrowser from '../Components/Applications/Browser';
+import Terminal from '../Components/Applications/Terminal';
+import TerminalIcon from '../Components/Icons/Terminal';
+import AboutMe from '../Components/Applications/AboutMe';
+import Lab from '../Components/Applications/Lab';
+import FileIcon from '../Components/Icons/File';
+import SettingsIcon from '../Components/Icons/Settings';
 
 // --- Typy ---
 type WindowProps = Record<string, unknown>;
 
 export interface WindowState {
     id: string;
-    type: 'browser' | 'game' | 'app' | 'file-explorer';
+    type: 'browser' | 'game' | 'app' | 'file-explorer' | 'terminal';
     title: string;
     icon: React.ComponentType<{ size?: number }>;
     position: { x: number; y: number };
@@ -138,6 +144,69 @@ const initialState: DevOsState = {
                     component: WebBrowser,
                     position: { x: 100, y: 100 },
                     size: { width: 800, height: 600 },
+                });
+            }
+        }
+    },
+    {
+        id: 'about-me-icon',
+        title: 'About Me',
+        icon: FileIcon,
+        position: { x: 0, y: 240 },
+        onDoubleClick: (state, actions) => {
+            const existingWindow = state.windows.find(w => w.title === 'About Me');
+            if (existingWindow) {
+                actions.focusWindow(existingWindow.id);
+            } else {
+                actions.createWindow({
+                    type: 'app',
+                    title: 'About Me',
+                    icon: FileIcon,
+                    component: AboutMe,
+                    position: { x: 180, y: 90 },
+                    size: { width: 720, height: 540 },
+                });
+            }
+        }
+    },
+    {
+        id: 'lab-icon',
+        title: 'Component Lab',
+        icon: SettingsIcon,
+        position: { x: 0, y: 320 },
+        onDoubleClick: (state, actions) => {
+            const existingWindow = state.windows.find(w => w.title === 'Component Lab');
+            if (existingWindow) {
+                actions.focusWindow(existingWindow.id);
+            } else {
+                actions.createWindow({
+                    type: 'app',
+                    title: 'Component Lab',
+                    icon: SettingsIcon,
+                    component: Lab,
+                    position: { x: 220, y: 90 },
+                    size: { width: 820, height: 600 },
+                });
+            }
+        }
+    },
+    {
+        id: 'terminal-icon',
+        title: 'Terminal',
+        icon: TerminalIcon,
+        position: { x: 0, y: 400 },
+        onDoubleClick: (state, actions) => {
+            const existingWindow = state.windows.find(w => w.type === 'terminal');
+            if (existingWindow) {
+                actions.focusWindow(existingWindow.id);
+            } else {
+                actions.createWindow({
+                    type: 'terminal',
+                    title: 'Portfolio Terminal',
+                    icon: TerminalIcon,
+                    component: Terminal,
+                    position: { x: 140, y: 120 },
+                    size: { width: 720, height: 440 },
                 });
             }
         }

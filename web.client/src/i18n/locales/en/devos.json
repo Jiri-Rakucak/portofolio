@@ -1,0 +1,147 @@
+{
+  "shared": {
+    "openRoute": "Open route",
+    "liveSite": "Live site",
+    "source": "Source",
+    "sourceCode": "Source code"
+  },
+  "browser": {
+    "empty": "No portfolio projects are available.",
+    "featuredProjects": "Featured projects",
+    "searchAria": "Search portfolio projects",
+    "searchPlaceholder": "Search projects, stack, category, or id",
+    "searchResults": "{{count}} matches",
+    "noSearchResults": "No projects match \"{{query}}\".",
+    "clearSearch": "Clear search"
+  },
+  "explorer": {
+    "portfolio": "Portfolio",
+    "items": "items",
+    "empty": "This folder is empty.",
+    "folders": {
+      "Desktop": "Shortcuts currently available on the DevOS desktop.",
+      "Downloads": "Reserved for downloadable assets, resumes, and future project files.",
+      "Documents": "Reserved for long-form notes, case studies, and documentation.",
+      "Projects": "Portfolio case studies generated from the central project content model."
+    }
+  },
+  "projectWindow": {
+    "notFound": "Project was not found.",
+    "overview": "Overview",
+    "highlights": "Highlights",
+    "technologies": "Technologies",
+    "caseStudy": {
+      "title": "Case study",
+      "problem": "Problem",
+      "solution": "Solution",
+      "outcome": "Outcome",
+      "lessons": "Lessons",
+      "additionalNotes": "Additional notes",
+      "assets": "Assets",
+      "assetPending": "Media pending:"
+    },
+    "metadata": {
+      "status": "status",
+      "role": "role",
+      "timeframe": "timeframe",
+      "impact": "impact"
+    }
+  },
+  "aboutMe": {
+    "windowTitle": "About Me",
+    "fileName": "~/portfolio/about-me.md",
+    "kicker": "Profile document",
+    "name": "Jiří Rakučák",
+    "role": "Frontend-focused creative developer building DevOS-style web experiences.",
+    "summary": "I like portfolio work that behaves like a product: structured content, thoughtful interaction, and enough technical depth to show how it was built.",
+    "updatedLabel": "updated",
+    "updatedValue": "April 2026",
+    "sections": {
+      "focus": {
+        "title": "Current focus",
+        "body": "This portfolio is becoming a bilingual React/Vite experience with a desktop-inspired DevOS layer, centralized content, and service pages that can later connect to an admin workflow."
+      },
+      "build": {
+        "title": "What I build",
+        "body": "Frontend systems, interactive 3D concepts, content-driven portfolio surfaces, and pragmatic backend foundations when the product actually needs them."
+      },
+      "work": {
+        "title": "How I work",
+        "body": "I prefer clear structure, small focused components, practical technology choices, and visible polish over decorative complexity."
+      }
+    },
+    "keywordsTitle": "Keywords",
+    "keywords": {
+      "react": {
+        "label": "React",
+        "description": "Primary UI layer for this portfolio and most current frontend work."
+      },
+      "typescript": {
+        "label": "TypeScript",
+        "description": "Keeps content models, routes, and UI contracts explicit."
+      },
+      "devos": {
+        "label": "DevOS",
+        "description": "The experimental desktop-style portfolio interface."
+      },
+      "three": {
+        "label": "Three.js",
+        "description": "Used when 3D helps explain or anchor the experience."
+      },
+      "content": {
+        "label": "Content model",
+        "description": "Projects and services are centralized so future admin editing is realistic."
+      },
+      "backend": {
+        "label": "Backend later",
+        "description": "The ASP.NET backend stays parked until a real workflow needs it."
+      }
+    },
+    "contactTitle": "Contact",
+    "contactIntro": "Direct links are the current contact flow while forms stay hidden.",
+    "email": "Email",
+    "github": "GitHub",
+    "linkedin": "LinkedIn"
+  },
+  "lab": {
+    "windowTitle": "Component Lab",
+    "fileName": "~/portfolio/lab.design",
+    "kicker": "Design system preview",
+    "title": "Component Lab",
+    "subtitle": "A compact surface for theme tokens, typography, and interface states used across the portfolio.",
+    "tokensTitle": "Theme tokens",
+    "typographyTitle": "Typography scale",
+    "componentsTitle": "Component states",
+    "interfaceTitle": "Interface sample",
+    "notesTitle": "Implementation notes",
+    "primaryAction": "Primary action",
+    "secondaryAction": "Secondary action",
+    "quietAction": "Quiet action",
+    "inputLabel": "Mock input",
+    "inputPlaceholder": "example query",
+    "statusReady": "Ready",
+    "statusDraft": "Draft",
+    "statusPrototype": "Prototype",
+    "sampleTitle": "Reusable service row",
+    "sampleBody": "This lab keeps visual decisions close to production components instead of showing detached mockups.",
+    "notes": [
+      "Tokens are read from the active styled-components theme.",
+      "Controls stay intentionally small so layout density matches the rest of DevOS.",
+      "This can grow into a real design-system documentation surface later."
+    ]
+  },
+  "terminal": {
+    "version": "DevOS Terminal v0.1",
+    "intro": "Type \"help\" to list portfolio commands.",
+    "help": "Available commands:\n  help              Show commands\n  about             Describe this portfolio\n  projects          List project ids\n  project <id>      Show project details\n  open <id>         Open project case study window\n  services          List service tracks\n  contact           Show contact links\n  clear             Clear terminal",
+    "about": "This portfolio is a React/Vite desktop-inspired experience focused on frontend engineering, 3D web interaction, and structured project storytelling.",
+    "projectNotFound": "Project \"{{projectId}}\" was not found. Available ids: {{projectIds}}",
+    "projectUsage": "Usage: project <id>\nAvailable ids: {{projectIds}}",
+    "openUsage": "Usage: open <id>\nAvailable ids: {{projectIds}}",
+    "openedCaseStudy": "Opened case study: {{projectName}}",
+    "highlights": "Highlights:",
+    "contact": "Contact:\n  email: jiri@rakucak.cz\n  github: https://github.com/jirirakucak\n  linkedin: https://linkedin.com/in/jirirakucak",
+    "unknownCommand": "Unknown command: {{command}}. Type \"help\" for available commands.",
+    "commandAria": "Terminal command"
+  }
+}

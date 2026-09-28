@@ -1,0 +1,129 @@
+{
+  "navigation": {
+    "home": "Domů",
+    "services": "Služby",
+    "frontend": "Frontend",
+    "backend": "Backend a systémy",
+    "fullServices": "Všechny služby",
+    "dashboard": "Dashboard",
+    "admin": "Admin",
+    "preferences": "Nastavení",
+    "projects": "Projekty"
+  },
+  "home": {
+    "heroTitle": "DevOS",
+    "heroSubtitle": "Webový operační systém",
+    "launchDevos": "Spustit DevOS",
+    "exploreServices": "Otevřít portfolio →",
+    "servicesTitle": "Mé dovednosti",
+    "servicesDescription": "Níže najdeš oblasti, ve kterých se pohybuju a umím pomoct."
+  },
+  "settings": {
+    "title": "Nastavení",
+    "intro": "Uprav vzhled a chování webu.",
+    "warning": "Některé změny můžou rozbít UI. V takovém případě použij reset níže.",
+    "darkMode": {
+      "label": "Tmavý režim",
+      "description": "Přepnutí mezi světlým a tmavým motivem",
+      "warning": "Může ovlivnit čitelnost některých prvků."
+    },
+    "language": {
+      "label": "Jazyk",
+      "description": "Přepne UI a portfolio obsah",
+      "en": "English",
+      "cs": "Čeština"
+    },
+    "colors": {
+      "title": "Barvy",
+      "accent": {
+        "label": "Akcent",
+        "description": "Hlavní zvýrazňovací barva tlačítek a odkazů"
+      },
+      "background": {
+        "label": "Pozadí",
+        "description": "Hlavní pozadí stránky"
+      },
+      "surface": {
+        "label": "Plochy",
+        "description": "Pozadí karet a modalů"
+      },
+      "text": {
+        "label": "Text",
+        "description": "Primární barva textu"
+      }
+    },
+    "reset": "Resetovat výchozí"
+  },
+  "servicesPage": {
+    "eyebrow": "Rozcestník dovedností",
+    "title": "Mé dovednosti",
+    "description": "Zde najdeš dovednosti, které nabízím: produktový frontend, interaktivní 3D, design systémy, backendové základy a technické směřování.",
+    "highlights": [
+      "Frontend-first produktové plochy",
+      "3D tam, kde přidává srozumitelnost",
+      "Backend až ve chvíli, kdy dává smysl"
+    ],
+    "laneTitle": "Oblasti služeb",
+    "laneDescription": "Každá oblast vede na detailní stránku se schopnostmi, stackem a souvisejícími směry.",
+    "trackCountLabel": "oblastí",
+    "fitLabel": "Nejlepší pro",
+    "stackLabel": "Hlavní stack",
+    "exploreDetails": "Prozkoumat detail",
+    "notSureTitle": "Vyber podle typu projektu",
+    "notSureDescription": "Pokud kategorie ještě není jasná, začni podle výsledku, který potřebuješ.",
+    "questions": [
+      "Potřebuješ jednu silnou landing page?",
+      "Stavíš interaktivní koncept pro investory?",
+      "Chceš osvěžit design systém?",
+      "Hledáš technické vedení pro interní tým?"
+    ],
+    "contactTitle": "Připravený poskládat zadání?",
+    "contactDescription": "Formulář je zatím schovaný, dokud nebude hotový backend nebo admin workflow. Teď použij přímé kontaktní odkazy a z hrubé myšlenky vybereme správný směr.",
+    "email": "Napsat e-mail",
+    "serviceNotFound": "Služba nebyla nalezena."
+  },
+  "projectsPage": {
+    "title": "Projekty",
+    "description": "Výběr klíčových projektů, na kterých pracuji nebo jsem pracoval. Každý ukazuje jiný kousek toho, co umím postavit.",
+    "highlights": [
+      "Interaktivní webové aplikace",
+      "3D a herní experimenty",
+      "Obsahové a systémové základy"
+    ],
+    "featuredTitle": "Klíčové projekty",
+    "featuredDescription": "Projekty, které nejlíp ukazují aktuální směr a schopnosti.",
+    "otherTitle": "Další práce",
+    "otherDescription": "Menší projekty a systémové části, které drží celek pohromadě.",
+    "viewDetail": "Zobrazit detail",
+    "openInDevos": "Otevřít v DevOS",
+    "projectNotFound": "Projekt nebyl nalezen.",
+    "overviewTitle": "Přehled",
+    "highlightsTitle": "Hlavní body",
+    "technologiesTitle": "Technologie",
+    "metaStatus": "Stav",
+    "metaRole": "Role",
+    "metaTimeframe": "Časový rámec",
+    "metaImpact": "Dopad",
+    "relatedTitle": "Další projekty",
+    "relatedDescription": "Prozkoumej další práci z portfolia.",
+    "backToProjects": "← Všechny projekty"
+  },
+  "footer": {
+    "bio": "Kreativní developer zaměřený na moderní webové aplikace, Unity vývoj a 3D design.",
+    "services": "Služby",
+    "technologies": "Technologie",
+    "contact": "Kontakt",
+    "location": "Praha, Česká republika",
+    "copyright": "© 2026 Jiří Rakučák. Všechna práva vyhrazena.",
+    "privacy": "Ochrana soukromí",
+    "terms": "Podmínky použití",
+    "sitemap": "Sitemap",
+    "serviceLinks": {
+      "web": "Webový vývoj",
+      "unity": "Unity vývoj",
+      "threeD": "3D design a modelování",
+      "design": "UI/UX design",
+      "consulting": "Konzultace"
+    }
+  }
+}

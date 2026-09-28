@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import Text from '../Shared/Typography';
 import { useAppTheme } from '../../styles/ThemeProvider';
 import { SettingRow, Label, SubLabel, ToggleSwitch, ColorPicker } from './SettingsAtoms';
 import type { Theme } from '../../styles/theme';
+import { useLocale } from '../../i18n/useLocale';
+import { locales, type Locale } from '../../i18n/types';
 
 const Container = styled.div`
   display: flex;
@@ -28,40 +31,82 @@ const Button = styled.button`
   }
 `;
 
-const WebSettings: React.FC = () => {
-  const { themeName, toggleTheme, theme, updateColor, resetTheme } = useAppTheme();
+const LanguageOptions = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
+`;
 
-  // Seznam barev, které chceme umožnit měnit
+const LanguageButton = styled.button<{ $isActive: boolean }>`
+  min-width: 88px;
+  padding: 0.55rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid ${({ $isActive, theme }) => $isActive ? theme.colors.accent : theme.colors.border};
+  color: ${({ theme }) => theme.colors.text};
+  background: ${({ $isActive, theme }) => $isActive ? theme.colors.accent + '33' : theme.colors.surface};
+  cursor: pointer;
+  font-weight: 700;
+
+  &:hover {
+    border-color: ${({ theme }) => theme.colors.accent};
+  }
+`;
+
+const WebSettings: React.FC = () => {
+  const { t } = useTranslation('common');
+  const { themeName, toggleTheme, theme, updateColor, resetTheme } = useAppTheme();
+  const { locale, setLocale } = useLocale();
+
   const editableColors: { key: keyof Theme['colors']; label: string; desc: string }[] = [
-    { key: 'accent', label: 'Accent Color', desc: 'Main highlight color for buttons and links' },
-    { key: 'background', label: 'Background Color', desc: 'Main page background' },
-    { key: 'surface', label: 'Surface Color', desc: 'Background for cards and modals' },
-    { key: 'text', label: 'Text Color', desc: 'Primary text color' },
+    { key: 'accent', label: t('settings.colors.accent.label'), desc: t('settings.colors.accent.description') },
+    { key: 'background', label: t('settings.colors.background.label'), desc: t('settings.colors.background.description') },
+    { key: 'surface', label: t('settings.colors.surface.label'), desc: t('settings.colors.surface.description') },
+    { key: 'text', label: t('settings.colors.text.label'), desc: t('settings.colors.text.description') },
   ];
 
   return (
     <Container>
       <div style={{ marginBottom: '1.5rem' }}>
-        <Text variant="h2">Preferences</Text>
+        <Text variant="h2">{t('settings.title')}</Text>
         <Text variant="bodyS">
-          Customize the look and feel of the website.
+          {t('settings.intro')}
         </Text>
         <Text variant="bodyS">
-           Some chnages may broke the UI. In that case, use the reset button below.
+          {t('settings.warning')}
         </Text>
       </div>
 
       <SettingRow>
         <Label>
-          Dark Mode
-          <SubLabel>Switch between light and dark theme</SubLabel>
-          <SubLabel>This may affect the visibility of some UI elements.</SubLabel>
+          {t('settings.darkMode.label')}
+          <SubLabel>{t('settings.darkMode.description')}</SubLabel>
+          <SubLabel>{t('settings.darkMode.warning')}</SubLabel>
         </Label>
         <ToggleSwitch checked={themeName === 'dark'} onChange={toggleTheme} />
       </SettingRow>
 
+      <SettingRow>
+        <Label>
+          {t('settings.language.label')}
+          <SubLabel>{t('settings.language.description')}</SubLabel>
+        </Label>
+        <LanguageOptions>
+          {locales.map((language: Locale) => (
+            <LanguageButton
+              key={language}
+              type="button"
+              $isActive={locale === language}
+              onClick={() => setLocale(language)}
+            >
+              {t(`settings.language.${language}`)}
+            </LanguageButton>
+          ))}
+        </LanguageOptions>
+      </SettingRow>
+
       <div style={{ marginTop: '1rem' }}>
-        <Text variant="h4">Colors</Text>
+        <Text variant="h4">{t('settings.colors.title')}</Text>
         {editableColors.map((item) => (
           <SettingRow key={item.key}>
             <Label>
@@ -76,7 +121,7 @@ const WebSettings: React.FC = () => {
         ))}
       </div>
 
-      <Button onClick={resetTheme}>Reset to Defaults</Button>
+      <Button onClick={resetTheme}>{t('settings.reset')}</Button>
     </Container>
   );
 };

@@ -6,9 +6,6 @@ import { useDevOs } from '../../Contexts/DevOsContext';
 import { TaskBar } from './TaskBar';
 import { DesktopIcon } from './DesktopIcon';
 
-
-// --- Styled Components ---
-
 const DevOsContainer = styled.div`
   width: 100vw;
   height: 100vh;
@@ -20,12 +17,11 @@ const DevOsContainer = styled.div`
 `;
 
 const DesktopArea = styled.main`
-  flex: 1;
+  flex: 1 1 auto;
+  min-height: 0;
   width: 100%;
-  height: 100%;
   position: relative;
-  /* Umožňuje umístit TaskBar na spodek */
-  padding-bottom: 50px; /* Výška TaskBaru */
+  overflow: hidden;
 `;
 
 const DevOsTitle = styled.h1`
@@ -41,15 +37,15 @@ const DevOsTitle = styled.h1`
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  pointer-events: none; /* Aby neblokoval klikání na okna */
+  pointer-events: none;
 `;
 
 const ExitButton = styled(Link)`
   position: fixed;
-  bottom: 60px; /* Posunuto nad TaskBar */
+  bottom: 60px;
   right: 1rem;
   padding: 10px 20px;
-  background: ${({ theme }) => theme.colors.surface}99; /* 99 = ~60% alpha */
+  background: ${({ theme }) => theme.colors.surface}99;
   border: 1px solid ${({ theme }) => theme.colors.accent};
   border-radius: 8px;
   color: ${({ theme }) => theme.colors.text};
@@ -59,7 +55,7 @@ const ExitButton = styled(Link)`
   text-decoration: none;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
-  z-index: 10001; /* Nad TaskBarem */
+  z-index: 10001;
 
   &:hover {
     background: ${({ theme }) => theme.colors.accent};
@@ -76,7 +72,6 @@ const DesktopGrid = styled.div`
     height: 100%;
     padding: 20px;
 `;
-// --- Hlavní komponenta ---
 
 const UIRender: React.FC = () => {
     const { state, actions } = useDevOs();
@@ -84,10 +79,8 @@ const UIRender: React.FC = () => {
     return (
         <DevOsContainer>
             <DesktopArea>
-                {/* Pokud nejsou žádná okna, zobraz titul */}
                 {state.windows.length === 0 && <DevOsTitle>DevOS</DevOsTitle>}
                 
-                {/* Renderuje pouze viditelná (ne minimalizovaná) okna */}
                 {state.windows
                     .filter(window => window.state !== 'minimized')
                     .map(window => {
@@ -116,7 +109,6 @@ const UIRender: React.FC = () => {
                     })
                 }
                 <DesktopGrid>
-                    {/* Přidej další ikony na plochu podle potřeby */}
                     {state.desktopIcons.map(icon => (
                         <DesktopIcon
                             key={icon.id}

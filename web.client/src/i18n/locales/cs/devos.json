@@ -1,0 +1,147 @@
+{
+  "shared": {
+    "openRoute": "Otevřít trasu",
+    "liveSite": "Živý web",
+    "source": "Zdroj",
+    "sourceCode": "Zdrojový kód"
+  },
+  "browser": {
+    "empty": "Žádné portfolio projekty nejsou dostupné.",
+    "featuredProjects": "Vybrané projekty",
+    "searchAria": "Hledat portfolio projekty",
+    "searchPlaceholder": "Hledej projekty, stack, kategorii nebo ID",
+    "searchResults": "{{count}} shod",
+    "noSearchResults": "Žádný projekt neodpovídá \"{{query}}\".",
+    "clearSearch": "Vyčistit hledání"
+  },
+  "explorer": {
+    "portfolio": "Portfolio",
+    "items": "položek",
+    "empty": "Tato složka je prázdná.",
+    "folders": {
+      "Desktop": "Zástupci dostupní na DevOS ploše.",
+      "Downloads": "Rezervováno pro stažitelné materiály, CV a budoucí projektové soubory.",
+      "Documents": "Rezervováno pro delší poznámky, case studies a dokumentaci.",
+      "Projects": "Portfolio case studies generované z centrálního obsahového modelu."
+    }
+  },
+  "projectWindow": {
+    "notFound": "Projekt nebyl nalezen.",
+    "overview": "Přehled",
+    "highlights": "Hlavní body",
+    "technologies": "Technologie",
+    "caseStudy": {
+      "title": "Case study",
+      "problem": "Problém",
+      "solution": "Řešení",
+      "outcome": "Výsledek",
+      "lessons": "Poznatky",
+      "additionalNotes": "Další poznámky",
+      "assets": "Assety",
+      "assetPending": "Média čekají:"
+    },
+    "metadata": {
+      "status": "stav",
+      "role": "role",
+      "timeframe": "časový rámec",
+      "impact": "dopad"
+    }
+  },
+  "aboutMe": {
+    "windowTitle": "O mně",
+    "fileName": "~/portfolio/o-mne.md",
+    "kicker": "Profilový dokument",
+    "name": "Jiří Rakučák",
+    "role": "Frontendově zaměřený creative developer stavící DevOS-style webové zážitky.",
+    "summary": "Baví mě portfolio práce, která se chová jako produkt: strukturovaný obsah, promyšlená interakce a dost technické hloubky na to, aby bylo vidět, jak je postavená.",
+    "updatedLabel": "upraveno",
+    "updatedValue": "duben 2026",
+    "sections": {
+      "focus": {
+        "title": "Aktuální zaměření",
+        "body": "Tohle portfolio se mění v dvojjazyčný React/Vite zážitek s desktopovou DevOS vrstvou, centralizovaným obsahem a službami připravenými na budoucí admin workflow."
+      },
+      "build": {
+        "title": "Co stavím",
+        "body": "Frontendové systémy, interaktivní 3D koncepty, content-driven portfolio plochy a pragmatické backendové základy ve chvíli, kdy je produkt opravdu potřebuje."
+      },
+      "work": {
+        "title": "Jak pracuju",
+        "body": "Preferuju jasnou strukturu, malé soustředěné komponenty, praktické technologické volby a viditelný polish před dekorativní složitostí."
+      }
+    },
+    "keywordsTitle": "Klíčová slova",
+    "keywords": {
+      "react": {
+        "label": "React",
+        "description": "Primární UI vrstva tohoto portfolia a většiny aktuální frontend práce."
+      },
+      "typescript": {
+        "label": "TypeScript",
+        "description": "Drží content modely, routy a UI kontrakty explicitní."
+      },
+      "devos": {
+        "label": "DevOS",
+        "description": "Experimentální desktopové rozhraní portfolia."
+      },
+      "three": {
+        "label": "Three.js",
+        "description": "Použitý ve chvíli, kdy 3D pomáhá vysvětlit nebo ukotvit zážitek."
+      },
+      "content": {
+        "label": "Content model",
+        "description": "Projekty a služby jsou centralizované, aby dávala smysl budoucí admin editace."
+      },
+      "backend": {
+        "label": "Backend později",
+        "description": "ASP.NET backend zůstává zaparkovaný, dokud ho nebude potřebovat reálné workflow."
+      }
+    },
+    "contactTitle": "Kontakt",
+    "contactIntro": "Přímé odkazy jsou aktuální kontaktní flow, zatímco formuláře zůstávají schované.",
+    "email": "E-mail",
+    "github": "GitHub",
+    "linkedin": "LinkedIn"
+  },
+  "lab": {
+    "windowTitle": "Component Lab",
+    "fileName": "~/portfolio/lab.design",
+    "kicker": "Náhled design systému",
+    "title": "Component Lab",
+    "subtitle": "Kompaktní plocha pro theme tokeny, typografii a stavy rozhraní používané napříč portfoliem.",
+    "tokensTitle": "Theme tokeny",
+    "typographyTitle": "Typografická škála",
+    "componentsTitle": "Stavy komponent",
+    "interfaceTitle": "Ukázka rozhraní",
+    "notesTitle": "Implementační poznámky",
+    "primaryAction": "Primární akce",
+    "secondaryAction": "Sekundární akce",
+    "quietAction": "Tichá akce",
+    "inputLabel": "Mock input",
+    "inputPlaceholder": "ukázkový dotaz",
+    "statusReady": "Ready",
+    "statusDraft": "Draft",
+    "statusPrototype": "Prototype",
+    "sampleTitle": "Znovupoužitelný service row",
+    "sampleBody": "Lab drží vizuální rozhodnutí blízko produkčním komponentám místo oddělených mockupů.",
+    "notes": [
+      "Tokeny se čtou z aktivního styled-components theme.",
+      "Ovládací prvky zůstávají záměrně malé, aby hustota layoutu seděla ke zbytku DevOS.",
+      "Později z toho může vyrůst reálná dokumentační plocha design systému."
+    ]
+  },
+  "terminal": {
+    "version": "DevOS Terminal v0.1",
+    "intro": "Zadej \"help\" pro výpis portfolio příkazů.",
+    "help": "Dostupné příkazy:\n  help              Zobrazit příkazy\n  about             Popsat portfolio\n  projects          Vypsat ID projektů\n  project <id>      Zobrazit detail projektu\n  open <id>         Otevřít case study okno\n  services          Vypsat oblasti služeb\n  contact           Zobrazit kontaktní odkazy\n  clear             Vyčistit terminál",
+    "about": "Toto portfolio je React/Vite desktopový zážitek zaměřený na frontend engineering, 3D webové interakce a strukturovanou prezentaci projektů.",
+    "projectNotFound": "Projekt \"{{projectId}}\" nebyl nalezen. Dostupná ID: {{projectIds}}",
+    "projectUsage": "Použití: project <id>\nDostupná ID: {{projectIds}}",
+    "openUsage": "Použití: open <id>\nDostupná ID: {{projectIds}}",
+    "openedCaseStudy": "Otevřena case study: {{projectName}}",
+    "highlights": "Hlavní body:",
+    "contact": "Kontakt:\n  email: jiri@rakucak.cz\n  github: https://github.com/jirirakucak\n  linkedin: https://linkedin.com/in/jirirakucak",
+    "unknownCommand": "Neznámý příkaz: {{command}}. Zadej \"help\" pro výpis příkazů.",
+    "commandAria": "Terminálový příkaz"
+  }
+}

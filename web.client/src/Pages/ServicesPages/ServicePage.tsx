@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { Link } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import Text from '../../Components/Shared/Typography';
-import { ContactForm, LoginForm, SignUpForm } from '../../Components/Shared/Forms';
+import { getServices } from '../../content/services';
+import { useLocale } from '../../i18n/useLocale';
 
 const Container = styled.div`
     background: ${({ theme }) => theme.colors.background};
@@ -14,134 +16,135 @@ const Container = styled.div`
 `;
 
 const HeroSection = styled.section`
-    padding: 6rem 2rem 5rem;
+    padding: 5.5rem 2rem 3.6rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-`;
-
-const ContentWrapper = styled.div`
-    margin: 0 auto;
-    padding: 4rem 2rem;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5rem;
-    background-color: ${({ theme }) => theme.colors.backgroundSecondary};
-
-    clip-path: polygon(0 0, 100% 15vw, 100% 100%, 0 100%);
-    
-    margin-top: -2vw;
-    
-    padding-top: calc(10vw + 4rem);
-    padding-bottom: 6rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-`;
-
-const Section = styled.section`
-    max-width: 900px;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
 `;
 
 const Description = styled.div`
-    margin-top: 1.5rem;
+    margin-top: 1.15rem;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
-    text-align: center;
     color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
 const HeroHighlights = styled.div`
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-top: 2.5rem;
+    gap: 0.65rem;
+    margin-top: 1.8rem;
     justify-content: center;
 `;
 
 const HighlightPill = styled.span`
-    padding: 0.5rem 1.4rem;
+    padding: 0.45rem 1.1rem;
     border-radius: 999px;
-    font-size: 0.9rem;
+    font-size: 0.86rem;
     background: ${({ theme }) => theme.colors.surface};
     border: 1px solid ${({ theme }) => theme.colors.border};
     color: ${({ theme }) => theme.colors.text};
 `;
 
+const ContentWrapper = styled.div`
+    margin: -2vw auto 0;
+    padding: calc(8vw + 3rem) 2rem 4.5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3.2rem;
+    background-color: ${({ theme }) => theme.colors.backgroundSecondary};
+    clip-path: polygon(0 0, 100% 15vw, 100% 100%, 0 100%);
+`;
+
+const Section = styled.section`
+    width: 100%;
+    max-width: 920px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+`;
+
 const SectionHeader = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.45rem;
 `;
 
-const ServiceGrid = styled.div`
+const ServiceList = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 1.75rem;
-    margin-top: 2rem;
+    gap: 0.85rem;
+    margin-top: 1rem;
 `;
 
-const ServiceItem = styled.div`
+const ServiceItem = styled.article`
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1.25rem;
+    align-items: start;
+    padding: 1.15rem 0 1.15rem 1.35rem;
+    border-left: 3px solid ${({ theme }) => theme.colors.accent};
+
+    @media (max-width: 720px) {
+        grid-template-columns: 1fr;
+    }
+`;
+
+const ServiceText = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    padding: 1.75rem;
-    border-left: 4px solid ${({ theme }) => theme.colors.accent || '#667eea'};
-    box-shadow: ${({ theme }) => theme.shadows?.sm || 'none'};
+    gap: 0.7rem;
 `;
 
-const ServiceTop = styled.div`
+const TitleRow = styled.div`
     display: flex;
-    align-items: center;
+    align-items: baseline;
     gap: 0.75rem;
 `;
 
-const Marker = styled.span`
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: ${({ theme }) => theme.colors.accent};
+const ServiceIndex = styled.span`
+    color: ${({ theme }) => theme.colors.accent};
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.76rem;
+    font-weight: 800;
 `;
 
 const ServiceDescription = styled.p`
-    font-family: ${({ theme }) => theme.fonts.main};
-    font-size: ${({ theme }) => theme.typography.bodyS.fontSize};
-    font-weight: ${({ theme }) => theme.typography.bodyS.fontWeight};
-    line-height: 1.5;
+    margin: 0;
     color: ${({ theme }) => theme.colors.textSecondary};
+    line-height: 1.55;
 `;
 
 const TagRow = styled.div`
     display: flex;
     flex-wrap: wrap;
-    gap: 0.6rem;
+    gap: 0.5rem;
 `;
 
 const Tag = styled.span`
-    padding: 0.35rem 0.9rem;
+    padding: 0.32rem 0.75rem;
     border-radius: 999px;
     border: 1px solid ${({ theme }) => theme.colors.border};
-    font-size: 0.8rem;
+    font-size: 0.76rem;
     color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
 const ServiceLink = styled(Link)`
-    margin-top: 1rem;
-    align-self: flex-start;
-    padding: 0.55rem 1.4rem;
+    margin-top: 0.2rem;
+    align-self: start;
+    padding: 0.54rem 1.15rem;
     border-radius: 999px;
     text-decoration: none;
     color: ${({ theme }) => theme.colors.text};
     border: 1px solid ${({ theme }) => theme.colors.accent};
     transition: all 0.2s ease;
-    font-weight: 600;
+    font-weight: 700;
+    white-space: nowrap;
 
     &:hover {
         background: ${({ theme }) => theme.colors.accent};
@@ -153,7 +156,7 @@ const ServiceLink = styled(Link)`
 const Divider = styled.hr`
     border: 0;
     height: 1px;
-    background: ${({ theme }) => theme.colors.border || 'rgba(255,255,255,0.1)'};
+    background: ${({ theme }) => theme.colors.border};
     margin: 0;
     width: 100%;
     max-width: 900px;
@@ -161,126 +164,151 @@ const Divider = styled.hr`
 
 const QuestionStrip = styled.div`
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1rem;
-    margin-top: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 0.8rem;
+    margin-top: 1rem;
 `;
 
 const QuestionCard = styled.div`
-    padding: 1.25rem 1.5rem;
-    border-radius: 16px;
+    padding: 1rem 1.15rem;
+    border-radius: 8px;
     background: ${({ theme }) => theme.colors.surface};
     border: 1px solid ${({ theme }) => theme.colors.border};
     color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: 0.95rem;
+    font-size: 0.92rem;
+    line-height: 1.5;
 `;
 
-const services = [
-    {
-        title: 'Web Development',
-        description: 'Modern web apps, marketing sites, and bespoke portals with performance-first mindset.',
-        tags: ['React', 'TypeScript', 'CMS'],
-        url: '/Services/FrontendDevelopment'
-    },
-    {
-        title: 'Unity Development',
-        description: 'Prototyping, gameplay systems and technical art for Unity projects and interactive demos.',
-        tags: ['Unity', 'C#', 'XR'],
-        url: '/Services/GameAnd3DGraphics'
-    },
-    {
-        title: '3D Design & Modeling',
-        description: 'Product mockups, stylized assets and 3D storytelling for web or realtime experiences.',
-        tags: ['Blender', 'Texturing', 'Rendering'],
-        url: '/Services/GameAnd3DGraphics'
-    },
-    {
-        title: 'UI/UX Design',
-        description: 'Design systems, high-fidelity prototypes and user testing to shape intuitive interfaces.',
-        tags: ['Design Systems', 'Figma', 'Prototype'],
-        url: '/Services/FrontendDevelopment'
-    },
-    {
-        title: 'Consulting',
-        description: 'Audits, roadmaps and team mentoring to help you ship faster with confidence.',
-        tags: ['Workshops', 'Architecture', 'Mentoring'],
-        url: '/Services/BackendAndSystems'
+const ContactPanel = styled.section`
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    padding: 1.5rem 0 0 1.35rem;
+    border-left: 3px solid ${({ theme }) => theme.colors.accent};
+`;
+
+const ContactActions = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.2rem;
+`;
+
+const ContactLink = styled.a`
+    padding: 0.6rem 1.2rem;
+    border-radius: 999px;
+    text-decoration: none;
+    color: ${({ theme }) => theme.colors.background};
+    background: ${({ theme }) => theme.colors.accent};
+    font-weight: 700;
+
+    &:hover {
+        opacity: 0.9;
     }
-];
+`;
+
+const SecondaryContactLink = styled.a`
+    padding: 0.6rem 1.2rem;
+    border-radius: 999px;
+    text-decoration: none;
+    color: ${({ theme }) => theme.colors.text};
+    border: 1px solid ${({ theme }) => theme.colors.border};
+    font-weight: 700;
+
+    &:hover {
+        border-color: ${({ theme }) => theme.colors.accent};
+        color: ${({ theme }) => theme.colors.accent};
+    }
+`;
+
+const highlightIndexes = [0, 1, 2];
+const questionIndexes = [0, 1, 2, 3];
 
 export default function ServicePage() {
+    const { t } = useTranslation('common');
+    const { locale } = useLocale();
+    const services = getServices(locale);
+
     return (
         <Container>
             <HeroSection>
-                <Text variant="h1">What do you need?</Text>
+                <Text variant="h1">{t('servicesPage.title')}</Text>
                 <Description>
-                    <Text variant="h3">
-                        A simple directory of everything I can help you with. Pick a track and the site will guide you to deeper details.
-                    </Text>
+                    <Text variant="h3">{t('servicesPage.description')}</Text>
                 </Description>
 
                 <HeroHighlights>
-                    <HighlightPill>Single founder friendly</HighlightPill>
-                    <HighlightPill>Studio-scale delivery</HighlightPill>
-                    <HighlightPill>Hands-on collaboration</HighlightPill>
+                    {highlightIndexes.map(index => (
+                        <HighlightPill key={index}>{t(`servicesPage.highlights.${index}`)}</HighlightPill>
+                    ))}
                 </HeroHighlights>
             </HeroSection>
 
             <ContentWrapper>
                 <Section>
                     <SectionHeader>
-                        <Text variant="h2">Choose your lane</Text>
-                        <Text variant="bodyS">
-                            These tracks mirror the Services section in the footer and route you to the detailed breakdowns.
-                        </Text>
+                        <Text variant="h2">{t('servicesPage.laneTitle')}</Text>
+                        <Text variant="bodyS">{t('servicesPage.laneDescription')}</Text>
                     </SectionHeader>
 
-                    <ServiceGrid>
-                        {services.map(service => (
-                            <ServiceItem key={service.title}>
-                                <ServiceTop>
-                                    <Marker />
-                                    <Text variant="h3">{service.title}</Text>
-                                </ServiceTop>
+                    <ServiceList>
+                        {services.map((service, index) => (
+                            <ServiceItem key={service.id}>
+                                <ServiceText style={{ viewTransitionName: service.viewTransitionName }}>
+                                    <TitleRow>
+                                        <ServiceIndex>{String(index + 1).padStart(2, '0')}</ServiceIndex>
+                                        <Text variant="h3">{service.title}</Text>
+                                    </TitleRow>
 
-                                <ServiceDescription>
-                                    {service.description}
-                                </ServiceDescription>
+                                    <ServiceDescription>{service.description}</ServiceDescription>
 
-                                <TagRow>
-                                    {service.tags.map(tag => (
-                                        <Tag key={tag}>{tag}</Tag>
-                                    ))}
-                                </TagRow>
+                                    <TagRow>
+                                        {service.tags.map(tag => (
+                                            <Tag key={tag}>{tag}</Tag>
+                                        ))}
+                                    </TagRow>
+                                </ServiceText>
 
-                                <ServiceLink to={service.url} viewTransition>Explore details</ServiceLink>
+                                <ServiceLink to={service.route} viewTransition>
+                                    {t('servicesPage.exploreDetails')}
+                                </ServiceLink>
                             </ServiceItem>
                         ))}
-                    </ServiceGrid>
+                    </ServiceList>
                 </Section>
 
                 <Divider />
 
                 <Section>
                     <SectionHeader>
-                        <Text variant="h2">Not sure yet?</Text>
-                        <Text variant="bodyS">
-                            Start with a quick question to point us in the right direction.
-                        </Text>
+                        <Text variant="h2">{t('servicesPage.notSureTitle')}</Text>
+                        <Text variant="bodyS">{t('servicesPage.notSureDescription')}</Text>
                     </SectionHeader>
 
                     <QuestionStrip>
-                        <QuestionCard>Need a single powerful landing page?</QuestionCard>
-                        <QuestionCard>Building an interactive concept for investors?</QuestionCard>
-                        <QuestionCard>Want to refresh your design system?</QuestionCard>
-                        <QuestionCard>Looking for tech guidance for your internal team?</QuestionCard>
+                        {questionIndexes.map(index => (
+                            <QuestionCard key={index}>{t(`servicesPage.questions.${index}`)}</QuestionCard>
+                        ))}
                     </QuestionStrip>
                 </Section>
 
                 <Divider />
-                <ContactForm/>
-                <LoginForm/>
-                <SignUpForm/>
+
+                <ContactPanel>
+                    <Text variant="h2">{t('servicesPage.contactTitle')}</Text>
+                    <Text variant="bodyS">{t('servicesPage.contactDescription')}</Text>
+                    <ContactActions>
+                        <ContactLink href="mailto:jiri@rakucak.cz">{t('servicesPage.email')}</ContactLink>
+                        <SecondaryContactLink href="https://github.com/jirirakucak" target="_blank" rel="noreferrer">
+                            GitHub
+                        </SecondaryContactLink>
+                        <SecondaryContactLink href="https://linkedin.com/in/jirirakucak" target="_blank" rel="noreferrer">
+                            LinkedIn
+                        </SecondaryContactLink>
+                    </ContactActions>
+                </ContactPanel>
             </ContentWrapper>
         </Container>
     );

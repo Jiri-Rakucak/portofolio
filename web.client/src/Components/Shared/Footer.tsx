@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import GitHubIcon from '../Icons/Github';
 import Text from './Typography';
 import { Link } from 'react-router';
@@ -187,6 +188,8 @@ const CopyrightText = styled.p`
 
 
 const Footer: React.FC = () => {
+    const { t } = useTranslation('common');
+
     return (
         <StyledFooter>
             <Container>
@@ -194,8 +197,7 @@ const Footer: React.FC = () => {
                     <StyledSection>
                         <SectionTitle>Jiří Rakučák</SectionTitle>
                         <SectionDescription>
-                            Creative developer specializing in modern web applications, 
-                            Unity development and 3D design. I combine technology with creativity.
+                            {t('footer.bio')}
                         </SectionDescription>
                         <SocialLinks>
                             <SocialLink href="https://github.com/jirirakucak" target="_blank" rel="noopener noreferrer">
@@ -210,38 +212,38 @@ const Footer: React.FC = () => {
                     </StyledSection>
 
                     <StyledSection>
-                        <SectionTitle>Services</SectionTitle>
+                        <SectionTitle>{t('footer.services')}</SectionTitle>
                         <FooterList>
                             <li>
-                                <FooterLink to="/Services/FrontendDevelopment" viewTransition>
-                                    <Text variant="bodyS">Web Development</Text>
+                                <FooterLink to="/services/frontend-development" viewTransition>
+                                    <Text variant="bodyS">{t('footer.serviceLinks.web')}</Text>
                                 </FooterLink>
                             </li>
                             <li>
-                                <FooterLink to="/Services/GameAnd3DGraphics" viewTransition>
-                                    <Text variant="bodyS">Unity Development</Text>
+                                <FooterLink to="/services/game-and-3d-graphics" viewTransition>
+                                    <Text variant="bodyS">{t('footer.serviceLinks.unity')}</Text>
                                 </FooterLink>
                             </li>
                             <li>
-                                <FooterLink to="/Services/GameAnd3DGraphics" viewTransition>
-                                    <Text variant="bodyS">3D Design & Modeling</Text>
+                                <FooterLink to="/services/game-and-3d-graphics" viewTransition>
+                                    <Text variant="bodyS">{t('footer.serviceLinks.threeD')}</Text>
                                 </FooterLink>
                             </li>
                             <li>
-                                <FooterLink to="/Services/UXUIDesign" viewTransition>
-                                    <Text variant="bodyS">UI/UX Design</Text>
+                                <FooterLink to="/services/ux-ui-design" viewTransition>
+                                    <Text variant="bodyS">{t('footer.serviceLinks.design')}</Text>
                                 </FooterLink>
                             </li>
                             <li>
-                                <FooterLink to="/Services/Consulting" viewTransition>
-                                    <Text variant="bodyS">Consulting</Text>
+                                <FooterLink to="/services/consulting" viewTransition>
+                                    <Text variant="bodyS">{t('footer.serviceLinks.consulting')}</Text>
                                 </FooterLink>
                             </li>
                         </FooterList>
                     </StyledSection>
 
                     <StyledSection>
-                        <SectionTitle>Technologies</SectionTitle>
+                        <SectionTitle>{t('footer.technologies')}</SectionTitle>
                         <FooterList>
                             <li>
                                 <FooterLink to="#" viewTransition>
@@ -272,7 +274,7 @@ const Footer: React.FC = () => {
                     </StyledSection>
  
                     <StyledSection>
-                        <SectionTitle>Kontakt</SectionTitle>
+                        <SectionTitle>{t('footer.contact')}</SectionTitle>
                         <ContactInfo>
                             <ContactItem>
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -290,18 +292,18 @@ const Footer: React.FC = () => {
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                                 </svg>
-                                <Text variant="bodyS">Praha, Česká republika</Text>
+                                <Text variant="bodyS">{t('footer.location')}</Text>
                             </ContactItem>
                         </ContactInfo>
                     </StyledSection>
                 </Content>
 
                 <FooterBottom>
-                    <CopyrightText>&copy; 2025 Jiří Rakučák. Všechna práva vyhrazena.</CopyrightText>
+                    <CopyrightText>{t('footer.copyright')}</CopyrightText>
                     <FooterBottomLinks>
-                        <FooterBottomLink href="#">Ochrana soukromí</FooterBottomLink>
-                        <FooterBottomLink href="#">Podmínky použití</FooterBottomLink>
-                        <FooterBottomLink href="#">Sitemap</FooterBottomLink>
+                        <FooterBottomLink href="#">{t('footer.privacy')}</FooterBottomLink>
+                        <FooterBottomLink href="#">{t('footer.terms')}</FooterBottomLink>
+                        <FooterBottomLink href="#">{t('footer.sitemap')}</FooterBottomLink>
                     </FooterBottomLinks>
                 </FooterBottom>
             </Container>

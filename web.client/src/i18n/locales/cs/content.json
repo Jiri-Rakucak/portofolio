@@ -1,0 +1,388 @@
+{
+  "projectStatusLabels": {
+    "live": "Živě",
+    "in-progress": "Ve vývoji",
+    "concept": "Koncept"
+  },
+  "projects": [
+    {
+      "id": "devos-portfolio",
+      "name": "DevOS Portfolio",
+      "shortDescription": "Interaktivní portfolio postavené jako webový desktopový systém.",
+      "description": "Moderní React portfolio, které prezentuje služby, projekty a experimentální DevOS interakce v responzivní Vite aplikaci.",
+      "status": "in-progress",
+      "category": "Portfolio",
+      "role": "Design engineer / frontend developer",
+      "timeframe": "Aktivní vývoj",
+      "impact": "Vytváří výraznou technickou prezentaci a znovupoužitelný obsahový základ.",
+      "technologies": ["React", "TypeScript", "Vite", "React Router", "styled-components"],
+      "highlights": [
+        "Lazy-loaded DevOS route a Three.js scéna",
+        "Komponentový systém napojený na theme",
+        "Centralizovaný obsahový model projektů a služeb"
+      ],
+      "route": "/",
+      "featured": true
+    },
+    {
+      "id": "atom-scene",
+      "name": "Interaktivní atomová scéna",
+      "shortDescription": "Three.js scéna použitá jako hlavní vizuální prvek desktopové homepage.",
+      "description": "React Three Fiber scéna s animovanými částicemi, trail efekty, theme materiály a orbit controls. Je izolovaná do vlastního lazy-loaded chunku.",
+      "status": "in-progress",
+      "category": "3D web",
+      "role": "Creative frontend developer",
+      "timeframe": "Prototypová fáze",
+      "impact": "Přidává zapamatovatelný interaktivní prvek bez blokování počátečního bundle.",
+      "technologies": ["Three.js", "React Three Fiber", "Drei", "React Spring"],
+      "highlights": [
+        "3D materiály řízené theme",
+        "Instancované vykreslování částic",
+        "Odděleno od hlavního bundle pro rychlejší první načtení"
+      ],
+      "route": "/",
+      "featured": true
+    },
+    {
+      "id": "service-pages",
+      "name": "Systém služeb",
+      "shortDescription": "Strukturované stránky pro frontend, backend, design, 3D a konzultace.",
+      "description": "Route-based sekce služeb, která vysvětluje hlavní pracovní oblasti a propojuje homepage, footer a rozcestník služeb přes sdílený obsah.",
+      "status": "concept",
+      "category": "Obsahový systém",
+      "role": "Informační architektura / frontend implementace",
+      "timeframe": "Základní fáze",
+      "impact": "Snižuje duplicitu textů a připravuje projekt na budoucí správu obsahu přes admin.",
+      "technologies": ["React Router", "TypeScript", "styled-components"],
+      "highlights": [
+        "Sdílený katalog služeb",
+        "Konzistentní routovací metadata",
+        "Připraveno na budoucí admin-managed obsah"
+      ],
+      "route": "/services"
+    },
+    {
+      "id": "unity-graduation-game",
+      "name": "Unity maturitní hra",
+      "shortDescription": "Maturitní herní projekt postavený v Unity a C#, připravený na screenshoty, gameplay poznámky a pozdější WebGL ukázku.",
+      "description": "Školní maturitní herní projekt postavený v Unity. Položka v portfoliu je zatím záměrně konzervativní, dokud nedoplníme přesný gameplay, rozsah a média z původního projektu.",
+      "status": "concept",
+      "category": "Unity / Game development",
+      "role": "Unity developer / C# gameplay programmer",
+      "timeframe": "Maturitní projekt",
+      "impact": "Ukazuje praktickou práci s game developmentem a připravuje cestu k budoucí WebGL ukázce v DevOS.",
+      "technologies": ["Unity", "C#", "Game design", "Gameplay programming"],
+      "highlights": [
+        "Vzniklo jako maturitní projekt",
+        "Připraveno na screenshoty nebo gameplay video",
+        "Později z toho může vzniknout Unity WebGL okno v DevOS"
+      ],
+      "featured": true,
+      "caseStudy": {
+        "summary": "Unity/C# maturitní projekt připravený jako plnohodnotná case study do portfolia. Položka čeká na původní poznámky, screenshoty, popis gameplaye a finální výsledek projektu.",
+        "problem": "Doplň původní zadání, žánr hry, cílový zážitek, omezení a hodnoticí kritéria maturitního projektu.",
+        "solution": "Popiš reálnou gameplay smyčku, Unity scény, C# systémy, assety, UI, ovládání a build pipeline po kontrole zdrojového projektu.",
+        "outcome": "Doplň finální stav projektu, výsledek prezentace nebo hodnocení, dostupnost dema a nejsilnější technické poznatky.",
+        "lessons": [
+          "Doplň jednu konkrétní technickou lekci z Unity nebo C#.",
+          "Doplň jednu lekci z gameplaye, level designu nebo UX.",
+          "Doplň jednu lekci z rozsahu, doručení nebo debugování."
+        ],
+        "sections": [
+          {
+            "title": "Média k doplnění",
+            "body": "Přidej screenshoty, krátký trailer nebo gameplay capture, než z toho bude veřejně použitelná featured case study."
+          },
+          {
+            "title": "Poznámka k WebGL",
+            "body": "Unity WebGL embed nech jako další krok až po kontrole velikosti buildu, ovládání, načítání a výkonu v prohlížeči."
+          }
+        ],
+        "assets": [
+          {
+            "type": "image",
+            "label": "Placeholder pro gameplay screenshot",
+            "src": "",
+            "alt": "Gameplay screenshot k doplnění"
+          },
+          {
+            "type": "video",
+            "label": "Placeholder pro gameplay video",
+            "src": "",
+            "alt": "Gameplay video k doplnění"
+          }
+        ]
+      }
+    }
+  ],
+  "services": [
+    {
+      "id": "frontend-development",
+      "title": "Frontend vývoj",
+      "description": "Moderní responzivní webové aplikace stavěné s důrazem na výkon.",
+      "route": "/services/frontend-development",
+      "tags": ["React", "TypeScript", "Vite"],
+      "technologies": [
+        { "name": "React", "url": "https://react.dev/" },
+        { "name": "TypeScript", "url": "https://www.typescriptlang.org/" },
+        { "name": "Vite", "url": "https://vite.dev/" },
+        { "name": "Three.js", "url": "https://threejs.org/" }
+      ],
+      "gradient": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      "featuredOnHome": true,
+      "viewTransitionName": "title-frontend-development",
+      "detail": {
+        "title": "Frontend vývoj",
+        "subtitle": "Moderní React rozhraní, interaktivní produktové plochy a rychlé uživatelské workflow.",
+        "introTitle": "Na co se soustředím",
+        "introBody": [
+          "Stavím frontendové systémy, které působí dotaženě, rychle se načítají a dávají smysl dlouhodobě udržovat. Cíl není jen hezké rozhraní, ale produktová plocha, která podporuje reálné uživatele a další iterace.",
+          "Tohle portfolio je zároveň ukázka směru: Vite, React Router, styled-components, 3D interakce, lazy-loaded části a obsahový model připravený pro budoucí admin workflow."
+        ],
+        "capabilitiesTitle": "Hlavní schopnosti",
+        "capabilities": [
+          {
+            "title": "Architektura React aplikací",
+            "description": "Komponentová struktura, routovací hranice, state flow, znovupoužitelné UI patterny a udržitelné TypeScript základy."
+          },
+          {
+            "title": "Interaktivní UI",
+            "description": "Responzivní layouty, přechody, theme-aware komponenty a detaily rozhraní, díky kterým produkt nepůsobí jako šablona."
+          },
+          {
+            "title": "Výkon a doručení",
+            "description": "Bundle splitting, rozumné renderování, Core Web Vitals a pragmatický build tooling kolem Vite."
+          },
+          {
+            "title": "3D a vizuální zážitky",
+            "description": "Browser-based 3D scény, WebGL koncepty a interaktivní preview pro projekty, kde statický obsah nestačí."
+          }
+        ],
+        "stackTitle": "Nástroje, po kterých sahám",
+        "stackDescription": "Stack se mění podle projektu, ale tyhle nástroje sedí směru tohoto portfolia.",
+        "stack": ["React", "TypeScript", "Vite", "React Router", "styled-components", "Three.js", "React Three Fiber", "Vitest"],
+        "relatedTitle": "Související směry",
+        "relatedDescription": "Frontend práce se často přímo potkává s designem, 3D interakcí a backendovou integrací.",
+        "relatedLinks": [
+          { "label": "UI/UX design", "route": "/services/ux-ui-design" },
+          { "label": "Hry a 3D grafika", "route": "/services/game-and-3d-graphics" },
+          { "label": "Backend a systémy", "route": "/services/backend-and-systems" },
+          { "label": "Všechny služby", "route": "/services" }
+        ]
+      }
+    },
+    {
+      "id": "game-and-3d-graphics",
+      "title": "Hry a 3D grafika",
+      "description": "Interaktivní zážitky, realtime vizuály a imerzivní 3D koncepty.",
+      "route": "/services/game-and-3d-graphics",
+      "tags": ["Unity", "C#", "WebGL"],
+      "technologies": [
+        { "name": "Unity", "url": "https://unity.com/" },
+        { "name": "C#", "url": "https://learn.microsoft.com/dotnet/csharp/" },
+        { "name": "Blender", "url": "https://www.blender.org/" },
+        { "name": "WebGL", "url": "https://get.webgl.org/" }
+      ],
+      "gradient": "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+      "featuredOnHome": true,
+      "viewTransitionName": "title-game-and-3d-graphics",
+      "detail": {
+        "title": "Hry a 3D grafika",
+        "subtitle": "Interaktivní 3D, realtime vizuály, prototypy a imerzivní koncepty připravené pro web.",
+        "introTitle": "Kde to dává smysl",
+        "introBody": [
+          "3D a herní interakce dokážou portfoliu, produktovému demu, edukačnímu nástroji nebo investorskému prototypu pomoct rychleji vysvětlit myšlenku. Beru je jako produktovou komunikaci, ne jako dekoraci.",
+          "Nejlépe fungují soustředěné věci: jasný vizuální koncept, responzivní interakce a build, který pořád respektuje výkon."
+        ],
+        "capabilitiesTitle": "Co můžu postavit",
+        "capabilities": [
+          {
+            "title": "Interaktivní 3D scény",
+            "description": "React Three Fiber scény, kamera, materiály, částice a lehké vizuální systémy pro web."
+          },
+          {
+            "title": "Herní a simulační prototypy",
+            "description": "Hratelné mechaniky, proof-of-concept smyčky, tréninkové koncepty a experimenty s realtime interakcí."
+          },
+          {
+            "title": "Workflow 3D assetů",
+            "description": "Příprava modelů, iterace v Blenderu, základní animace a assety optimalizované pro realtime rendering."
+          },
+          {
+            "title": "Shader a vizuální polish",
+            "description": "Custom vizuální efekty, ladění materiálů, pohyb částic a drobné detaily, které scéně dodají život."
+          }
+        ],
+        "stackTitle": "Nástroje, po kterých sahám",
+        "stackDescription": "Renderovací cestu volím podle cílové platformy, výkonového rozpočtu a míry interakce.",
+        "stack": ["Three.js", "React Three Fiber", "Drei", "Unity", "C#", "Blender", "WebGL", "GLSL"],
+        "relatedTitle": "Související směry",
+        "relatedDescription": "3D práce je nejsilnější, když má jasný frontendový rámec a dobře navržené rozhraní.",
+        "relatedLinks": [
+          { "label": "Frontend vývoj", "route": "/services/frontend-development" },
+          { "label": "UI/UX design", "route": "/services/ux-ui-design" },
+          { "label": "Všechny služby", "route": "/services" }
+        ]
+      }
+    },
+    {
+      "id": "backend-and-systems",
+      "title": "Backend a systémy",
+      "description": "Serverová architektura, API, datové modely a udržitelné systémy.",
+      "route": "/services/backend-and-systems",
+      "tags": ["API", "Databáze", "Architektura"],
+      "technologies": [
+        { "name": "Node.js", "url": "https://nodejs.org/" },
+        { "name": "C#", "url": "https://learn.microsoft.com/dotnet/csharp/" },
+        { "name": "SQL", "url": "https://www.postgresql.org/docs/current/tutorial-sql.html" },
+        { "name": "API", "url": "https://developer.mozilla.org/docs/Learn_web_development/Extensions/Client-side_APIs/Introduction" }
+      ],
+      "gradient": "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+      "featuredOnHome": true,
+      "viewTransitionName": "title-backend-and-systems",
+      "detail": {
+        "title": "Backend a systémy",
+        "subtitle": "API, datové modely, integrace a systémové základy, které drží frontendový produkt.",
+        "introTitle": "Aktuální role v tomto projektu",
+        "introBody": [
+          "Backend je u tohoto portfolia záměrně zaparkovaný, dokud nebude konkrétní důvod ho řešit. Jakmile bude potřeba, první krok bude upgrade backend shellu a návrh API kolem stejného content shape, který už používá frontend.",
+          "U klientských projektů je cíl backendu jednoduchý: spolehlivý tok dat, jasné kontrakty, bezpečný přístup a architektura, která zvládne růst bez zbytečné ceremonie na začátku."
+        ],
+        "capabilitiesTitle": "Hlavní schopnosti",
+        "capabilities": [
+          {
+            "title": "Návrh API",
+            "description": "REST-style rozhraní, endpoint kontrakty, validační hranice a response modely přívětivé pro frontend."
+          },
+          {
+            "title": "Datové modelování",
+            "description": "Projektové schéma, relační datové struktury, plánování dotazů a pragmatická rozhodnutí kolem persistence."
+          },
+          {
+            "title": "Autentizace a admin flow",
+            "description": "Chráněné admin plochy, role-aware přístup, session/token handling a workflow pro správu obsahu."
+          },
+          {
+            "title": "Integrace",
+            "description": "Napojení externích služeb, form providerů, content API, analytiky a provozních nástrojů bez zbytečného překomplikování."
+          }
+        ],
+        "stackTitle": "Nástroje, po kterých sahám",
+        "stackDescription": "Aktuální backend není aktivní, ale tohle jsou pravděpodobné směry, až bude backend potřeba.",
+        "stack": ["ASP.NET", "C#", "Node.js", "PostgreSQL", "SQL", "REST API", "Autentizace", "Docker"],
+        "relatedTitle": "Související směry",
+        "relatedDescription": "Backend rozhodnutí mají následovat frontend a admin workflow, které produkt opravdu potřebuje.",
+        "relatedLinks": [
+          { "label": "Frontend vývoj", "route": "/services/frontend-development" },
+          { "label": "Konzultace", "route": "/services/consulting" },
+          { "label": "Všechny služby", "route": "/services" }
+        ]
+      }
+    },
+    {
+      "id": "ui-ux-design",
+      "title": "UI/UX design",
+      "description": "Design systémy, high-fidelity prototypy a praktická práce s uživatelskou zkušeností.",
+      "route": "/services/ux-ui-design",
+      "tags": ["Design systémy", "Figma", "Prototypy"],
+      "technologies": [
+        { "name": "Figma", "url": "https://www.figma.com/" },
+        { "name": "Design Systems", "url": "https://www.designsystems.com/" },
+        { "name": "Accessibility", "url": "https://www.w3.org/WAI/fundamentals/accessibility-intro/" }
+      ],
+      "gradient": "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
+      "viewTransitionName": "title-ui-ux-design",
+      "detail": {
+        "title": "UI/UX design",
+        "subtitle": "Struktura rozhraní, produktová srozumitelnost, design systémy a prototypy připravené na implementaci.",
+        "introTitle": "Design jako produktová struktura",
+        "introBody": [
+          "UI/UX beru jako most mezi tím, co produkt potřebuje říct, a tím, co uživatel potřebuje udělat. Výstup má implementaci usnadnit, ne vytvořit oddělený designový artefakt, který se pak pere s kódem.",
+          "U tohoto portfolia to znamená praktické layouty, konzistentní interakční patterny, střídmý vizuální jazyk a znovupoužitelné obsahové struktury."
+        ],
+        "capabilitiesTitle": "Designové schopnosti",
+        "capabilities": [
+          {
+            "title": "Informační architektura",
+            "description": "Struktura stránek, navigační logika, hierarchie obsahu a flow, které pomáhají rychle pochopit nabídku."
+          },
+          {
+            "title": "Návrh rozhraní",
+            "description": "High-fidelity obrazovky, responzivní stavy, chování komponent a vizuální systémy navržené pro implementaci."
+          },
+          {
+            "title": "Prototypování",
+            "description": "Klikatelné flow, interakční koncepty a raná validace dřív, než se investuje čas do hlubšího vývoje."
+          },
+          {
+            "title": "Základy design systému",
+            "description": "Pravidla pro znovupoužitelné komponenty, theme tokeny, typografie, spacing a patterny, které drží produkt pohromadě."
+          }
+        ],
+        "stackTitle": "Nástroje, po kterých sahám",
+        "stackDescription": "Designový toolset držím u produktových rozhodnutí a implementačního handoffu.",
+        "stack": ["Figma", "Design systémy", "Wireframy", "Prototypy", "Accessibility", "Responzivní design", "Theme tokeny"],
+        "relatedTitle": "Související směry",
+        "relatedDescription": "Design práce se nejvíc potkává s frontendovou implementací a konzultací produktového směru.",
+        "relatedLinks": [
+          { "label": "Frontend vývoj", "route": "/services/frontend-development" },
+          { "label": "Konzultace", "route": "/services/consulting" },
+          { "label": "Všechny služby", "route": "/services" }
+        ]
+      }
+    },
+    {
+      "id": "consulting",
+      "title": "Konzultace",
+      "description": "Audity, plánování roadmapy, architektonické vedení a praktický mentoring.",
+      "route": "/services/consulting",
+      "tags": ["Architektura", "Mentoring", "Roadmapy"],
+      "technologies": [
+        { "name": "Architecture", "url": "https://learn.microsoft.com/azure/architecture/guide/" },
+        { "name": "Agile", "url": "https://agilemanifesto.org/" },
+        { "name": "DevOps", "url": "https://learn.microsoft.com/devops/what-is-devops" }
+      ],
+      "gradient": "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
+      "viewTransitionName": "title-consulting",
+      "detail": {
+        "title": "Konzultace",
+        "subtitle": "Technické směřování, review architektury, plánování projektu a praktická podpora pro důležitá rozhodnutí.",
+        "introTitle": "Užitečné a konkrétní vedení",
+        "introBody": [
+          "Konzultace dávají smysl jen tehdy, když vytvoří jasno. Soustředím se na konkrétní rozhodnutí: co stavět jako první, jaký stack sedí týmu, co jde zjednodušit a kde se opravdu skrývá technické riziko.",
+          "Může jít o lehký audit, roadmap session nebo hands-on párování kolem architektury, frontend kvality, DevOS-style interakce nebo budoucího admin/backend plánu."
+        ],
+        "capabilitiesTitle": "Oblasti zaměření",
+        "capabilities": [
+          {
+            "title": "Review architektury",
+            "description": "Kontrola struktury aplikace, routingu, toku obsahu, datových kontraktů a rizik udržitelnosti dřív, než začnou být drahá."
+          },
+          {
+            "title": "Plánování roadmapy",
+            "description": "Převod hrubé myšlenky do posloupnosti technické práce s jasnými tradeoffy a realistickými fázemi."
+          },
+          {
+            "title": "Rozhodnutí o stacku",
+            "description": "Volba knihoven, frameworků, hostingu a načasování backendu podle skutečných omezení produktu."
+          },
+          {
+            "title": "Praktický mentoring",
+            "description": "Párování na implementaci, code review, frontend architektuře nebo design-to-code rozhodnutích."
+          }
+        ],
+        "stackTitle": "Témata, která můžeme řešit",
+        "stackDescription": "Rozsah konzultace záleží na tom, kde je produkt zaseknutý a jaké rozhodnutí je potřeba udělat jako další.",
+        "stack": ["Architektura", "React", "TypeScript", "Vite", "Content modely", "Design systémy", "Admin workflow", "Plánování dodávky"],
+        "relatedTitle": "Související směry",
+        "relatedDescription": "Konzultace může propojit strategii s konkrétní frontendovou, backendovou nebo designovou implementací.",
+        "relatedLinks": [
+          { "label": "Frontend vývoj", "route": "/services/frontend-development" },
+          { "label": "Backend a systémy", "route": "/services/backend-and-systems" },
+          { "label": "UI/UX design", "route": "/services/ux-ui-design" },
+          { "label": "Všechny služby", "route": "/services" }
+        ]
+      }
+    }
+  ]
+}

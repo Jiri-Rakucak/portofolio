@@ -82,7 +82,7 @@ const StyledLink = styled(Link)`
 
 export const LaunchButton: React.FC<LaunchButtonProps> = ({
     to, 
-    text = "Launch DevOs",
+    text = "Launch DevOS",
     onClick 
 }) => {
     const handleClick = () => {
