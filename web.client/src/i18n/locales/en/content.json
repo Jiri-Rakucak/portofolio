@@ -25,23 +25,46 @@
       "featured": true
     },
     {
-      "id": "atom-scene",
-      "name": "Interactive Atom Scene",
-      "shortDescription": "Three.js scene used as the visual anchor of the desktop homepage.",
-      "description": "A React Three Fiber scene with animated particles, trails, themed materials, and orbit controls. It is isolated into its own lazy-loaded chunk.",
+      "id": "ragsystem",
+      "name": "Personal Conversation RAG",
+      "shortDescription": "Local-first RAG system for semantic search across AI conversation history and personal notes without cloud leaks.",
+      "description": "A modular backend system built on ports-and-adapters architecture. Safely imports large conversation exports (ChatGPT, Claude) and markdown notes, streams JSON shards directly from archives, generates local embeddings via Ollama, and queries ChromaDB without paid cloud APIs.",
       "status": "in-progress",
-      "category": "3D Web",
-      "role": "Creative frontend developer",
-      "timeframe": "Prototype phase",
-      "impact": "Adds a memorable interactive signal without blocking the initial app bundle.",
-      "technologies": ["Three.js", "React Three Fiber", "Drei", "React Spring"],
+      "category": "AI / Backend",
+      "role": "Backend & AI engineer / Architect",
+      "timeframe": "Active development",
+      "impact": "Consolidates fragmented history across AI platforms into a single private search engine with zero API costs and guaranteed data privacy.",
+      "technologies": ["Python", "Docker", "ChromaDB", "Ollama", "Pydantic", "Typer", "ijson"],
       "highlights": [
-        "Theme-driven 3D materials",
-        "Instanced particle rendering",
-        "Separated from the main bundle for better initial load"
+        "Local-first architecture using local BGE-M3 multilingual embeddings via Ollama",
+        "Memory-efficient streaming of large export archives and JSON shards (ijson)",
+        "Conversation graph-aware chunking preserving branching turns with deterministic deduplication",
+        "Clean ports-and-adapters architecture with strict type safety (Mypy strict, Pydantic v2)"
       ],
-      "route": "/",
-      "featured": true
+      "route": "/projects/ragsystem",
+      "repoUrl": "https://github.com/Jiri-Rakucak/ragsystem",
+      "featured": true,
+      "caseStudy": {
+        "summary": "A private, local-first system for semantic search across ChatGPT, Claude conversation history, and markdown notes with zero cloud API reliance and guaranteed privacy.",
+        "problem": "Conversation history is split across multiple AI providers whose built-in search is limited to exact keywords. Official export files also contain gigabytes of nested message trees and JSON shards that easily exhaust RAM when loaded naively.",
+        "solution": "Engineered a robust Python pipeline using the streaming ijson parser to process large ZIP archives shard-by-shard. Leveraged the multilingual BGE-M3 embedding model via local Ollama and Dockerized ChromaDB for vector indexing. Preserved conversation graph branches with deterministic hashing for fully idempotent imports.",
+        "outcome": "A fully functional CLI application containerized with Docker Compose, delivering fast indexing, strict type safety, and >85% test coverage. Provides reliable semantic retrieval with relevance distance and conversation provenance.",
+        "lessons": [
+          "Processing gigabyte-scale chat exports requires streaming (ijson) and tree graph traversal rather than naive whole-file in-memory parsing.",
+          "Decoupling domain logic from provider formats (ports-and-adapters) enables adding new importers without altering the indexing pipeline.",
+          "Bridging native host Ollama with Docker Compose application services maximizes GPU acceleration while keeping runtime environments clean and reproducible."
+        ],
+        "sections": [
+          {
+            "title": "Architecture & Code Quality",
+            "body": "Built around a ports-and-adapters (hexagonal) architecture. Domain models are enforced via Pydantic v2, CLI interfaces use Typer, and the codebase satisfies strict Mypy type-checking, Ruff linting, and automated unit/integration test suites."
+          },
+          {
+            "title": "Performance & Memory Efficiency",
+            "body": "Streaming directly from ZIP archives combined with incremental indexing allows the system to handle heavy exports with a minimal memory footprint. SHA-256 content hashes prevent duplicate chunks and make repeated runs instantaneous."
+          }
+        ]
+      }
     },
     {
       "id": "service-pages",

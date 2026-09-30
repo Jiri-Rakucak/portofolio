@@ -56,6 +56,7 @@ const Nav = styled.nav`
   align-items: center;
   max-width: 1264px;
   margin: 0 auto;
+  padding: 0;
 `;
 
 const NavBg = styled.div`

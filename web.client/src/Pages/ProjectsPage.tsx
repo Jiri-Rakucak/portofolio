@@ -9,7 +9,7 @@ import {
   type PortfolioProject,
 } from "../content/projects";
 import { useLocale } from "../i18n/useLocale";
-import ArrowRight from "../Components/Icons/ArrowRight";
+import { ArrowRight, ArrowLeft } from "../Components/Icons/Arrows";
 
 /* ------------------------------------------------------------------ */
 /*  Gradient map – visual bg per category (placeholder for screenshots)*/
@@ -30,6 +30,8 @@ const categoryGradients: Record<string, string> = {
     "radial-gradient(ellipse at 40% 60%, #4facfe44, #00f2fe33), linear-gradient(135deg, #1a1a2e 0%, #0a1628 100%)",
   "Content System":
     "radial-gradient(ellipse at 40% 60%, #4facfe44, #00f2fe33), linear-gradient(135deg, #1a1a2e 0%, #0a1628 100%)",
+  "AI / Backend":
+    "radial-gradient(ellipse at 60% 30%, #00f2fe44, #4facfe33), linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%)",
 };
 
 const fallbackGradient =
@@ -53,9 +55,15 @@ const Page = styled.div`
 /* ------------------------------------------------------------------ */
 /*  Carousel                                                           */
 /* ------------------------------------------------------------------ */
+const ArrowScope = styled.div`
+  max-width: 1480px;
+  width: 100%;
+  position: relative;
+`;
+
 const CarouselContainer = styled.div`
   max-width: 1264px;
-  margin: 0 0;
+  margin: 0 auto;
 `;
 
 const CarouselViewport = styled.section`
@@ -218,14 +226,15 @@ const ArrowButton = styled.button<{ $side: "left" | "right" }>`
   top: 50%;
   ${({ $side }) => ($side === "left" ? "left: 1.2rem;" : "right: 1.2rem;")}
   transform: translateY(-50%);
+  padding: 0;
+  padding-left: ${({ $side }) => ($side === "left" ? "0" : "3px")};
+  padding-right: ${({ $side }) => ($side === "right" ? "-0" : "3px")};
   z-index: 5;
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(12px);
-  color: #fff;
+  background-color: ${({ theme }) => theme.colors.backgroundSecondary};
+  color: ${({ theme }) => theme.colors.text};
   font-size: 1.3rem;
   cursor: pointer;
   display: flex;
@@ -260,23 +269,28 @@ const DotRow = styled.div`
   transform: translateX(-50%);
   z-index: 5;
   display: flex;
-  gap: 0.55rem;
+  gap: 1rem;
 `;
 
 const Dot = styled.button<{ $active: boolean }>`
-  width: ${({ $active }) => ($active ? "28px" : "10px")};
+  width: 10px;
   height: 10px;
+  padding: 0;
   border-radius: 999px;
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
-  background: ${({ $active }) =>
-    $active ? "#fff" : "rgba(255, 255, 255, 0.3)"};
+  background-color: ${({ $active, theme }) =>
+    $active ? theme.colors.text : theme.colors.backgroundSecondary};
+`;
 
-  &:hover {
-    background: ${({ $active }) =>
-      $active ? "#fff" : "rgba(255, 255, 255, 0.5)"};
-  }
+const Line = styled.div<{ $size?: string }>`
+  width: ${({ $size }) => $size ?? "100%"};
+  height: 2px;
+  content: none;
+  background-color: ${({ theme }) => theme.colors.backgroundSecondary};
+  background-color: red;
+  color: red;
 `;
 
 /* ------------------------------------------------------------------ */
@@ -460,56 +474,53 @@ export default function ProjectsPage() {
   return (
     <Page>
       {/* ---- Carousel ---- */}
-      <CarouselContainer>
-        <CarouselViewport>
-          {/* Intro overlay */}
-          <IntroOverlay $visible={introVisible}>
-            <IntroTitle>{t("projectsPage.title")}</IntroTitle>
-            <IntroSubtitle>{t("projectsPage.description")}</IntroSubtitle>
-          </IntroOverlay>
+      <ArrowScope>
+        <CarouselContainer>
+          <CarouselViewport>
+            {/* Intro overlay */}
+            <IntroOverlay $visible={introVisible}>
+              <IntroTitle>{t("projectsPage.title")}</IntroTitle>
+              <IntroSubtitle>{t("projectsPage.description")}</IntroSubtitle>
+            </IntroOverlay>
 
-          {/* Slides */}
-          <CarouselTrack $offset={-activeIndex * 100}>
-            {projects.map((project) => (
-              <Slide
-                key={project.id}
-                $bg={categoryGradients[project.category] ?? fallbackGradient}
-              >
-                <SlideContent>
-                  <SlideCategory>{project.category}</SlideCategory>
-                  <SlideTitle>{project.name}</SlideTitle>
-                  <SlideDescription>
-                    {project.shortDescription}
-                  </SlideDescription>
-                  <SlideTechRow>
-                    {project.technologies.slice(0, 5).map((tech) => (
-                      <SlideTechPill key={tech}>{tech}</SlideTechPill>
-                    ))}
-                  </SlideTechRow>
-                  <SlideActions>
-                    <SlideLink to={`/projects/${project.id}`}>
-                      {t("projectsPage.viewDetail")}
-                    </SlideLink>
-                  </SlideActions>
-                </SlideContent>
-              </Slide>
-            ))}
-          </CarouselTrack>
-
-          {/* Dots */}
-          {!introVisible && (
-            <DotRow>
-              {projects.map((p, i) => (
-                <Dot
-                  key={p.id}
-                  $active={i === activeIndex}
-                  onClick={() => goTo(i)}
-                  aria-label={p.name}
-                />
+            {/* Slides */}
+            <CarouselTrack $offset={-activeIndex * 100}>
+              {projects.map((project) => (
+                <Slide
+                  key={project.id}
+                  $bg={categoryGradients[project.category] ?? fallbackGradient}
+                >
+                  <SlideContent>
+                    <SlideCategory>{project.category}</SlideCategory>
+                    <SlideTitle>{project.name}</SlideTitle>
+                    <SlideDescription>
+                      {project.shortDescription}
+                    </SlideDescription>
+                    <SlideTechRow>
+                      {project.technologies.slice(0, 5).map((tech) => (
+                        <SlideTechPill key={tech}>{tech}</SlideTechPill>
+                      ))}
+                    </SlideTechRow>
+                  </SlideContent>
+                </Slide>
               ))}
-            </DotRow>
-          )}
-        </CarouselViewport>
+            </CarouselTrack>
+
+            {/* Dots */}
+            {!introVisible && (
+              <DotRow>
+                {projects.map((p, i) => (
+                  <Dot
+                    key={p.id}
+                    $active={i === activeIndex}
+                    onClick={() => goTo(i)}
+                    aria-label={p.name}
+                  />
+                ))}
+              </DotRow>
+            )}
+          </CarouselViewport>
+        </CarouselContainer>
 
         {/* Arrows */}
         <ArrowButton
@@ -518,7 +529,7 @@ export default function ProjectsPage() {
           disabled={introVisible}
           aria-label="Previous project"
         >
-          <ArrowRight size={24} />
+          <ArrowLeft size={24} />
         </ArrowButton>
         <ArrowButton
           $side="right"
@@ -528,7 +539,7 @@ export default function ProjectsPage() {
         >
           <ArrowRight size={24} />
         </ArrowButton>
-      </CarouselContainer>
+      </ArrowScope>
 
       {/* ---- Detail below ---- */}
       {active && !introVisible && (

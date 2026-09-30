@@ -95,17 +95,19 @@ describe('portfolio content', () => {
     });
 
     it('filters projects by search terms across metadata', () => {
-        const results = filterProjectsBySearch(getPortfolioProjects('en'), 'react three');
+        const results = filterProjectsBySearch(getPortfolioProjects('en'), 'chromadb');
 
-        expect(results.map(project => project.id)).toContain('atom-scene');
+        expect(results.map(project => project.id)).toContain('ragsystem');
     });
 
     it('filters projects by optional case-study content', () => {
         const graduationResults = filterProjectsBySearch(getPortfolioProjects('en'), 'unity graduation');
         const webglResults = filterProjectsBySearch(getPortfolioProjects('cs'), 'webgl maturitní');
+        const ragResults = filterProjectsBySearch(getPortfolioProjects('cs'), 'ijson');
 
         expect(graduationResults.map(project => project.id)).toContain('unity-graduation-game');
         expect(webglResults.map(project => project.id)).toContain('unity-graduation-game');
+        expect(ragResults.map(project => project.id)).toContain('ragsystem');
     });
 
     it('normalizes browser-like project search addresses', () => {

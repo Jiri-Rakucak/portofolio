@@ -31,8 +31,12 @@ export const createAppRouter = (token: string | null, role: string | null) =>
           element: <ProjectDetailPage projectId="devos-portfolio" />,
         },
         {
+          path: "/projects/ragsystem",
+          element: <ProjectDetailPage projectId="ragsystem" />,
+        },
+        {
           path: "/projects/atom-scene",
-          element: <ProjectDetailPage projectId="atom-scene" />,
+          element: <Navigate to="/projects/ragsystem" replace />,
         },
         {
           path: "/projects/service-pages",

@@ -25,23 +25,46 @@
       "featured": true
     },
     {
-      "id": "atom-scene",
-      "name": "Interaktivní atomová scéna",
-      "shortDescription": "Three.js scéna použitá jako hlavní vizuální prvek desktopové homepage.",
-      "description": "React Three Fiber scéna s animovanými částicemi, trail efekty, theme materiály a orbit controls. Je izolovaná do vlastního lazy-loaded chunku.",
+      "id": "ragsystem",
+      "name": "Personal Conversation RAG",
+      "shortDescription": "Local-first RAG systém pro sémantické vyhledávání v historii AI konverzací a osobních poznámkách bez odesílání dat do cloudu.",
+      "description": "Modulární backendový systém postavený na ports-and-adapters architektuře. Umožňuje bezpečně importovat rozsáhlé exporty konverzací (ChatGPT, Claude) i markdown poznámky, streamovat JSON shardy přímo z archivů, generovat lokální embeddingy přes Ollama a vyhledávat v ChromaDB bez nutnosti placených cloudových API.",
       "status": "in-progress",
-      "category": "3D web",
-      "role": "Creative frontend developer",
-      "timeframe": "Prototypová fáze",
-      "impact": "Přidává zapamatovatelný interaktivní prvek bez blokování počátečního bundle.",
-      "technologies": ["Three.js", "React Three Fiber", "Drei", "React Spring"],
+      "category": "AI / Backend",
+      "role": "Backend & AI engineer / Architekt",
+      "timeframe": "Aktivní vývoj",
+      "impact": "Sjednocuje roztříštěnou historii z více AI platforem do jednoho privátního vyhledávače s důrazem na nulové API náklady a absolutní soukromí dat.",
+      "technologies": ["Python", "Docker", "ChromaDB", "Ollama", "Pydantic", "Typer", "ijson"],
       "highlights": [
-        "3D materiály řízené theme",
-        "Instancované vykreslování částic",
-        "Odděleno od hlavního bundle pro rychlejší první načtení"
+        "Local-first architektura s lokálním embedding modelem BGE-M3 přes Ollama",
+        "Paměťově úsporné streamování velkých exportů a JSON shardů ze ZIPu (ijson)",
+        "Grafové chunkování zachovávající stromové větve zpráv a deterministické hashe pro zamezení duplicit",
+        "Čistá ports-and-adapters architektura s přísným typováním (Mypy strict, Pydantic v2)"
       ],
-      "route": "/",
-      "featured": true
+      "route": "/projects/ragsystem",
+      "repoUrl": "https://github.com/Jiri-Rakucak/ragsystem",
+      "featured": true,
+      "caseStudy": {
+        "summary": "Privátní local-first systém pro sémantické vyhledávání nad historií z ChatGPT, Claude a markdown poznámek bez spoléhání na placená cloudová API a se zárukou 100% soukromí.",
+        "problem": "AI konverzace bývají roztříštěné napříč poskytovateli a nativní vyhledávání je omezeno jen na přesná klíčová slova. Oficiální exporty navíc obsahují rozsáhlé stromové struktury a gigabajty dat v JSONech, které při naivním načtení vyčerpají operační paměť.",
+        "solution": "Návrh robustní pipeline v Pythonu s využitím streamovaného parseru ijson pro zpracování velkých ZIP archivů po jednotlivých shardech. Využití vícejazyčného modelu BGE-M3 v lokální instanci Ollama a vektorové databáze ChromaDB v Dockeru. Zachování grafu konverzací s deterministickými hashy zaručuje plně idempotentní importy bez duplicit.",
+        "outcome": "Plně funkční CLI aplikace kontejnerizovaná v Docker Compose s rychlým indexováním, striktní typovou kontrolou a testovacím pokrytím přes 85 %. Systém poskytuje spolehlivé sémantické vyhledávání s hodnocením relevance a kontextem zpráv.",
+        "lessons": [
+          "Zpracování gigabajtových exportů vyžaduje streaming (ijson) a procházení stromu zpráv místo naivního načítání celého JSONu do paměti.",
+          "Důsledné oddělení doménové logiky od konkrétních providerů (ports-and-adapters) umožňuje přidávat nové formáty importů bez zásahu do indexačního jádra.",
+          "Kombinace Windows Ollama s Docker Compose pro aplikační kontejnery poskytuje plnou GPU akceleraci při zachování izolovaného a čistého prostředí."
+        ],
+        "sections": [
+          {
+            "title": "Architektura a kvalita kódu",
+            "body": "Projekt staví na architektuře ports-and-adapters (hexagonal). Doménové modely jsou striktně validovány přes Pydantic v2, CLI je postaveno na Typeru a celý repozitář splňuje přísná pravidla Mypy v strict módu a Ruff linteru."
+          },
+          {
+            "title": "Efektivita a práce s pamětí",
+            "body": "Díky streamování přímo ze ZIP archivu a inkrementálnímu indexování systém zvládá zpracovat rozsáhlé exporty bez vysokých nároků na RAM. Zdroje a chunky využívají SHA-256 hashe, takže opakované spuštění přeskočí nezměněná data."
+          }
+        ]
+      }
     },
     {
       "id": "service-pages",

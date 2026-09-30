@@ -11,10 +11,10 @@
     "projects": "Projekty"
   },
   "home": {
-    "heroTitle": "DevOS",
-    "heroSubtitle": "Webový operační systém",
+    "heroTitle": "Jiří Rakučák",
+    "heroSubtitle": "Portfolio & Creative Coding",
     "launchDevos": "Spustit DevOS",
-    "exploreServices": "Otevřít portfolio →",
+    "exploreServices": "Prozkoumat portfolio →",
     "servicesTitle": "Mé dovednosti",
     "servicesDescription": "Níže najdeš oblasti, ve kterých se pohybuju a umím pomoct."
   },
@@ -83,7 +83,7 @@
     "serviceNotFound": "Služba nebyla nalezena."
   },
   "projectsPage": {
-    "title": "Projekty",
+    "title": "Moje projektíky",
     "description": "Výběr klíčových projektů, na kterých pracuji nebo jsem pracoval. Každý ukazuje jiný kousek toho, co umím postavit.",
     "highlights": [
       "Interaktivní webové aplikace",
