@@ -93,6 +93,8 @@ General UI translations live in `web.client/src/i18n/locales/*/common.json`; Dev
 
 Canonical frontend routes use lowercase paths:
 
+- `/projects`
+- `/projects/:projectId`
 - `/services`
 - `/services/frontend-development`
 - `/services/game-and-3d-graphics`

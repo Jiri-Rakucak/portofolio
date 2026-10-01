@@ -28,7 +28,7 @@ const Summary = styled.p`
 
 const StudyGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
   gap: 12px;
 
   @media (max-width: 920px) {

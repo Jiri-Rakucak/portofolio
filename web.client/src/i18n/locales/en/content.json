@@ -27,13 +27,13 @@
     {
       "id": "ragsystem",
       "name": "Personal Conversation RAG",
-      "shortDescription": "Local-first RAG system for semantic search across AI conversation history and personal notes without cloud leaks.",
-      "description": "A modular backend system built on ports-and-adapters architecture. Safely imports large conversation exports (ChatGPT, Claude) and markdown notes, streams JSON shards directly from archives, generates local embeddings via Ollama, and queries ChromaDB without paid cloud APIs.",
+      "shortDescription": "Local-first semantic search across ChatGPT conversation exports and personal notes, with local embeddings and storage.",
+      "description": "A modular Python retrieval system built on ports-and-adapters architecture. Imports ChatGPT exports and markdown notes, streams JSON shards directly from ZIP archives, generates local embeddings via Ollama, and queries ChromaDB. Claude imports and grounded answer generation are planned for later phases.",
       "status": "in-progress",
       "category": "AI / Backend",
       "role": "Backend & AI engineer / Architect",
       "timeframe": "Active development",
-      "impact": "Consolidates fragmented history across AI platforms into a single private search engine with zero API costs and guaranteed data privacy.",
+      "impact": "Brings conversation exports and personal notes into a searchable local index without requiring paid cloud APIs for retrieval.",
       "technologies": ["Python", "Docker", "ChromaDB", "Ollama", "Pydantic", "Typer", "ijson"],
       "highlights": [
         "Local-first architecture using local BGE-M3 multilingual embeddings via Ollama",
@@ -45,10 +45,10 @@
       "repoUrl": "https://github.com/Jiri-Rakucak/ragsystem",
       "featured": true,
       "caseStudy": {
-        "summary": "A private, local-first system for semantic search across ChatGPT, Claude conversation history, and markdown notes with zero cloud API reliance and guaranteed privacy.",
-        "problem": "Conversation history is split across multiple AI providers whose built-in search is limited to exact keywords. Official export files also contain gigabytes of nested message trees and JSON shards that easily exhaust RAM when loaded naively.",
-        "solution": "Engineered a robust Python pipeline using the streaming ijson parser to process large ZIP archives shard-by-shard. Leveraged the multilingual BGE-M3 embedding model via local Ollama and Dockerized ChromaDB for vector indexing. Preserved conversation graph branches with deterministic hashing for fully idempotent imports.",
-        "outcome": "A fully functional CLI application containerized with Docker Compose, delivering fast indexing, strict type safety, and >85% test coverage. Provides reliable semantic retrieval with relevance distance and conversation provenance.",
+        "summary": "The retrieval foundation of a personal RAG system: semantic search over ChatGPT exports and markdown notes using local Ollama embeddings and ChromaDB. Answer generation is a later phase.",
+        "problem": "Finding a past decision across conversation exports and notes takes manual searching. Large exports also contain nested message graphs and multiple JSON shards, making whole-file parsing expensive in memory.",
+        "solution": "Built a Python pipeline using ijson to stream ZIP archives shard-by-shard, with conversation-aware chunking and stable identifiers. Local BGE-M3 embeddings via Ollama and Dockerized ChromaDB provide the retrieval layer.",
+        "outcome": "The CLI supports ingestion, indexing, and search with source metadata and distance. The ChatGPT importer has been checked against a real account export. Full-corpus indexing and the final search smoke test remain to be validated. Quality checks include strict Mypy, Ruff, and an 85% branch-coverage gate.",
         "lessons": [
           "Processing gigabyte-scale chat exports requires streaming (ijson) and tree graph traversal rather than naive whole-file in-memory parsing.",
           "Decoupling domain logic from provider formats (ports-and-adapters) enables adding new importers without altering the indexing pipeline.",
@@ -57,11 +57,11 @@
         "sections": [
           {
             "title": "Architecture & Code Quality",
-            "body": "Built around a ports-and-adapters (hexagonal) architecture. Domain models are enforced via Pydantic v2, CLI interfaces use Typer, and the codebase satisfies strict Mypy type-checking, Ruff linting, and automated unit/integration test suites."
+            "body": "Ports-and-adapters architecture separates source importers, domain logic, and infrastructure. Pydantic v2 validates models, Typer provides the CLI, and the project configures strict Mypy, Ruff, and automated tests."
           },
           {
             "title": "Performance & Memory Efficiency",
-            "body": "Streaming directly from ZIP archives combined with incremental indexing allows the system to handle heavy exports with a minimal memory footprint. SHA-256 content hashes prevent duplicate chunks and make repeated runs instantaneous."
+            "body": "Streaming from ZIP archives avoids loading the entire export into memory. Stable identifiers and SHA-256 hashes let repeated ingestion and indexing skip unchanged data. End-to-end runtime and memory measurements are still to be recorded."
           }
         ]
       }

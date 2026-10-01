@@ -53,6 +53,7 @@ Do not run backend upgrades or backend migrations unless the task specifically a
 - `createBrowserRouter`, `Link`, `Navigate`, `Outlet`, and `ScrollRestoration` are imported from `react-router`.
 - `src/Routes/DevOsRoute.tsx` exists to keep DevOS dependencies lazy-loaded.
 - New canonical routes should use lowercase URL paths. Keep redirects only for legacy paths that may already be linked.
+- Public projects use `/projects/:projectId` and resolve IDs from central content. Do not add a separate route for each project.
 
 ## Performance Notes
 
@@ -69,6 +70,7 @@ Vitest is configured for frontend unit tests. For new functionality, add focused
 - error case
 
 Current tests cover the central content model in `web.client/src/content/__tests__/`.
+Project page rendering, optional case studies, missing IDs, and carousel states are covered in `web.client/src/Pages/__tests__/`.
 
 ## Content Model
 

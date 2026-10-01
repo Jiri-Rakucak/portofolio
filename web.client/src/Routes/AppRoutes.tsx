@@ -27,24 +27,12 @@ export const createAppRouter = (token: string | null, role: string | null) =>
         { path: "/", element: <HomePage /> },
         { path: "/projects", element: <ProjectsPage /> },
         {
-          path: "/projects/devos-portfolio",
-          element: <ProjectDetailPage projectId="devos-portfolio" />,
-        },
-        {
-          path: "/projects/ragsystem",
-          element: <ProjectDetailPage projectId="ragsystem" />,
+          path: "/projects/:projectId",
+          element: <ProjectDetailPage />,
         },
         {
           path: "/projects/atom-scene",
-          element: <Navigate to="/projects/ragsystem" replace />,
-        },
-        {
-          path: "/projects/service-pages",
-          element: <ProjectDetailPage projectId="service-pages" />,
-        },
-        {
-          path: "/projects/unity-graduation-game",
-          element: <ProjectDetailPage projectId="unity-graduation-game" />,
+          element: <Navigate to="/projects/devos-portfolio" replace />,
         },
         {
           path: "/Services",

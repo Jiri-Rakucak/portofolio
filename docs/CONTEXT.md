@@ -36,6 +36,9 @@ The ASP.NET project exists as a future backend placeholder. It should remain out
 - Project and service metadata were centralized in `web.client/src/content/`.
 - ProjectWindow was upgraded into a mini case-study view with status, role, timeframe, impact, highlights, technologies, and CTAs.
 - Project content now supports optional structured case-study fields: summary, problem, solution, outcome, lessons, additional sections, and assets.
+- The public project carousel lives at `/projects`; `/projects/:projectId` resolves any central content entry and renders its optional case study. Unknown IDs show a localized return link.
+- Project page styles live in focused `ProjectsPages/*.styles.ts` modules. Carousel controls are localized, support arrow keys, and hide inactive slides from assistive technology.
+- Personal Conversation RAG is now a featured project. Copy was checked against the local RAG repository: manual notes and ChatGPT import are implemented; Claude import and answer generation are planned; full-corpus search validation is still pending.
 - A Unity graduation game placeholder project was added as the first game case-study shell without inventing unrecovered gameplay details.
 - DevOS Explorer and Browser now use central project data for project discovery and previews.
 - DevOS Browser address bar now filters projects by id, name, category, stack, and other metadata.
@@ -107,8 +110,16 @@ General UI translations live in `web.client/src/i18n/locales/*/common.json`. Dev
 ## Next Work Candidates
 
 1. Replace mobile placeholder content.
-2. Add real case study pages.
+2. Add real project media and outcomes to the existing case-study pages; replace Unity draft copy before publishing.
 3. Add Testing Library when component tests become necessary.
 4. Refactor remaining DevOS placeholder apps into focused modules, especially Games.
 5. Decide whether forms need a backend or third-party form service.
 6. If backend is needed, upgrade it to the latest stable LTS first.
+
+## Portfolio Review Follow-ups
+
+- RAG needs an anonymized CLI example, architecture visual, and measured indexing/search results.
+- The carousel still uses temporary gradient backgrounds; replace them with real project media when available.
+- `index.html` still uses the Vite favicon and lacks portfolio/social metadata.
+- Footer contains a sample phone number and placeholder technology/legal links; verify contact destinations before launch.
+- Mobile remains deferred by the owner's desktop-first preference.

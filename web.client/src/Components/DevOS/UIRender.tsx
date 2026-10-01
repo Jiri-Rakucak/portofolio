@@ -5,6 +5,7 @@ import { DraggableWindow } from './DraggableWindow';
 import { useDevOs } from '../../Contexts/DevOsContext';
 import { TaskBar } from './TaskBar';
 import { DesktopIcon } from './DesktopIcon';
+import { Wallpaper } from './Wallpaper';
 
 const DevOsContainer = styled.div`
   width: 100vw;
@@ -79,6 +80,7 @@ const UIRender: React.FC = () => {
     return (
         <DevOsContainer>
             <DesktopArea>
+                <Wallpaper />
                 {state.windows.length === 0 && <DevOsTitle>DevOS</DevOsTitle>}
                 
                 {state.windows

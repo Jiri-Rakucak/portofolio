@@ -27,13 +27,13 @@
     {
       "id": "ragsystem",
       "name": "Personal Conversation RAG",
-      "shortDescription": "Local-first RAG systém pro sémantické vyhledávání v historii AI konverzací a osobních poznámkách bez odesílání dat do cloudu.",
-      "description": "Modulární backendový systém postavený na ports-and-adapters architektuře. Umožňuje bezpečně importovat rozsáhlé exporty konverzací (ChatGPT, Claude) i markdown poznámky, streamovat JSON shardy přímo z archivů, generovat lokální embeddingy přes Ollama a vyhledávat v ChromaDB bez nutnosti placených cloudových API.",
+      "shortDescription": "Lokální sémantické vyhledávání v exportech ChatGPT konverzací a osobních poznámkách s lokálními embeddingy a úložištěm.",
+      "description": "Modulární vyhledávací systém v Pythonu postavený na ports-and-adapters architektuře. Importuje ChatGPT exporty a markdown poznámky, streamuje JSON shardy přímo ze ZIP archivů, generuje lokální embeddingy přes Ollama a vyhledává v ChromaDB. Import Claude a generování odpovědí nad nalezeným kontextem jsou plánované do dalších fází.",
       "status": "in-progress",
       "category": "AI / Backend",
       "role": "Backend & AI engineer / Architekt",
       "timeframe": "Aktivní vývoj",
-      "impact": "Sjednocuje roztříštěnou historii z více AI platforem do jednoho privátního vyhledávače s důrazem na nulové API náklady a absolutní soukromí dat.",
+      "impact": "Spojuje exporty konverzací a osobní poznámky do lokálního vyhledávacího indexu bez nutnosti placených cloudových API pro vyhledávání.",
       "technologies": ["Python", "Docker", "ChromaDB", "Ollama", "Pydantic", "Typer", "ijson"],
       "highlights": [
         "Local-first architektura s lokálním embedding modelem BGE-M3 přes Ollama",
@@ -45,23 +45,23 @@
       "repoUrl": "https://github.com/Jiri-Rakucak/ragsystem",
       "featured": true,
       "caseStudy": {
-        "summary": "Privátní local-first systém pro sémantické vyhledávání nad historií z ChatGPT, Claude a markdown poznámek bez spoléhání na placená cloudová API a se zárukou 100% soukromí.",
-        "problem": "AI konverzace bývají roztříštěné napříč poskytovateli a nativní vyhledávání je omezeno jen na přesná klíčová slova. Oficiální exporty navíc obsahují rozsáhlé stromové struktury a gigabajty dat v JSONech, které při naivním načtení vyčerpají operační paměť.",
-        "solution": "Návrh robustní pipeline v Pythonu s využitím streamovaného parseru ijson pro zpracování velkých ZIP archivů po jednotlivých shardech. Využití vícejazyčného modelu BGE-M3 v lokální instanci Ollama a vektorové databáze ChromaDB v Dockeru. Zachování grafu konverzací s deterministickými hashy zaručuje plně idempotentní importy bez duplicit.",
-        "outcome": "Plně funkční CLI aplikace kontejnerizovaná v Docker Compose s rychlým indexováním, striktní typovou kontrolou a testovacím pokrytím přes 85 %. Systém poskytuje spolehlivé sémantické vyhledávání s hodnocením relevance a kontextem zpráv.",
+        "summary": "Vyhledávací základ osobního RAG systému: sémantické hledání nad ChatGPT exporty a markdown poznámkami s lokálními embeddingy přes Ollama a ChromaDB. Generování odpovědí přijde v další fázi.",
+        "problem": "Najít starší rozhodnutí mezi exporty konverzací a poznámkami vyžaduje ruční hledání. Velké exporty navíc obsahují grafy zpráv a více JSON shardů, takže načítání celého souboru najednou spotřebovává hodně paměti.",
+        "solution": "Pipeline v Pythonu využívá ijson ke streamování ZIP archivů po shardech, chunkování podle konverzací a stabilní identifikátory. Lokální BGE-M3 embeddingy přes Ollama a ChromaDB v Dockeru tvoří vyhledávací vrstvu.",
+        "outcome": "CLI podporuje import, indexování a vyhledávání s metadaty zdroje a vzdáleností výsledků. ChatGPT importer byl ověřený na skutečném exportu účtu. Indexování celého korpusu a finální smoke test vyhledávání ještě čekají na ověření. Kontroly kvality zahrnují Mypy strict, Ruff a minimálně 85% pokrytí větví jako testovací podmínku.",
         "lessons": [
           "Zpracování gigabajtových exportů vyžaduje streaming (ijson) a procházení stromu zpráv místo naivního načítání celého JSONu do paměti.",
           "Důsledné oddělení doménové logiky od konkrétních providerů (ports-and-adapters) umožňuje přidávat nové formáty importů bez zásahu do indexačního jádra.",
-          "Kombinace Windows Ollama s Docker Compose pro aplikační kontejnery poskytuje plnou GPU akceleraci při zachování izolovaného a čistého prostředí."
+          "Kombinace nativní Ollama na Windows s Docker Compose odděluje běh modelu od aplikačních služeb a umožňuje využít podporované GPU."
         ],
         "sections": [
           {
             "title": "Architektura a kvalita kódu",
-            "body": "Projekt staví na architektuře ports-and-adapters (hexagonal). Doménové modely jsou striktně validovány přes Pydantic v2, CLI je postaveno na Typeru a celý repozitář splňuje přísná pravidla Mypy v strict módu a Ruff linteru."
+            "body": "Ports-and-adapters architektura odděluje importéry, doménovou logiku a infrastrukturu. Pydantic v2 validuje modely, Typer poskytuje CLI a projekt má nastavené Mypy strict, Ruff a automatické testy."
           },
           {
             "title": "Efektivita a práce s pamětí",
-            "body": "Díky streamování přímo ze ZIP archivu a inkrementálnímu indexování systém zvládá zpracovat rozsáhlé exporty bez vysokých nároků na RAM. Zdroje a chunky využívají SHA-256 hashe, takže opakované spuštění přeskočí nezměněná data."
+            "body": "Streamování ze ZIP archivů odstraňuje potřebu načíst celý export do paměti. Stabilní identifikátory a SHA-256 hashe umožňují při opakovaném importu a indexování přeskočit nezměněná data. Celkové časy zpracování a spotřebu paměti je ještě potřeba změřit."
           }
         ]
       }

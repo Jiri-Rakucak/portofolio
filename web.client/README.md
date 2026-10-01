@@ -49,6 +49,8 @@ The DevOS route is lazy-loaded through `src/Routes/DevOsRoute.tsx` so its window
 
 Canonical route paths are lowercase. Legacy mixed-case service and DevOS paths are kept as redirects in `src/Routes/AppRoutes.tsx`.
 
+The project carousel is available at `/projects`. A single `/projects/:projectId` route resolves central project data, so adding a project does not require adding a route. Public details render the same optional case-study content as DevOS ProjectWindow.
+
 ## Important Folders
 
 ```text
