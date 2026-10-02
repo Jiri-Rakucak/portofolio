@@ -67,72 +67,74 @@
       }
     },
     {
-      "id": "service-pages",
-      "name": "Systém služeb",
-      "shortDescription": "Strukturované stránky pro frontend, backend, design, 3D a konzultace.",
-      "description": "Route-based sekce služeb, která vysvětluje hlavní pracovní oblasti a propojuje homepage, footer a rozcestník služeb přes sdílený obsah.",
-      "status": "concept",
-      "category": "Obsahový systém",
-      "role": "Informační architektura / frontend implementace",
-      "timeframe": "Základní fáze",
-      "impact": "Snižuje duplicitu textů a připravuje projekt na budoucí správu obsahu přes admin.",
-      "technologies": ["React Router", "TypeScript", "styled-components"],
-      "highlights": [
-        "Sdílený katalog služeb",
-        "Konzistentní routovací metadata",
-        "Připraveno na budoucí admin-managed obsah"
-      ],
-      "route": "/services"
-    },
-    {
       "id": "unity-graduation-game",
-      "name": "Unity maturitní hra",
-      "shortDescription": "Maturitní herní projekt postavený v Unity a C#, připravený na screenshoty, gameplay poznámky a pozdější WebGL ukázku.",
-      "description": "Školní maturitní herní projekt postavený v Unity. Položka v portfoliu je zatím záměrně konzervativní, dokud nedoplníme přesný gameplay, rozsah a média z původního projektu.",
-      "status": "concept",
-      "category": "Unity / Game development",
-      "role": "Unity developer / C# gameplay programmer",
-      "timeframe": "Maturitní projekt",
-      "impact": "Ukazuje praktickou práci s game developmentem a připravuje cestu k budoucí WebGL ukázce v DevOS.",
-      "technologies": ["Unity", "C#", "Game design", "Gameplay programming"],
+      "name": "Starbounder",
+      "shortDescription": "Prototyp 2D vesmírného sandboxu: objevování procedurálních soustav, přistávání na planetách, těžba surovin a stavba kolonií.",
+      "description": "Starbounder je maturitní projekt v Unity a C#, který kombinuje průzkum vesmíru se sandboxovými a strategickými mechanikami. Navazuje na dřívější procedurální generátor a rozšiřuje ho o herní smyčku letu, přistávání, těžby, stavby a ukládání postupu. Byl prezentovaný jako funkční prototyp a tvoří základ pro další rozvoj, nikoli dokončenou komerční hru.",
+      "status": "in-progress",
+      "category": "2D sandbox / Game development",
+      "role": "Herní návrh / vývoj v Unity a C#",
+      "timeframe": "Maturitní práce 2025/2026; prezentovaný prototyp",
+      "impact": "Posunul původní procedurální generátor do hratelného prototypu, který propojuje průzkum, získávání surovin, stavbu kolonií, UI a ukládání postupu.",
+      "technologies": ["Unity 6", "C#", "URP", "Job System", "Burst", "ScriptableObject", "UI Toolkit", "Input System"],
       "highlights": [
-        "Vzniklo jako maturitní projekt",
-        "Připraveno na screenshoty nebo gameplay video",
-        "Později z toho může vzniknout Unity WebGL okno v DevOS"
+        "Hvězdné soustavy podle seedu s procedurálními meshi planet, biomy, texturami a surovinami",
+        "Paralelní výpočty biomů, textur a rozmístění objektů pomocí Job Systemu a Burstu",
+        "Let lodí, gravitační zóny planet, přistávání a průzkum pěšky",
+        "Těžba, sdílený inventář a datově řízené budovy kolonií s cenou a závislostmi",
+        "Galaxy Hub, kompas, mapa soustavy, inventář a stavební panely v UI Toolkitu",
+        "JSON save po jednotlivých galaxiích pro loď, inventář, budovy a stav extraktorů"
       ],
+      "route": "/projects/unity-graduation-game",
+      "liveUrl": "https://jirirakucak.itch.io/starbounder",
       "featured": true,
       "caseStudy": {
-        "summary": "Unity/C# maturitní projekt připravený jako plnohodnotná case study do portfolia. Položka čeká na původní poznámky, screenshoty, popis gameplaye a finální výsledek projektu.",
-        "problem": "Doplň původní zadání, žánr hry, cílový zážitek, omezení a hodnoticí kritéria maturitního projektu.",
-        "solution": "Popiš reálnou gameplay smyčku, Unity scény, C# systémy, assety, UI, ovládání a build pipeline po kontrole zdrojového projektu.",
-        "outcome": "Doplň finální stav projektu, výsledek prezentace nebo hodnocení, dostupnost dema a nejsilnější technické poznatky.",
+        "summary": "Maturitní prototyp, který mění procedurálně generovaný vesmír v propojený sandboxový zážitek. Práce se soustředila na integraci herních systémů a zrychlení generování světa.",
+        "problem": "Ročníkový projekt uměl generovat soustavy a planety, ale chyběly mu propojené mechaniky, které dávají průzkumu smysl. Maturitní zadání přidalo fyziku lodi, těžbu, budování kolonií, obíhající planety a ukládání postupu.",
+        "solution": "Generování podle seedu vytváří hvězdnou soustavu a povrchy planet. Paralelní joby kompilované Burstem počítají mapy biomů, pixely textur a kandidátní pozice objektů. Stavový automat přepíná ovládání lodi a postavy, zatímco ScriptableObject data definují suroviny a budovy. UI Toolkit tyto systémy propojuje přes Galaxy Hub, HUD, mapu, inventář a stavební panely.",
+        "outcome": "Prezentovaný funkční prototyp 2D vesmírné hry s průzkumem, těžbou, budováním kolonií a ukládáním po galaxiích. Závěrečná dokumentace uvádí zkrácení inicializace světa přibližně z 30 na 5 sekund po přechodu na Jobs/Burst. Projekt zůstává prototypem; onboarding, balanc ekonomiky a nastavení čekají na další rozvoj.",
         "lessons": [
-          "Doplň jednu konkrétní technickou lekci z Unity nebo C#.",
-          "Doplň jednu lekci z gameplaye, level designu nebo UX.",
-          "Doplň jednu lekci z rozsahu, doručení nebo debugování."
+          "Přesun generování do paralelních jobů vyžadoval změnu datových toků a explicitní synchronizaci před vytvářením Unity objektů.",
+          "ScriptableObject data oddělují parametry surovin a budov od herního kódu a usnadňují ladění i rozšiřování obsahu.",
+          "Obnova světa ze seedu před načtením postupu zjednodušuje ukládání, ale změněné objekty světa stále potřebují vlastní uložený stav.",
+          "Funkční soubor systémů potřebuje onboarding a jasné cíle hráče, aby se z něj stala srozumitelná hra."
         ],
         "sections": [
           {
-            "title": "Média k doplnění",
-            "body": "Přidej screenshoty, krátký trailer nebo gameplay capture, než z toho bude veřejně použitelná featured case study."
+            "title": "Herní smyčka",
+            "body": "Vytvořit nebo vybrat galaxii, proletět její vygenerovanou soustavou, přistát a prozkoumat planetu pěšky. Vytěžit suroviny do společného inventáře, umístit budovy s cenou a závislostmi a vrátit se do hubu s uloženým postupem."
           },
           {
-            "title": "Poznámka k WebGL",
-            "body": "Unity WebGL embed nech jako další krok až po kontrole velikosti buildu, ovládání, načítání a výkonu v prohlížeči."
+            "title": "Generování a výkon",
+            "body": "Generátor vytváří meshe planet a ze seedů rozmisťuje biomy, suroviny a dekorace. Job System a Burst paralelizují výpočet biomových map, pixelů textur a kandidátních pozic objektů; coroutine rozkládají inicializaci mezi snímky. Kontrolovaná verze projektu používá Unity 6000.2.8f1 a URP."
+          },
+          {
+            "title": "Ukládání a obnova galaxie",
+            "body": "JSON soubory oddělují metadata galaxií od herního postupu. Při načítání se nejprve znovu vygeneruje soustava a potom se obnoví pozice a energie lodi, inventář, budovy a stav extraktorů. Hráč se při načtení vrací do lodi, aby se předešlo problémům při obnově planetární fyziky."
+          },
+          {
+            "title": "Rozsah prototypu a další kroky",
+            "body": "Vývoj doprovázelo ruční a scénářové testování se zpětnou vazbou od dalších hráčů. Měsíce a stavové indikátory lodi zůstávají experimentální, záložka nastavení není dokončená. Další priority jsou úvodní quest guide, balanc ekonomiky, nastavení a přemapování kláves i úplnější ukládání vytěžených ložisek. WebGL ukázka v portfoliu je možný pozdější krok."
           }
         ],
         "assets": [
           {
             "type": "image",
-            "label": "Placeholder pro gameplay screenshot",
-            "src": "",
-            "alt": "Gameplay screenshot k doplnění"
+            "label": "Let vesmírem a navigační kompas",
+            "src": "/projects/unity-graduation-game/space-flight.png",
+            "alt": "Loď ve Starbounderu ve hvězdném poli s kruhovým navigačním kompasem"
           },
           {
-            "type": "video",
-            "label": "Placeholder pro gameplay video",
-            "src": "",
-            "alt": "Gameplay video k doplnění"
+            "type": "image",
+            "label": "Mapa hvězdné soustavy",
+            "src": "/projects/unity-graduation-game/sector-map.png",
+            "alt": "Mapa soustavy v pause menu Starbounderu se značkami planet a hráče"
+          },
+          {
+            "type": "image",
+            "label": "Stavební panel na planetě",
+            "src": "/projects/unity-graduation-game/building-panel.png",
+            "alt": "Povrch planety ve Starbounderu s inventářem surovin a panelem dostupných budov"
           }
         ]
       }

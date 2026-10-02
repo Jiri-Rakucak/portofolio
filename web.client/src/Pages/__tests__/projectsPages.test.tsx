@@ -43,10 +43,10 @@ describe('project detail page', () => {
     });
 
     it('renders a project without optional case-study content', async () => {
-        const html = await renderPage('/projects/service-pages');
+        const html = await renderPage('/projects/devos-portfolio');
 
-        expect(html).toContain('Service Pages System');
-        expect(html).toContain('href="/services"');
+        expect(html).toContain('DevOS Portfolio');
+        expect(html).toContain('href="/"');
         expect(html).not.toContain('>Case study<');
     });
 

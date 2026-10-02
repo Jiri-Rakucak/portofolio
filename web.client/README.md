@@ -104,7 +104,7 @@ Optional project case-study fields are supported through the `caseStudy` object:
 - `sections`
 - `assets`
 
-Use these for deeper project stories in DevOS ProjectWindow. The `unity-graduation-game` entry is currently a structured placeholder for the Unity graduation project and should be replaced with real gameplay notes, screenshots, build links, and outcome details before it becomes public portfolio copy.
+Use these for deeper project stories in DevOS ProjectWindow and public project pages. The `unity-graduation-game` entry presents Starbounder as a graduation prototype, with verified system descriptions and screenshots under `public/projects/unity-graduation-game/`. See [source notes](../docs/STARBOUNDER.md) before expanding its claims or adding a playable embed.
 
 DevOS project discovery currently uses this content model in two places:
 

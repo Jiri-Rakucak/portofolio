@@ -85,7 +85,7 @@ Typed access helpers live in:
 
 The JSON shape is intentionally close to what a future admin UI, backend API, CMS, or local content editor could provide. When admin functionality becomes useful, the project can replace the static JSON imports with fetched content while keeping the consuming UI mostly unchanged.
 
-The DevOS Explorer, Browser, ProjectWindow, About Me document, service directory, and detailed service pages already consume localized content for project discovery, previews, mini case-study views, profile copy, and service copy. Project entries can include optional `caseStudy` content for deeper storytelling. The current Unity graduation game entry is a placeholder shell for real gameplay notes, screenshots, build links, and outcome details.
+The DevOS Explorer, Browser, ProjectWindow, About Me document, service directory, and detailed service pages already consume localized content for project discovery, previews, mini case-study views, profile copy, and service copy. Project entries can include optional `caseStudy` content for deeper storytelling. Starbounder, the Unity graduation prototype, now has a source-backed case study and three actual screenshots. See [source notes](docs/STARBOUNDER.md) for its scope and verification limits.
 
 General UI translations live in `web.client/src/i18n/locales/*/common.json`; DevOS-specific UI, terminal output, and About Me profile copy live in `web.client/src/i18n/locales/*/devos.json`. Language selection is stored in `localStorage` and exposed through Preferences.
 

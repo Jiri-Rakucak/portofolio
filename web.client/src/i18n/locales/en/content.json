@@ -67,72 +67,74 @@
       }
     },
     {
-      "id": "service-pages",
-      "name": "Service Pages System",
-      "shortDescription": "Structured service pages for frontend, backend, design, 3D, and consulting work.",
-      "description": "A route-based service section that explains available work areas and links the homepage, footer, and service directory around shared content.",
-      "status": "concept",
-      "category": "Content System",
-      "role": "Information architecture / frontend implementation",
-      "timeframe": "Foundation phase",
-      "impact": "Reduces duplicated copy and prepares the project for future admin-managed content.",
-      "technologies": ["React Router", "TypeScript", "styled-components"],
-      "highlights": [
-        "Shared service catalog",
-        "Consistent routing metadata",
-        "Prepared for future admin-managed content"
-      ],
-      "route": "/services"
-    },
-    {
       "id": "unity-graduation-game",
-      "name": "Unity Graduation Game",
-      "shortDescription": "Graduation project game built in Unity and C#, prepared for screenshots, gameplay notes, and a possible WebGL showcase later.",
-      "description": "A school graduation game project built with Unity. The portfolio entry is intentionally conservative until exact gameplay, scope, and media are added from the original project.",
-      "status": "concept",
-      "category": "Unity / Game Development",
-      "role": "Unity developer / C# gameplay programmer",
-      "timeframe": "Graduation project",
-      "impact": "Shows practical game-development work and creates a path toward a future WebGL DevOS showcase.",
-      "technologies": ["Unity", "C#", "Game Design", "Gameplay Programming"],
+      "name": "Starbounder",
+      "shortDescription": "A 2D space sandbox prototype: explore procedural star systems, land on planets, mine resources, and build colonies.",
+      "description": "Starbounder is a Unity/C# graduation project combining space exploration with sandbox and strategy mechanics. It extends an earlier procedural world generator into a gameplay loop of flying, landing, mining, building, and saving progress. Presented as a functional prototype, it provides a foundation for further development rather than a finished commercial game.",
+      "status": "in-progress",
+      "category": "2D Sandbox / Game Development",
+      "role": "Game design / Unity and C# development",
+      "timeframe": "2025/2026 graduation project; presented prototype",
+      "impact": "Turned an earlier procedural generator into a playable prototype connecting exploration, resource gathering, colony construction, UI, and saved progress.",
+      "technologies": ["Unity 6", "C#", "URP", "Job System", "Burst", "ScriptableObject", "UI Toolkit", "Input System"],
       "highlights": [
-        "Built as a graduation project",
-        "Prepared for screenshots or gameplay video",
-        "Can later become a Unity WebGL DevOS window"
+        "Seed-based star systems with procedural planet meshes, biomes, textures, and resources",
+        "Parallel biome, texture, and spawn calculations using Job System and Burst",
+        "Ship flight, planetary gravity zones, landing, and on-foot exploration",
+        "Mining, shared inventory, and data-driven colony buildings with costs and dependencies",
+        "Galaxy Hub, compass, sector map, inventory, and building panels built with UI Toolkit",
+        "Per-galaxy JSON saves for the ship, inventory, buildings, and extractor state"
       ],
+      "route": "/projects/unity-graduation-game",
+      "liveUrl": "https://jirirakucak.itch.io/starbounder",
       "featured": true,
       "caseStudy": {
-        "summary": "A Unity/C# graduation project reserved for a full portfolio case study. This entry is ready for original build notes, screenshots, gameplay description, and final project results.",
-        "problem": "Document the original assignment, game genre, target experience, constraints, and evaluation criteria from the graduation project.",
-        "solution": "Describe the actual gameplay loop, Unity scenes, C# systems, assets, UI, input handling, and build pipeline once the source project is reviewed.",
-        "outcome": "Add the final project state, school evaluation or presentation result, demo availability, and the strongest technical lessons learned.",
+        "summary": "A graduation prototype that turns procedural space generation into an interconnected sandbox experience. The work focused on integrating gameplay systems and improving world-generation performance.",
+        "problem": "The previous school-year project could generate star systems and planets, but lacked the connected gameplay needed to make them worth exploring. The graduation assignment added ship physics, mining, colony construction, orbiting planets, and persistent progress.",
+        "solution": "Seed-based generation creates the star system and planet surfaces. Burst-compiled parallel jobs compute biome maps, texture pixels, and spawn candidates. A player state machine switches between ship and on-foot controls, while ScriptableObject data drives resources and buildings. UI Toolkit exposes these systems through a Galaxy Hub, HUD, map, inventory, and construction panels.",
+        "outcome": "Presented as a functional 2D space-game prototype with exploration, mining, colony construction, and per-galaxy saves. The final thesis reports a reduction in world initialization from roughly 30 seconds to 5 seconds after the Jobs/Burst refactor. The project remains a prototype with onboarding, economy balancing, and settings still to develop.",
         "lessons": [
-          "Add one concrete Unity or C# technical lesson.",
-          "Add one gameplay, level-design, or UX lesson.",
-          "Add one scope, delivery, or debugging lesson."
+          "Moving generation into parallel jobs required restructuring data flow and explicitly synchronizing work before creating Unity objects.",
+          "ScriptableObject data separates resource and building parameters from gameplay code, making tuning and content expansion easier.",
+          "Regenerating the world from a seed before restoring saved progress simplifies persistence, but changed world objects still need explicit save data.",
+          "A working collection of systems needs onboarding and clear player goals to become an understandable game."
         ],
         "sections": [
           {
-            "title": "Media to add",
-            "body": "Add screenshots, a short trailer, or gameplay capture before this becomes a public-facing featured case study."
+            "title": "Gameplay loop",
+            "body": "Create or select a galaxy, travel through its generated star system, land, and explore a planet on foot. Mine resources into a shared inventory, place buildings with costs and dependencies, and return to the hub with saved progress."
           },
           {
-            "title": "WebGL note",
-            "body": "Keep the Unity WebGL embed as a later step after checking build size, input handling, loading time, and browser performance."
+            "title": "World generation and performance",
+            "body": "The generator builds planet meshes and distributes biomes, resources, and decorations from seeds. Job System and Burst handle biome maps, texture pixels, and candidate spawn positions in parallel; coroutines spread initialization across frames. The reviewed project uses Unity 6000.2.8f1 and URP."
+          },
+          {
+            "title": "Saving and restoring a galaxy",
+            "body": "JSON files store galaxy metadata and gameplay state separately. Loading first regenerates the star system, then restores ship position and energy, inventory, buildings, and extractor state. The player returns to the ship on load to avoid problems when resuming planetary physics."
+          },
+          {
+            "title": "Prototype scope and next steps",
+            "body": "Testing during development was manual and scenario-based, with feedback from other players. Moon support and ship status indicators remain experimental, and the settings tab is unfinished. The next priorities are a guided first-session quest, economy balancing, settings and key rebinding, and more complete persistence of mined deposits. A WebGL portfolio embed remains a possible later step."
           }
         ],
         "assets": [
           {
             "type": "image",
-            "label": "Gameplay screenshot placeholder",
-            "src": "",
-            "alt": "Gameplay screenshot to add"
+            "label": "Space flight and navigation compass",
+            "src": "/projects/unity-graduation-game/space-flight.png",
+            "alt": "Starbounder ship in a starfield with a circular navigation compass"
           },
           {
-            "type": "video",
-            "label": "Gameplay video placeholder",
-            "src": "",
-            "alt": "Gameplay video to add"
+            "type": "image",
+            "label": "Sector map",
+            "src": "/projects/unity-graduation-game/sector-map.png",
+            "alt": "Starbounder pause-menu sector map with planet and player markers"
+          },
+          {
+            "type": "image",
+            "label": "Planetary construction panel",
+            "src": "/projects/unity-graduation-game/building-panel.png",
+            "alt": "Starbounder planetary surface with resource inventory and building availability panels"
           }
         ]
       }

@@ -6,7 +6,7 @@ const floatWaveOne = keyframes`
     transform: translateY(0) scaleY(1);
   }
   50% {
-    transform: translateY(-16px) scaleY(1.03);
+    transform: translateY(-22px) scaleY(1.04);
   }
 `;
 
@@ -15,7 +15,16 @@ const floatWaveTwo = keyframes`
     transform: translateY(0) scaleY(1);
   }
   50% {
-    transform: translateY(18px) scaleY(0.97);
+    transform: translateY(24px) scaleY(0.96);
+  }
+`;
+
+const floatWaveThree = keyframes`
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
   }
 `;
 
@@ -39,9 +48,9 @@ const WallpaperContainer = styled.div`
   user-select: none;
   z-index: 0;
   background: radial-gradient(
-    circle at 50% 50%,
+    ellipse at 50% 50%,
     ${({ theme }) => theme.colors.background} 0%,
-    #0d0c11 100%
+    #07060a 100%
   );
 
   @media (prefers-reduced-motion: reduce) {
@@ -57,18 +66,27 @@ const SvgCanvas = styled.svg`
   display: block;
 `;
 
+const ScreenGroup = styled.g`
+  mix-blend-mode: screen;
+`;
+
 const AnimatedGroupOne = styled.g`
-  animation: ${floatWaveOne} 16s ease-in-out infinite;
+  animation: ${floatWaveOne} 18s ease-in-out infinite;
   transform-origin: center;
 `;
 
 const AnimatedGroupTwo = styled.g`
-  animation: ${floatWaveTwo} 20s ease-in-out infinite;
+  animation: ${floatWaveTwo} 22s ease-in-out infinite;
+  transform-origin: center;
+`;
+
+const AnimatedGroupThree = styled.g`
+  animation: ${floatWaveThree} 26s ease-in-out infinite;
   transform-origin: center;
 `;
 
 const GlowingAmbient = styled.g`
-  animation: ${pulseGlow} 10s ease-in-out infinite;
+  animation: ${pulseGlow} 12s ease-in-out infinite;
 `;
 
 export const Wallpaper: React.FC = () => {
@@ -81,171 +99,253 @@ export const Wallpaper: React.FC = () => {
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
-          {/* Central diffused accent bloom */}
-          <radialGradient id="centerBloom" cx="50%" cy="50%" r="50%">
+          {/* Široké ambientní záře pokrývající celou plochu (levá strana, střed i pravá strana) */}
+          <radialGradient id="centerBloom" cx="50%" cy="50%" r="60%">
             <stop offset="0%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.22" />
             <stop offset="45%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.08" />
             <stop offset="100%" stopColor="transparent" stopOpacity="0" />
           </radialGradient>
 
-          {/* Secondary ambient backlight */}
-          <radialGradient id="sideBloom" cx="80%" cy="60%" r="40%">
+          {/* Důležitá levá ambientní aura – odstraňuje pocit 'oříznutí' na levé straně */}
+          <radialGradient id="leftBloom" cx="15%" cy="50%" r="55%">
             <stop offset="0%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.18" />
+            <stop offset="50%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.06" />
             <stop offset="100%" stopColor="transparent" stopOpacity="0" />
           </radialGradient>
 
-          {/* Primary wave gradient: Soft start -> high energetic accent -> fading out */}
+          {/* Pravá ambientní aura */}
+          <radialGradient id="rightBloom" cx="85%" cy="55%" r="55%">
+            <stop offset="0%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.16" />
+            <stop offset="50%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.05" />
+            <stop offset="100%" stopColor="transparent" stopOpacity="0" />
+          </radialGradient>
+
+          {/* Plynulý gradient primární vlny – táhne se hluboko od -600px do +2520px */}
           <linearGradient id="waveGradPrimary" x1="0%" y1="50%" x2="100%" y2="50%">
             <stop offset="0%" stopColor="var(--color-accent, #3498db)" stopOpacity="0" />
-            <stop offset="25%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.45" />
-            <stop offset="55%" stopColor="#ffffff" stopOpacity="0.95" />
-            <stop offset="70%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.6" />
+            <stop offset="15%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.25" />
+            <stop offset="38%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.75" />
+            <stop offset="52%" stopColor="#ffffff" stopOpacity="0.95" />
+            <stop offset="68%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.7" />
+            <stop offset="85%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.2" />
             <stop offset="100%" stopColor="var(--color-accent, #3498db)" stopOpacity="0" />
           </linearGradient>
 
-          {/* Intersecting wave gradient: darker edge into vibrant highlight */}
+          {/* Plynulý gradient sekundární křížící se vlny */}
           <linearGradient id="waveGradSecondary" x1="0%" y1="40%" x2="100%" y2="60%">
             <stop offset="0%" stopColor="var(--color-accent, #3498db)" stopOpacity="0" />
-            <stop offset="35%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.5" />
-            <stop offset="60%" stopColor="#ffffff" stopOpacity="0.9" />
-            <stop offset="85%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.3" />
+            <stop offset="18%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.25" />
+            <stop offset="44%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.65" />
+            <stop offset="56%" stopColor="#ffffff" stopOpacity="0.9" />
+            <stop offset="70%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.55" />
+            <stop offset="86%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.18" />
             <stop offset="100%" stopColor="var(--color-accent, #3498db)" stopOpacity="0" />
           </linearGradient>
 
-          {/* Translucent ribbon fill 1 */}
-          <linearGradient id="ribbonFillOne" x1="0%" y1="0%" x2="100%" y2="0%">
+          {/* Plynulý gradient třetí hluboké atmosféry */}
+          <linearGradient id="waveGradTertiary" x1="0%" y1="30%" x2="100%" y2="70%">
             <stop offset="0%" stopColor="var(--color-accent, #3498db)" stopOpacity="0" />
-            <stop offset="30%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.22" />
-            <stop offset="55%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.35" />
+            <stop offset="25%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.18" />
+            <stop offset="50%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.4" />
             <stop offset="80%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.15" />
             <stop offset="100%" stopColor="var(--color-accent, #3498db)" stopOpacity="0" />
           </linearGradient>
 
-          {/* Translucent ribbon fill 2 */}
-          <linearGradient id="ribbonFillTwo" x1="0%" y1="100%" x2="100%" y2="0%">
+          {/* Výplň těla stuhy 1 – bezešvá */}
+          <linearGradient id="ribbonFillOne" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="var(--color-accent, #3498db)" stopOpacity="0" />
-            <stop offset="25%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.18" />
-            <stop offset="65%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.28" />
+            <stop offset="20%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.18" />
+            <stop offset="50%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.32" />
+            <stop offset="80%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.15" />
             <stop offset="100%" stopColor="var(--color-accent, #3498db)" stopOpacity="0" />
           </linearGradient>
 
-          {/* Heavy ambient blur */}
-          <filter id="ambientBlur" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="40" />
+          {/* Výplň těla stuhy 2 */}
+          <linearGradient id="ribbonFillTwo" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="var(--color-accent, #3498db)" stopOpacity="0" />
+            <stop offset="20%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.15" />
+            <stop offset="52%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.28" />
+            <stop offset="82%" stopColor="var(--color-accent, #3498db)" stopOpacity="0.1" />
+            <stop offset="100%" stopColor="var(--color-accent, #3498db)" stopOpacity="0" />
+          </linearGradient>
+
+          {/* Filtry s 300% oblastí – absolutně vylučují jakékoliv oříznutí (ufiknutí) bluru */}
+          <filter id="ultraSoftBlur" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="80" />
           </filter>
 
-          {/* Medium volumetric glow */}
-          <filter id="mediumGlow" x="-25%" y="-25%" width="150%" height="150%">
-            <feGaussianBlur stdDeviation="16" result="blur" />
+          <filter id="ribbonFeather" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="36" />
+          </filter>
+
+          <filter id="etherealGlow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="34" result="wideBlur" />
+            <feGaussianBlur stdDeviation="14" result="midBlur" />
             <feMerge>
-              <feMergeNode in="blur" />
+              <feMergeNode in="wideBlur" />
+              <feMergeNode in="midBlur" />
+            </feMerge>
+          </filter>
+
+          <filter id="softLaserCore" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="12" result="softAura" />
+            <feGaussianBlur stdDeviation="4" result="laserGlow" />
+            <feMerge>
+              <feMergeNode in="softAura" />
+              <feMergeNode in="laserGlow" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
 
-          {/* Intense neon core glow */}
-          <filter id="neonLaserCore" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="6" result="coloredGlow" />
-            <feGaussianBlur stdDeviation="2" result="sharpGlow" />
+          <filter id="hotFilamentGlow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="2.5" result="filamentGlow" />
             <feMerge>
-              <feMergeNode in="coloredGlow" />
-              <feMergeNode in="sharpGlow" />
+              <feMergeNode in="filamentGlow" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
         </defs>
 
-        {/* Ambient backlighting */}
+        {/* Široké ambientní záře po celé šířce plochy */}
         <GlowingAmbient>
-          <ellipse cx="960" cy="540" rx="750" ry="420" fill="url(#centerBloom)" />
-          <ellipse cx="1500" cy="580" rx="550" ry="320" fill="url(#sideBloom)" />
+          <ellipse cx="960" cy="540" rx="1100" ry="580" fill="url(#centerBloom)" />
+          <ellipse cx="250" cy="500" rx="800" ry="520" fill="url(#leftBloom)" />
+          <ellipse cx="1670" cy="560" rx="800" ry="520" fill="url(#rightBloom)" />
         </GlowingAmbient>
 
-        {/* Deep ambient diffused wave aura */}
-        <path
-          d="M -100 590 C 350 670, 750 420, 1120 510 C 1480 600, 1720 440, 2020 390"
-          stroke="var(--color-accent, #3498db)"
-          strokeWidth="110"
-          filter="url(#ambientBlur)"
-          opacity="0.3"
-        />
-        <path
-          d="M -100 410 C 400 320, 780 620, 1180 540 C 1520 460, 1760 610, 2020 640"
-          stroke="var(--color-accent, #3498db)"
-          strokeWidth="90"
-          filter="url(#ambientBlur)"
-          opacity="0.25"
-        />
-
-        {/* Wave Group 1: Lower sweeping ribbon */}
-        <AnimatedGroupOne>
-          {/* Volumetric Ribbon Body */}
+        <ScreenGroup>
+          {/* Spodní hluboké atmosférické aury – táhnou se od -600px do +2520px s obrovským rozptylem */}
           <path
-            d="M -80 610 C 340 680, 680 430, 1080 500 C 1440 570, 1700 450, 2020 390 L 2020 470 C 1700 530, 1420 660, 1060 585 C 660 510, 320 760, -80 690 Z"
-            fill="url(#ribbonFillOne)"
+            d="M -600 760 C 100 860, 600 360, 1100 490 C 1580 610, 1980 410, 2520 360"
+            stroke="var(--color-accent, #3498db)"
+            strokeWidth="240"
+            strokeLinecap="round"
+            filter="url(#ultraSoftBlur)"
+            opacity="0.32"
+          />
+          <path
+            d="M -600 280 C 150 180, 650 680, 1160 540 C 1600 410, 2050 680, 2520 720"
+            stroke="var(--color-accent, #3498db)"
+            strokeWidth="220"
+            strokeLinecap="round"
+            filter="url(#ultraSoftBlur)"
+            opacity="0.28"
           />
 
-          {/* Soft aura contour */}
-          <path
-            d="M -80 650 C 330 720, 670 470, 1070 540 C 1430 610, 1700 490, 2020 430"
-            stroke="url(#waveGradPrimary)"
-            strokeWidth="18"
-            filter="url(#mediumGlow)"
-            opacity="0.45"
-          />
+          {/* Vlna 3: Široká vertikální záře rozšiřující světlo do horní i dolní části obrazovky */}
+          <AnimatedGroupThree>
+            <path
+              d="M -600 480 C 50 250, 720 780, 1260 420 C 1750 180, 2180 500, 2520 560"
+              stroke="url(#waveGradTertiary)"
+              strokeWidth="140"
+              strokeLinecap="round"
+              filter="url(#ultraSoftBlur)"
+              opacity="0.35"
+            />
+          </AnimatedGroupThree>
 
-          {/* Brilliant central beam */}
-          <path
-            d="M -80 650 C 330 720, 670 470, 1070 540 C 1430 610, 1700 490, 2020 430"
-            stroke="url(#waveGradPrimary)"
-            strokeWidth="6"
-            filter="url(#neonLaserCore)"
-            opacity="0.85"
-          />
+          {/* Vlna 1: Hlavní plynulá stuha (rozšířená z -600 na 2520) */}
+          <AnimatedGroupOne>
+            {/* Tělo stuhy – bez ostrých hran, s velkým přesahem za okraje obrazovky */}
+            <path
+              d="M -600 740 C 100 820, 600 350, 1080 470 C 1520 590, 1940 390, 2520 330 L 2520 440 C 1940 500, 1520 700, 1080 580 C 600 460, 100 930, -600 850 Z"
+              fill="url(#ribbonFillOne)"
+              filter="url(#ribbonFeather)"
+              opacity="0.45"
+            />
 
-          {/* Razor sharp hot-white core filament */}
-          <path
-            d="M -80 650 C 330 720, 670 470, 1070 540 C 1430 610, 1700 490, 2020 430"
-            stroke="#ffffff"
-            strokeWidth="1.8"
-            opacity="0.95"
-          />
-        </AnimatedGroupOne>
+            {/* Široká rozptýlená světelná stopa */}
+            <path
+              d="M -600 780 C 100 860, 600 380, 1100 500 C 1550 620, 1950 420, 2520 360"
+              stroke="url(#waveGradPrimary)"
+              strokeWidth="70"
+              strokeLinecap="round"
+              filter="url(#etherealGlow)"
+              opacity="0.35"
+            />
 
-        {/* Wave Group 2: Intersecting top-to-bottom counter ribbon */}
-        <AnimatedGroupTwo>
-          {/* Volumetric Ribbon Body */}
-          <path
-            d="M -80 390 C 380 300, 780 610, 1160 530 C 1500 450, 1740 600, 2020 630 L 2020 550 C 1730 520, 1480 380, 1140 460 C 760 540, 370 230, -80 310 Z"
-            fill="url(#ribbonFillTwo)"
-          />
+            {/* Střední měkká aura */}
+            <path
+              d="M -600 780 C 100 860, 600 380, 1100 500 C 1550 620, 1950 420, 2520 360"
+              stroke="url(#waveGradPrimary)"
+              strokeWidth="24"
+              strokeLinecap="round"
+              filter="url(#etherealGlow)"
+              opacity="0.6"
+            />
 
-          {/* Soft aura contour */}
-          <path
-            d="M -80 350 C 380 260, 770 570, 1150 495 C 1490 415, 1740 560, 2020 590"
-            stroke="url(#waveGradSecondary)"
-            strokeWidth="16"
-            filter="url(#mediumGlow)"
-            opacity="0.4"
-          />
+            {/* Zářící světelný paprsek */}
+            <path
+              d="M -600 780 C 100 860, 600 380, 1100 500 C 1550 620, 1950 420, 2520 360"
+              stroke="url(#waveGradPrimary)"
+              strokeWidth="7"
+              strokeLinecap="round"
+              filter="url(#softLaserCore)"
+              opacity="0.85"
+            />
 
-          {/* Brilliant central beam */}
-          <path
-            d="M -80 350 C 380 260, 770 570, 1150 495 C 1490 415, 1740 560, 2020 590"
-            stroke="url(#waveGradSecondary)"
-            strokeWidth="5"
-            filter="url(#neonLaserCore)"
-            opacity="0.8"
-          />
+            {/* Zjemněné vnitřní vlákno */}
+            <path
+              d="M -600 780 C 100 860, 600 380, 1100 500 C 1550 620, 1950 420, 2520 360"
+              stroke="#ffffff"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              filter="url(#hotFilamentGlow)"
+              opacity="0.85"
+            />
+          </AnimatedGroupOne>
 
-          {/* Razor sharp hot-white core filament */}
-          <path
-            d="M -80 350 C 380 260, 770 570, 1150 495 C 1490 415, 1740 560, 2020 590"
-            stroke="#ffffff"
-            strokeWidth="1.6"
-            opacity="0.9"
-          />
-        </AnimatedGroupTwo>
+          {/* Vlna 2: Křížící se horní stuha (rozšířená z -600 na 2520) */}
+          <AnimatedGroupTwo>
+            {/* Tělo stuhy */}
+            <path
+              d="M -600 240 C 150 140, 650 640, 1140 500 C 1580 380, 2030 640, 2520 680 L 2520 760 C 2030 720, 1580 460, 1140 580 C 650 720, 150 220, -600 320 Z"
+              fill="url(#ribbonFillTwo)"
+              filter="url(#ribbonFeather)"
+              opacity="0.4"
+            />
+
+            {/* Široká rozptýlená stopa */}
+            <path
+              d="M -600 280 C 150 180, 650 680, 1150 540 C 1600 420, 2050 680, 2520 720"
+              stroke="url(#waveGradSecondary)"
+              strokeWidth="60"
+              strokeLinecap="round"
+              filter="url(#etherealGlow)"
+              opacity="0.32"
+            />
+
+            {/* Střední měkká aura */}
+            <path
+              d="M -600 280 C 150 180, 650 680, 1150 540 C 1600 420, 2050 680, 2520 720"
+              stroke="url(#waveGradSecondary)"
+              strokeWidth="20"
+              strokeLinecap="round"
+              filter="url(#etherealGlow)"
+              opacity="0.55"
+            />
+
+            {/* Zářící paprsek */}
+            <path
+              d="M -600 280 C 150 180, 650 680, 1150 540 C 1600 420, 2050 680, 2520 720"
+              stroke="url(#waveGradSecondary)"
+              strokeWidth="6"
+              strokeLinecap="round"
+              filter="url(#softLaserCore)"
+              opacity="0.8"
+            />
+
+            {/* Zjemněné vnitřní vlákno */}
+            <path
+              d="M -600 280 C 150 180, 650 680, 1150 540 C 1600 420, 2050 680, 2520 720"
+              stroke="#ffffff"
+              strokeWidth="2"
+              strokeLinecap="round"
+              filter="url(#hotFilamentGlow)"
+              opacity="0.8"
+            />
+          </AnimatedGroupTwo>
+        </ScreenGroup>
       </SvgCanvas>
     </WallpaperContainer>
   );

@@ -39,7 +39,7 @@ The ASP.NET project exists as a future backend placeholder. It should remain out
 - The public project carousel lives at `/projects`; `/projects/:projectId` resolves any central content entry and renders its optional case study. Unknown IDs show a localized return link.
 - Project page styles live in focused `ProjectsPages/*.styles.ts` modules. Carousel controls are localized, support arrow keys, and hide inactive slides from assistive technology.
 - Personal Conversation RAG is now a featured project. Copy was checked against the local RAG repository: manual notes and ChatGPT import are implemented; Claude import and answer generation are planned; full-corpus search validation is still pending.
-- A Unity graduation game placeholder project was added as the first game case-study shell without inventing unrecovered gameplay details.
+- The Unity graduation entry now presents Starbounder as a prototype with a source-backed bilingual case study, an itch.io link, and three screenshots extracted from its thesis. Review provenance and limitations are recorded in `docs/STARBOUNDER.md`.
 - DevOS Explorer and Browser now use central project data for project discovery and previews.
 - DevOS Browser address bar now filters projects by id, name, category, stack, and other metadata.
 - DevOS Terminal was added as an interactive portfolio CLI with project, service, contact, and open commands.
@@ -103,14 +103,14 @@ Project case-study content is optional per project. Use it when a project needs 
 - `sections`: extra titled notes such as media notes or future WebGL embedding
 - `assets`: screenshots, videos, WebGL builds, or external links
 
-The `unity-graduation-game` entry is intentionally a placeholder. Replace its conservative copy with real gameplay, screenshots, source notes, and final outcome once the original Unity project is reviewed.
+The `unity-graduation-game` ID remains stable, but its content now describes Starbounder: procedural space exploration, mining, colony building, Jobs/Burst generation, UI Toolkit, and per-galaxy saves. It is explicitly a prototype, not a finished game. See [Starbounder source notes](STARBOUNDER.md) for the reviewed local snapshot, reported performance figures, media provenance, and future work.
 
 General UI translations live in `web.client/src/i18n/locales/*/common.json`. DevOS-specific labels, terminal output, About Me profile copy, and Component Lab copy live in `web.client/src/i18n/locales/*/devos.json`. The current language is stored in `localStorage` as `portfolio.locale` and controlled from Preferences.
 
 ## Next Work Candidates
 
 1. Replace mobile placeholder content.
-2. Add real project media and outcomes to the existing case-study pages; replace Unity draft copy before publishing.
+2. Add real project media and outcomes to the remaining case studies; check the Starbounder download link before publishing and consider a gameplay clip.
 3. Add Testing Library when component tests become necessary.
 4. Refactor remaining DevOS placeholder apps into focused modules, especially Games.
 5. Decide whether forms need a backend or third-party form service.

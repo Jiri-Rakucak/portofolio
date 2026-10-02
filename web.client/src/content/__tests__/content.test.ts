@@ -102,11 +102,11 @@ describe('portfolio content', () => {
 
     it('filters projects by optional case-study content', () => {
         const graduationResults = filterProjectsBySearch(getPortfolioProjects('en'), 'unity graduation');
-        const webglResults = filterProjectsBySearch(getPortfolioProjects('cs'), 'webgl maturitní');
+        const starbounderResults = filterProjectsBySearch(getPortfolioProjects('cs'), 'burst starbounder');
         const ragResults = filterProjectsBySearch(getPortfolioProjects('cs'), 'ijson');
 
         expect(graduationResults.map(project => project.id)).toContain('unity-graduation-game');
-        expect(webglResults.map(project => project.id)).toContain('unity-graduation-game');
+        expect(starbounderResults.map(project => project.id)).toContain('unity-graduation-game');
         expect(ragResults.map(project => project.id)).toContain('ragsystem');
     });
 

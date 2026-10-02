@@ -86,7 +86,7 @@ Localized source data lives in:
 
 Keep project and service IDs aligned across locales.
 
-Projects may include optional `caseStudy` content with `summary`, `problem`, `solution`, `outcome`, `lessons`, `sections`, and `assets`. ProjectWindow renders this when present. `unity-graduation-game` is currently a placeholder shell for the Unity graduation project; do not invent gameplay details without source material.
+Projects may include optional `caseStudy` content with `summary`, `problem`, `solution`, `outcome`, `lessons`, `sections`, and `assets`. ProjectWindow renders this when present. `unity-graduation-game` is Starbounder, a graduation prototype reviewed against its local Unity repository and thesis. Keep its prototype scope explicit; source notes and verification limits live in `docs/STARBOUNDER.md`.
 
 Do not duplicate project/service metadata inside components. If future admin functionality is introduced, preserve the content shape and swap the static exports for API-backed data.
 

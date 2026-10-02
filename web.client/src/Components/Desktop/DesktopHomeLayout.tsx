@@ -151,7 +151,7 @@ export default function DesktopHomeLayout() {
               <Text variant="h2">{t("home.heroSubtitle")}</Text>
             </HeroText>
             <LaunchButton to="/devos" text={t("home.launchDevos")} />
-            <SecondaryLink to="/services" viewTransition>
+            <SecondaryLink to="/projects" viewTransition>
               <Text variant="bodyM">{t("home.exploreServices")}</Text>
             </SecondaryLink>
           </StyledHeroSection>
