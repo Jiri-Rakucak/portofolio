@@ -12,6 +12,7 @@ import AdminIcon from "../Icons/Admin";
 import Text from "./Typography";
 import Modal from "./Modal";
 import WebSettings from "../Settings/WebSettings";
+import { contact } from '../../content/contact';
 
 const PlaceholderLogo = ({ className }: { className?: string }) => (
   <svg
@@ -79,6 +80,15 @@ const LogoLink = styled(Link)`
   align-items: center;
   text-decoration: none;
   color: ${({ theme }) => theme.colors.accent};
+  transition: color 0.2s ease;
+  &:hover,
+  &:focus-visible {
+    color: ${({ theme }) => theme.colors.text};
+  }
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.accent};
+    outline-offset: 4px;
+  }
 `;
 
 const RightSection = styled.div`
@@ -257,7 +267,7 @@ const Header = () => {
       <StyledHeader>
         <Nav>
           <LogoContainer>
-            <LogoLink to="/" viewTransition>
+            <LogoLink to="/" viewTransition aria-label={t("navigation.home")}>
               <PlaceholderLogo />
             </LogoLink>
           </LogoContainer>
@@ -265,18 +275,20 @@ const Header = () => {
           <RightSection>
             <SocialLinks>
               <SocialLink
-                href="https://linkedin.com/in/jirirakucak"
+                href={contact.linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
+                title="LinkedIn"
               >
                 <LinkedInIcon size={28} />
               </SocialLink>
               <SocialLink
-                href="https://github.com/jirirakucak"
+                href={contact.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
+                title="GitHub"
               >
                 <GitHubIcon size={28} />
               </SocialLink>

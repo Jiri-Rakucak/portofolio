@@ -32,6 +32,31 @@ const renderPage = async (path: string, locale: 'en' | 'cs' = 'en') => {
 afterEach(() => vi.restoreAllMocks());
 
 describe('project detail page', () => {
+    it('renders Starbounder motivation, a gallery, and a prototype download CTA', async () => {
+        const html = await renderPage('/projects/unity-graduation-game', 'cs');
+        const project = projectContent.getProjectById('unity-graduation-game', 'cs');
+
+        expect(html).toContain(project?.caseStudy?.motivation);
+        expect(html).toContain(project?.cover?.src);
+        expect(html.match(/aria-label="Zvětšit:/g)).toHaveLength(5);
+        expect(html).toContain('Stáhnout prototyp');
+        expect(html).toContain('<details');
+        expect(html).not.toContain('project.meta');
+        expect(html).not.toContain('projectWindow.');
+    });
+
+    it('omits the gallery section when a case study has no usable images', async () => {
+        const project = projectContent.getProjectById('unity-graduation-game', 'en')!;
+        vi.spyOn(projectContent, 'getProjectById').mockReturnValue({
+            ...project, caseStudy: { ...project.caseStudy!, assets: [{ type: 'image', label: 'Pending', src: '' }] },
+        });
+
+        const html = await renderPage('/projects/unity-graduation-game');
+
+        expect(html).not.toContain('Project screenshots');
+        expect(html).toContain(project.caseStudy?.outcome);
+    });
+
     it('renders the localized RAG case study and source link without a self-link', async () => {
         const html = await renderPage('/projects/ragsystem', 'cs');
         const project = projectContent.getProjectById('ragsystem', 'cs');
@@ -60,6 +85,14 @@ describe('project detail page', () => {
 });
 
 describe('project carousel', () => {
+    it('renders the central project cover rather than a hardcoded image', async () => {
+        const html = await renderPage('/projects');
+        const project = projectContent.getProjectById('unity-graduation-game', 'en');
+
+        expect(html).toContain(project?.cover?.src);
+        expect(html).toContain(project?.cover?.alt);
+    });
+
     it('renders localized navigation and keeps slides inaccessible behind the intro', async () => {
         const html = await renderPage('/projects', 'cs');
 

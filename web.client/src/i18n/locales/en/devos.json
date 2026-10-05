@@ -140,7 +140,7 @@
     "openUsage": "Usage: open <id>\nAvailable ids: {{projectIds}}",
     "openedCaseStudy": "Opened case study: {{projectName}}",
     "highlights": "Highlights:",
-    "contact": "Contact:\n  email: jiri@rakucak.cz\n  github: https://github.com/jirirakucak\n  linkedin: https://linkedin.com/in/jirirakucak",
+    "contact": "Contact:\n  email: {{email}}\n  phone: {{phoneDisplay}}\n  github: {{githubUrl}}\n  linkedin: {{linkedinUrl}}",
     "unknownCommand": "Unknown command: {{command}}. Type \"help\" for available commands.",
     "commandAria": "Terminal command"
   }

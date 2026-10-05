@@ -140,7 +140,7 @@
     "openUsage": "Použití: open <id>\nDostupná ID: {{projectIds}}",
     "openedCaseStudy": "Otevřena case study: {{projectName}}",
     "highlights": "Hlavní body:",
-    "contact": "Kontakt:\n  email: jiri@rakucak.cz\n  github: https://github.com/jirirakucak\n  linkedin: https://linkedin.com/in/jirirakucak",
+    "contact": "Kontakt:\n  email: {{email}}\n  telefon: {{phoneDisplay}}\n  github: {{githubUrl}}\n  linkedin: {{linkedinUrl}}",
     "unknownCommand": "Neznámý příkaz: {{command}}. Zadej \"help\" pro výpis příkazů.",
     "commandAria": "Terminálový příkaz"
   }

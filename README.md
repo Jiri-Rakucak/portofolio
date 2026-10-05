@@ -83,9 +83,11 @@ Typed access helpers live in:
 - `web.client/src/content/projects.ts`
 - `web.client/src/content/services.ts`
 
+Owner contacts and social URLs are centralized in `web.client/src/content/contact.ts`. The desktop homepage introduces Jiří Rakučák in both languages, keeps projects as the primary action, and retains the atom as a lazy-loaded interactive visual. Further homepage project/skills polish and the mobile redesign remain separate next steps.
+
 The JSON shape is intentionally close to what a future admin UI, backend API, CMS, or local content editor could provide. When admin functionality becomes useful, the project can replace the static JSON imports with fetched content while keeping the consuming UI mostly unchanged.
 
-The DevOS Explorer, Browser, ProjectWindow, About Me document, service directory, and detailed service pages already consume localized content for project discovery, previews, mini case-study views, profile copy, and service copy. Project entries can include optional `caseStudy` content for deeper storytelling. Starbounder, the Unity graduation prototype, now has a source-backed case study and three actual screenshots. See [source notes](docs/STARBOUNDER.md) for its scope and verification limits.
+The DevOS Explorer, Browser, ProjectWindow, About Me document, service directory, and detailed service pages already consume localized content for project discovery, previews, mini case-study views, profile copy, and service copy. Project entries can include optional `caseStudy` content for deeper storytelling. Starbounder, the Unity graduation prototype, has a source-backed case study, a real cover, personal motivation, and a five-image public gallery. See [source notes](docs/STARBOUNDER.md) for its scope and verification limits.
 
 General UI translations live in `web.client/src/i18n/locales/*/common.json`; DevOS-specific UI, terminal output, and About Me profile copy live in `web.client/src/i18n/locales/*/devos.json`. Language selection is stored in `localStorage` and exposed through Preferences.
 

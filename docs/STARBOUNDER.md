@@ -20,7 +20,7 @@ Remote access was unavailable during review, so this is not a claim about the la
 
 The thesis reports world initialization improving from roughly 30 seconds to 5 seconds after the Job System/Burst refactor. Portfolio copy attributes this to the thesis; it is not an independently reproduced benchmark.
 
-The public CTA `https://jirirakucak.itch.io/starbounder` comes from the presentation notes. Current availability and downloadable platform support still need checking. No public source CTA is added because the GitHub repository is internal. A WebGL embed is only a future option, not an existing build.
+The public CTA `https://jirirakucak.itch.io/starbounder` comes from the presentation notes. On 2026-10-04 the owner confirmed the page is correct and current; this was not independently checked. The public CTA is labelled "Download prototype" rather than "Live site". No public source CTA is added because the GitHub repository is internal. A WebGL embed is only a future option, not an existing build.
 
 ## Screenshot Provenance
 
@@ -32,7 +32,17 @@ Only gameplay screenshots were extracted from the thesis; assignment pages and s
 | `web.client/public/projects/unity-graduation-game/sector-map.png` | `word/media/image6.png` |
 | `web.client/public/projects/unity-graduation-game/building-panel.png` | `word/media/image8.png` |
 
-EN/CZ labels and alt text live alongside the case study in the localized `content.json` files. The current case-study UI exposes media as links, not an inline gallery.
+On 2026-10-04 the owner supplied additional gameplay screenshots. The cover uses `planet-in-space-no-ship.png`: its visible generated planet and open left side suit the title overlay. The public gallery selects `space-flight.png`, `planet-landing.png`, `planet-solar-extractor.png`, `building-detail-panel.png`, and `galaxy-map.png` to show different parts of the gameplay loop. Other supplied images remain available without renaming or deletion.
+
+EN/CZ cover alt text, screenshot captions, the download label, and the owner's personal motivation live in localized `content.json` files. Public project pages render an inline gallery with a full-size image viewer. DevOS retains its existing presentation of case-study media as links.
+
+## Public Presentation
+
+The public detail leads with the project cover and CTA, then motivation/overview, screenshots, the challenge/approach/result, and lessons. Highlights, technologies, and additional notes appear once in expandable technical details. Public case-study rendering is separate from DevOS window components.
+
+Yet Another React Lightbox was evaluated through Context7. The npm registry was unavailable, so no dependency was added. The limited full-size viewer uses the native HTML `dialog` for modal focus containment and Escape behavior, with project-specific previous/next controls. It does not implement custom pan/zoom physics. Revisit the library if pinch zoom, panning, or richer media becomes necessary.
+
+Unit tests cover public page rendering, gallery filtering and optional metadata, empty sources, localization, and image defaults. A Playwright interaction/screenshot check could not run in the current environment because Chromium lacks `libnspr4.so`; the dev server also cannot bind a port (`EPERM`). Browser verification of layout, image failures, keyboard navigation, focus return, and narrow viewports remains a follow-up.
 
 ## Follow-up Priorities
 

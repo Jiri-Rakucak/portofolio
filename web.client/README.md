@@ -76,7 +76,7 @@ src/
 ## Performance Notes
 
 - `DesktopHomeLayout` is lazy-loaded from the home page.
-- `AtomScene` is lazy-loaded from the desktop layout.
+- `AtomScene` is lazy-loaded by the desktop hero's `HeroScene` boundary.
 - `/devos` is lazy-loaded as a separate route.
 - The Three.js scene still creates a large chunk, but it is isolated from the main app bundle.
 
@@ -91,8 +91,13 @@ Typed helpers expose that data from `src/content/`:
 
 - `projects.ts`: project metadata, case-study metadata, featured projects, DevOS file-system entries, and project lookup helpers
 - `services.ts`: service metadata used by homepage cards and the service directory
+- `contact.ts`: owner name, email, phone, city, and social URLs shared by public contact views and DevOS contact output
 
 Keep new project/service metadata in the locale JSON first, then consume it through the helper functions. This avoids duplicate content between homepage cards, DevOS Explorer, Browser, ProjectWindow, Terminal, the service directory, and detailed service pages.
+
+The desktop introduction is rendered by `Components/Desktop/HomeHero.tsx`; its copy lives in `common.json`. Projects are the primary hero action. The atom uses `layout="hero"` only here; default DevOS framing is unchanged. Hero camera projection is implemented with Three.js `setViewOffset` and unit-tested independently of WebGL. The optional scene has an error boundary, so its render failures do not remove the introduction or navigation. Mobile home has not been redesigned yet.
+
+Edit owner contact values in `src/content/contact.ts`, not in individual components. Country wording belongs in `footer.location` in `common.json`, interpolating `city`; Terminal contact copy interpolates the same values from `devos.json`.
 
 Optional project case-study fields are supported through the `caseStudy` object:
 
@@ -105,6 +110,8 @@ Optional project case-study fields are supported through the `caseStudy` object:
 - `assets`
 
 Use these for deeper project stories in DevOS ProjectWindow and public project pages. The `unity-graduation-game` entry presents Starbounder as a graduation prototype, with verified system descriptions and screenshots under `public/projects/unity-graduation-game/`. See [source notes](../docs/STARBOUNDER.md) before expanding its claims or adding a playable embed.
+
+Public project pages support optional localized `cover`, `liveLabel`, and `caseStudy.motivation` metadata. Their gallery, native-dialog viewer, image fallback, and story rendering live in `src/Pages/ProjectsPages/`, separately from DevOS components. Screenshot thumbnails preserve the full frame; technical detail is expandable rather than duplicated in the hero and body.
 
 DevOS project discovery currently uses this content model in two places:
 

@@ -7,6 +7,7 @@ import {
   getProjectStatusLabels,
 } from '../../content/projects';
 import { getServices } from '../../content/services';
+import { contact } from '../../content/contact';
 import { useDevOs } from '../../Contexts/DevOsContext';
 import { useLocale } from '../../i18n/useLocale';
 import FileIcon from '../Icons/File';
@@ -266,7 +267,7 @@ const Terminal: React.FC = () => {
       appendLines([
         {
           kind: 'output',
-          text: t('terminal.contact'),
+          text: t('terminal.contact', contact),
         },
       ]);
       return;

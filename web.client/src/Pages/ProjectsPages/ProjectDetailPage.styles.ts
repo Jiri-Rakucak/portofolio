@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router";
 import type { ProjectStatus } from "../../content/projects";
+import PortfolioImage from './PortfolioImage';
 
 export const Container = styled.div`
   background: ${({ theme }) => theme.colors.background};
@@ -12,15 +13,27 @@ export const Container = styled.div`
   flex-direction: column;
 `;
 
-export const HeroSection = styled.section`
+export const HeroSection = styled.section<{ $hasCover: boolean }>`
+  position: relative;
+  isolation: isolate;
   padding: 6rem 2rem 4rem;
+  min-height: ${({ $hasCover }) => $hasCover ? 'min(560px, 70svh)' : 'auto'};
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  justify-content: center;
+  color: ${({ theme, $hasCover }) => $hasCover ? '#fff' : theme.colors.text};
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: ${({ $hasCover }) => $hasCover ? 'linear-gradient(90deg, rgba(0,0,0,0.75), transparent 80%)' : 'transparent'};
+    pointer-events: none;
+  }
   h1 {
     max-width: 100%;
     overflow-wrap: anywhere;
+    line-height: 1.15;
   }
   @media (max-width: 640px) {
     h1 {
@@ -29,12 +42,26 @@ export const HeroSection = styled.section`
   }
 `;
 
+export const HeroImage = styled(PortfolioImage)`
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+`;
+
+export const HeroContent = styled.div`
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
 export const EyebrowRow = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   margin-bottom: 1.2rem;
 `;
 
@@ -53,38 +80,21 @@ export const StatusPill = styled.span<{ $status: ProjectStatus }>`
 `;
 
 export const CategoryLabel = styled.span`
-  color: ${({ theme }) => theme.colors.textSecondary};
+  color: inherit;
   font-size: 0.84rem;
 `;
 
 export const HeroDescription = styled.div`
-  margin-top: 1.5rem;
-  max-width: 820px;
-  margin-left: auto;
-  margin-right: auto;
-  color: ${({ theme }) => theme.colors.textSecondary};
-`;
-
-export const TagRow = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.7rem;
-  justify-content: center;
-  margin-top: 2rem;
-`;
-
-export const Tag = styled.span`
-  padding: 0.45rem 1rem;
-  border-radius: 999px;
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  color: ${({ theme }) => theme.colors.textSecondary};
-  background: ${({ theme }) => theme.colors.surface};
-  font-size: 0.84rem;
+  margin-top: 1.25rem;
+  max-width: 560px;
+  color: inherit;
+  font-size: 1.1rem;
+  line-height: 1.7;
 `;
 
 export const ContentWrapper = styled.div`
-  margin: -2vw auto 0;
-  padding: calc(10vw + 4rem) 2rem 6rem;
+  margin: -36px auto 0;
+  padding: 5rem 2rem 6rem;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -92,11 +102,15 @@ export const ContentWrapper = styled.div`
   align-items: center;
   gap: 4.5rem;
   background-color: ${({ theme }) => theme.colors.backgroundSecondary};
-  clip-path: polygon(0 0, 100% 15vw, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, 100% 36px, 100% 100%, 0 100%);
+  @media (max-width: 640px) {
+    padding: 4rem 1.25rem;
+    gap: 3rem;
+  }
 `;
 
 export const Section = styled.section`
-  max-width: 900px;
+  max-width: 1200px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -109,7 +123,7 @@ export const Divider = styled.hr`
   background: ${({ theme }) => theme.colors.border};
   margin: 0;
   width: 100%;
-  max-width: 900px;
+  max-width: 1200px;
 `;
 
 
@@ -118,8 +132,8 @@ export const Divider = styled.hr`
 
 export const TwoColumn = styled.div`
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(260px, 0.8fr);
-  gap: 2.5rem;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
+  gap: 4rem;
   margin-top: 0.5rem;
 
   @media (max-width: 760px) {
@@ -198,29 +212,9 @@ export const SideColumn = styled.aside`
   gap: 1.25rem;
 `;
 
-export const TerminalPanel = styled.div`
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  border-radius: 8px;
-  background: ${({ theme }) => theme.colors.surface};
-  overflow: hidden;
-`;
-
-export const TerminalHeader = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 0.65rem 0.85rem;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-  color: ${({ theme }) => theme.colors.textSecondary};
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.78rem;
-`;
-
-export const Dot = styled.span`
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: ${({ theme }) => theme.colors.accent};
+export const MetadataPanel = styled.div`
+  border-left: 1px solid ${({ theme }) => theme.colors.border};
+  padding-left: 1.5rem;
 `;
 
 export const MetadataList = styled.dl`
@@ -251,11 +245,6 @@ export const MetadataValue = styled.dd`
 
 
 
-export const ActionPanel = styled.div`
-  display: grid;
-  gap: 0.65rem;
-`;
-
 export const PrimaryAction = styled(Link)`
   display: block;
   padding: 0.65rem 0.85rem;
@@ -265,6 +254,10 @@ export const PrimaryAction = styled(Link)`
   text-decoration: none;
   font-weight: 700;
   text-align: center;
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.accent};
+    outline-offset: 3px;
+  }
   transition: all 0.2s ease;
 
   &:hover {
@@ -282,6 +275,10 @@ export const ExternalAction = styled.a`
   text-decoration: none;
   font-weight: 700;
   text-align: center;
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.accent};
+    outline-offset: 3px;
+  }
   transition: all 0.2s ease;
 
   &:hover {
@@ -298,19 +295,82 @@ export const RelatedActions = styled.div`
 `;
 
 export const RelatedLink = styled(Link)`
-  padding: 0.6rem 1.3rem;
-  border-radius: 999px;
+  align-self: flex-start;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  padding: 0.6rem 0;
   text-decoration: none;
   color: ${({ theme }) => theme.colors.text};
-  border: 1px solid ${({ theme }) => theme.colors.accent};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.accent};
   transition: all 0.2s ease;
   font-weight: 700;
 
   &:hover {
-    background: ${({ theme }) => theme.colors.accent};
-    color: ${({ theme }) => theme.colors.background};
-    transform: translateY(-1px);
+    color: ${({ theme }) => theme.colors.accent};
   }
+`;
+
+export const HeroActions = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+  ${ExternalAction} {
+    color: inherit;
+    border-color: currentColor;
+    padding: 0.75rem 1.25rem;
+  }
+`;
+
+export const Lead = styled.p`
+  margin: 0;
+  color: ${({ theme }) => theme.colors.text};
+  font-size: 1.12rem;
+  line-height: 1.8;
+  max-width: 750px;
+`;
+
+export const StoryGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+  @media (max-width: 960px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+export const StoryBlock = styled.section`
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+  h2 {
+    color: ${({ theme }) => theme.colors.accent};
+    font-size: 1.15rem;
+  }
+`;
+
+export const TechnicalDetails = styled.details`
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+  summary {
+    cursor: pointer;
+    padding: 1.25rem 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    &:focus-visible {
+      outline: 2px solid ${({ theme }) => theme.colors.accent};
+      outline-offset: 4px;
+    }
+  }
+`;
+
+export const TechnicalContent = styled.div`
+  display: grid;
+  gap: 1.75rem;
+  padding: 0.5rem 0 2rem;
 `;
 
 export const EmptyState = styled.div`

@@ -1,26 +1,21 @@
-import { useParams } from "react-router";
-import { useTranslation } from "react-i18next";
-import Text from "../../Components/Shared/Typography";
+import { useParams } from 'react-router';
+import { useTranslation } from 'react-i18next';
+import Text from '../../Components/Shared/Typography';
+import { getProjectById, getPortfolioProjects, getProjectStatusLabels } from '../../content/projects';
+import { useLocale } from '../../i18n/useLocale';
+import ProjectGallery from './ProjectGallery';
+import ProjectStory from './ProjectStory';
 import {
-  getProjectById,
-  getPortfolioProjects,
-  getProjectStatusLabels,
-} from "../../content/projects";
-import { useLocale } from "../../i18n/useLocale";
-import { ProjectCaseStudy } from "../../Components/Applications/ProjectCaseStudy";
-
-import {
-  Container, HeroSection, EyebrowRow, StatusPill, CategoryLabel, HeroDescription,
-  TagRow, Tag, ContentWrapper, Section, Divider, TwoColumn, MainColumn, SubSection,
-  BodyCopy, HighlightList, HighlightItem, TechList, TechBadge, SideColumn,
-  TerminalPanel, TerminalHeader, Dot, MetadataList, MetadataItem, MetadataTerm,
-  MetadataValue, ActionPanel, PrimaryAction, ExternalAction, RelatedActions,
-  RelatedLink, EmptyState,
-} from "./ProjectDetailPage.styles";
+  Container, HeroSection, HeroImage, HeroContent, EyebrowRow, StatusPill, CategoryLabel,
+  HeroDescription, HeroActions, ContentWrapper, Section, Divider, TwoColumn, MainColumn,
+  SubSection, Lead, BodyCopy, HighlightList, HighlightItem, TechList, TechBadge, SideColumn,
+  MetadataPanel, MetadataList, MetadataItem, MetadataTerm, MetadataValue, PrimaryAction,
+  ExternalAction, RelatedActions, RelatedLink, EmptyState, TechnicalDetails, TechnicalContent,
+} from './ProjectDetailPage.styles';
 
 export default function ProjectDetailPage() {
-  const { projectId = "" } = useParams<{ projectId: string }>();
-  const { t } = useTranslation("common");
+  const { projectId = '' } = useParams<{ projectId: string }>();
+  const { t } = useTranslation('common');
   const { locale } = useLocale();
   const project = getProjectById(projectId, locale);
   const statusLabels = getProjectStatusLabels(locale);
@@ -29,172 +24,134 @@ export default function ProjectDetailPage() {
     return (
       <Container>
         <EmptyState>
-          <h1>{t("projectsPage.projectNotFound")}</h1>
-          <PrimaryAction to="/projects">{t("projectsPage.backToProjects")}</PrimaryAction>
+          <h1>{t('projectsPage.projectNotFound')}</h1>
+          <PrimaryAction to="/projects">{t('projectsPage.backToProjects')}</PrimaryAction>
         </EmptyState>
       </Container>
     );
   }
 
-  const allProjects = getPortfolioProjects(locale);
-  const relatedProjects = allProjects
-    .filter((p) => p.id !== project.id)
-    .slice(0, 3);
+  const study = project.caseStudy;
+  const assets = study?.assets ?? [];
+  const hasImages = assets.some(asset => asset.type === 'image' && asset.src?.trim());
+  const resources = assets.filter(asset => asset.type !== 'image' && asset.src?.trim());
+  const relatedProjects = getPortfolioProjects(locale).filter(item => item.id !== project.id).slice(0, 3);
 
   return (
     <Container>
-      <HeroSection>
-        <EyebrowRow>
-          <StatusPill $status={project.status}>
-            {statusLabels[project.status]}
-          </StatusPill>
-          <CategoryLabel>{project.category}</CategoryLabel>
-        </EyebrowRow>
-
-        <Text variant="h1" as="h1">{project.name}</Text>
-
-        <HeroDescription>
-          <Text variant="h3">{project.shortDescription}</Text>
-        </HeroDescription>
-
-        <TagRow>
-          {project.technologies.map((tech) => (
-            <Tag key={tech}>{tech}</Tag>
-          ))}
-        </TagRow>
+      <HeroSection $hasCover={Boolean(project.cover?.src)}>
+        {project.cover?.src && (
+          <HeroImage src={project.cover.src} alt={project.cover.alt} fit="cover" position="75% center" loading="eager" />
+        )}
+        <HeroContent>
+          <EyebrowRow>
+            <StatusPill $status={project.status}>{statusLabels[project.status]}</StatusPill>
+            <CategoryLabel>{project.category}</CategoryLabel>
+          </EyebrowRow>
+          <Text variant="h1" as="h1">{project.name}</Text>
+          <HeroDescription>{project.shortDescription}</HeroDescription>
+          <HeroActions>
+            {project.liveUrl && (
+              <ExternalAction href={project.liveUrl} target="_blank" rel="noreferrer">
+                {project.liveLabel || t('projectsPage.liveSite')}
+              </ExternalAction>
+            )}
+            {project.repoUrl && (
+              <ExternalAction href={project.repoUrl} target="_blank" rel="noreferrer">
+                {t('projectsPage.sourceCode')}
+              </ExternalAction>
+            )}
+            {project.route && project.route !== `/projects/${project.id}` && (
+              <PrimaryAction to={project.route}>{t('projectsPage.openProject')}</PrimaryAction>
+            )}
+          </HeroActions>
+        </HeroContent>
       </HeroSection>
 
       <ContentWrapper>
-        {/* Main content – two column */}
         <Section>
           <TwoColumn>
             <MainColumn>
-              <SubSection>
-                <Text variant="h2" as="h2">
-                  {t("projectsPage.overviewTitle")}
-                </Text>
-                <BodyCopy>{project.description}</BodyCopy>
-              </SubSection>
-
-              {project.caseStudy && <ProjectCaseStudy caseStudy={project.caseStudy} />}
-
-              <SubSection>
-                <Text variant="h2" as="h2">
-                  {t("projectsPage.highlightsTitle")}
-                </Text>
-                <HighlightList>
-                  {project.highlights.map((highlight) => (
-                    <HighlightItem key={highlight}>
-                      {highlight}
-                    </HighlightItem>
-                  ))}
-                </HighlightList>
-              </SubSection>
-
-              <SubSection>
-                <Text variant="h2" as="h2">
-                  {t("projectsPage.technologiesTitle")}
-                </Text>
-                <TechList>
-                  {project.technologies.map((tech) => (
-                    <TechBadge key={tech}>{tech}</TechBadge>
-                  ))}
-                </TechList>
-              </SubSection>
+              <Text variant="h2" as="h2">
+                {t(study?.motivation ? 'projectsPage.motivationTitle' : 'projectsPage.overviewTitle')}
+              </Text>
+              <Lead>{study?.motivation || project.description}</Lead>
             </MainColumn>
-
             <SideColumn>
-              <TerminalPanel>
-                <TerminalHeader>
-                  <Dot />
-                  project.meta
-                </TerminalHeader>
+              <MetadataPanel>
                 <MetadataList>
                   <MetadataItem>
-                    <MetadataTerm>
-                      {t("projectsPage.metaStatus")}
-                    </MetadataTerm>
-                    <MetadataValue>
-                      {statusLabels[project.status]}
-                    </MetadataValue>
-                  </MetadataItem>
-                  <MetadataItem>
-                    <MetadataTerm>
-                      {t("projectsPage.metaRole")}
-                    </MetadataTerm>
+                    <MetadataTerm>{t('projectsPage.metaRole')}</MetadataTerm>
                     <MetadataValue>{project.role}</MetadataValue>
                   </MetadataItem>
                   <MetadataItem>
-                    <MetadataTerm>
-                      {t("projectsPage.metaTimeframe")}
-                    </MetadataTerm>
+                    <MetadataTerm>{t('projectsPage.metaTimeframe')}</MetadataTerm>
                     <MetadataValue>{project.timeframe}</MetadataValue>
                   </MetadataItem>
-                  <MetadataItem>
-                    <MetadataTerm>
-                      {t("projectsPage.metaImpact")}
-                    </MetadataTerm>
-                    <MetadataValue>{project.impact}</MetadataValue>
-                  </MetadataItem>
                 </MetadataList>
-              </TerminalPanel>
-
-              <ActionPanel>
-                {project.route && project.route !== `/projects/${project.id}` && (
-                  <PrimaryAction to={project.route}>
-                    {t("projectsPage.openProject")}
-                  </PrimaryAction>
-                )}
-                {project.liveUrl && (
-                  <ExternalAction
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {t("projectsPage.liveSite")}
-                  </ExternalAction>
-                )}
-                {project.repoUrl && (
-                  <ExternalAction
-                    href={project.repoUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {t("projectsPage.sourceCode")}
-                  </ExternalAction>
-                )}
-                <PrimaryAction to="/projects">
-                  {t("projectsPage.backToProjects")}
-                </PrimaryAction>
-              </ActionPanel>
+              </MetadataPanel>
             </SideColumn>
           </TwoColumn>
         </Section>
 
-        {/* Related projects */}
-        {relatedProjects.length > 0 && (
-          <>
-            <Divider />
+        {hasImages && (
+          <Section aria-label={t('projectsPage.galleryTitle')}>
+            <Text variant="h2" as="h2">{t('projectsPage.galleryTitle')}</Text>
+            <ProjectGallery key={project.id} assets={assets} />
+          </Section>
+        )}
 
-            <Section>
-              <Text variant="h2" as="h2">{t("projectsPage.relatedTitle")}</Text>
-              <Text variant="bodyS">
-                {t("projectsPage.relatedDescription")}
-              </Text>
+        {study && <ProjectStory caseStudy={study} />}
+
+        <Section>
+          <TechnicalDetails>
+            <summary>{t('projectsPage.technicalTitle')}</summary>
+            <TechnicalContent>
+              <SubSection>
+                <Text variant="h3" as="h3">{t('projectsPage.highlightsTitle')}</Text>
+                <HighlightList>
+                  {project.highlights.map(highlight => <HighlightItem key={highlight}>{highlight}</HighlightItem>)}
+                </HighlightList>
+              </SubSection>
+              <SubSection>
+                <Text variant="h3" as="h3">{t('projectsPage.technologiesTitle')}</Text>
+                <TechList>{project.technologies.map(tech => <TechBadge key={tech}>{tech}</TechBadge>)}</TechList>
+              </SubSection>
+              {study?.sections?.map(note => (
+                <SubSection key={note.title}>
+                  <Text variant="h3" as="h3">{note.title}</Text>
+                  <BodyCopy>{note.body}</BodyCopy>
+                </SubSection>
+              ))}
+            </TechnicalContent>
+          </TechnicalDetails>
+        </Section>
+
+        {resources.length > 0 && (
+          <Section>
+            <Text variant="h2" as="h2">{t('projectsPage.resourcesTitle')}</Text>
+            <RelatedActions>
+              {resources.map(asset => (
+                <ExternalAction key={asset.src} href={asset.src} target="_blank" rel="noreferrer">{asset.label}</ExternalAction>
+              ))}
+            </RelatedActions>
+          </Section>
+        )}
+
+        <Divider />
+        <Section>
+          <RelatedLink to="/projects">{t('projectsPage.backToProjects')}</RelatedLink>
+          {relatedProjects.length > 0 && (
+            <>
+              <Text variant="h2" as="h2">{t('projectsPage.relatedTitle')}</Text>
               <RelatedActions>
-                {relatedProjects.map((p) => (
-                  <RelatedLink
-                    key={p.id}
-                    to={`/projects/${p.id}`}
-                    viewTransition
-                  >
-                    {p.name}
-                  </RelatedLink>
+                {relatedProjects.map(item => (
+                  <RelatedLink key={item.id} to={`/projects/${item.id}`} viewTransition>{item.name}</RelatedLink>
                 ))}
               </RelatedActions>
-            </Section>
-          </>
-        )}
+            </>
+          )}
+        </Section>
       </ContentWrapper>
     </Container>
   );

@@ -16,6 +16,7 @@ export type ProjectAsset = {
 
 export type ProjectCaseStudy = {
     summary: string;
+    motivation?: string;
     problem: string;
     solution: string;
     outcome: string;
@@ -38,6 +39,8 @@ export type PortfolioProject = {
     highlights: string[];
     route?: string;
     liveUrl?: string;
+    liveLabel?: string;
+    cover?: { src: string; alt: string };
     repoUrl?: string;
     featured?: boolean;
     caseStudy?: ProjectCaseStudy;

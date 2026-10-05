@@ -2,8 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import GitHubIcon from "../Icons/Github";
+import LinkedInIcon from '../Icons/Linkedin';
 import Text from "./Typography";
 import { Link } from "react-router";
+import { contact } from '../../content/contact';
 
 const StyledFooter = styled.footer`
   background: ${({ theme }) => theme.colors.backgroundSecondary};
@@ -28,9 +30,13 @@ const Container = styled.div`
 
 const Content = styled.div`
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.5fr);
   gap: 40px;
   margin-bottom: 40px;
+
+  @media (max-width: 1000px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -39,6 +45,7 @@ const Content = styled.div`
 `;
 
 const StyledSection = styled.div`
+  min-width: 0;
   display: flex;
   flex-direction: column;
 `;
@@ -91,6 +98,10 @@ const SocialLink = styled.a`
   color: ${({ theme }) => theme.colors.text};
   transition: all 0.3s ease;
   text-decoration: none;
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.accent};
+    outline-offset: 4px;
+  }
   &:hover {
     background: ${({ theme }) => theme.colors.accent};
     color: #ffffff;
@@ -121,6 +132,10 @@ const FooterLink = styled(Link)`
   }
 `;
 
+const FooterTechnology = styled.div`
+  color: ${({ theme }) => theme.colors.textSecondary};
+`;
+
 const ContactInfo = styled.div`
   display: flex;
   flex-direction: column;
@@ -132,9 +147,15 @@ const ContactItem = styled.div`
   align-items: center;
   gap: 10px;
   color: ${({ theme }) => theme.colors.textSecondary};
+  min-width: 0;
+  svg {
+    flex: 0 0 16px;
+  }
 `;
 
 const ContactLink = styled.a`
+  min-width: 0;
+  overflow-wrap: anywhere;
   font-family: ${({ theme }) => theme.fonts.main};
   font-size: ${({ theme }) => theme.typography.bodyS.fontSize};
   font-weight: ${({ theme }) => theme.typography.bodyS.fontWeight};
@@ -159,27 +180,6 @@ const FooterBottom = styled.div`
   }
 `;
 
-const FooterBottomLinks = styled.div`
-  display: flex;
-  gap: 20px;
-
-  @media (max-width: 768px) {
-    justify-content: center;
-  }
-`;
-
-const FooterBottomLink = styled.a`
-  font-family: ${({ theme }) => theme.fonts.main};
-  font-size: ${({ theme }) => theme.typography.bodyXS.fontSize};
-  font-weight: ${({ theme }) => theme.typography.bodyXS.fontWeight};
-  color: ${({ theme }) => theme.colors.textSecondary};
-  text-decoration: none;
-  transition: color 0.3s ease;
-  &:hover {
-    color: ${({ theme }) => theme.colors.accent};
-  }
-`;
-
 const CopyrightText = styled.p`
   font-family: ${({ theme }) => theme.fonts.main};
   font-size: ${({ theme }) => theme.typography.bodyXS.fontSize};
@@ -195,29 +195,26 @@ const Footer: React.FC = () => {
       <Container>
         <Content>
           <StyledSection>
-            <SectionTitle>Jiří Rakučák</SectionTitle>
+            <SectionTitle>{contact.name}</SectionTitle>
             <SectionDescription>{t("footer.bio")}</SectionDescription>
             <SocialLinks>
               <SocialLink
-                href="https://github.com/jirirakucak"
+                href={contact.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="GitHub"
+                title="GitHub"
               >
                 <GitHubIcon size={20} />
               </SocialLink>
               <SocialLink
-                href="https://linkedin.com/in/jirirakucak"
+                href={contact.linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                title="LinkedIn"
               >
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
+                <LinkedInIcon size={20} />
               </SocialLink>
             </SocialLinks>
           </StyledSection>
@@ -259,29 +256,29 @@ const Footer: React.FC = () => {
             <SectionTitle>{t("footer.technologies")}</SectionTitle>
             <FooterList>
               <li>
-                <FooterLink to="#" viewTransition>
+                <FooterTechnology>
                   <Text variant="bodyS">React & TypeScript</Text>
-                </FooterLink>
+                </FooterTechnology>
               </li>
               <li>
-                <FooterLink to="#" viewTransition>
+                <FooterTechnology>
                   <Text variant="bodyS">Node.js & C#</Text>
-                </FooterLink>
+                </FooterTechnology>
               </li>
               <li>
-                <FooterLink to="#" viewTransition>
+                <FooterTechnology>
                   <Text variant="bodyS">Unity & WebGL</Text>
-                </FooterLink>
+                </FooterTechnology>
               </li>
               <li>
-                <FooterLink to="#" viewTransition>
+                <FooterTechnology>
                   <Text variant="bodyS">Blender & Three.js</Text>
-                </FooterLink>
+                </FooterTechnology>
               </li>
               <li>
-                <FooterLink to="#" viewTransition>
+                <FooterTechnology>
                   <Text variant="bodyS">Database & APIs</Text>
-                </FooterLink>
+                </FooterTechnology>
               </li>
             </FooterList>
           </StyledSection>
@@ -298,8 +295,8 @@ const Footer: React.FC = () => {
                 >
                   <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
                 </svg>
-                <ContactLink href="mailto:jiri@rakucak.cz">
-                  jiri@rakucak.cz
+                <ContactLink href={`mailto:${contact.email}`}>
+                  {contact.email}
                 </ContactLink>
               </ContactItem>
               <ContactItem>
@@ -311,8 +308,8 @@ const Footer: React.FC = () => {
                 >
                   <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
                 </svg>
-                <ContactLink href="tel:+420123456789">
-                  +420 123 456 789
+                <ContactLink href={`tel:${contact.phone}`}>
+                  {contact.phoneDisplay}
                 </ContactLink>
               </ContactItem>
               <ContactItem>
@@ -324,7 +321,7 @@ const Footer: React.FC = () => {
                 >
                   <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
                 </svg>
-                <Text variant="bodyS">{t("footer.location")}</Text>
+                <Text variant="bodyS">{t("footer.location", { city: contact.city })}</Text>
               </ContactItem>
             </ContactInfo>
           </StyledSection>
@@ -332,11 +329,6 @@ const Footer: React.FC = () => {
 
         <FooterBottom>
           <CopyrightText>{t("footer.copyright")}</CopyrightText>
-          <FooterBottomLinks>
-            <FooterBottomLink href="#">{t("footer.privacy")}</FooterBottomLink>
-            <FooterBottomLink href="#">{t("footer.terms")}</FooterBottomLink>
-            <FooterBottomLink href="#">{t("footer.sitemap")}</FooterBottomLink>
-          </FooterBottomLinks>
         </FooterBottom>
       </Container>
     </StyledFooter>

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router";
+import PortfolioImage from './PortfolioImage';
 
 export const projectGradients: Record<string, string> = {
   "devos-portfolio":
@@ -64,7 +65,7 @@ export const CarouselTrack = styled.div<{ $offset: number }>`
   }
 `;
 
-export const Slide = styled.div<{ $bg: string }>`
+export const Slide = styled.div<{ $bg: string; $hasCover: boolean }>`
   flex: 0 0 100%;
   height: 100%;
   position: relative;
@@ -78,9 +79,19 @@ export const Slide = styled.div<{ $bg: string }>`
     content: "";
     position: absolute;
     inset: 0;
-    backdrop-filter: blur(40px) saturate(1.4);
-    -webkit-backdrop-filter: blur(40px) saturate(1.4);
+    z-index: 1;
+    pointer-events: none;
+    background: ${({ $hasCover }) => $hasCover ? 'linear-gradient(90deg, rgba(0,0,0,0.75), transparent 85%)' : 'transparent'};
+    backdrop-filter: ${({ $hasCover }) => $hasCover ? 'none' : 'blur(40px) saturate(1.4)'};
+    -webkit-backdrop-filter: ${({ $hasCover }) => $hasCover ? 'none' : 'blur(40px) saturate(1.4)'};
   }
+`;
+
+export const SlideCover = styled(PortfolioImage)`
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 `;
 
 export const SlideContent = styled.div`
@@ -286,6 +297,14 @@ export const DetailLink = styled(Link)`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  &:hover,
+  &:focus-visible {
+    color: ${({ theme }) => theme.colors.text};
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
   &:focus-visible {
     outline: 2px solid ${({ theme }) => theme.colors.accent};
     outline-offset: 3px;

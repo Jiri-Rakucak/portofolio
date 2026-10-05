@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Text from '../../Components/Shared/Typography';
 import { getServices } from '../../content/services';
 import { useLocale } from '../../i18n/useLocale';
+import { contact } from '../../content/contact';
 
 const Container = styled.div`
     background: ${({ theme }) => theme.colors.background};
@@ -300,11 +301,11 @@ export default function ServicePage() {
                     <Text variant="h2">{t('servicesPage.contactTitle')}</Text>
                     <Text variant="bodyS">{t('servicesPage.contactDescription')}</Text>
                     <ContactActions>
-                        <ContactLink href="mailto:jiri@rakucak.cz">{t('servicesPage.email')}</ContactLink>
-                        <SecondaryContactLink href="https://github.com/jirirakucak" target="_blank" rel="noreferrer">
+                        <ContactLink href={`mailto:${contact.email}`}>{t('servicesPage.email')}</ContactLink>
+                        <SecondaryContactLink href={contact.githubUrl} target="_blank" rel="noreferrer">
                             GitHub
                         </SecondaryContactLink>
-                        <SecondaryContactLink href="https://linkedin.com/in/jirirakucak" target="_blank" rel="noreferrer">
+                        <SecondaryContactLink href={contact.linkedinUrl} target="_blank" rel="noreferrer">
                             LinkedIn
                         </SecondaryContactLink>
                     </ContactActions>

@@ -87,9 +87,15 @@
       ],
       "route": "/projects/unity-graduation-game",
       "liveUrl": "https://jirirakucak.itch.io/starbounder",
+      "liveLabel": "Download prototype",
+      "cover": {
+        "src": "/projects/unity-graduation-game/planet-in-space-no-ship.png",
+        "alt": "A procedurally generated green planet in Starbounder against stars and nebulae"
+      },
       "featured": true,
       "caseStudy": {
         "summary": "A graduation prototype that turns procedural space generation into an interconnected sandbox experience. The work focused on integrating gameplay systems and improving world-generation performance.",
+        "motivation": "I started Starbounder to challenge myself with a more complex project and learn new technologies. I was particularly interested in procedural generation with Perlin noise and working with parallel and asynchronous systems in Unity.",
         "problem": "The previous school-year project could generate star systems and planets, but lacked the connected gameplay needed to make them worth exploring. The graduation assignment added ship physics, mining, colony construction, orbiting planets, and persistent progress.",
         "solution": "Seed-based generation creates the star system and planet surfaces. Burst-compiled parallel jobs compute biome maps, texture pixels, and spawn candidates. A player state machine switches between ship and on-foot controls, while ScriptableObject data drives resources and buildings. UI Toolkit exposes these systems through a Galaxy Hub, HUD, map, inventory, and construction panels.",
         "outcome": "Presented as a functional 2D space-game prototype with exploration, mining, colony construction, and per-galaxy saves. The final thesis reports a reduction in world initialization from roughly 30 seconds to 5 seconds after the Jobs/Burst refactor. The project remains a prototype with onboarding, economy balancing, and settings still to develop.",
@@ -126,15 +132,27 @@
           },
           {
             "type": "image",
-            "label": "Sector map",
-            "src": "/projects/unity-graduation-game/sector-map.png",
-            "alt": "Starbounder pause-menu sector map with planet and player markers"
+            "label": "Landing and on-foot exploration",
+            "src": "/projects/unity-graduation-game/planet-landing.png",
+            "alt": "A character beside a landing ship on the green surface of a planet"
           },
           {
             "type": "image",
-            "label": "Planetary construction panel",
-            "src": "/projects/unity-graduation-game/building-panel.png",
-            "alt": "Starbounder planetary surface with resource inventory and building availability panels"
+            "label": "Starting a colony",
+            "src": "/projects/unity-graduation-game/planet-solar-extractor.png",
+            "alt": "A character, extractor, and solar panel on a planetary surface in Starbounder"
+          },
+          {
+            "type": "image",
+            "label": "Building requirements and construction",
+            "src": "/projects/unity-graduation-game/building-detail-panel.png",
+            "alt": "Starbounder construction UI with inventory, available buildings, and extractor requirements"
+          },
+          {
+            "type": "image",
+            "label": "Sector map",
+            "src": "/projects/unity-graduation-game/galaxy-map.png",
+            "alt": "Starbounder pause-menu sector map with planet and player markers"
           }
         ]
       }

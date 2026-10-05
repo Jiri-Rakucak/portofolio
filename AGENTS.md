@@ -78,6 +78,7 @@ Use `web.client/src/content/` as the source of truth for portfolio metadata:
 
 - `projects.ts` for typed project access and DevOS project file entries
 - `services.ts` for typed service access, service directory cards, and detailed service pages
+- `contact.ts` for language-neutral owner contact details and social URLs; reuse these in the header, footer, service contact, About Me, and Terminal
 
 Localized source data lives in:
 
@@ -87,6 +88,10 @@ Localized source data lives in:
 Keep project and service IDs aligned across locales.
 
 Projects may include optional `caseStudy` content with `summary`, `problem`, `solution`, `outcome`, `lessons`, `sections`, and `assets`. ProjectWindow renders this when present. `unity-graduation-game` is Starbounder, a graduation prototype reviewed against its local Unity repository and thesis. Keep its prototype scope explicit; source notes and verification limits live in `docs/STARBOUNDER.md`.
+
+Public pages also support optional project `cover` (`src`, localized `alt`), localized `liveLabel`, and `caseStudy.motivation`. Public gallery/story components live in `Pages/ProjectsPages/` and must not introduce UI changes in DevOS. The gallery uses native `dialog`; do not replace it with the shared legacy modal without preserving focus containment, Escape, and focus return.
+
+Desktop home hero lives in `Components/Desktop/HomeHero.tsx`. `HeroScene` keeps the atom lazy and isolates rendering failures from navigation. `AtomScene` defaults to its existing DevOS window layout; only the homepage passes `layout="hero"` for full-bleed rendering and camera framing. Keep project browsing as the primary hero action and DevOS as secondary. Mobile home remains deferred.
 
 Do not duplicate project/service metadata inside components. If future admin functionality is introduced, preserve the content shape and swap the static exports for API-backed data.
 

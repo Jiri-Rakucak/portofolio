@@ -11,7 +11,7 @@ import { ArrowRight, ArrowLeft } from "../Components/Icons/Arrows";
 
 import {
   Page, PageTitle, ArrowScope, CarouselContainer, CarouselViewport, CarouselTrack,
-  Slide, SlideContent, SlideCategory, SlideTitle, SlideDescription, SlideTechRow,
+  Slide, SlideCover, SlideContent, SlideCategory, SlideTitle, SlideDescription, SlideTechRow,
   SlideTechPill, IntroOverlay, IntroTitle, IntroSubtitle, ArrowButton, DotRow, Dot,
   DetailSection, DetailGrid, DetailMain, DetailBlock, DetailBody, HighlightList,
   HighlightItem, TechList, TechBadge, DetailSide, TerminalPanel, TerminalHeader,
@@ -92,9 +92,14 @@ export default function ProjectsPage() {
                 <Slide
                   key={project.id}
                   $bg={projectGradients[project.id] ?? fallbackGradient}
+                  $hasCover={Boolean(project.cover?.src)}
                   inert={introVisible || index !== activeIndex}
                   aria-hidden={introVisible || index !== activeIndex}
                 >
+                  {project.cover?.src && (
+                    <SlideCover src={project.cover.src} alt={project.cover.alt}
+                      fit="cover" position="75% center" />
+                  )}
                   <SlideContent>
                     <SlideCategory>{project.category}</SlideCategory>
                     <SlideTitle>{project.name}</SlideTitle>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
+import { contact } from '../../content/contact';
 
 const sectionKeys = ['focus', 'build', 'work'] as const;
 const keywordKeys = ['react', 'typescript', 'devos', 'three', 'content', 'backend'] as const;
@@ -273,11 +274,11 @@ const AboutMe: React.FC = () => {
           <SectionTitle>{t('aboutMe.contactTitle')}</SectionTitle>
           <ContactIntro>{t('aboutMe.contactIntro')}</ContactIntro>
           <ContactActions>
-            <ContactLink href="mailto:jiri@rakucak.cz">{t('aboutMe.email')}</ContactLink>
-            <ContactLink href="https://github.com/jirirakucak" target="_blank" rel="noreferrer">
+            <ContactLink href={`mailto:${contact.email}`}>{t('aboutMe.email')}</ContactLink>
+            <ContactLink href={contact.githubUrl} target="_blank" rel="noreferrer">
               {t('aboutMe.github')}
             </ContactLink>
-            <ContactLink href="https://linkedin.com/in/jirirakucak" target="_blank" rel="noreferrer">
+            <ContactLink href={contact.linkedinUrl} target="_blank" rel="noreferrer">
               {t('aboutMe.linkedin')}
             </ContactLink>
           </ContactActions>

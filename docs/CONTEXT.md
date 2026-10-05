@@ -12,8 +12,8 @@ The active application is `web.client`, a React/Vite single-page app. It uses Re
 
 The desktop homepage includes:
 
-- Three.js atom scene
-- DevOS launch call to action
+- a personal CZ/EN introduction with projects as the primary action and DevOS as secondary
+- a lazy-loaded full-bleed Three.js atom scene
 - service cards linking to detailed service pages
 
 The DevOS route includes:
@@ -33,6 +33,8 @@ The ASP.NET project exists as a future backend placeholder. It should remain out
 - React Router was kept, upgraded, and moved to current v7 import conventions.
 - DevOS was moved behind a lazy route boundary.
 - `AtomScene` was moved behind a lazy component boundary.
+- The desktop hero is now isolated in `HomeHero` and `HeroScene`, with a bounded left-shifted camera projection and an optional-scene error boundary. Atom geometry and animation are unchanged; the default DevOS window layout retains its previous framing.
+- Owner contacts and social URLs are centralized in `web.client/src/content/contact.ts`. Footer, header, services, About Me, and Terminal use the same source. Location is Liberec with localized country copy. Dead footer legal links were removed and technology labels are no longer fake links.
 - Project and service metadata were centralized in `web.client/src/content/`.
 - ProjectWindow was upgraded into a mini case-study view with status, role, timeframe, impact, highlights, technologies, and CTAs.
 - Project content now supports optional structured case-study fields: summary, problem, solution, outcome, lessons, additional sections, and assets.
@@ -40,6 +42,7 @@ The ASP.NET project exists as a future backend placeholder. It should remain out
 - Project page styles live in focused `ProjectsPages/*.styles.ts` modules. Carousel controls are localized, support arrow keys, and hide inactive slides from assistive technology.
 - Personal Conversation RAG is now a featured project. Copy was checked against the local RAG repository: manual notes and ChatGPT import are implemented; Claude import and answer generation are planned; full-corpus search validation is still pending.
 - The Unity graduation entry now presents Starbounder as a prototype with a source-backed bilingual case study, an itch.io link, and three screenshots extracted from its thesis. Review provenance and limitations are recorded in `docs/STARBOUNDER.md`.
+- Starbounder's public carousel/detail now use a real cover; the detail has the owner's bilingual motivation, a five-image gallery, a native-dialog image viewer, and expandable technical notes. The owner confirmed the itch.io page is current. Public story/media components are independent of DevOS presentation.
 - DevOS Explorer and Browser now use central project data for project discovery and previews.
 - DevOS Browser address bar now filters projects by id, name, category, stack, and other metadata.
 - DevOS Terminal was added as an interactive portfolio CLI with project, service, contact, and open commands.
@@ -110,7 +113,7 @@ General UI translations live in `web.client/src/i18n/locales/*/common.json`. Dev
 ## Next Work Candidates
 
 1. Replace mobile placeholder content.
-2. Add real project media and outcomes to the remaining case studies; check the Starbounder download link before publishing and consider a gameplay clip.
+2. Verify Starbounder's public gallery in a browser, then add real project media and outcomes to the remaining case studies. Consider a gameplay clip later.
 3. Add Testing Library when component tests become necessary.
 4. Refactor remaining DevOS placeholder apps into focused modules, especially Games.
 5. Decide whether forms need a backend or third-party form service.
@@ -118,8 +121,10 @@ General UI translations live in `web.client/src/i18n/locales/*/common.json`. Dev
 
 ## Portfolio Review Follow-ups
 
+- Homepage polish is staged: the personal hero and contacts are updated; next add selected projects before skills, then refine the skills copy/layout. The existing service cards remain for now.
+- Browser verification of the updated hero (canvas pixels, interaction, and desktop/narrow viewport layout) remains pending: the sandbox cannot bind the Vite port (`EPERM`) and the available Chromium lacks `libnspr4.so`. Unit tests exercise camera projection, hero copy/actions, and contact consumers, not actual WebGL rendering.
 - RAG needs an anonymized CLI example, architecture visual, and measured indexing/search results.
-- The carousel still uses temporary gradient backgrounds; replace them with real project media when available.
+- The carousel uses real media for Starbounder; the other projects still use temporary gradient backgrounds.
 - `index.html` still uses the Vite favicon and lacks portfolio/social metadata.
-- Footer contains a sample phone number and placeholder technology/legal links; verify contact destinations before launch.
+- Footer uses owner-provided email, phone, location, and LinkedIn. The existing GitHub profile URL was preserved as requested; no independent account verification was performed.
 - Mobile remains deferred by the owner's desktop-first preference.

@@ -87,9 +87,15 @@
       ],
       "route": "/projects/unity-graduation-game",
       "liveUrl": "https://jirirakucak.itch.io/starbounder",
+      "liveLabel": "Stáhnout prototyp",
+      "cover": {
+        "src": "/projects/unity-graduation-game/planet-in-space-no-ship.png",
+        "alt": "Procedurálně vygenerovaná zelená planeta Starbounderu na pozadí hvězd a mlhovin"
+      },
       "featured": true,
       "caseStudy": {
         "summary": "Maturitní prototyp, který mění procedurálně generovaný vesmír v propojený sandboxový zážitek. Práce se soustředila na integraci herních systémů a zrychlení generování světa.",
+        "motivation": "Starbounder jsem začal vyvíjet, abych si vyzkoušel práci na komplexnějším projektu a naučil se nové technologie. Lákalo mě zejména procedurální generování pomocí Perlinova šumu a práce s paralelními a asynchronními systémy v Unity.",
         "problem": "Ročníkový projekt uměl generovat soustavy a planety, ale chyběly mu propojené mechaniky, které dávají průzkumu smysl. Maturitní zadání přidalo fyziku lodi, těžbu, budování kolonií, obíhající planety a ukládání postupu.",
         "solution": "Generování podle seedu vytváří hvězdnou soustavu a povrchy planet. Paralelní joby kompilované Burstem počítají mapy biomů, pixely textur a kandidátní pozice objektů. Stavový automat přepíná ovládání lodi a postavy, zatímco ScriptableObject data definují suroviny a budovy. UI Toolkit tyto systémy propojuje přes Galaxy Hub, HUD, mapu, inventář a stavební panely.",
         "outcome": "Prezentovaný funkční prototyp 2D vesmírné hry s průzkumem, těžbou, budováním kolonií a ukládáním po galaxiích. Závěrečná dokumentace uvádí zkrácení inicializace světa přibližně z 30 na 5 sekund po přechodu na Jobs/Burst. Projekt zůstává prototypem; onboarding, balanc ekonomiky a nastavení čekají na další rozvoj.",
@@ -126,15 +132,27 @@
           },
           {
             "type": "image",
-            "label": "Mapa hvězdné soustavy",
-            "src": "/projects/unity-graduation-game/sector-map.png",
-            "alt": "Mapa soustavy v pause menu Starbounderu se značkami planet a hráče"
+            "label": "Přistání a průzkum pěšky",
+            "src": "/projects/unity-graduation-game/planet-landing.png",
+            "alt": "Postava vedle přistávající lodi na zeleném povrchu planety"
           },
           {
             "type": "image",
-            "label": "Stavební panel na planetě",
-            "src": "/projects/unity-graduation-game/building-panel.png",
-            "alt": "Povrch planety ve Starbounderu s inventářem surovin a panelem dostupných budov"
+            "label": "Základ kolonie",
+            "src": "/projects/unity-graduation-game/planet-solar-extractor.png",
+            "alt": "Postava, extraktor a solární panel na povrchu planety ve Starbounderu"
+          },
+          {
+            "type": "image",
+            "label": "Požadavky a stavba budov",
+            "src": "/projects/unity-graduation-game/building-detail-panel.png",
+            "alt": "Stavební UI Starbounderu s inventářem, seznamem budov a detailem požadavků extraktoru"
+          },
+          {
+            "type": "image",
+            "label": "Mapa hvězdné soustavy",
+            "src": "/projects/unity-graduation-game/galaxy-map.png",
+            "alt": "Mapa soustavy v pause menu Starbounderu se značkami planet a hráče"
           }
         ]
       }
