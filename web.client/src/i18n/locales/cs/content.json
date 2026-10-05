@@ -162,7 +162,7 @@
     {
       "id": "frontend-development",
       "title": "Frontend vývoj",
-      "description": "Moderní responzivní webové aplikace stavěné s důrazem na výkon.",
+      "description": "Webové aplikace v Reactu a TypeScriptu s důrazem na použitelnost a výkon.",
       "route": "/services/frontend-development",
       "tags": ["React", "TypeScript", "Vite"],
       "technologies": [
@@ -176,36 +176,36 @@
       "viewTransitionName": "title-frontend-development",
       "detail": {
         "title": "Frontend vývoj",
-        "subtitle": "Moderní React rozhraní, interaktivní produktové plochy a rychlé uživatelské workflow.",
+        "subtitle": "Webové aplikace v Reactu: od návrhu rozhraní po implementaci a testování.",
         "introTitle": "Na co se soustředím",
         "introBody": [
-          "Stavím frontendové systémy, které působí dotaženě, rychle se načítají a dávají smysl dlouhodobě udržovat. Cíl není jen hezké rozhraní, ale produktová plocha, která podporuje reálné uživatele a další iterace.",
-          "Tohle portfolio je zároveň ukázka směru: Vite, React Router, styled-components, 3D interakce, lazy-loaded části a obsahový model připravený pro budoucí admin workflow."
+          "Při vývoji webu řeším srozumitelné rozhraní, rychlé načítání a přehlednou strukturu kódu. Chci, aby se aplikace dobře používala a šla dál rozšiřovat.",
+          "V tomto portfoliu používám React, TypeScript a Vite. Náročnější části načítám samostatně a obsah odděluji od komponent, aby se dal jednoduše upravovat."
         ],
         "capabilitiesTitle": "Hlavní schopnosti",
         "capabilities": [
           {
             "title": "Architektura React aplikací",
-            "description": "Komponentová struktura, routovací hranice, state flow, znovupoužitelné UI patterny a udržitelné TypeScript základy."
+            "description": "Rozdělení komponent, navigace, správa stavu a typování dat v TypeScriptu."
           },
           {
             "title": "Interaktivní UI",
-            "description": "Responzivní layouty, přechody, theme-aware komponenty a detaily rozhraní, díky kterým produkt nepůsobí jako šablona."
+            "description": "Rozvržení pro různé obrazovky, světlý a tmavý motiv, přechody a ovládání klávesnicí."
           },
           {
-            "title": "Výkon a doručení",
-            "description": "Bundle splitting, rozumné renderování, Core Web Vitals a pragmatický build tooling kolem Vite."
+            "title": "Výkon a načítání",
+            "description": "Rozdělení aplikace do samostatných částí, odložené načítání a omezení zbytečného vykreslování."
           },
           {
             "title": "3D a vizuální zážitky",
-            "description": "Browser-based 3D scény, WebGL koncepty a interaktivní preview pro projekty, kde statický obsah nestačí."
+            "description": "3D scény a interaktivní ukázky v prohlížeči pomocí Three.js a React Three Fiber."
           }
         ],
         "stackTitle": "Nástroje, po kterých sahám",
-        "stackDescription": "Stack se mění podle projektu, ale tyhle nástroje sedí směru tohoto portfolia.",
+        "stackDescription": "Tyto nástroje používám v portfoliu a při práci na webových aplikacích.",
         "stack": ["React", "TypeScript", "Vite", "React Router", "styled-components", "Three.js", "React Three Fiber", "Vitest"],
         "relatedTitle": "Související směry",
-        "relatedDescription": "Frontend práce se často přímo potkává s designem, 3D interakcí a backendovou integrací.",
+        "relatedDescription": "Webové rozhraní propojuji s návrhem designu, interaktivními scénami a datovými službami.",
         "relatedLinks": [
           { "label": "UI/UX design", "route": "/services/ux-ui-design" },
           { "label": "Hry a 3D grafika", "route": "/services/game-and-3d-graphics" },
@@ -217,7 +217,7 @@
     {
       "id": "game-and-3d-graphics",
       "title": "Hry a 3D grafika",
-      "description": "Interaktivní zážitky, realtime vizuály a imerzivní 3D koncepty.",
+      "description": "Herní prototypy v Unity a interaktivní 3D scény pro web.",
       "route": "/services/game-and-3d-graphics",
       "tags": ["Unity", "C#", "WebGL"],
       "technologies": [
@@ -231,36 +231,36 @@
       "viewTransitionName": "title-game-and-3d-graphics",
       "detail": {
         "title": "Hry a 3D grafika",
-        "subtitle": "Interaktivní 3D, realtime vizuály, prototypy a imerzivní koncepty připravené pro web.",
+        "subtitle": "Herní mechaniky, procedurální světy a interaktivní scény v Unity a Three.js.",
         "introTitle": "Kde to dává smysl",
         "introBody": [
-          "3D a herní interakce dokážou portfoliu, produktovému demu, edukačnímu nástroji nebo investorskému prototypu pomoct rychleji vysvětlit myšlenku. Beru je jako produktovou komunikaci, ne jako dekoraci.",
-          "Nejlépe fungují soustředěné věci: jasný vizuální koncept, responzivní interakce a build, který pořád respektuje výkon."
+          "V Unity zkouším herní mechaniky a procedurální generování. Starbounder propojuje průzkum vesmíru, těžbu a stavbu kolonií do hratelného prototypu.",
+          "Na webu používám Three.js a React Three Fiber. Při návrhu scény řeším její ovládání, čitelnost a nároky na výkon."
         ],
         "capabilitiesTitle": "Co můžu postavit",
         "capabilities": [
           {
             "title": "Interaktivní 3D scény",
-            "description": "React Three Fiber scény, kamera, materiály, částice a lehké vizuální systémy pro web."
+            "description": "Scény v React Three Fiber, ovládání kamery, materiály a animace pro web."
           },
           {
             "title": "Herní a simulační prototypy",
-            "description": "Hratelné mechaniky, proof-of-concept smyčky, tréninkové koncepty a experimenty s realtime interakcí."
+            "description": "Herní mechaniky, procedurální generování a propojení jednotlivých systémů do hratelného prototypu."
           },
           {
-            "title": "Workflow 3D assetů",
-            "description": "Příprava modelů, iterace v Blenderu, základní animace a assety optimalizované pro realtime rendering."
+            "title": "Příprava 3D modelů",
+            "description": "Úpravy modelů v Blenderu, základní animace a příprava podkladů pro vykreslování v reálném čase."
           },
           {
-            "title": "Shader a vizuální polish",
-            "description": "Custom vizuální efekty, ladění materiálů, pohyb částic a drobné detaily, které scéně dodají život."
+            "title": "Materiály a vizuální efekty",
+            "description": "Úpravy materiálů, shaderů, animací a částic podle potřeb scény."
           }
         ],
         "stackTitle": "Nástroje, po kterých sahám",
-        "stackDescription": "Renderovací cestu volím podle cílové platformy, výkonového rozpočtu a míry interakce.",
+        "stackDescription": "Pro hry používám Unity, pro webové scény Three.js. Další nástroje volím podle projektu.",
         "stack": ["Three.js", "React Three Fiber", "Drei", "Unity", "C#", "Blender", "WebGL", "GLSL"],
         "relatedTitle": "Související směry",
-        "relatedDescription": "3D práce je nejsilnější, když má jasný frontendový rámec a dobře navržené rozhraní.",
+        "relatedDescription": "Interaktivní scéna potřebuje také přehledné rozhraní a srozumitelné ovládání.",
         "relatedLinks": [
           { "label": "Frontend vývoj", "route": "/services/frontend-development" },
           { "label": "UI/UX design", "route": "/services/ux-ui-design" },
@@ -271,7 +271,7 @@
     {
       "id": "backend-and-systems",
       "title": "Backend a systémy",
-      "description": "Serverová architektura, API, datové modely a udržitelné systémy.",
+      "description": "API, datové modely a nástroje pro zpracování a vyhledávání dat.",
       "route": "/services/backend-and-systems",
       "tags": ["API", "Databáze", "Architektura"],
       "technologies": [
@@ -285,36 +285,36 @@
       "viewTransitionName": "title-backend-and-systems",
       "detail": {
         "title": "Backend a systémy",
-        "subtitle": "API, datové modely, integrace a systémové základy, které drží frontendový produkt.",
-        "introTitle": "Aktuální role v tomto projektu",
+        "subtitle": "API, datové modely a zpracování dat oddělené od uživatelského rozhraní.",
+        "introTitle": "Jak přistupuji k datům",
         "introBody": [
-          "Backend je u tohoto portfolia záměrně zaparkovaný, dokud nebude konkrétní důvod ho řešit. Jakmile bude potřeba, první krok bude upgrade backend shellu a návrh API kolem stejného content shape, který už používá frontend.",
-          "U klientských projektů je cíl backendu jednoduchý: spolehlivý tok dat, jasné kontrakty, bezpečný přístup a architektura, která zvládne růst bez zbytečné ceremonie na začátku."
+          "Při práci s daty odděluji jejich načítání, zpracování a ukládání. Rozhraní mezi částmi musí být jasné a vstupy ověřené, aby se chyby daly najít a řešit.",
+          "V projektu Personal Conversation RAG propojuji import konverzací, lokální embeddingy a sémantické vyhledávání. Jde zatím o vyhledávací základ; generování odpovědí je plánované."
         ],
         "capabilitiesTitle": "Hlavní schopnosti",
         "capabilities": [
           {
             "title": "Návrh API",
-            "description": "REST-style rozhraní, endpoint kontrakty, validační hranice a response modely přívětivé pro frontend."
+            "description": "Struktura požadavků a odpovědí, ověřování vstupů a srozumitelné chybové stavy."
           },
           {
             "title": "Datové modelování",
-            "description": "Projektové schéma, relační datové struktury, plánování dotazů a pragmatická rozhodnutí kolem persistence."
+            "description": "Datové struktury, vztahy mezi záznamy a způsob ukládání a vyhledávání."
           },
           {
-            "title": "Autentizace a admin flow",
-            "description": "Chráněné admin plochy, role-aware přístup, session/token handling a workflow pro správu obsahu."
+            "title": "Přihlášení a správa obsahu",
+            "description": "Návrh přístupových práv, přihlašování a rozhraní pro úpravu obsahu."
           },
           {
             "title": "Integrace",
-            "description": "Napojení externích služeb, form providerů, content API, analytiky a provozních nástrojů bez zbytečného překomplikování."
+            "description": "Napojení datových zdrojů a externích služeb přes jasně oddělená rozhraní."
           }
         ],
         "stackTitle": "Nástroje, po kterých sahám",
-        "stackDescription": "Aktuální backend není aktivní, ale tohle jsou pravděpodobné směry, až bude backend potřeba.",
-        "stack": ["ASP.NET", "C#", "Node.js", "PostgreSQL", "SQL", "REST API", "Autentizace", "Docker"],
+        "stackDescription": "Vlastní projekty rozvíjím hlavně v Pythonu a C#. Pro RAG používám lokální modely a vektorovou databázi.",
+        "stack": ["Python", "C#", "Docker", "Ollama", "ChromaDB", "Pydantic", "REST API", "SQL"],
         "relatedTitle": "Související směry",
-        "relatedDescription": "Backend rozhodnutí mají následovat frontend a admin workflow, které produkt opravdu potřebuje.",
+        "relatedDescription": "Datová část a uživatelské rozhraní se musí shodnout na tom, jaká data aplikace potřebuje.",
         "relatedLinks": [
           { "label": "Frontend vývoj", "route": "/services/frontend-development" },
           { "label": "Konzultace", "route": "/services/consulting" },
@@ -325,7 +325,7 @@
     {
       "id": "ui-ux-design",
       "title": "UI/UX design",
-      "description": "Design systémy, high-fidelity prototypy a praktická práce s uživatelskou zkušeností.",
+      "description": "Návrh přehledných rozhraní, navigace a znovupoužitelných komponent.",
       "route": "/services/ux-ui-design",
       "tags": ["Design systémy", "Figma", "Prototypy"],
       "technologies": [
@@ -337,36 +337,36 @@
       "viewTransitionName": "title-ui-ux-design",
       "detail": {
         "title": "UI/UX design",
-        "subtitle": "Struktura rozhraní, produktová srozumitelnost, design systémy a prototypy připravené na implementaci.",
-        "introTitle": "Design jako produktová struktura",
+        "subtitle": "Rozvržení obsahu, navigace a chování rozhraní pro konkrétní použití.",
+        "introTitle": "Rozhraní, ve kterém se dá vyznat",
         "introBody": [
-          "UI/UX beru jako most mezi tím, co produkt potřebuje říct, a tím, co uživatel potřebuje udělat. Výstup má implementaci usnadnit, ne vytvořit oddělený designový artefakt, který se pak pere s kódem.",
-          "U tohoto portfolia to znamená praktické layouty, konzistentní interakční patterny, střídmý vizuální jazyk a znovupoužitelné obsahové struktury."
+          "Začínám tím, co návštěvník potřebuje najít nebo udělat. Podle toho navrhuji pořadí obsahu, navigaci a jednotlivé kroky v rozhraní.",
+          "Při implementaci hlídám čitelnost, rozestupy a jednotné chování ovládacích prvků. Návrh ověřuji i ve světlém a tmavém motivu a při ovládání klávesnicí."
         ],
         "capabilitiesTitle": "Designové schopnosti",
         "capabilities": [
           {
             "title": "Informační architektura",
-            "description": "Struktura stránek, navigační logika, hierarchie obsahu a flow, které pomáhají rychle pochopit nabídku."
+            "description": "Struktura stránek, pořadí obsahu a navigace podle potřeb návštěvníka."
           },
           {
             "title": "Návrh rozhraní",
-            "description": "High-fidelity obrazovky, responzivní stavy, chování komponent a vizuální systémy navržené pro implementaci."
+            "description": "Rozvržení obrazovek, čitelnost, stavy komponent a přizpůsobení různým velikostem displeje."
           },
           {
             "title": "Prototypování",
-            "description": "Klikatelné flow, interakční koncepty a raná validace dřív, než se investuje čas do hlubšího vývoje."
+            "description": "Klikatelné návrhy a jednoduché ukázky pro ověření navigace a interakcí."
           },
           {
             "title": "Základy design systému",
-            "description": "Pravidla pro znovupoužitelné komponenty, theme tokeny, typografie, spacing a patterny, které drží produkt pohromadě."
+            "description": "Společná pravidla pro barvy, typografii, rozestupy a opakovaně používané komponenty."
           }
         ],
         "stackTitle": "Nástroje, po kterých sahám",
-        "stackDescription": "Designový toolset držím u produktových rozhodnutí a implementačního handoffu.",
+        "stackDescription": "Návrh propojuji s implementací a průběžně ověřuji chování rozhraní.",
         "stack": ["Figma", "Design systémy", "Wireframy", "Prototypy", "Accessibility", "Responzivní design", "Theme tokeny"],
         "relatedTitle": "Související směry",
-        "relatedDescription": "Design práce se nejvíc potkává s frontendovou implementací a konzultací produktového směru.",
+        "relatedDescription": "Návrh rozhraní navazuje na jeho implementaci a plánování projektu.",
         "relatedLinks": [
           { "label": "Frontend vývoj", "route": "/services/frontend-development" },
           { "label": "Konzultace", "route": "/services/consulting" },
@@ -377,7 +377,7 @@
     {
       "id": "consulting",
       "title": "Konzultace",
-      "description": "Audity, plánování roadmapy, architektonické vedení a praktický mentoring.",
+      "description": "Společné probrání návrhu, volby technologií a dalšího postupu.",
       "route": "/services/consulting",
       "tags": ["Architektura", "Mentoring", "Roadmapy"],
       "technologies": [
@@ -389,36 +389,36 @@
       "viewTransitionName": "title-consulting",
       "detail": {
         "title": "Konzultace",
-        "subtitle": "Technické směřování, review architektury, plánování projektu a praktická podpora pro důležitá rozhodnutí.",
-        "introTitle": "Užitečné a konkrétní vedení",
+        "subtitle": "Probrání technického návrhu, struktury aplikace a jednotlivých kroků vývoje.",
+        "introTitle": "Od nápadu ke konkrétním krokům",
         "introBody": [
-          "Konzultace dávají smysl jen tehdy, když vytvoří jasno. Soustředím se na konkrétní rozhodnutí: co stavět jako první, jaký stack sedí týmu, co jde zjednodušit a kde se opravdu skrývá technické riziko.",
-          "Může jít o lehký audit, roadmap session nebo hands-on párování kolem architektury, frontend kvality, DevOS-style interakce nebo budoucího admin/backend plánu."
+          "Můžeme společně projít nápad nebo rozpracovanou aplikaci, pojmenovat nejasnosti a rozdělit další práci do zvládnutelných kroků.",
+          "Zaměřuji se na strukturu kódu, volbu nástrojů a propojení rozhraní s daty. Užitečným výsledkem je konkrétní návrh postupu, ne obecný seznam doporučení."
         ],
         "capabilitiesTitle": "Oblasti zaměření",
         "capabilities": [
           {
-            "title": "Review architektury",
-            "description": "Kontrola struktury aplikace, routingu, toku obsahu, datových kontraktů a rizik udržitelnosti dřív, než začnou být drahá."
+            "title": "Kontrola struktury aplikace",
+            "description": "Probrání komponent, navigace, toku dat a míst, která komplikují další úpravy."
           },
           {
-            "title": "Plánování roadmapy",
-            "description": "Převod hrubé myšlenky do posloupnosti technické práce s jasnými tradeoffy a realistickými fázemi."
+            "title": "Plánování vývoje",
+            "description": "Rozdělení zadání do kroků a určení toho, co má smysl řešit jako první."
           },
           {
-            "title": "Rozhodnutí o stacku",
-            "description": "Volba knihoven, frameworků, hostingu a načasování backendu podle skutečných omezení produktu."
+            "title": "Volba technologií",
+            "description": "Porovnání nástrojů podle požadavků projektu, jejich omezení a nároků na údržbu."
           },
           {
-            "title": "Praktický mentoring",
-            "description": "Párování na implementaci, code review, frontend architektuře nebo design-to-code rozhodnutích."
+            "title": "Společná práce s kódem",
+            "description": "Procházení implementace, hledání chyb a ověření možných úprav na konkrétní části aplikace."
           }
         ],
         "stackTitle": "Témata, která můžeme řešit",
-        "stackDescription": "Rozsah konzultace záleží na tom, kde je produkt zaseknutý a jaké rozhodnutí je potřeba udělat jako další.",
-        "stack": ["Architektura", "React", "TypeScript", "Vite", "Content modely", "Design systémy", "Admin workflow", "Plánování dodávky"],
+        "stackDescription": "Začneme konkrétní otázkou nebo částí projektu, kterou potřebuješ posunout.",
+        "stack": ["Architektura", "React", "TypeScript", "Vite", "Datové modely", "Design systémy", "Správa obsahu", "Plánování vývoje"],
         "relatedTitle": "Související směry",
-        "relatedDescription": "Konzultace může propojit strategii s konkrétní frontendovou, backendovou nebo designovou implementací.",
+        "relatedDescription": "Další postup může navazovat na frontend, zpracování dat nebo návrh rozhraní.",
         "relatedLinks": [
           { "label": "Frontend vývoj", "route": "/services/frontend-development" },
           { "label": "Backend a systémy", "route": "/services/backend-and-systems" },

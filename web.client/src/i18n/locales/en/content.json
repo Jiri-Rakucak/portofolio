@@ -162,7 +162,7 @@
     {
       "id": "frontend-development",
       "title": "Frontend Development",
-      "description": "Modern, responsive web applications built with a performance-first mindset.",
+      "description": "React and TypeScript web applications focused on usability and performance.",
       "route": "/services/frontend-development",
       "tags": ["React", "TypeScript", "Vite"],
       "technologies": [
@@ -176,36 +176,36 @@
       "viewTransitionName": "title-frontend-development",
       "detail": {
         "title": "Frontend Development",
-        "subtitle": "Modern React interfaces, interactive product surfaces, and fast user-facing workflows.",
+        "subtitle": "React web applications, from interface design to implementation and testing.",
         "introTitle": "What I focus on",
         "introBody": [
-          "I build frontend systems that feel polished, load quickly, and are practical to maintain. The goal is not just a good-looking interface, but a product surface that supports real users and real iteration.",
-          "This portfolio itself is an example of that direction: Vite, React Router, styled-components, 3D interaction, lazy-loaded experiences, and a content model that can grow into an admin-managed workflow."
+          "When building a website, I focus on clear interfaces, fast loading, and readable code. I want the application to be easy to use and straightforward to extend.",
+          "This portfolio uses React, TypeScript, and Vite. I load heavier features separately and keep content outside components so it is easy to update."
         ],
         "capabilitiesTitle": "Key capabilities",
         "capabilities": [
           {
             "title": "React application architecture",
-            "description": "Component structure, route boundaries, state flow, reusable UI patterns, and maintainable TypeScript foundations."
+            "description": "Component structure, navigation, state management, and typed data in TypeScript."
           },
           {
-            "title": "Interaction-rich UI",
-            "description": "Responsive layouts, transitions, theme-aware components, and interface details that make a product feel intentionally built."
+            "title": "Interactive interfaces",
+            "description": "Layouts for different screens, light and dark themes, transitions, and keyboard navigation."
           },
           {
-            "title": "Performance and delivery",
-            "description": "Bundle splitting, rendering discipline, Core Web Vitals awareness, and pragmatic build tooling around Vite."
+            "title": "Performance and loading",
+            "description": "Code splitting, lazy loading, and reducing unnecessary rendering."
           },
           {
             "title": "3D and visual experiences",
-            "description": "Browser-based 3D scenes, WebGL concepts, and interactive previews when a project needs more than static content."
+            "description": "Browser-based 3D scenes and interactive previews using Three.js and React Three Fiber."
           }
         ],
         "stackTitle": "Tools I reach for",
-        "stackDescription": "The stack changes with the project, but these are the tools that fit this portfolio direction well.",
+        "stackDescription": "These are the tools I use in this portfolio and when building web applications.",
         "stack": ["React", "TypeScript", "Vite", "React Router", "styled-components", "Three.js", "React Three Fiber", "Vitest"],
         "relatedTitle": "Related paths",
-        "relatedDescription": "Frontend work often connects directly with design, 3D interaction, and backend integration.",
+        "relatedDescription": "Web interfaces connect with design, interactive scenes, and data services.",
         "relatedLinks": [
           { "label": "UI/UX Design", "route": "/services/ux-ui-design" },
           { "label": "Game & 3D Graphics", "route": "/services/game-and-3d-graphics" },
@@ -217,7 +217,7 @@
     {
       "id": "game-and-3d-graphics",
       "title": "Game & 3D Graphics",
-      "description": "Interactive experiences, realtime visuals, and immersive 3D concepts.",
+      "description": "Unity game prototypes and interactive 3D scenes for the web.",
       "route": "/services/game-and-3d-graphics",
       "tags": ["Unity", "C#", "WebGL"],
       "technologies": [
@@ -231,36 +231,36 @@
       "viewTransitionName": "title-game-and-3d-graphics",
       "detail": {
         "title": "Game & 3D Graphics",
-        "subtitle": "Interactive 3D, realtime visuals, prototypes, and browser-friendly immersive concepts.",
+        "subtitle": "Game mechanics, procedural worlds, and interactive scenes in Unity and Three.js.",
         "introTitle": "Where this fits",
         "introBody": [
-          "3D and game-style interaction can make a portfolio, product demo, educational tool, or investor prototype easier to understand. I treat it as product communication first, not decoration.",
-          "The strongest use cases are focused: a clear visual concept, a responsive interaction model, and a build that still respects performance constraints."
+          "In Unity, I explore game mechanics and procedural generation. Starbounder connects space exploration, mining, and colony building in a playable prototype.",
+          "For the web, I use Three.js and React Three Fiber. I consider a scene's controls, readability, and performance requirements as part of its design."
         ],
         "capabilitiesTitle": "What I can build",
         "capabilities": [
           {
             "title": "Interactive 3D scenes",
-            "description": "React Three Fiber scenes, camera controls, materials, particles, and lightweight visual systems for the web."
+            "description": "React Three Fiber scenes, camera controls, materials, and animation for the web."
           },
           {
             "title": "Game and simulation prototypes",
-            "description": "Playable mechanics, proof-of-concept loops, training concepts, and realtime interaction experiments."
+            "description": "Game mechanics, procedural generation, and connecting systems into a playable prototype."
           },
           {
-            "title": "3D asset workflow",
-            "description": "Model preparation, Blender-based iteration, basic animation setup, and assets optimized for realtime rendering."
+            "title": "Preparing 3D models",
+            "description": "Editing models in Blender, basic animation, and preparing assets for real-time rendering."
           },
           {
-            "title": "Shader and visual polish",
-            "description": "Custom visual effects, material tuning, particle motion, and small details that make scenes feel alive."
+            "title": "Materials and visual effects",
+            "description": "Adjusting materials, shaders, animation, and particles to suit the scene."
           }
         ],
         "stackTitle": "Tools I reach for",
-        "stackDescription": "I choose the rendering path based on target platform, performance budget, and how much interaction the project needs.",
+        "stackDescription": "I use Unity for games and Three.js for web scenes. Other tools depend on the project.",
         "stack": ["Three.js", "React Three Fiber", "Drei", "Unity", "C#", "Blender", "WebGL", "GLSL"],
         "relatedTitle": "Related paths",
-        "relatedDescription": "3D work is strongest when it is paired with a clear frontend shell and strong interface decisions.",
+        "relatedDescription": "An interactive scene also needs a clear interface and understandable controls.",
         "relatedLinks": [
           { "label": "Frontend Development", "route": "/services/frontend-development" },
           { "label": "UI/UX Design", "route": "/services/ux-ui-design" },
@@ -271,7 +271,7 @@
     {
       "id": "backend-and-systems",
       "title": "Backend & Systems",
-      "description": "Server-side architecture, APIs, data modeling, and maintainable systems.",
+      "description": "APIs, data models, and tools for processing and searching data.",
       "route": "/services/backend-and-systems",
       "tags": ["APIs", "Databases", "Architecture"],
       "technologies": [
@@ -285,36 +285,36 @@
       "viewTransitionName": "title-backend-and-systems",
       "detail": {
         "title": "Backend & Systems",
-        "subtitle": "APIs, data models, integrations, and system foundations that support the frontend product.",
-        "introTitle": "Current role in this project",
+        "subtitle": "APIs, data models, and data processing separate from the user interface.",
+        "introTitle": "How I approach data",
         "introBody": [
-          "Backend work is intentionally parked for this portfolio until there is a concrete need. When it becomes necessary, I would upgrade the backend shell first and design the API around the same content shape the frontend already uses.",
-          "For client work, the backend goal is simple: reliable data flow, clear contracts, secure access, and enough architecture to grow without turning early development into ceremony."
+          "I separate data loading, processing, and storage. The interfaces between them need to be clear and inputs validated so errors can be found and handled.",
+          "In Personal Conversation RAG, I connect conversation imports, local embeddings, and semantic search. It is currently a retrieval foundation; answer generation is planned."
         ],
         "capabilitiesTitle": "Core capabilities",
         "capabilities": [
           {
             "title": "API design",
-            "description": "REST-style interfaces, endpoint contracts, validation boundaries, and frontend-friendly response models."
+            "description": "Request and response structure, input validation, and clear error states."
           },
           {
             "title": "Data modeling",
-            "description": "Project-specific schema design, relational data structures, query planning, and pragmatic persistence decisions."
+            "description": "Data structures, relationships between records, and storage and retrieval approaches."
           },
           {
-            "title": "Authentication and admin flows",
-            "description": "Protected admin surfaces, role-aware access, session/token handling, and content editing workflows."
+            "title": "Authentication and content management",
+            "description": "Designing access permissions, sign-in, and interfaces for editing content."
           },
           {
             "title": "Integrations",
-            "description": "Connecting external services, form providers, content APIs, analytics, and operational tools without overcomplicating the app."
+            "description": "Connecting data sources and external services through clearly separated interfaces."
           }
         ],
         "stackTitle": "Tools I reach for",
-        "stackDescription": "The current backend is not active, but these are the likely directions once real backend work starts.",
-        "stack": ["ASP.NET", "C#", "Node.js", "PostgreSQL", "SQL", "REST APIs", "Authentication", "Docker"],
+        "stackDescription": "My projects mainly use Python and C#. RAG uses local models and a vector database.",
+        "stack": ["Python", "C#", "Docker", "Ollama", "ChromaDB", "Pydantic", "REST APIs", "SQL"],
         "relatedTitle": "Related paths",
-        "relatedDescription": "Backend decisions should follow the frontend and admin workflows the product actually needs.",
+        "relatedDescription": "The data layer and user interface need to agree on the information the application requires.",
         "relatedLinks": [
           { "label": "Frontend Development", "route": "/services/frontend-development" },
           { "label": "Consulting", "route": "/services/consulting" },
@@ -325,7 +325,7 @@
     {
       "id": "ui-ux-design",
       "title": "UI/UX Design",
-      "description": "Design systems, high-fidelity prototypes, and practical user experience work.",
+      "description": "Clear interfaces, navigation, and reusable components.",
       "route": "/services/ux-ui-design",
       "tags": ["Design Systems", "Figma", "Prototyping"],
       "technologies": [
@@ -337,36 +337,36 @@
       "viewTransitionName": "title-ui-ux-design",
       "detail": {
         "title": "UI/UX Design",
-        "subtitle": "Interface structure, product clarity, design systems, and prototypes that are ready to build.",
-        "introTitle": "Design as product structure",
+        "subtitle": "Content layout, navigation, and interface behavior for a specific use case.",
+        "introTitle": "An interface that makes sense",
         "introBody": [
-          "I approach UI/UX as the bridge between what the product needs to say and what users need to do. The output should make implementation easier, not create a separate design artifact that fights the code.",
-          "For this portfolio, that means practical layouts, consistent interaction patterns, restrained visual language, and reusable content structures."
+          "I start with what a visitor needs to find or do. That informs the content order, navigation, and steps in the interface.",
+          "During implementation, I pay attention to readability, spacing, and consistent control behavior. I also check the design in light and dark themes and with keyboard navigation."
         ],
         "capabilitiesTitle": "Design capabilities",
         "capabilities": [
           {
             "title": "Information architecture",
-            "description": "Page structure, navigation logic, content hierarchy, and flows that help users understand the offer quickly."
+            "description": "Page structure, content order, and navigation based on visitor needs."
           },
           {
             "title": "Interface design",
-            "description": "High-fidelity screens, responsive states, component behavior, and visual systems designed for implementation."
+            "description": "Screen layouts, readability, component states, and adaptation to different display sizes."
           },
           {
             "title": "Prototyping",
-            "description": "Clickable flows, interaction concepts, and early validation before time is spent on deeper engineering."
+            "description": "Clickable designs and simple previews for checking navigation and interactions."
           },
           {
             "title": "Design system foundations",
-            "description": "Reusable component rules, theme tokens, typography, spacing, and patterns that keep the product coherent."
+            "description": "Shared rules for colors, typography, spacing, and reusable components."
           }
         ],
         "stackTitle": "Tools I reach for",
-        "stackDescription": "The design toolset stays focused on product decisions and implementation handoff.",
+        "stackDescription": "I connect design with implementation and check interface behavior as I build.",
         "stack": ["Figma", "Design Systems", "Wireframes", "Prototypes", "Accessibility", "Responsive Design", "Theme Tokens"],
         "relatedTitle": "Related paths",
-        "relatedDescription": "Design work connects most directly with frontend implementation and consulting around product direction.",
+        "relatedDescription": "Interface design connects with implementation and project planning.",
         "relatedLinks": [
           { "label": "Frontend Development", "route": "/services/frontend-development" },
           { "label": "Consulting", "route": "/services/consulting" },
@@ -377,7 +377,7 @@
     {
       "id": "consulting",
       "title": "Consulting",
-      "description": "Audits, roadmap planning, architecture guidance, and hands-on mentoring.",
+      "description": "Discussing a design, technology choices, and next steps together.",
       "route": "/services/consulting",
       "tags": ["Architecture", "Mentoring", "Roadmaps"],
       "technologies": [
@@ -389,36 +389,36 @@
       "viewTransitionName": "title-consulting",
       "detail": {
         "title": "Consulting",
-        "subtitle": "Technical direction, architecture review, project planning, and hands-on support for decisions that matter.",
-        "introTitle": "Useful, practical guidance",
+        "subtitle": "Discussing technical design, application structure, and development steps.",
+        "introTitle": "From an idea to concrete steps",
         "introBody": [
-          "Consulting only helps when it creates clarity. I focus on concrete decisions: what to build first, which stack fits the team, what can be simplified, and where technical risk is actually hiding.",
-          "This can be a lightweight audit, a roadmap session, or hands-on pairing around architecture, frontend quality, DevOS-style interaction, or future admin/backend planning."
+          "We can look through an idea or an application in progress, identify unclear points, and break the next work into manageable steps.",
+          "I focus on code structure, tool choices, and connecting interfaces with data. The useful result is a concrete approach, not a general list of recommendations."
         ],
         "capabilitiesTitle": "Areas of focus",
         "capabilities": [
           {
-            "title": "Architecture review",
-            "description": "Reviewing app structure, routing, content flow, data contracts, and maintainability risks before they become expensive."
+            "title": "Application structure review",
+            "description": "Discussing components, navigation, data flow, and areas that make changes difficult."
           },
           {
-            "title": "Roadmap planning",
-            "description": "Turning a rough idea into sequenced technical work with clear tradeoffs and realistic delivery stages."
+            "title": "Development planning",
+            "description": "Breaking down a brief into steps and deciding what to work on first."
           },
           {
-            "title": "Stack decisions",
-            "description": "Choosing libraries, frameworks, hosting paths, and backend timing based on the actual product constraints."
+            "title": "Technology choices",
+            "description": "Comparing tools against project requirements, limitations, and maintenance needs."
           },
           {
-            "title": "Hands-on mentoring",
-            "description": "Pairing on implementation, code review, frontend architecture, or design-to-code decisions."
+            "title": "Working through code together",
+            "description": "Reviewing implementation, finding errors, and trying changes on a specific part of the application."
           }
         ],
         "stackTitle": "Topics I can cover",
-        "stackDescription": "The consulting scope depends on where the product is blocked and what decision needs to be made next.",
-        "stack": ["Architecture", "React", "TypeScript", "Vite", "Content Models", "Design Systems", "Admin Workflows", "Delivery Planning"],
+        "stackDescription": "We start with a specific question or part of the project you want to move forward.",
+        "stack": ["Architecture", "React", "TypeScript", "Vite", "Data Models", "Design Systems", "Content Management", "Development Planning"],
         "relatedTitle": "Related paths",
-        "relatedDescription": "Consulting can connect strategy with a concrete frontend, backend, or design implementation path.",
+        "relatedDescription": "The next steps can involve frontend development, data processing, or interface design.",
         "relatedLinks": [
           { "label": "Frontend Development", "route": "/services/frontend-development" },
           { "label": "Backend & Systems", "route": "/services/backend-and-systems" },

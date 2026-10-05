@@ -1,10 +1,10 @@
 {
   "navigation": {
     "home": "Home",
-    "services": "Services",
-    "frontend": "Frontend Dev",
+    "services": "Skills",
+    "frontend": "Frontend",
     "backend": "Backend & Systems",
-    "fullServices": "Full Services",
+    "fullServices": "All areas",
     "dashboard": "Dashboard",
     "admin": "Admin",
     "preferences": "Preferences",
@@ -16,8 +16,13 @@
     "heroIntro": "I build web applications, game prototypes, and tools for working with data. I enjoy bringing technical depth and interactive experiences together.",
     "launchDevos": "Launch DevOS",
     "exploreProjects": "View projects",
-    "servicesTitle": "Comprehensive IT Services",
-    "servicesDescription": "I provide full-cycle development services ranging from responsive frontend interfaces to robust backend systems and immersive 3D experiences. Explore the specialized categories below to see how we can build your next project."
+    "servicesTitle": "My skills",
+    "servicesDescription": "I work on web applications, games, and data tools. I care about clear interfaces, readable code, and understanding how things work.",
+    "exploreSkills": "More about my skills",
+    "projectsTitle": "Selected projects",
+    "projectsDescription": "Personal projects where I explore new approaches and bring them together into working systems.",
+    "allProjects": "All projects",
+    "projectDetail": "View project {{name}}"
   },
   "settings": {
     "title": "Preferences",
@@ -56,36 +61,36 @@
     "reset": "Reset to Defaults"
   },
   "servicesPage": {
-    "eyebrow": "Service directory",
-    "title": "Pick the right way to build",
-    "description": "A practical map of the ways I can help: product frontend, interactive 3D, design systems, backend foundations, and technical direction.",
+    "eyebrow": "Skills overview",
+    "title": "My skills",
+    "description": "I work on web applications, game prototypes, and data tools. Here is an overview of these areas and the tools I use.",
     "highlights": [
-      "Frontend-first product surfaces",
-      "3D when it adds clarity",
-      "Backend only when needed"
+      "Web applications",
+      "Games and interactive 3D",
+      "APIs and data"
     ],
-    "laneTitle": "Service tracks",
-    "laneDescription": "Each track opens into a focused detail page with capabilities, stack choices, and related paths.",
+    "laneTitle": "What I work on",
+    "laneDescription": "Each area covers specific approaches, tools, and related skills.",
     "trackCountLabel": "tracks",
     "fitLabel": "Best fit",
     "stackLabel": "Core stack",
-    "exploreDetails": "Explore details",
-    "notSureTitle": "Choose by project shape",
-    "notSureDescription": "If the category is not obvious yet, start from the outcome you need.",
+    "exploreDetails": "More about this area",
+    "notSureTitle": "Start with the project",
+    "notSureDescription": "These areas often overlap. We can start with what you want to build.",
     "questions": [
-      "Need a single powerful landing page?",
-      "Building an interactive concept for investors?",
-      "Want to refresh your design system?",
-      "Looking for tech guidance for your internal team?"
+      "A website or web application",
+      "A game prototype or interactive 3D scene",
+      "A clearer user interface",
+      "A tool for processing and searching data"
     ],
-    "contactTitle": "Ready to shape the brief?",
-    "contactDescription": "The form flow is intentionally hidden until the backend or admin workflow exists. For now, use direct contact links and we can turn the rough idea into the right track.",
+    "contactTitle": "Have a project or a question?",
+    "contactDescription": "Tell me what you want to build or discuss. We can look at the options and next steps together.",
     "email": "Email me",
     "serviceNotFound": "Service was not found."
   },
   "projectsPage": {
     "title": "Projects",
-    "description": "A curated selection of projects I am working on or have built. Each one highlights a different part of what I can deliver.",
+    "description": "A selection of my work: what I wanted to build, how I approached it, and where the project stands.",
     "highlights": [
       "Interactive web applications",
       "3D and game experiments",
@@ -134,8 +139,8 @@
     "backToProjects": "← All projects"
   },
   "footer": {
-    "bio": "Creative developer specializing in modern web applications, Unity development and 3D design. I combine technology with creativity.",
-    "services": "Services",
+    "bio": "I build web applications, game prototypes, and data tools. I am interested in connecting technical solutions with clear interfaces.",
+    "services": "Skills",
     "technologies": "Technologies",
     "contact": "Contact",
     "location": "{{city}}, Czech Republic",

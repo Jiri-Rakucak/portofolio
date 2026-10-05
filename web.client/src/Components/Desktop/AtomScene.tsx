@@ -2,9 +2,10 @@ import { Canvas, useThree } from "@react-three/fiber";
 import {OrbitControls} from "@react-three/drei";
 import {Atom} from "./Atom";
 import styled from "styled-components";
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect, type RefObject } from 'react';
 import { PerspectiveCamera } from 'three';
 import { frameHeroCamera } from './heroCamera';
+import HeroPointerRotation from './HeroPointerRotation';
 
 const Container = styled.div<{ $immersive: boolean }>`
     height: ${({ $immersive }) => $immersive ? '100%' : '550px'};
@@ -31,7 +32,12 @@ function HeroCamera() {
     return null;
 }
 
-const AtomScene = ({ layout = 'window' }: { layout?: 'window' | 'hero' }) => {
+type AtomSceneProps = {
+    layout?: 'window' | 'hero';
+    pointerSource?: RefObject<HTMLElement | null>;
+};
+
+const AtomScene = ({ layout = 'window', pointerSource }: AtomSceneProps) => {
     const immersive = layout === 'hero';
     return (
         <Container $immersive={immersive}>
@@ -39,8 +45,14 @@ const AtomScene = ({ layout = 'window' }: { layout?: 'window' | 'hero' }) => {
                 {immersive && <HeroCamera />}
                 <ambientLight intensity={.5} />
                 <pointLight position={[10, 10, 10]} />
-                <Atom/>
-                <OrbitControls enableZoom={false} enablePan={!immersive} />
+                {immersive ? (
+                    <HeroPointerRotation pointerSource={pointerSource}><Atom /></HeroPointerRotation>
+                ) : (
+                    <>
+                        <Atom />
+                        <OrbitControls enableZoom={false} enablePan />
+                    </>
+                )}
             </StyledCanvas>
         </Container>
     )

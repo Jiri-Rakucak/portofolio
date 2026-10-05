@@ -2,24 +2,6 @@ import styled from "styled-components";
 import { Link } from "react-router";
 import PortfolioImage from './PortfolioImage';
 
-export const projectGradients: Record<string, string> = {
-  "devos-portfolio":
-    "radial-gradient(ellipse at 30% 40%, #667eea55, #764ba244), linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)",
-  "unity-graduation-game":
-    "radial-gradient(ellipse at 70% 50%, #fa709a44, #fee14033), linear-gradient(135deg, #1a1a2e 0%, #2d1b00 100%)",
-  "service-pages":
-    "radial-gradient(ellipse at 40% 60%, #4facfe44, #00f2fe33), linear-gradient(135deg, #1a1a2e 0%, #0a1628 100%)",
-  ragsystem:
-    "radial-gradient(ellipse at 60% 30%, #00f2fe44, #4facfe33), linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%)",
-};
-
-export const fallbackGradient =
-  "radial-gradient(ellipse at 50% 50%, #a18cd144, #fbc2eb33), linear-gradient(135deg, #1a1a2e 0%, #1a1a2e 100%)";
-
-
-
-
-
 export const Page = styled.div`
   background: ${({ theme }) => theme.colors.background};
   color: ${({ theme }) => theme.colors.text};

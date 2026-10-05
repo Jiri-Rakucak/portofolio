@@ -1,10 +1,10 @@
 {
   "navigation": {
     "home": "Domů",
-    "services": "Služby",
+    "services": "Dovednosti",
     "frontend": "Frontend",
     "backend": "Backend a systémy",
-    "fullServices": "Všechny služby",
+    "fullServices": "Všechny oblasti",
     "dashboard": "Dashboard",
     "admin": "Admin",
     "preferences": "Nastavení",
@@ -17,7 +17,12 @@
     "launchDevos": "Spustit DevOS",
     "exploreProjects": "Prohlédnout projekty",
     "servicesTitle": "Mé dovednosti",
-    "servicesDescription": "Níže najdeš oblasti, ve kterých se pohybuju a umím pomoct."
+    "servicesDescription": "Věnuji se webovým aplikacím, hrám a práci s daty. Záleží mi na srozumitelném rozhraní, přehledném kódu a pochopení toho, jak věci fungují.",
+    "exploreSkills": "Více o dovednostech",
+    "projectsTitle": "Vybrané projekty",
+    "projectsDescription": "Vlastní projekty, na kterých zkouším nové přístupy a propojuji je do funkčního celku.",
+    "allProjects": "Všechny projekty",
+    "projectDetail": "Prohlédnout projekt {{name}}"
   },
   "settings": {
     "title": "Nastavení",
@@ -58,34 +63,34 @@
   "servicesPage": {
     "eyebrow": "Rozcestník dovedností",
     "title": "Mé dovednosti",
-    "description": "Zde najdeš dovednosti, které nabízím: produktový frontend, interaktivní 3D, design systémy, backendové základy a technické směřování.",
+    "description": "Věnuji se vývoji webových aplikací, herním prototypům a práci s daty. Tady najdeš přehled jednotlivých oblastí a nástrojů, které používám.",
     "highlights": [
-      "Frontend-first produktové plochy",
-      "3D tam, kde přidává srozumitelnost",
-      "Backend až ve chvíli, kdy dává smysl"
+      "Webové aplikace",
+      "Hry a interaktivní 3D",
+      "API a práce s daty"
     ],
-    "laneTitle": "Oblasti služeb",
-    "laneDescription": "Každá oblast vede na detailní stránku se schopnostmi, stackem a souvisejícími směry.",
+    "laneTitle": "Čemu se věnuji",
+    "laneDescription": "U každé oblasti najdeš konkrétní postupy, používané technologie a související dovednosti.",
     "trackCountLabel": "oblastí",
     "fitLabel": "Nejlepší pro",
     "stackLabel": "Hlavní stack",
-    "exploreDetails": "Prozkoumat detail",
+    "exploreDetails": "Více o této oblasti",
     "notSureTitle": "Vyber podle typu projektu",
-    "notSureDescription": "Pokud kategorie ještě není jasná, začni podle výsledku, který potřebuješ.",
+    "notSureDescription": "Jednotlivé oblasti se často propojují. Začít můžeme tím, co chceš vytvořit.",
     "questions": [
-      "Potřebuješ jednu silnou landing page?",
-      "Stavíš interaktivní koncept pro investory?",
-      "Chceš osvěžit design systém?",
-      "Hledáš technické vedení pro interní tým?"
+      "Webová stránka nebo aplikace",
+      "Herní prototyp nebo interaktivní 3D",
+      "Přehlednější uživatelské rozhraní",
+      "Nástroj pro zpracování a vyhledávání dat"
     ],
-    "contactTitle": "Připravený poskládat zadání?",
-    "contactDescription": "Formulář je zatím schovaný, dokud nebude hotový backend nebo admin workflow. Teď použij přímé kontaktní odkazy a z hrubé myšlenky vybereme správný směr.",
+    "contactTitle": "Máš projekt nebo otázku?",
+    "contactDescription": "Napiš mi, co chceš vytvořit nebo probrat. Můžeme společně projít možnosti a další postup.",
     "email": "Napsat e-mail",
     "serviceNotFound": "Služba nebyla nalezena."
   },
   "projectsPage": {
-    "title": "Moje projektíky",
-    "description": "Výběr klíčových projektů, na kterých pracuji nebo jsem pracoval. Každý ukazuje jiný kousek toho, co umím postavit.",
+    "title": "Moje projekty",
+    "description": "Výběr vlastní práce: co jsem chtěl vytvořit, jak jsem postupoval a kam se projekt dostal.",
     "highlights": [
       "Interaktivní webové aplikace",
       "3D a herní experimenty",
@@ -134,8 +139,8 @@
     "backToProjects": "← Všechny projekty"
   },
   "footer": {
-    "bio": "Kreativní developer zaměřený na moderní webové aplikace, Unity vývoj a 3D design.",
-    "services": "Služby",
+    "bio": "Vyvíjím webové aplikace, herní prototypy a nástroje pro práci s daty. Zajímá mě spojení technického řešení a srozumitelného rozhraní.",
+    "services": "Dovednosti",
     "technologies": "Technologie",
     "contact": "Kontakt",
     "location": "{{city}}, Česká republika",

@@ -1,4 +1,4 @@
-import { Component, lazy, Suspense, type PropsWithChildren } from 'react';
+import { Component, lazy, Suspense, type PropsWithChildren, type RefObject } from 'react';
 import { SceneLayer } from './HomeHero.styles';
 
 const AtomScene = lazy(() => import('./AtomScene'));
@@ -16,12 +16,12 @@ class SceneBoundary extends Component<PropsWithChildren, { failed: boolean }> {
   }
 }
 
-export default function HeroScene() {
+export default function HeroScene({ pointerSource }: { pointerSource: RefObject<HTMLElement | null> }) {
   return (
     <SceneLayer aria-hidden="true">
       <SceneBoundary>
         <Suspense fallback={null}>
-          <AtomScene layout="hero" />
+          <AtomScene layout="hero" pointerSource={pointerSource} />
         </Suspense>
       </SceneBoundary>
     </SceneLayer>

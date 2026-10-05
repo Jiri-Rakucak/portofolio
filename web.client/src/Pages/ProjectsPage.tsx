@@ -16,8 +16,8 @@ import {
   DetailSection, DetailGrid, DetailMain, DetailBlock, DetailBody, HighlightList,
   HighlightItem, TechList, TechBadge, DetailSide, TerminalPanel, TerminalHeader,
   TerminalDot, MetaList, MetaItem, MetaTerm, MetaValue, DetailLink,
-  projectGradients, fallbackGradient,
 } from "./ProjectsPages/ProjectsPage.styles";
+import { projectGradients, fallbackGradient } from '../styles/projectMedia';
 
 export default function ProjectsPage() {
   const { t } = useTranslation("common");

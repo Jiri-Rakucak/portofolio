@@ -14,34 +14,6 @@ import Modal from "./Modal";
 import WebSettings from "../Settings/WebSettings";
 import { contact } from '../../content/contact';
 
-const PlaceholderLogo = ({ className }: { className?: string }) => (
-  <svg
-    className={className}
-    width="40"
-    height="40"
-    viewBox="0 0 100 100"
-    xmlns="http://www.w3.org/2000/svg"
-    fill="currentColor"
-  >
-    <circle
-      cx="50"
-      cy="50"
-      r="45"
-      stroke="currentColor"
-      strokeWidth="10"
-      fill="none"
-    />
-    <path
-      d="M35 65 L50 35 L65 65"
-      stroke="currentColor"
-      strokeWidth="10"
-      fill="none"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
 const StyledHeader = styled.header`
   width: 100%;
   background-color: transparent;
@@ -53,7 +25,7 @@ const StyledHeader = styled.header`
 
 const Nav = styled.nav`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   max-width: 1264px;
   margin: 0 auto;
@@ -66,29 +38,6 @@ const NavBg = styled.div`
   width: 100%;
   height: 68px;
   background-color: ${({ theme }) => theme.colors.backgroundSecondary};
-`;
-
-const LogoContainer = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-  pointer-events: auto;
-`;
-
-const LogoLink = styled(Link)`
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: ${({ theme }) => theme.colors.accent};
-  transition: color 0.2s ease;
-  &:hover,
-  &:focus-visible {
-    color: ${({ theme }) => theme.colors.text};
-  }
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.colors.accent};
-    outline-offset: 4px;
-  }
 `;
 
 const RightSection = styled.div`
@@ -266,12 +215,6 @@ const Header = () => {
     <>
       <StyledHeader>
         <Nav>
-          <LogoContainer>
-            <LogoLink to="/" viewTransition aria-label={t("navigation.home")}>
-              <PlaceholderLogo />
-            </LogoLink>
-          </LogoContainer>
-
           <RightSection>
             <SocialLinks>
               <SocialLink

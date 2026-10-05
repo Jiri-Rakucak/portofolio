@@ -50,15 +50,14 @@ describe.each([
         expect(css).toContain(`outline:2px solid ${theme.colors.accent};`);
     });
 
-    it('gives the home logo a themed hover, keyboard focus, and an accessible label', async () => {
+    it('keeps navigation right-aligned and the home menu link without a placeholder logo', async () => {
         await i18n.changeLanguage('en');
         const { html, css } = renderStyles(<Header />, theme);
-        const logo = html.match(/<a\b[^>]*aria-label="Home"[^>]*>/)?.[0];
-        const className = logo?.match(/class="([^"]+)"/)?.[1].split(' ').pop();
 
-        expect(logo).toContain('href="/"');
-        expect(className).toBeTruthy();
-        expect(css).toContain(`.${className}:hover,.${className}:focus-visible{color:${theme.colors.text};}`);
-        expect(css).toContain(`.${className}:focus-visible{outline:2px solid ${theme.colors.accent};`);
+        expect(html.match(/href="\/"/g)).toHaveLength(1);
+        expect(html).toContain('>Home</p>');
+        expect(html).not.toContain('aria-label="Home"');
+        expect(html).not.toContain('viewBox="0 0 100 100"');
+        expect(css).toContain('justify-content:flex-end;');
     });
 });

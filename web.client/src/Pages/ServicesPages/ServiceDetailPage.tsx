@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Text from '../../Components/Shared/Typography';
 import { getServiceById } from '../../content/services';
 import { useLocale } from '../../i18n/useLocale';
+import { angledSection } from '../../styles/angledSection';
 
 const Container = styled.div`
     background: ${({ theme }) => theme.colors.background};
@@ -56,8 +57,8 @@ const Tag = styled.span`
 `;
 
 const ContentWrapper = styled.div`
-    margin: -2vw auto 0;
-    padding: calc(10vw + 4rem) 2rem 6rem;
+    ${angledSection}
+    padding: calc(var(--section-cut) + 3rem) 2rem 6rem;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -65,7 +66,6 @@ const ContentWrapper = styled.div`
     align-items: center;
     gap: 4.5rem;
     background-color: ${({ theme }) => theme.colors.backgroundSecondary};
-    clip-path: polygon(0 0, 100% 15vw, 100% 100%, 0 100%);
 `;
 
 const Section = styled.section`

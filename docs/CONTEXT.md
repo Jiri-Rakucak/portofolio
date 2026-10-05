@@ -14,7 +14,8 @@ The desktop homepage includes:
 
 - a personal CZ/EN introduction with projects as the primary action and DevOS as secondary
 - a lazy-loaded full-bleed Three.js atom scene
-- service cards linking to detailed service pages
+- selected Starbounder and RAG project rows with large unframed previews and central metadata
+- a compact text-based skills section linking to detailed skill pages, without service cards
 
 The DevOS route includes:
 
@@ -34,6 +35,13 @@ The ASP.NET project exists as a future backend placeholder. It should remain out
 - DevOS was moved behind a lazy route boundary.
 - `AtomScene` was moved behind a lazy component boundary.
 - The desktop hero is now isolated in `HomeHero` and `HeroScene`, with a bounded left-shifted camera projection and an optional-scene error boundary. Atom geometry and animation are unchanged; the default DevOS window layout retains its previous framing.
+- Homepage atom tilt follows mouse position within the hero through a separate parent group, bounded to 12 degrees of pitch and 20 degrees of yaw with frame-rate-independent Three.js damping. Tracking includes overlaid copy/buttons, resets on leave/cancel/scroll/resize/window blur, and is disabled for reduced motion or non-mouse/coarse input. Hero drag-orbit controls are removed; the DevOS atom window retains OrbitControls, and inner atom/electron animation is unchanged.
+- The placeholder header logo was removed at the owner's request. Navigation stays right-aligned, with Home in the existing dropdown.
+- Starbounder remains a 2D game. A 3D planet preview is not planned for its current case study because it would misrepresent the game. A future 3D remake is only an owner idea, not portfolio scope.
+- Desktop home now follows introduction -> selected projects -> skills. `getHomeProjects` explicitly selects Starbounder first, then RAG; the unfinished DevOS portfolio is not included here. This selection is independent of the general `featured` flag used elsewhere.
+- Homepage project previews are open image/text rows rather than framed cards. Starbounder uses its central cover, while RAG retains the shared placeholder gradient until the owner supplies media. Adding a `cover` in both locale content files automatically replaces the homepage and carousel placeholder.
+- Angled content bands on the homepage, service directory/details, and project details share `styles/angledSection.ts`: 48px on desktop and 32px at narrow widths. Content padding clears the cut; the slope no longer grows with viewport width.
+- Public skills copy in EN/CZ is concrete and personal, without corporate phrasing or internal notes about pending forms/backend work. This is a content-only change; backend implementation remains parked.
 - Owner contacts and social URLs are centralized in `web.client/src/content/contact.ts`. Footer, header, services, About Me, and Terminal use the same source. Location is Liberec with localized country copy. Dead footer legal links were removed and technology labels are no longer fake links.
 - Project and service metadata were centralized in `web.client/src/content/`.
 - ProjectWindow was upgraded into a mini case-study view with status, role, timeframe, impact, highlights, technologies, and CTAs.
@@ -94,7 +102,7 @@ The frontend currently uses localized JSON content:
 - `web.client/src/i18n/locales/en/content.json`
 - `web.client/src/i18n/locales/cs/content.json`
 
-Typed helper modules still live in `web.client/src/content/projects.ts` and `web.client/src/content/services.ts`. They are the source of truth for homepage cards, DevOS Explorer, Browser, Terminal, ProjectWindow, service directory content, and detailed service pages. The data shape is intentionally suitable for a future admin flow where the owner can add or edit projects/services directly from the site. A backend or CMS can later expose the same shape without forcing a UI rewrite.
+Typed helper modules still live in `web.client/src/content/projects.ts` and `web.client/src/content/services.ts`. They are the source of truth for homepage sections, DevOS Explorer, Browser, Terminal, ProjectWindow, service directory content, and detailed service pages. The data shape is intentionally suitable for a future admin flow where the owner can add or edit projects/services directly from the site. A backend or CMS can later expose the same shape without forcing a UI rewrite.
 
 Project case-study content is optional per project. Use it when a project needs deeper storytelling in DevOS ProjectWindow:
 
@@ -121,8 +129,10 @@ General UI translations live in `web.client/src/i18n/locales/*/common.json`. Dev
 
 ## Portfolio Review Follow-ups
 
-- Homepage polish is staged: the personal hero and contacts are updated; next add selected projects before skills, then refine the skills copy/layout. The existing service cards remain for now.
+- Homepage introduction, selected project rows, text-based skills, contacts, and bounded angled transitions are implemented. The old glass service-card component was removed. Next assess the actual rendered spacing and replace RAG's temporary preview when real media is available.
 - Browser verification of the updated hero (canvas pixels, interaction, and desktop/narrow viewport layout) remains pending: the sandbox cannot bind the Vite port (`EPERM`) and the available Chromium lacks `libnspr4.so`. Unit tests exercise camera projection, hero copy/actions, and contact consumers, not actual WebGL rendering.
+- Tests additionally cover localized homepage selection/rendering, missing covers or selected entries, empty service lists, section order, and shared cut/padding rules. These do not replace browser layout verification.
+- Atom mouse-follow tests cover coordinate mapping, angle limits, real Three.js Euler damping across frame rates, invalid input, DOM listener cleanup, preference changes, and hero/DevOS interaction boundaries. Actual pointer/WebGL rendering still needs browser verification.
 - RAG needs an anonymized CLI example, architecture visual, and measured indexing/search results.
 - The carousel uses real media for Starbounder; the other projects still use temporary gradient backgrounds.
 - `index.html` still uses the Vite favicon and lacks portfolio/social metadata.

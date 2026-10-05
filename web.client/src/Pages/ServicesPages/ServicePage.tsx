@@ -5,6 +5,7 @@ import Text from '../../Components/Shared/Typography';
 import { getServices } from '../../content/services';
 import { useLocale } from '../../i18n/useLocale';
 import { contact } from '../../content/contact';
+import { angledSection } from '../../styles/angledSection';
 
 const Container = styled.div`
     background: ${({ theme }) => theme.colors.background};
@@ -50,8 +51,8 @@ const HighlightPill = styled.span`
 `;
 
 const ContentWrapper = styled.div`
-    margin: -2vw auto 0;
-    padding: calc(8vw + 3rem) 2rem 4.5rem;
+    ${angledSection}
+    padding: calc(var(--section-cut) + 3rem) 2rem 4.5rem;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -59,7 +60,6 @@ const ContentWrapper = styled.div`
     align-items: center;
     gap: 3.2rem;
     background-color: ${({ theme }) => theme.colors.backgroundSecondary};
-    clip-path: polygon(0 0, 100% 15vw, 100% 100%, 0 100%);
 `;
 
 const Section = styled.section`

@@ -28,6 +28,15 @@ export const getPortfolioProjects = (locale?: Locale): PortfolioProject[] =>
 export const getFeaturedProjects = (locale?: Locale): PortfolioProject[] =>
     getPortfolioProjects(locale).filter(project => project.featured);
 
+const homeProjectIds = ['unity-graduation-game', 'ragsystem'] as const;
+
+export const getHomeProjects = (locale?: Locale): PortfolioProject[] => {
+    const projects = getPortfolioProjects(locale);
+    return homeProjectIds
+        .map(id => projects.find(project => project.id === id))
+        .filter((project): project is PortfolioProject => project !== undefined);
+};
+
 export const getProjectById = (projectId: string, locale?: Locale) =>
     getPortfolioProjects(locale).find(project => project.id === projectId);
 

@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArrowRight } from '../Icons/Arrows';
 import TerminalIcon from '../Icons/Terminal';
@@ -6,10 +7,11 @@ import { Hero, HeroInner, HeroCopy, Identity, Role, Intro, Actions, PrimaryLink,
 
 export default function HomeHero() {
   const { t } = useTranslation('common');
+  const pointerSource = useRef<HTMLElement>(null);
 
   return (
-    <Hero>
-      <HeroScene />
+    <Hero ref={pointerSource}>
+      <HeroScene pointerSource={pointerSource} />
       <HeroInner>
         <HeroCopy>
           <Role>{t('home.heroSubtitle')}</Role>

@@ -93,6 +93,16 @@ Public pages also support optional project `cover` (`src`, localized `alt`), loc
 
 Desktop home hero lives in `Components/Desktop/HomeHero.tsx`. `HeroScene` keeps the atom lazy and isolates rendering failures from navigation. `AtomScene` defaults to its existing DevOS window layout; only the homepage passes `layout="hero"` for full-bleed rendering and camera framing. Keep project browsing as the primary hero action and DevOS as secondary. Mobile home remains deferred.
 
+Homepage mouse tilt is isolated in `HeroPointerRotation`, `heroPointer.ts`, and `heroPointerEvents.ts`. Listen on the hero DOM ref (including copy/buttons), use client coordinates relative to its bounds, and animate a separate parent group using Three.js damping. Keep angles bounded and disable following for reduced motion or non-mouse input. Hero OrbitControls are removed to avoid competing rotation; DevOS controls and inner atom/electron animation remain unchanged.
+
+The header intentionally has no logo. Keep the Home link in its dropdown and navigation aligned right. Starbounder is a 2D game; do not introduce 3D presentation that suggests otherwise.
+
+Desktop home continues with `HomeProjects` and `HomeSkills`, styled by `HomeSections.styles.ts`. Keep these as open sections, not glass service cards. `getHomeProjects` in `content/projects.ts` curates Starbounder and RAG independently of the global featured flag; do not include DevOS here without the owner's approval. RAG's gradient is intentional until a real central `cover` is supplied.
+
+Use `styles/angledSection.ts` for sloped content bands: shared 48px/32px cuts and content padding that clears the cut. Do not reintroduce viewport-width-based slopes. Shared project preview gradients live in `styles/projectMedia.ts`.
+
+Public copy should be concrete, personal, and professional in both languages. Keep internal backend/form implementation notes in documentation, not visitor-facing contact or skills text.
+
 Do not duplicate project/service metadata inside components. If future admin functionality is introduced, preserve the content shape and swap the static exports for API-backed data.
 
 ## Localization Notes

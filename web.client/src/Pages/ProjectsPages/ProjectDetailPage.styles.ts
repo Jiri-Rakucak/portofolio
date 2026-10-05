@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router";
 import type { ProjectStatus } from "../../content/projects";
 import PortfolioImage from './PortfolioImage';
+import { angledSection } from '../../styles/angledSection';
 
 export const Container = styled.div`
   background: ${({ theme }) => theme.colors.background};
@@ -93,8 +94,8 @@ export const HeroDescription = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
-  margin: -36px auto 0;
-  padding: 5rem 2rem 6rem;
+  ${angledSection}
+  padding: calc(var(--section-cut) + 3rem) 2rem 6rem;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -102,9 +103,8 @@ export const ContentWrapper = styled.div`
   align-items: center;
   gap: 4.5rem;
   background-color: ${({ theme }) => theme.colors.backgroundSecondary};
-  clip-path: polygon(0 0, 100% 36px, 100% 100%, 0 100%);
   @media (max-width: 640px) {
-    padding: 4rem 1.25rem;
+    padding: calc(var(--section-cut) + 2rem) 1.25rem 4rem;
     gap: 3rem;
   }
 `;
