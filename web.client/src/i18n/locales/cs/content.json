@@ -42,6 +42,11 @@
         "Čistá ports-and-adapters architektura s přísným typováním (Mypy strict, Pydantic v2)"
       ],
       "route": "/projects/ragsystem",
+      "cover": {
+        "src": "/projects/ragsystem/ragsystem-preview.png",
+        "presentation": "inline",
+        "alt": "Náhled rozhraní RAG s vyhledávacím polem a filtry pro ChatGPT konverzace a poznámky."
+      },
       "repoUrl": "https://github.com/Jiri-Rakucak/ragsystem",
       "featured": true,
       "caseStudy": {
@@ -90,6 +95,7 @@
       "liveLabel": "Stáhnout prototyp",
       "cover": {
         "src": "/projects/unity-graduation-game/planet-in-space-no-ship.png",
+        "presentation": "background",
         "alt": "Procedurálně vygenerovaná zelená planeta Starbounderu na pozadí hvězd a mlhovin"
       },
       "featured": true,

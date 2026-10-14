@@ -54,6 +54,7 @@ Do not run backend upgrades or backend migrations unless the task specifically a
 - `src/Routes/DevOsRoute.tsx` exists to keep DevOS dependencies lazy-loaded.
 - New canonical routes should use lowercase URL paths. Keep redirects only for legacy paths that may already be linked.
 - Public projects use `/projects/:projectId` and resolve IDs from central content. Do not add a separate route for each project.
+- The catch-all 404 is a child of `MainLayout`, with localized `notFound` copy and explicit recovery links. Keep it in the public shell without adding duplicate headers or full-screen clickable overlays. Missing project IDs retain the project detail's own fallback.
 
 ## Performance Notes
 
@@ -89,15 +90,17 @@ Keep project and service IDs aligned across locales.
 
 Projects may include optional `caseStudy` content with `summary`, `problem`, `solution`, `outcome`, `lessons`, `sections`, and `assets`. ProjectWindow renders this when present. `unity-graduation-game` is Starbounder, a graduation prototype reviewed against its local Unity repository and thesis. Keep its prototype scope explicit; source notes and verification limits live in `docs/STARBOUNDER.md`.
 
-Public pages also support optional project `cover` (`src`, localized `alt`), localized `liveLabel`, and `caseStudy.motivation`. Public gallery/story components live in `Pages/ProjectsPages/` and must not introduce UI changes in DevOS. The gallery uses native `dialog`; do not replace it with the shared legacy modal without preserving focus containment, Escape, and focus return.
+Public pages also support optional project `cover` (`src`, localized `alt`, optional `presentation`), localized `liveLabel`, and `caseStudy.motivation`. `cover.presentation` controls only the public detail: `background` (default, Starbounder) keeps the existing hero image; `inline` (RAG) puts the contained full preview below the text hero, inside the first content-band section so the angled cut cannot crop it. Keep both locale settings aligned. Do not branch on project IDs or change homepage/carousel/DevOS layouts to implement these modes. Public gallery/story components live in `Pages/ProjectsPages/` and must not introduce UI changes in DevOS. The gallery and shared Preferences modal use native `dialog`; preserve modal focus containment, Escape, and focus return.
+
+Header navigation uses ordinary disclosure buttons and links, not ARIA menu roles. Keep mouse hover as a preview; click/keyboard activation pins the disclosure open. Close it on outside pointer interaction, focus leaving, link selection, or Escape (nested skills first). Navigation state and event handling live in `headerNavigationState.ts` and `useHeaderNavigation.ts`; do not replace native buttons with clickable divs. Preferences return focus to the visible navigation toggle because their initiating item is hidden after opening. Keep dialog lifecycle cleanup in `dialogLifecycle.ts`, including the prior scroll style and priority. Settings use labelled native controls, pressed-state language buttons, and a color-only reset; do not imply the reset also changes language or theme.
 
 Desktop home hero lives in `Components/Desktop/HomeHero.tsx`. `HeroScene` keeps the atom lazy and isolates rendering failures from navigation. `AtomScene` defaults to its existing DevOS window layout; only the homepage passes `layout="hero"` for full-bleed rendering and camera framing. Keep project browsing as the primary hero action and DevOS as secondary. Mobile home remains deferred.
 
 Homepage mouse tilt is isolated in `HeroPointerRotation`, `heroPointer.ts`, and `heroPointerEvents.ts`. Listen on the hero DOM ref (including copy/buttons), use client coordinates relative to its bounds, and animate a separate parent group using Three.js damping. Keep angles bounded and disable following for reduced motion or non-mouse input. Hero OrbitControls are removed to avoid competing rotation; DevOS controls and inner atom/electron animation remain unchanged.
 
-The header intentionally has no logo. Keep the Home link in its dropdown and navigation aligned right. Starbounder is a 2D game; do not introduce 3D presentation that suggests otherwise.
+The header intentionally has no logo. Keep the Home link in its dropdown and navigation aligned right. The dropdown background extends behind the top icons with a continuous surface and only rounded bottom corners; do not turn it into a detached bordered popover. Starbounder is a 2D game; do not introduce 3D presentation that suggests otherwise.
 
-Desktop home continues with `HomeProjects` and `HomeSkills`, styled by `HomeSections.styles.ts`. Keep these as open sections, not glass service cards. `getHomeProjects` in `content/projects.ts` curates Starbounder and RAG independently of the global featured flag; do not include DevOS here without the owner's approval. RAG's gradient is intentional until a real central `cover` is supplied.
+Desktop home continues with `HomeProjects` and `HomeSkills`, styled by `HomeSections.styles.ts`. Keep these as open sections, not glass service cards. `getHomeProjects` in `content/projects.ts` curates Starbounder and RAG independently of the global featured flag; do not include DevOS here without the owner's approval. RAG uses the owner-provided `ragsystem-preview.png` as its central `cover` in both locales; retain the shared gradient only as the missing-media fallback.
 
 Use `styles/angledSection.ts` for sloped content bands: shared 48px/32px cuts and content padding that clears the cut. Do not reintroduce viewport-width-based slopes. Shared project preview gradients live in `styles/projectMedia.ts`.
 

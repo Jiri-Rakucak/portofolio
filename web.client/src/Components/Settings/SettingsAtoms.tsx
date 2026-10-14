@@ -1,123 +1,124 @@
 import styled from 'styled-components';
-import type { ChangeEvent } from 'react';
+import { focusRing } from '../Shared/controlStyles';
 
 export const SettingRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 0;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid color-mix(in srgb, ${({ theme }) => theme.colors.text} 14%, transparent);
 
-  &:last-child {
-    border-bottom: none;
-  }
+    &:last-child { border-bottom: 0; }
+    @media (max-width: 480px) { flex-wrap: wrap; }
 `;
 
 export const Label = styled.label`
-  color: ${({ theme }) => theme.colors.text};
-  font-weight: 500;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    color: ${({ theme }) => theme.colors.text};
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.5;
 `;
 
 export const SubLabel = styled.span`
-  font-size: 0.8rem;
-  color: ${({ theme }) => theme.colors.textSecondary};
+    color: ${({ theme }) => theme.colors.textSecondary};
+    font-size: 0.8125rem;
+    font-weight: 400;
 `;
 
-// Toggle Switch
 const SwitchLabel = styled.label`
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 26px;
+    position: relative;
+    display: inline-block;
+    flex-shrink: 0;
+    width: 48px;
+    height: 28px;
 `;
 
 const SwitchInput = styled.input`
-  opacity: 0;
-  width: 0;
-  height: 0;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
 
-  &:checked + span {
-    background-color: ${({ theme }) => theme.colors.accent};
-  }
-
-  &:checked + span:before {
-    transform: translateX(24px);
-  }
+    &:checked + span { background: ${({ theme }) => theme.colors.accent}; }
+    &:checked + span::before { transform: translateX(20px); }
+    &:focus-visible + span { outline: 2px solid ${({ theme }) => theme.colors.text}; outline-offset: 3px; }
 `;
 
 const Slider = styled.span`
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: ${({ theme }) => theme.colors.textSecondary}40;
-  transition: .4s;
-  border-radius: 34px;
-
-  &:before {
     position: absolute;
-    content: "";
-    height: 20px;
-    width: 20px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    transition: .4s;
-    border-radius: 50%;
-  }
+    inset: 0;
+    border: 1px solid color-mix(in srgb, ${({ theme }) => theme.colors.text} 30%, transparent);
+    border-radius: 28px;
+    background: ${({ theme }) => theme.colors.backgroundSecondary};
+    transition: background-color 0.2s ease;
+
+    &::before {
+        position: absolute;
+        content: '';
+        width: 20px;
+        height: 20px;
+        top: 3px;
+        left: 3px;
+        border-radius: 50%;
+        background: ${({ theme }) => theme.colors.text};
+        transition: transform 0.2s ease;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        &, &::before { transition: none; }
+    }
 `;
 
-export const ToggleSwitch = ({ checked, onChange }: { checked: boolean; onChange: () => void }) => (
-  <SwitchLabel>
-    <SwitchInput type="checkbox" checked={checked} onChange={onChange} />
-    <Slider />
-  </SwitchLabel>
-);
+export function ToggleSwitch({ id, checked, onChange }: { id: string; checked: boolean; onChange: () => void }) {
+    return (
+        <SwitchLabel>
+            <SwitchInput id={id} type="checkbox" role="switch" checked={checked} onChange={onChange} />
+            <Slider aria-hidden="true" />
+        </SwitchLabel>
+    );
+}
 
-// Color Picker
-const ColorInputContainer = styled.div`
-  position: relative;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 2px solid ${({ theme }) => theme.colors.border};
-  cursor: pointer;
-  
-  &:hover {
-    border-color: ${({ theme }) => theme.colors.accent};
-  }
+const ColorControl = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
 `;
 
-const StyledColorInput = styled.input`
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  cursor: pointer;
-  border: none;
-  padding: 0;
-  margin: 0;
+const ColorValue = styled.span`
+    color: ${({ theme }) => theme.colors.textSecondary};
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
 `;
 
-export const ColorPicker = ({ value, onChange }: { value: string; onChange: (val: string) => void }) => {
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onChange(event.target.value);
-  };
+const ColorInput = styled.input`
+    ${focusRing}
+    width: 44px;
+    height: 32px;
+    padding: 3px;
+    border: 1px solid color-mix(in srgb, ${({ theme }) => theme.colors.text} 30%, transparent);
+    border-radius: 6px;
+    background: transparent;
+    cursor: pointer;
 
-  return (
-    <ColorInputContainer style={{ backgroundColor: value }}>
-      <StyledColorInput 
-        type="color" 
-        value={value} 
-        onChange={handleChange}
-      />
-    </ColorInputContainer>
-  );
-};
+    &::-webkit-color-swatch-wrapper { padding: 0; }
+    &::-webkit-color-swatch { border: 0; border-radius: 3px; }
+    &::-moz-color-swatch { border: 0; border-radius: 3px; }
+`;
+
+export function ColorPicker({ id, value, onChange }: { id: string; value: string; onChange: (value: string) => void }) {
+    return (
+        <ColorControl>
+            <ColorValue aria-hidden="true">{value.toUpperCase()}</ColorValue>
+            <ColorInput id={id} type="color" value={value} onChange={event => onChange(event.target.value)} />
+        </ColorControl>
+    );
+}

@@ -1,129 +1,120 @@
-import React from 'react';
+import { useId } from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import Text from '../Shared/Typography';
 import { useAppTheme } from '../../styles/ThemeProvider';
 import { SettingRow, Label, SubLabel, ToggleSwitch, ColorPicker } from './SettingsAtoms';
+import { focusRing } from '../Shared/controlStyles';
 import type { Theme } from '../../styles/theme';
 import { useLocale } from '../../i18n/useLocale';
-import { locales, type Locale } from '../../i18n/types';
+import { locales } from '../../i18n/types';
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 `;
 
-const Button = styled.button`
-  margin-top: 2rem;
-  padding: 0.75rem 1.5rem;
-  color: ${({ theme }) => theme.colors.error};
-  border: 1px solid ${({ theme }) => theme.colors.error};
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.2s;
+const Heading = styled.h2`
+    margin: 0;
+    padding-right: 48px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.4;
+`;
 
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.error}15;
-    color: ${({ theme }) => theme.colors.error};
-    border: 1px solid ${({ theme }) => theme.colors.error};
-  }
+const SectionTitle = styled.h3`
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.textSecondary};
+`;
+
+const ResetButton = styled.button`
+    ${focusRing}
+    align-self: flex-start;
+    padding: 0.6rem 0.9rem;
+    border: 1px solid color-mix(in srgb, ${({ theme }) => theme.colors.text} 25%, transparent);
+    border-radius: 6px;
+    background: transparent;
+    color: ${({ theme }) => theme.colors.text};
+    font: inherit;
+    font-size: 0.875rem;
+    cursor: pointer;
+
+    &:hover { background: color-mix(in srgb, ${({ theme }) => theme.colors.text} 10%, transparent); }
 `;
 
 const LanguageOptions = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: flex-end;
+    display: flex;
+    flex-shrink: 0;
+    padding: 3px;
+    gap: 3px;
+    border: 1px solid color-mix(in srgb, ${({ theme }) => theme.colors.text} 20%, transparent);
+    border-radius: 6px;
 `;
 
 const LanguageButton = styled.button<{ $isActive: boolean }>`
-  min-width: 88px;
-  padding: 0.55rem 0.8rem;
-  border-radius: 6px;
-  border: 1px solid ${({ $isActive, theme }) => $isActive ? theme.colors.accent : theme.colors.border};
-  color: ${({ theme }) => theme.colors.text};
-  background: ${({ $isActive, theme }) => $isActive ? theme.colors.accent + '33' : theme.colors.surface};
-  cursor: pointer;
-  font-weight: 700;
+    ${focusRing}
+    min-width: 80px;
+    min-height: 36px;
+    padding: 0.4rem 0.6rem;
+    border: 0;
+    border-radius: 3px;
+    color: ${({ theme }) => theme.colors.text};
+    background: ${({ $isActive, theme }) => $isActive
+        ? `color-mix(in srgb, ${theme.colors.text} 14%, transparent)` : 'transparent'};
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.8125rem;
+    font-weight: ${({ $isActive }) => $isActive ? 600 : 400};
 
-  &:hover {
-    border-color: ${({ theme }) => theme.colors.accent};
-  }
+    &:hover { background: color-mix(in srgb, ${({ theme }) => theme.colors.text} 20%, transparent); }
 `;
 
-const WebSettings: React.FC = () => {
-  const { t } = useTranslation('common');
-  const { themeName, toggleTheme, theme, updateColor, resetTheme } = useAppTheme();
-  const { locale, setLocale } = useLocale();
+export default function WebSettings({ titleId }: { titleId: string }) {
+    const { t } = useTranslation('common');
+    const { themeName, toggleTheme, theme, updateColor, resetTheme } = useAppTheme();
+    const { locale, setLocale } = useLocale();
+    const controlId = useId();
+    const languageLabelId = useId();
+    const colorsTitleId = useId();
+    const editableColors: (keyof Theme['colors'])[] = ['accent', 'background', 'surface', 'text'];
 
-  const editableColors: { key: keyof Theme['colors']; label: string; desc: string }[] = [
-    { key: 'accent', label: t('settings.colors.accent.label'), desc: t('settings.colors.accent.description') },
-    { key: 'background', label: t('settings.colors.background.label'), desc: t('settings.colors.background.description') },
-    { key: 'surface', label: t('settings.colors.surface.label'), desc: t('settings.colors.surface.description') },
-    { key: 'text', label: t('settings.colors.text.label'), desc: t('settings.colors.text.description') },
-  ];
-
-  return (
-    <Container>
-      <div style={{ marginBottom: '1.5rem' }}>
-        <Text variant="h2">{t('settings.title')}</Text>
-        <Text variant="bodyS">
-          {t('settings.intro')}
-        </Text>
-        <Text variant="bodyS">
-          {t('settings.warning')}
-        </Text>
-      </div>
-
-      <SettingRow>
-        <Label>
-          {t('settings.darkMode.label')}
-          <SubLabel>{t('settings.darkMode.description')}</SubLabel>
-          <SubLabel>{t('settings.darkMode.warning')}</SubLabel>
-        </Label>
-        <ToggleSwitch checked={themeName === 'dark'} onChange={toggleTheme} />
-      </SettingRow>
-
-      <SettingRow>
-        <Label>
-          {t('settings.language.label')}
-          <SubLabel>{t('settings.language.description')}</SubLabel>
-        </Label>
-        <LanguageOptions>
-          {locales.map((language: Locale) => (
-            <LanguageButton
-              key={language}
-              type="button"
-              $isActive={locale === language}
-              onClick={() => setLocale(language)}
-            >
-              {t(`settings.language.${language}`)}
-            </LanguageButton>
-          ))}
-        </LanguageOptions>
-      </SettingRow>
-
-      <div style={{ marginTop: '1rem' }}>
-        <Text variant="h4">{t('settings.colors.title')}</Text>
-        {editableColors.map((item) => (
-          <SettingRow key={item.key}>
-            <Label>
-              {item.label}
-              <SubLabel>{item.desc}</SubLabel>
-            </Label>
-            <ColorPicker 
-              value={theme.colors[item.key]} 
-              onChange={(val) => updateColor(item.key, val)} 
-            />
-          </SettingRow>
-        ))}
-      </div>
-
-      <Button onClick={resetTheme}>{t('settings.reset')}</Button>
-    </Container>
-  );
-};
-
-export default WebSettings;
+    return (
+        <Container>
+            <Heading id={titleId}>{t('settings.title')}</Heading>
+            <div>
+                <SettingRow>
+                    <Label htmlFor={`${controlId}-theme`}>{t('settings.darkMode.label')}</Label>
+                    <ToggleSwitch id={`${controlId}-theme`} checked={themeName === 'dark'} onChange={toggleTheme} />
+                </SettingRow>
+                <SettingRow>
+                    <Label as="span" id={languageLabelId}>{t('settings.language.label')}</Label>
+                    <LanguageOptions role="group" aria-labelledby={languageLabelId}>
+                        {locales.map(language => (
+                            <LanguageButton key={language} type="button" lang={language}
+                                aria-pressed={locale === language} $isActive={locale === language}
+                                onClick={() => setLocale(language)}>
+                                {t(`settings.language.${language}`)}
+                            </LanguageButton>
+                        ))}
+                    </LanguageOptions>
+                </SettingRow>
+            </div>
+            <section aria-labelledby={colorsTitleId}>
+                <SectionTitle id={colorsTitleId}>{t('settings.colors.title')}</SectionTitle>
+                {editableColors.map(key => (
+                    <SettingRow key={key}>
+                        <Label htmlFor={`${controlId}-${key}`}>
+                            {t(`settings.colors.${key}.label`)}
+                            <SubLabel>{t(`settings.colors.${key}.description`)}</SubLabel>
+                        </Label>
+                        <ColorPicker id={`${controlId}-${key}`} value={theme.colors[key]}
+                            onChange={value => updateColor(key, value)} />
+                    </SettingRow>
+                ))}
+            </section>
+            <ResetButton type="button" onClick={resetTheme}>{t('settings.reset')}</ResetButton>
+        </Container>
+    );
+}

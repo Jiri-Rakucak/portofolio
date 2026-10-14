@@ -1,65 +1,28 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router';
-import Text from '../Components/Shared/Typography';
-import Page404Image from '../Components/Desktop/Page404Image';
+import { useId } from 'react';
+import { useTranslation } from 'react-i18next';
+import { ArrowLeft } from '../Components/Icons/Arrows';
+import { PrimaryLink, SecondaryLink } from '../Components/Desktop/HomeHero.styles';
+import { Page, Content, ErrorCode, Heading, Message, Actions } from './404Page.styles';
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  min-height: calc(100vh - 80px); /* Odečteme přibližnou výšku headeru, aby to bylo přesně na viewport */
-  background-color: ${({ theme }) => theme.colors.background};
-  color: ${({ theme }) => theme.colors.text};
-  text-align: center;
-  padding: 2rem;
-`;
+const Page404 = () => {
+  const { t } = useTranslation('common');
+  const headingId = useId();
 
-const Textarea = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  text-align: left;
-`;
-
-const Message = styled.p`
-  font-family: ${({ theme }) => theme.fonts.main};
-  font-size: ${({ theme }) => theme.typography.bodyL.fontSize};
-  font-weight: ${({ theme }) => theme.typography.bodyL.fontWeight};
-  line-height: 1.5;
-  color: ${({ theme }) => theme.colors.textSecondary};
-  max-width: 600px;
-  margin-bottom: 3rem;
-`;
-
-const BackButton = styled(Link)`
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-`;
-
-const Page404: React.FC = () => {
   return (
-    <Container>
-      <Page404Image />
-      <Textarea>
-        <Text variant="h2">
-          Page Not Found
-        </Text>
-        
-        <Message>
-          Oops! It seems like you've ventured into the void. 
-          The page you are looking for doesn't exist or has been moved.
-          Click anywhere to return home.
-        </Message>
-      </Textarea>
-
-      <BackButton to="/">
-        Return Home
-      </BackButton>
-    </Container>
+    <Page aria-labelledby={headingId}>
+      <Content>
+        <ErrorCode>404</ErrorCode>
+        <Heading id={headingId}>{t('notFound.title')}</Heading>
+        <Message>{t('notFound.description')}</Message>
+        <Actions>
+          <PrimaryLink to="/" viewTransition>
+            <span aria-hidden="true"><ArrowLeft size={16} /></span>
+            {t('notFound.home')}
+          </PrimaryLink>
+          <SecondaryLink to="/projects" viewTransition>{t('notFound.projects')}</SecondaryLink>
+        </Actions>
+      </Content>
+    </Page>
   );
 };
 

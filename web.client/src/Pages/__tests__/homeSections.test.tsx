@@ -30,7 +30,7 @@ const render = async (element: ReactElement, locale: Locale = 'en') => {
 afterEach(() => vi.restoreAllMocks());
 
 describe('homepage project presentation', () => {
-    it.each(locales)('shows the %s central project metadata and real Starbounder cover', async locale => {
+    it.each(locales)('shows the %s central project metadata and both project covers', async locale => {
         const html = await render(<HomeProjects />, locale);
         const selected = projects.getHomeProjects(locale);
 
@@ -39,9 +39,9 @@ describe('homepage project presentation', () => {
             expect(html).toContain(project.shortDescription);
             expect(html).toContain(`href="/projects/${project.id}"`);
             expect(html).toContain(projects.getProjectStatusLabels(locale)[project.status]);
+            expect(html).toContain(project.cover?.src);
+            expect(html).toContain(project.cover?.alt);
         }
-        expect(html).toContain(selected[0].cover?.src);
-        expect(html).toContain(selected[0].cover?.alt);
         expect(html).not.toContain('DevOS Portfolio');
         expect(html).not.toContain('{{name}}');
     });

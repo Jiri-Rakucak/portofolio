@@ -85,6 +85,7 @@ export const createAppRouter = (token: string | null, role: string | null) =>
           path: "/services/consulting",
           element: <ServiceDetailPage serviceId="consulting" />,
         },
+        { path: "*", element: <Page404 /> },
       ],
     },
 
@@ -108,10 +109,5 @@ export const createAppRouter = (token: string | null, role: string | null) =>
           <AdminPage />
         </ProtectedRoute>
       ),
-    },
-
-    {
-      path: "*",
-      element: <Page404 />,
     },
   ]);

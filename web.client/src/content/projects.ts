@@ -8,6 +8,7 @@ import type {
 
 export type {
     PortfolioProject,
+    ProjectCover,
     ProjectCaseStudy,
     ProjectFile,
     ProjectStatus,

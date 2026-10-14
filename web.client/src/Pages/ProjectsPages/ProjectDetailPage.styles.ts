@@ -14,21 +14,21 @@ export const Container = styled.div`
   flex-direction: column;
 `;
 
-export const HeroSection = styled.section<{ $hasCover: boolean }>`
+export const HeroSection = styled.section<{ $hasBackgroundCover: boolean }>`
   position: relative;
   isolation: isolate;
   padding: 6rem 2rem 4rem;
-  min-height: ${({ $hasCover }) => $hasCover ? 'min(560px, 70svh)' : 'auto'};
+  min-height: ${({ $hasBackgroundCover }) => $hasBackgroundCover ? 'min(560px, 70svh)' : 'auto'};
   display: flex;
   flex-direction: column;
   justify-content: center;
-  color: ${({ theme, $hasCover }) => $hasCover ? '#fff' : theme.colors.text};
+  color: ${({ theme, $hasBackgroundCover }) => $hasBackgroundCover ? '#fff' : theme.colors.text};
   &::after {
     content: '';
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: ${({ $hasCover }) => $hasCover ? 'linear-gradient(90deg, rgba(0,0,0,0.75), transparent 80%)' : 'transparent'};
+    background: ${({ $hasBackgroundCover }) => $hasBackgroundCover ? 'linear-gradient(90deg, rgba(0,0,0,0.75), transparent 80%)' : 'transparent'};
     pointer-events: none;
   }
   h1 {
@@ -49,6 +49,13 @@ export const HeroImage = styled(PortfolioImage)`
   z-index: -2;
   width: 100%;
   height: 100%;
+`;
+
+export const InlineCoverImage = styled(PortfolioImage)`
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: transparent;
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 export const HeroContent = styled.div`
@@ -115,15 +122,6 @@ export const Section = styled.section`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-`;
-
-export const Divider = styled.hr`
-  border: 0;
-  height: 1px;
-  background: ${({ theme }) => theme.colors.border};
-  margin: 0;
-  width: 100%;
-  max-width: 1200px;
 `;
 
 

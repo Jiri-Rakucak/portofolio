@@ -1,5 +1,8 @@
 {
   "navigation": {
+    "primary": "Hlavní navigace",
+    "openMenu": "Otevřít navigaci",
+    "closeMenu": "Zavřít navigaci",
     "home": "Domů",
     "services": "Dovednosti",
     "frontend": "Frontend",
@@ -26,12 +29,10 @@
   },
   "settings": {
     "title": "Nastavení",
-    "intro": "Uprav vzhled a chování webu.",
-    "warning": "Některé změny můžou rozbít UI. V takovém případě použij reset níže.",
+    "close": "Zavřít nastavení",
     "darkMode": {
       "label": "Tmavý režim",
-      "description": "Přepnutí mezi světlým a tmavým motivem",
-      "warning": "Může ovlivnit čitelnost některých prvků."
+      "description": "Přepnutí mezi světlým a tmavým motivem"
     },
     "language": {
       "label": "Jazyk",
@@ -58,7 +59,7 @@
         "description": "Primární barva textu"
       }
     },
-    "reset": "Resetovat výchozí"
+    "reset": "Obnovit barvy"
   },
   "servicesPage": {
     "eyebrow": "Rozcestník dovedností",
@@ -118,6 +119,7 @@
     "lessonsTitle": "Co mi projekt dal",
     "technicalTitle": "Uvnitř projektu",
     "galleryTitle": "Ukázky projektu",
+    "previewTitle": "Náhled projektu",
     "resourcesTitle": "Další odkazy",
     "gallery": {
       "openImage": "Zvětšit: {{label}}",
@@ -137,6 +139,12 @@
     "relatedTitle": "Další projekty",
     "relatedDescription": "Prozkoumej další práci z portfolia.",
     "backToProjects": "← Všechny projekty"
+  },
+  "notFound": {
+    "title": "Stránka nenalezena",
+    "description": "Požadovaná stránka neexistuje nebo byla přesunuta.",
+    "home": "Vrátit se domů",
+    "projects": "Prohlédnout projekty"
   },
   "footer": {
     "bio": "Vyvíjím webové aplikace, herní prototypy a nástroje pro práci s daty. Zajímá mě spojení technického řešení a srozumitelného rozhraní.",

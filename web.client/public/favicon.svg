@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>JR</title>
+  <metadata>
+    Inter Black glyph outlines. Copyright (c) 2016 The Inter Project Authors.
+    Source: https://github.com/rsms/inter/tree/master/src/Inter-Roman.glyphspackage/glyphs
+    License: SIL Open Font License 1.1, /licenses/inter-OFL.txt
+  </metadata>
+  <rect width="64" height="64" rx="8" fill="#201d22" />
+  <g fill="#f5f5f5" transform="translate(4.35 47.62) scale(.02125 -.02125)">
+    <path d="M586-20 C931-20 1124 155 1124 468 L1124 1490 H726 V460 C726 348 676 294 586 294 C495 294 444 348 444 458 V559 H40 V466 C40 154 236-20 586-20 Z" />
+    <g transform="translate(1220 0)">
+      <path d="M500 0 V1166 H642 C785 1166 870 1111 870 984 C870 856 785 806 642 806 H340 V492 H724 C1064 492 1292 663 1292 984 C1292 1300 1070 1490 738 1490 H96 V0 Z" />
+      <path d="M1342 0 L968 684 H538 L902 0 Z" />
+    </g>
+  </g>
+</svg>

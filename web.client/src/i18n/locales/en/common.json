@@ -1,5 +1,8 @@
 {
   "navigation": {
+    "primary": "Main navigation",
+    "openMenu": "Open navigation",
+    "closeMenu": "Close navigation",
     "home": "Home",
     "services": "Skills",
     "frontend": "Frontend",
@@ -26,12 +29,10 @@
   },
   "settings": {
     "title": "Preferences",
-    "intro": "Customize the look and feel of the website.",
-    "warning": "Some changes may break the UI. In that case, use the reset button below.",
+    "close": "Close preferences",
     "darkMode": {
       "label": "Dark Mode",
-      "description": "Switch between light and dark theme",
-      "warning": "This may affect the visibility of some UI elements."
+      "description": "Switch between light and dark theme"
     },
     "language": {
       "label": "Language",
@@ -58,7 +59,7 @@
         "description": "Primary text color"
       }
     },
-    "reset": "Reset to Defaults"
+    "reset": "Reset colors"
   },
   "servicesPage": {
     "eyebrow": "Skills overview",
@@ -118,6 +119,7 @@
     "lessonsTitle": "What I learned",
     "technicalTitle": "Inside the project",
     "galleryTitle": "Project screenshots",
+    "previewTitle": "Project preview",
     "resourcesTitle": "More resources",
     "gallery": {
       "openImage": "Enlarge: {{label}}",
@@ -137,6 +139,12 @@
     "relatedTitle": "More projects",
     "relatedDescription": "Explore more work from the portfolio.",
     "backToProjects": "← All projects"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you're looking for doesn't exist or may have moved.",
+    "home": "Return home",
+    "projects": "View projects"
   },
   "footer": {
     "bio": "I build web applications, game prototypes, and data tools. I am interested in connecting technical solutions with clear interfaces.",

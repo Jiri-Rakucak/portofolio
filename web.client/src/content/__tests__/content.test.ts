@@ -23,6 +23,23 @@ describe('portfolio content', () => {
         expect(getProjectById('missing-project', 'cs')).toBeUndefined();
     });
 
+    it('shares the owner-provided RAG cover path while localizing its description', () => {
+        const english = getProjectById('ragsystem', 'en')?.cover;
+        const czech = getProjectById('ragsystem', 'cs')?.cover;
+
+        expect(english?.src).toBe('/projects/ragsystem/ragsystem-preview.png');
+        expect(czech?.src).toBe(english?.src);
+        expect(english?.alt).toContain('RAG interface preview');
+        expect(czech?.alt).toContain('Náhled rozhraní RAG');
+        expect(czech?.alt).not.toBe(english?.alt);
+        expect(english?.presentation).toBe('inline');
+        expect(czech?.presentation).toBe(english?.presentation);
+    });
+
+    it.each(locales)('keeps the %s Starbounder cover cinematic', locale => {
+        expect(getProjectById('unity-graduation-game', locale)?.cover?.presentation).toBe('background');
+    });
+
     it.each(locales)('exposes every %s project in the DevOS project file system', (locale: Locale) => {
         const projects = getPortfolioProjects(locale);
         const fileProjectIds = getProjectFileSystem(locale).Projects.map(file => file.id);

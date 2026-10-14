@@ -19,8 +19,9 @@ Personal portfolio with bilingual project case studies, a mouse-responsive Three
 - Unframed project previews and a compact text-based skills section, with shared bounded angled transitions across public pages.
 - Project carousel at `/projects` and data-driven case studies at `/projects/:projectId`.
 - Starbounder: a 2D Unity graduation prototype with a real cover, personal motivation, five-image gallery, image viewer, technical notes, and prototype download link. It is not presented as a finished game.
-- Personal Conversation RAG: a local-first Python retrieval project with a case study. Its preview still uses a placeholder gradient; answer generation is planned, not implemented.
+- Personal Conversation RAG: a local-first Python retrieval project with a case study and owner-provided interface preview. Answer generation is planned, not implemented.
 - Localized skills directory and detail pages, plus shared email, phone, location, and social contacts.
+- Localized 404 page within the public layout, with explicit home/project links and typography matching the portfolio.
 - Experimental DevOS with draggable/resizable windows, project Explorer and Browser, an interactive portfolio Terminal, About Me, and Component Lab. Other apps remain partly demo-quality.
 
 ## Tech Stack
@@ -109,7 +110,7 @@ Owner contacts and social URLs are centralized in `web.client/src/content/contac
 
 Homepage project selection is controlled by `getHomeProjects` in `projects.ts`, independently of the general `featured` flag used elsewhere. It currently selects Starbounder first, then RAG. Descriptions, status labels, technologies, and covers come from the central content rather than component-local copies.
 
-To replace RAG's placeholder, add its image under `web.client/public/projects/ragsystem/` and supply a `cover` with the same `src` and localized `alt` in both locale entries. The homepage and project carousel will use it automatically. See the [frontend guide](web.client/README.md) for content and gallery details.
+RAG uses `web.client/public/projects/ragsystem/ragsystem-preview.png` as its central cover, with localized alt text in both locale entries. The homepage and project carousel keep their existing previews. The public detail uses `cover.presentation: "inline"` to show the full screenshot below its text introduction; Starbounder uses `"background"` to retain its cinematic hero. Omitted presentation fields default to `"background"`. See the [frontend guide](web.client/README.md) for content and gallery details.
 
 The JSON shape is intentionally close to what a future admin UI, backend API, CMS, or local content editor could provide. When admin functionality becomes useful, the project can replace the static JSON imports with fetched content while keeping the consuming UI mostly unchanged.
 
@@ -139,9 +140,9 @@ Legacy mixed-case routes redirect to the lowercase equivalents.
 ## Known Gaps
 
 - Mobile home remains placeholder-quality; it will be redesigned after the desktop direction is settled.
-- RAG still needs real preview media, an anonymized CLI example, an architecture visual, and measured indexing/search results.
+- RAG still needs an anonymized CLI example, an architecture visual, and measured indexing/search results.
 - Automated browser verification of the hero, mouse interaction, gallery, and viewport layout remains pending. The current agent sandbox cannot bind the Vite port, and its Chromium installation lacks required shared libraries.
-- The browser tab still uses the `DevOs` title and Vite favicon; portfolio/social metadata is not finished.
+- The browser tab uses the portfolio title and an outlined Inter JR favicon. The HTML description is an English fallback; localized per-route metadata and sharing previews remain pending.
 - Several DevOS apps and the login/admin flow remain prototypes.
 - Contact forms, an admin editor, and API-backed content are future possibilities, not implemented features.
 
@@ -157,7 +158,7 @@ Legacy mixed-case routes redirect to the lowercase equivalents.
 
 1. Check the desktop experience in a browser and refine spacing and interaction based on the rendered UI.
 2. Add real RAG media and concrete examples/results to its case study; consider a Starbounder gameplay clip later.
-3. Finish the portfolio title, favicon, and sharing metadata.
+3. Add localized per-route metadata and sharing previews once the production URL and preview image are settled.
 4. Return to DevOS and replace the remaining demo behavior in a separate phase.
 5. Redesign mobile after the desktop layout is settled.
 6. Introduce a backend, forms, or an admin editor only when needed; upgrade the parked backend to the latest stable LTS before real backend work.

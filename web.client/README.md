@@ -103,7 +103,7 @@ The header has no logo; its right-aligned dropdown retains the Home link.
 
 `HomeProjects` and `HomeSkills` follow the hero, using open layouts in `HomeSections.styles.ts` rather than service cards. The homepage selection is controlled by `getHomeProjects` in `content/projects.ts` (Starbounder, then RAG), independently of the general `featured` field. Missing selected entries are omitted, never replaced by DevOS.
 
-To add RAG preview media, put the image under `public/projects/ragsystem/` and add `cover: { src, alt }` to its entry in both locale `content.json` files. Use the same path with localized alt text. The homepage and project carousel then replace their placeholder automatically; gallery images remain separate `caseStudy.assets` entries. Shared fallback gradients live in `styles/projectMedia.ts`.
+RAG's owner-provided preview is `public/projects/ragsystem/ragsystem-preview.png`, referenced by `cover: { src, alt }` in both locale `content.json` files with localized alt text. The homepage, project carousel, and detail consume this central cover; gallery images remain separate `caseStudy.assets` entries. Shared fallback gradients live in `styles/projectMedia.ts` and still apply when a cover is missing or cannot load.
 
 Angled content bands share `styles/angledSection.ts`, with a 48px desktop cut and a 32px narrow-screen cut. Consumers reserve top padding beyond `var(--section-cut)` so content is not clipped. Keep public skills/contact copy free of internal implementation notes; backend plans belong in documentation.
 
@@ -122,6 +122,27 @@ Optional project case-study fields are supported through the `caseStudy` object:
 Use these for deeper project stories in DevOS ProjectWindow and public project pages. The `unity-graduation-game` entry presents Starbounder as a graduation prototype, with verified system descriptions and screenshots under `public/projects/unity-graduation-game/`. See [source notes](../docs/STARBOUNDER.md) before expanding its claims or adding a playable embed.
 
 Public project pages support optional localized `cover`, `liveLabel`, and `caseStudy.motivation` metadata. Their gallery, native-dialog viewer, image fallback, and story rendering live in `src/Pages/ProjectsPages/`, separately from DevOS components. Screenshot thumbnails preserve the full frame; technical detail is expandable rather than duplicated in the hero and body.
+
+The optional `cover.presentation` controls only the public project detail:
+
+- `background`: the cover fills the hero behind its title/actions, with the existing readability overlay. This is the backward-compatible default and Starbounder's explicit setting.
+- `inline`: the hero uses the normal theme background; the full cover is shown below it, as the first section inside the angled content band. The preview uses a stable 16:9 area with `contain`, no text overlay, darkening, or decorative frame. This is RAG's setting.
+
+```json
+"cover": {
+  "src": "/projects/ragsystem/ragsystem-preview.png",
+  "alt": "RAG interface preview with a search field and filters for ChatGPT conversations and notes.",
+  "presentation": "inline"
+}
+```
+
+Keep the path and presentation aligned across locale files and localize `alt`. Homepage/carousel cover rendering and DevOS ignore the presentation field and retain their existing layouts. Missing or whitespace-only cover sources render a text-only hero; failed inline images use the existing accessible image fallback.
+
+### Navigation and Preferences
+
+The public header uses native disclosure buttons and normal links. `headerNavigationState.ts` distinguishes a temporary mouse-hover preview from click/keyboard activation; `useHeaderNavigation.ts` handles dismissal and focus. Styles are isolated in `Header.styles.ts`.
+
+Preferences use the shared native `dialog` in `Components/Shared/Modal.tsx`. `dialogLifecycle.ts` preserves the body scroll style and returns focus to the visible navigation toggle after closing. Settings controls have associated labels and language choices expose their pressed state. The reset only restores custom colors; it does not change theme or language. Unit/SSR tests for these behaviors live in `Components/Shared/__tests__/` and `Components/Settings/__tests__/`; native browser interactions still need browser verification.
 
 DevOS project discovery currently uses this content model in two places:
 

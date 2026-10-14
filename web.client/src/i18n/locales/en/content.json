@@ -42,6 +42,11 @@
         "Clean ports-and-adapters architecture with strict type safety (Mypy strict, Pydantic v2)"
       ],
       "route": "/projects/ragsystem",
+      "cover": {
+        "src": "/projects/ragsystem/ragsystem-preview.png",
+        "presentation": "inline",
+        "alt": "RAG interface preview with a search field and filters for ChatGPT conversations and notes."
+      },
       "repoUrl": "https://github.com/Jiri-Rakucak/ragsystem",
       "featured": true,
       "caseStudy": {
@@ -90,6 +95,7 @@
       "liveLabel": "Download prototype",
       "cover": {
         "src": "/projects/unity-graduation-game/planet-in-space-no-ship.png",
+        "presentation": "background",
         "alt": "A procedurally generated green planet in Starbounder against stars and nebulae"
       },
       "featured": true,

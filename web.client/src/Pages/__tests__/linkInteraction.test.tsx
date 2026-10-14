@@ -55,7 +55,7 @@ describe.each([
         const { html, css } = renderStyles(<Header />, theme);
 
         expect(html.match(/href="\/"/g)).toHaveLength(1);
-        expect(html).toContain('>Home</p>');
+        expect(html).toContain('>Home</span>');
         expect(html).not.toContain('aria-label="Home"');
         expect(html).not.toContain('viewBox="0 0 100 100"');
         expect(css).toContain('justify-content:flex-end;');

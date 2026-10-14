@@ -2,6 +2,12 @@ export type ProjectStatus = 'live' | 'in-progress' | 'concept';
 
 export type ProjectAssetType = 'image' | 'video' | 'webgl' | 'link';
 
+export type ProjectCover = {
+    src: string;
+    alt: string;
+    presentation?: 'background' | 'inline';
+};
+
 export type ProjectCaseStudySection = {
     title: string;
     body: string;
@@ -40,7 +46,7 @@ export type PortfolioProject = {
     route?: string;
     liveUrl?: string;
     liveLabel?: string;
-    cover?: { src: string; alt: string };
+    cover?: ProjectCover;
     repoUrl?: string;
     featured?: boolean;
     caseStudy?: ProjectCaseStudy;

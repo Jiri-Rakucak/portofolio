@@ -64,6 +64,8 @@ describe('project detail page', () => {
         expect(html).toContain(project?.caseStudy?.solution);
         expect(html).toContain(project?.repoUrl);
         expect(html).not.toContain('href="/projects/ragsystem"');
+        expect(html).toContain(project?.cover?.src);
+        expect(html).toContain(project?.cover?.alt);
         expect(html).toContain('Zdrojový kód');
     });
 
@@ -91,6 +93,9 @@ describe('project carousel', () => {
 
         expect(html).toContain(project?.cover?.src);
         expect(html).toContain(project?.cover?.alt);
+        const rag = projectContent.getProjectById('ragsystem', 'en');
+        expect(html).toContain(rag?.cover?.src);
+        expect(html).toContain(rag?.cover?.alt);
     });
 
     it('renders localized navigation and keeps slides inaccessible behind the intro', async () => {

@@ -1,16 +1,21 @@
 import styled from 'styled-components';
+import type { ButtonHTMLAttributes, Ref } from 'react';
+import { focusRing } from './controlStyles';
 
-interface MenuToggleProps {
+interface MenuToggleProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isOpen: boolean;
+  controls: string;
+  ref?: Ref<HTMLButtonElement>;
 }
 
-const Dot = styled.span<{ isOpen: boolean }>`
+const Dot = styled.span<{ $isOpen: boolean }>`
   width: 8px;
   height: 8px;
-  background-color: ${({ theme, isOpen }) => (isOpen ? theme.colors.accent : theme.colors.text)};
+  background-color: ${({ theme, $isOpen }) => ($isOpen ? theme.colors.accent : theme.colors.text)};
   border-radius: 50%;
   display: block;
   transition: background-color 0.3s ease;
+  @media (prefers-reduced-motion: reduce) { transition: none; }
 `;
 
 const DotRow = styled.div`
@@ -25,31 +30,36 @@ const DotRow = styled.div`
 `;
 
 const StyledMenuToggle = styled.button`
+  ${focusRing}
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: 4px;
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: center;
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
 `;
 
-const MenuToggle: React.FC<MenuToggleProps> = ({ isOpen }) => {
+const MenuToggle = ({ isOpen, controls, ref, ...props }: MenuToggleProps) => {
   return (
-    <StyledMenuToggle aria-label="Toggle menu">
-      <DotRow>
-        <Dot isOpen={isOpen} />
-        <Dot isOpen={isOpen} />
-        <Dot isOpen={isOpen} />
+    <StyledMenuToggle {...props} ref={ref} type="button" aria-expanded={isOpen} aria-controls={controls}>
+      <DotRow aria-hidden="true">
+        <Dot $isOpen={isOpen} />
+        <Dot $isOpen={isOpen} />
+        <Dot $isOpen={isOpen} />
       </DotRow>
-      <DotRow>
-        <Dot isOpen={isOpen} />
-        <Dot isOpen={isOpen} />
-        <Dot isOpen={isOpen} />
+      <DotRow aria-hidden="true">
+        <Dot $isOpen={isOpen} />
+        <Dot $isOpen={isOpen} />
+        <Dot $isOpen={isOpen} />
       </DotRow>
-      <DotRow>
-        <Dot isOpen={isOpen} />
-        <Dot isOpen={isOpen} />
-        <Dot isOpen={isOpen} />
+      <DotRow aria-hidden="true">
+        <Dot $isOpen={isOpen} />
+        <Dot $isOpen={isOpen} />
+        <Dot $isOpen={isOpen} />
       </DotRow>
     </StyledMenuToggle>
   );
