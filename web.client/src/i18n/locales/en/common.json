@@ -140,6 +140,21 @@
     "relatedDescription": "Explore more work from the portfolio.",
     "backToProjects": "← All projects"
   },
+  "metadata": {
+    "pageTitle": "{{page}} | {{owner}}",
+    "home": {
+      "pageTitle": "{{owner}} | Portfolio",
+      "description": "Jiří Rakučák's portfolio: web applications, game prototypes, and tools for working with data. Based in Liberec, Czech Republic."
+    },
+    "projects": { "description": "Explore my projects, including the Starbounder 2D game prototype and a local-first RAG search system, with case studies and technical details." },
+    "services": { "description": "My skills in React and TypeScript, Unity, interactive 3D, backend systems, and interface design, with concrete approaches and related projects." },
+    "notFound": { "title": "Page not found", "description": "This page is not available. Return to Jiří Rakučák's portfolio or explore his projects." },
+    "projectNotFound": { "title": "Project not found", "description": "The requested project is not available in Jiří Rakučák's portfolio. Explore the project overview instead." },
+    "serviceNotFound": { "title": "Skill area not found", "description": "The requested skill area is not available. Explore Jiří Rakučák's skills overview instead." },
+    "devos": { "description": "Explore Jiří Rakučák's experimental desktop-style portfolio, with project browsing, an interactive terminal, and draggable windows." },
+    "login": { "title": "Sign in", "description": "Sign-in page for portfolio administration." },
+    "admin": { "title": "Administration", "description": "Portfolio administration." }
+  },
   "notFound": {
     "title": "Page not found",
     "description": "The page you're looking for doesn't exist or may have moved.",

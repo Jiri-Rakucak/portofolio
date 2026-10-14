@@ -70,8 +70,8 @@ export const lightTheme: Theme = {
     border: '#111827', // Zvaž '#dcdfe6' nebo podobnou barvu
 
     text: '#111827',
-    textSecondary: '#6B7280',
-    textMuted: '#AAAAAA',
+    textSecondary: '#596170',
+    textMuted: '#5C6370',
 
     accent: '#007BFF',
     error: '#FF0000',

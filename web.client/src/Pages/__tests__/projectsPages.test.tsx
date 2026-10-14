@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { MemoryRouter, Route, Routes } from 'react-router';
 import { I18nextProvider } from 'react-i18next';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider, ServerStyleSheet } from 'styled-components';
 import { LanguageContext } from '../../i18n/LanguageContext';
 import i18n from '../../i18n';
 import { darkTheme } from '../../styles/theme';
@@ -10,10 +10,10 @@ import * as projectContent from '../../content/projects';
 import ProjectDetailPage from '../ProjectsPages/ProjectDetailPage';
 import ProjectsPage from '../ProjectsPage';
 
-const renderPage = async (path: string, locale: 'en' | 'cs' = 'en') => {
+const renderPage = async (path: string, locale: 'en' | 'cs' = 'en', sheet?: ServerStyleSheet) => {
     await i18n.changeLanguage(locale);
 
-    return renderToStaticMarkup(
+    const page = (
         <I18nextProvider i18n={i18n}>
             <LanguageContext.Provider value={{ locale, setLocale: vi.fn(), toggleLocale: vi.fn() }}>
                 <ThemeProvider theme={darkTheme}>
@@ -25,8 +25,9 @@ const renderPage = async (path: string, locale: 'en' | 'cs' = 'en') => {
                     </MemoryRouter>
                 </ThemeProvider>
             </LanguageContext.Provider>
-        </I18nextProvider>,
+        </I18nextProvider>
     );
+    return renderToStaticMarkup(sheet ? sheet.collectStyles(page) : page);
 };
 
 afterEach(() => vi.restoreAllMocks());
@@ -87,15 +88,52 @@ describe('project detail page', () => {
 });
 
 describe('project carousel', () => {
-    it('renders the central project cover rather than a hardcoded image', async () => {
-        const html = await renderPage('/projects');
-        const project = projectContent.getProjectById('unity-graduation-game', 'en');
+    it.each(['en', 'cs'] as const)('uses background covers but excludes inline screenshots in %s', async locale => {
+        const html = await renderPage('/projects', locale);
+        const project = projectContent.getProjectById('unity-graduation-game', locale);
 
         expect(html).toContain(project?.cover?.src);
         expect(html).toContain(project?.cover?.alt);
-        const rag = projectContent.getProjectById('ragsystem', 'en');
-        expect(html).toContain(rag?.cover?.src);
-        expect(html).toContain(rag?.cover?.alt);
+        const rag = projectContent.getProjectById('ragsystem', locale);
+        expect(html).not.toContain(rag?.cover?.src);
+        expect(html).not.toContain(rag?.cover?.alt);
+        expect(html).toContain(rag?.name);
+    });
+
+    it('gives RAG a neutral gray gradient instead of its screenshot', async () => {
+        const rag = projectContent.getProjectById('ragsystem', 'en')!;
+        vi.spyOn(projectContent, 'getPortfolioProjects').mockReturnValue([rag]);
+        const sheet = new ServerStyleSheet();
+        try {
+            const html = await renderPage('/projects', 'en', sheet);
+            expect(html).not.toContain('<img');
+            expect(sheet.getStyleTags()).toContain('background:linear-gradient(135deg, #1e1e1e 0%, #343434 55%, #191919 100%)');
+        } finally { sheet.seal(); }
+    });
+
+    it.each(['inline', 'background', undefined] as const)('selects covers by presentation (%s), not project ID', async presentation => {
+        const project = projectContent.getProjectById('ragsystem', 'en')!;
+        vi.spyOn(projectContent, 'getPortfolioProjects').mockReturnValue([{
+            ...project, id: 'future-project',
+            cover: { src: '/future-preview.png', alt: 'Future preview', presentation },
+        }]);
+        const html = await renderPage('/projects');
+        if (presentation === 'inline') {
+            expect(html).not.toContain('/future-preview.png');
+        } else {
+            expect(html).toContain('/future-preview.png');
+            expect(html).toContain('alt="Future preview"');
+        }
+    });
+
+    it.each([undefined, '', '   '])('omits images with missing or unusable sources (%s)', async src => {
+        const project = projectContent.getProjectById('unity-graduation-game', 'en')!;
+        vi.spyOn(projectContent, 'getPortfolioProjects').mockReturnValue([{
+            ...project, cover: src === undefined ? undefined : { src, alt: 'Pending cover' },
+        }]);
+        const html = await renderPage('/projects');
+        expect(html).not.toContain('<img');
+        expect(html).toContain(project.name);
     });
 
     it('renders localized navigation and keeps slides inaccessible behind the intro', async () => {

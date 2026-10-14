@@ -140,6 +140,21 @@
     "relatedDescription": "Prozkoumej další práci z portfolia.",
     "backToProjects": "← Všechny projekty"
   },
+  "metadata": {
+    "pageTitle": "{{page}} | {{owner}}",
+    "home": {
+      "pageTitle": "{{owner}} | Portfolio",
+      "description": "Portfolio Jiřího Rakučáka: webové aplikace, herní prototypy a nástroje pro práci s daty. Liberec, Česká republika."
+    },
+    "projects": { "description": "Prohlédni si mé projekty, včetně prototypu 2D hry Starbounder a lokálního RAG vyhledávání, s popisem vývoje a technickými detaily." },
+    "services": { "description": "Mé dovednosti v Reactu a TypeScriptu, Unity, interaktivním 3D, backendových systémech a návrhu rozhraní, s konkrétními postupy a souvisejícími projekty." },
+    "notFound": { "title": "Stránka nenalezena", "description": "Tato stránka není dostupná. Vrať se do portfolia Jiřího Rakučáka nebo si prohlédni jeho projekty." },
+    "projectNotFound": { "title": "Projekt nenalezen", "description": "Požadovaný projekt není v portfoliu Jiřího Rakučáka dostupný. Prohlédni si místo něj přehled projektů." },
+    "serviceNotFound": { "title": "Oblast nenalezena", "description": "Požadovaná oblast není dostupná. Prohlédni si místo ní přehled dovedností Jiřího Rakučáka." },
+    "devos": { "description": "Experimentální portfolio Jiřího Rakučáka ve stylu desktopu s procházením projektů, interaktivním terminálem a přesouváním oken." },
+    "login": { "title": "Přihlášení", "description": "Přihlašovací stránka správy portfolia." },
+    "admin": { "title": "Administrace", "description": "Správa portfolia." }
+  },
   "notFound": {
     "title": "Stránka nenalezena",
     "description": "Požadovaná stránka neexistuje nebo byla přesunuta.",

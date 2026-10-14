@@ -6,7 +6,7 @@ export const projectGradients: Record<string, string> = {
   'service-pages':
     'radial-gradient(ellipse at 40% 60%, #4facfe44, #00f2fe33), linear-gradient(135deg, #1a1a2e 0%, #0a1628 100%)',
   ragsystem:
-    'radial-gradient(ellipse at 60% 30%, #00f2fe44, #4facfe33), linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%)',
+    'linear-gradient(135deg, #1e1e1e 0%, #343434 55%, #191919 100%)',
 };
 
 export const fallbackGradient =

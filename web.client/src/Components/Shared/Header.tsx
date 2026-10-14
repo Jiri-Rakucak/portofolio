@@ -8,7 +8,7 @@ import DashboardIcon from '../Icons/Dashboard';
 import AdminIcon from '../Icons/Admin';
 import MenuToggle from './MenuToggle';
 import Text from './Typography';
-import Modal from './Modal';
+import PreferencesDrawer from '../Settings/PreferencesDrawer';
 import WebSettings from '../Settings/WebSettings';
 import { contact } from '../../content/contact';
 import useHeaderNavigation from './useHeaderNavigation';
@@ -86,10 +86,10 @@ const Header = () => {
                     </RightSection>
                 </Nav>
             </StyledHeader>
-            <Modal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)}
+            <PreferencesDrawer isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} title={t('settings.title')}
                 labelledBy={settingsTitleId} closeLabel={t('settings.close')} returnFocusRef={triggerRef}>
-                <WebSettings titleId={settingsTitleId} />
-            </Modal>
+                <WebSettings />
+            </PreferencesDrawer>
             <NavBg />
         </>
     );

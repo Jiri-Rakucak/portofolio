@@ -8,7 +8,7 @@ import i18n from '../../../i18n';
 import { darkTheme, lightTheme } from '../../../styles/theme';
 import Header from '../Header';
 import MenuToggle from '../MenuToggle';
-import Modal from '../Modal';
+import PreferencesDrawer from '../../Settings/PreferencesDrawer';
 import { NavLinks, RightSection } from '../Header.styles';
 
 vi.mock('react-dom', () => ({ createPortal: (children: ReactNode) => children }));
@@ -61,21 +61,23 @@ describe('navigation markup', () => {
     });
 });
 
-describe('preferences dialog markup', () => {
+describe('preferences drawer markup', () => {
     it('renders a labelled native dialog with an accessible close button, not a non-modal open attribute', async () => {
         vi.stubGlobal('document', { body: {}, head: { querySelector: () => null } });
-        const html = await render(<Modal isOpen onClose={() => {}} labelledBy="preferences-title"
+        const html = await render(<PreferencesDrawer isOpen onClose={() => {}} labelledBy="preferences-title" title="Preferences"
             closeLabel="Close preferences" returnFocusRef={{ current: null }}>
-            <h2 id="preferences-title">Preferences</h2>
-        </Modal>, 'en');
+            <p>Settings controls</p>
+        </PreferencesDrawer>, 'en');
         expect(html).toMatch(/<dialog[^>]*aria-labelledby="preferences-title"/);
         expect(html).toContain('aria-label="Close preferences"');
+        expect(html).toMatch(/<h2[^>]*id="preferences-title"[^>]*>Preferences<\/h2>/);
+        expect(html.match(/id="preferences-title"/g)).toHaveLength(1);
         expect(html).not.toMatch(/<dialog[^>]*\bopen=/);
     });
 
     it('does not render a closed dialog', async () => {
-        const html = await render(<Modal isOpen={false} onClose={() => {}} labelledBy="title"
-            closeLabel="Close" returnFocusRef={{ current: null }}>Hidden</Modal>, 'en');
+        const html = await render(<PreferencesDrawer isOpen={false} onClose={() => {}} labelledBy="title" title="Preferences"
+            closeLabel="Close" returnFocusRef={{ current: null }}>Hidden</PreferencesDrawer>, 'en');
         expect(html).toBe('');
     });
 
@@ -84,15 +86,23 @@ describe('preferences dialog markup', () => {
         const sheet = new ServerStyleSheet();
         try {
             renderToStaticMarkup(sheet.collectStyles(<ThemeProvider theme={theme}>
-                <Modal isOpen onClose={() => {}} labelledBy="title" closeLabel="Close" returnFocusRef={{ current: null }}>
-                    <h2 id="title">Preferences</h2>
-                </Modal>
+                <PreferencesDrawer isOpen onClose={() => {}} labelledBy="title" title="Preferences"
+                    closeLabel="Close" returnFocusRef={{ current: null }}>Settings controls</PreferencesDrawer>
             </ThemeProvider>));
             const css = sheet.getStyleTags();
-            expect(css).toContain('600px');
+            expect(css).toContain('440px');
+            expect(css).toContain('1264px');
             expect(css).toContain(':focus-visible');
             expect(css).toContain('100dvh');
-            expect(css).toContain('border-radius:8px');
+            expect(css).toContain('justify-content:flex-end');
+            expect(css).toContain('overflow-y:auto');
+            expect(css).toContain('min-height:0');
+            expect(css).toContain('prefers-reduced-motion');
+            expect(css).toContain('from{transform:translateY(-100%);}');
+            expect(css).toContain('to{transform:translateY(0);}');
+            expect(css).not.toContain('translateX');
+            expect(css).not.toContain('backdrop-filter');
+            expect(css).not.toContain('border-radius:8px');
         } finally { sheet.seal(); }
     });
 });

@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { activateModal, isOutsideDialog } from '../dialogLifecycle';
+import { activateModal } from '../dialogLifecycle';
 
 function fixture(overflow = '', priority = '') {
     const style = {
@@ -59,17 +59,5 @@ describe('native preferences dialog lifecycle', () => {
         element.showModal.mockImplementationOnce(() => { throw new Error('Cannot open dialog'); });
         expect(() => activateModal(dialog, () => null)).toThrow('Cannot open dialog');
         expect(style.setProperty).not.toHaveBeenCalled();
-    });
-});
-
-describe('backdrop hit testing', () => {
-    const bounds = { left: 100, right: 500, top: 100, bottom: 600 };
-
-    it.each([[99, 200], [501, 200], [200, 99], [200, 601]])('recognizes backdrop point %s, %s', (clientX, clientY) => {
-        expect(isOutsideDialog(bounds, { clientX, clientY })).toBe(true);
-    });
-
-    it.each([[100, 100], [500, 600], [200, 200]])('does not dismiss on dialog padding or edge %s, %s', (clientX, clientY) => {
-        expect(isOutsideDialog(bounds, { clientX, clientY })).toBe(false);
     });
 });

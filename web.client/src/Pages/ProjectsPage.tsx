@@ -88,32 +88,38 @@ export default function ProjectsPage() {
 
             {/* Slides */}
             <CarouselTrack $offset={-activeIndex * 100}>
-              {projects.map((project, index) => (
-                <Slide
-                  key={project.id}
-                  $bg={projectGradients[project.id] ?? fallbackGradient}
-                  $hasCover={Boolean(project.cover?.src)}
-                  inert={introVisible || index !== activeIndex}
-                  aria-hidden={introVisible || index !== activeIndex}
-                >
-                  {project.cover?.src && (
-                    <SlideCover src={project.cover.src} alt={project.cover.alt}
-                      fit="cover" position="75% center" />
-                  )}
-                  <SlideContent>
-                    <SlideCategory>{project.category}</SlideCategory>
-                    <SlideTitle>{project.name}</SlideTitle>
-                    <SlideDescription>
-                      {project.shortDescription}
-                    </SlideDescription>
-                    <SlideTechRow>
-                      {project.technologies.slice(0, 5).map((tech) => (
-                        <SlideTechPill key={tech}>{tech}</SlideTechPill>
-                      ))}
-                    </SlideTechRow>
-                  </SlideContent>
-                </Slide>
-              ))}
+              {projects.map((project, index) => {
+                const cover = project.cover?.src?.trim() && project.cover.presentation !== 'inline'
+                  ? project.cover
+                  : undefined;
+
+                return (
+                  <Slide
+                    key={project.id}
+                    $bg={projectGradients[project.id] ?? fallbackGradient}
+                    $hasCover={Boolean(cover)}
+                    inert={introVisible || index !== activeIndex}
+                    aria-hidden={introVisible || index !== activeIndex}
+                  >
+                    {cover && (
+                      <SlideCover src={cover.src} alt={cover.alt}
+                        fit="cover" position="75% center" />
+                    )}
+                    <SlideContent>
+                      <SlideCategory>{project.category}</SlideCategory>
+                      <SlideTitle>{project.name}</SlideTitle>
+                      <SlideDescription>
+                        {project.shortDescription}
+                      </SlideDescription>
+                      <SlideTechRow>
+                        {project.technologies.slice(0, 5).map((tech) => (
+                          <SlideTechPill key={tech}>{tech}</SlideTechPill>
+                        ))}
+                      </SlideTechRow>
+                    </SlideContent>
+                  </Slide>
+                );
+              })}
             </CarouselTrack>
 
             {/* Dots */}

@@ -14,6 +14,7 @@ export const SettingRow = styled.div`
 `;
 
 export const Label = styled.label`
+    min-width: 0;
     display: flex;
     flex-direction: column;
     gap: 0.3rem;

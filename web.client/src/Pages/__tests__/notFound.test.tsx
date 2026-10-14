@@ -11,6 +11,8 @@ import { darkTheme, lightTheme } from '../../styles/theme';
 import { createAppRouter } from '../../Routes/AppRoutes';
 import MainLayout from '../../Layout/MainLayout';
 import Page404 from '../404Page';
+import { resolveMatchedMetadata } from '../../metadata/pageMetadata';
+import { contact } from '../../content/contact';
 
 vi.mock('react-router', async importOriginal => {
     const actual = await importOriginal<typeof import('react-router')>();
@@ -25,6 +27,10 @@ function configuredRoutes() {
     const call = calls[calls.length - 1];
     if (!call) throw new Error('The application router was not configured');
     return call[0];
+}
+
+function routerMetadata(router: ReturnType<typeof createMemoryRouter>, locale: 'en' | 'cs') {
+    return resolveMatchedMetadata(router.state.matches.map(({ route, params }) => ({ handle: route.handle, params })), locale);
 }
 
 function localized(children: ReactNode, locale: 'en' | 'cs') {
@@ -91,15 +97,39 @@ describe('not-found routing', () => {
             expect(html).not.toContain('#secret');
             expect(router.state.location.pathname).toBe('/missing/nested/page');
             expect(router.state.errors).toBeNull();
+            expect(routerMetadata(router, locale).robots).toBe('noindex, follow');
         } finally { router.dispose(); }
     });
 
     it('keeps the fallback under MainLayout instead of duplicating the public shell', () => {
         const matches = matchRoutes(configuredRoutes(), '/unknown')!;
-        const parent = matches[0].route.element;
+        const parent = matches[matches.length - 2].route.element;
         const fallback = matches[matches.length - 1].route.element;
         expect(isValidElement(parent) && parent.type).toBe(MainLayout);
         expect(isValidElement(fallback) && fallback.type).toBe(Page404);
+    });
+
+    it('updates metadata across real router navigation and a language switch on the same URL', async () => {
+        const router = createMemoryRouter(configuredRoutes(), { initialEntries: ['/'] });
+        try {
+            expect(routerMetadata(router, 'en').title).toBe(`${contact.name} | Portfolio`);
+            await router.navigate('/projects/ragsystem');
+            expect(routerMetadata(router, 'en').title).toContain('Personal Conversation RAG');
+            const english = routerMetadata(router, 'en');
+            const czech = routerMetadata(router, 'cs');
+            expect(czech.description).not.toBe(english.description);
+            expect(router.state.location.pathname).toBe('/projects/ragsystem');
+            await router.navigate('/services/ux-ui-design');
+            expect(routerMetadata(router, 'en').title).toContain('UI/UX');
+            await router.navigate('/projects/missing');
+            expect(routerMetadata(router, 'en').robots).toBe('noindex, follow');
+            await router.navigate('/devos');
+            expect(routerMetadata(router, 'en').title).toBe(`DevOS | ${contact.name}`);
+            await router.navigate('/login');
+            expect(routerMetadata(router, 'en').robots).toBe('noindex, follow');
+            await router.navigate('/projects');
+            expect(routerMetadata(router, 'en').robots).toBe('index, follow');
+        } finally { router.dispose(); }
     });
 
     it.each([

@@ -11,16 +11,16 @@ async function render(locale: 'en' | 'cs') {
     return renderToStaticMarkup(
         <I18nextProvider i18n={i18n}>
             <LanguageContext.Provider value={{ locale, setLocale: () => {}, toggleLocale: () => {} }}>
-                <AppThemeProvider><WebSettings titleId="preferences-title" /></AppThemeProvider>
+                <AppThemeProvider><WebSettings /></AppThemeProvider>
             </LanguageContext.Provider>
         </I18nextProvider>,
     );
 }
 
 describe('preferences controls', () => {
-    it.each(['en', 'cs'] as const)('renders a compact %s heading and correctly selected language', async locale => {
+    it.each(['en', 'cs'] as const)('renders correctly selected %s language without duplicating the drawer heading', async locale => {
         const html = await render(locale);
-        expect(html).toMatch(new RegExp(`<h2[^>]*id="preferences-title"[^>]*>${locale === 'cs' ? 'Nastavení' : 'Preferences'}</h2>`));
+        expect(html).not.toContain('<h2');
         expect(html).toMatch(new RegExp(`lang="${locale}"[^>]*aria-pressed="true"`));
         expect(html.match(/aria-pressed="true"/g)).toHaveLength(1);
         expect(html).toContain(locale === 'cs' ? 'Obnovit barvy' : 'Reset colors');

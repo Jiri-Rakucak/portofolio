@@ -14,14 +14,6 @@ const Container = styled.div`
     gap: 1.5rem;
 `;
 
-const Heading = styled.h2`
-    margin: 0;
-    padding-right: 48px;
-    font-size: 1.5rem;
-    font-weight: 600;
-    line-height: 1.4;
-`;
-
 const SectionTitle = styled.h3`
     margin: 0;
     font-size: 0.875rem;
@@ -71,7 +63,7 @@ const LanguageButton = styled.button<{ $isActive: boolean }>`
     &:hover { background: color-mix(in srgb, ${({ theme }) => theme.colors.text} 20%, transparent); }
 `;
 
-export default function WebSettings({ titleId }: { titleId: string }) {
+export default function WebSettings() {
     const { t } = useTranslation('common');
     const { themeName, toggleTheme, theme, updateColor, resetTheme } = useAppTheme();
     const { locale, setLocale } = useLocale();
@@ -82,7 +74,6 @@ export default function WebSettings({ titleId }: { titleId: string }) {
 
     return (
         <Container>
-            <Heading id={titleId}>{t('settings.title')}</Heading>
             <div>
                 <SettingRow>
                     <Label htmlFor={`${controlId}-theme`}>{t('settings.darkMode.label')}</Label>

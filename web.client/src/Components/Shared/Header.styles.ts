@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router';
 import { focusRing } from './controlStyles';
+import { navigationContentWidth } from '../../styles/layout';
 
 const navigationControl = css`
   ${focusRing}
@@ -39,7 +40,7 @@ export const Nav = styled.nav`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  max-width: 1264px;
+  max-width: ${navigationContentWidth}px;
   margin: 0 auto;
 `;
 

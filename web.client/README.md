@@ -103,7 +103,7 @@ The header has no logo; its right-aligned dropdown retains the Home link.
 
 `HomeProjects` and `HomeSkills` follow the hero, using open layouts in `HomeSections.styles.ts` rather than service cards. The homepage selection is controlled by `getHomeProjects` in `content/projects.ts` (Starbounder, then RAG), independently of the general `featured` field. Missing selected entries are omitted, never replaced by DevOS.
 
-RAG's owner-provided preview is `public/projects/ragsystem/ragsystem-preview.png`, referenced by `cover: { src, alt }` in both locale `content.json` files with localized alt text. The homepage, project carousel, and detail consume this central cover; gallery images remain separate `caseStudy.assets` entries. Shared fallback gradients live in `styles/projectMedia.ts` and still apply when a cover is missing or cannot load.
+RAG's owner-provided preview is `public/projects/ragsystem/ragsystem-preview.png`, referenced by `cover: { src, alt, presentation }` in both locale `content.json` files with localized alt text. The homepage and detail consume this central cover; the carousel uses RAG's neutral gray gradient rather than overlapping its own copy with the screenshot text. Gallery images remain separate `caseStudy.assets` entries. Shared fallback gradients live in `styles/projectMedia.ts` and still apply when a cover is missing or cannot load.
 
 Angled content bands share `styles/angledSection.ts`, with a 48px desktop cut and a 32px narrow-screen cut. Consumers reserve top padding beyond `var(--section-cut)` so content is not clipped. Keep public skills/contact copy free of internal implementation notes; backend plans belong in documentation.
 
@@ -123,10 +123,10 @@ Use these for deeper project stories in DevOS ProjectWindow and public project p
 
 Public project pages support optional localized `cover`, `liveLabel`, and `caseStudy.motivation` metadata. Their gallery, native-dialog viewer, image fallback, and story rendering live in `src/Pages/ProjectsPages/`, separately from DevOS components. Screenshot thumbnails preserve the full frame; technical detail is expandable rather than duplicated in the hero and body.
 
-The optional `cover.presentation` controls only the public project detail:
+The optional `cover.presentation` controls public project detail and carousel media:
 
-- `background`: the cover fills the hero behind its title/actions, with the existing readability overlay. This is the backward-compatible default and Starbounder's explicit setting.
-- `inline`: the hero uses the normal theme background; the full cover is shown below it, as the first section inside the angled content band. The preview uses a stable 16:9 area with `contain`, no text overlay, darkening, or decorative frame. This is RAG's setting.
+- `background`: the cover fills the detail hero and carousel behind their copy, with the existing readability overlay. This is the backward-compatible default and Starbounder's explicit setting.
+- `inline`: the detail hero uses the normal theme background; the full cover is shown below it, as the first section inside the angled content band. The preview uses a stable 16:9 area with `contain`, no text overlay, darkening, or decorative frame. The carousel omits the screenshot and uses the project gradient. This is RAG's setting.
 
 ```json
 "cover": {
@@ -136,13 +136,30 @@ The optional `cover.presentation` controls only the public project detail:
 }
 ```
 
-Keep the path and presentation aligned across locale files and localize `alt`. Homepage/carousel cover rendering and DevOS ignore the presentation field and retain their existing layouts. Missing or whitespace-only cover sources render a text-only hero; failed inline images use the existing accessible image fallback.
+Keep the path and presentation aligned across locale files and localize `alt`. Homepage cover rendering and DevOS ignore the presentation field and retain their existing layouts. Missing or whitespace-only cover sources render a text-only detail hero and a gradient carousel background; failed inline images use the existing accessible image fallback.
+
+### Page Metadata
+
+All existing routes are wrapped by the pathless `Layout/MetadataLayout.tsx`, which renders one metadata owner outside lazy page boundaries. Routes declare `handle.metadata` via the typed `metadataHandle` helper. The service route factory uses one service ID for both the page and its metadata.
+
+- `src/metadata/pageMetadata.ts`: resolve matched-route metadata using the selected locale; project summaries and service descriptions come from the central content model.
+- `src/metadata/PageMetadata.tsx`: observe router matches and the locale, then apply title/description/robots changes.
+- `src/metadata/documentMetadata.ts`: reuse/create the managed head tags, remove duplicates of those tags, and leave author/theme/favicon and other metadata alone.
+- `metadata` in locale `common.json`: directory/fallback titles and descriptions. No route prefixes or production URLs are introduced.
+
+The fixed locale translator avoids a stale-language metadata update while `LanguageProvider` synchronizes global i18next. Missing pages/projects/services and login/admin get `noindex, follow`; normal public navigation restores `index, follow`. DevOS receives its own title/description but its UI and lazy loading are unchanged.
+
+Tests cover localized resolution, central-content changes, missing IDs, real memory-router navigation, managed DOM API updates, duplicate-tag cleanup, and fallback alignment. Browser DOM integration remains to be checked in an unrestricted environment. The static `index.html` title/description stay as an English homepage fallback for initial loading or clients without JavaScript. This is not per-route SSR/prerendering, authorization, or HTTP status handling. Canonical/hreflang tags and Open Graph/social images are deferred until deployment details are supplied.
 
 ### Navigation and Preferences
 
 The public header uses native disclosure buttons and normal links. `headerNavigationState.ts` distinguishes a temporary mouse-hover preview from click/keyboard activation; `useHeaderNavigation.ts` handles dismissal and focus. Styles are isolated in `Header.styles.ts`.
 
-Preferences use the shared native `dialog` in `Components/Shared/Modal.tsx`. `dialogLifecycle.ts` preserves the body scroll style and returns focus to the visible navigation toggle after closing. Settings controls have associated labels and language choices expose their pressed state. The reset only restores custom colors; it does not change theme or language. Unit/SSR tests for these behaviors live in `Components/Shared/__tests__/` and `Components/Settings/__tests__/`; native browser interactions still need browser verification.
+Preferences use `Components/Settings/PreferencesDrawer.tsx`: a full-height right-side panel, not a centered modal. Its transparent native-dialog host aligns with the navigation's shared 1264px width from `styles/layout.ts`; the actual panel is capped at 440px and fits smaller screens. This keeps it near the navigation on ultrawide monitors. The title and close button stay visible while the body scrolls independently; outside pointer interaction or Escape dismisses it without blur or a heavy backdrop.
+
+The native modal primitive still provides focus containment/inert page behavior. `dialogLifecycle.ts` preserves the body scroll style and returns focus to the visible navigation toggle after closing. The panel slides down from above and exits upward, starting the exit at its current position even if opening is interrupted. Entry CSS and the cancellable Web Animations exit in `drawerMotion.ts` respect reduced motion, and unmount cancels pending close callbacks. `WebSettings` renders only controls; the drawer owns its heading. Controls have associated labels and language choices expose their pressed state. The reset only restores custom colors, not theme or language. Theme/color persistence remains a separate follow-up.
+
+The light theme keeps its existing backgrounds, primary text, and accent. Only secondary/muted text tokens are darker to improve readability on gray content bands. Focused default-palette contrast tests cover these text colors on the theme's backgrounds; they do not certify custom overrides or all interactive states. Unit/SSR tests live in `Components/Shared/__tests__/`, `Components/Settings/__tests__/`, and `styles/__tests__/`; native browser interactions and actual ultrawide layout still need browser verification.
 
 DevOS project discovery currently uses this content model in two places:
 
