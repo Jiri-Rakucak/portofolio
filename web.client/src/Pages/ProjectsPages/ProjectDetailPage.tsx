@@ -82,8 +82,10 @@ export default function ProjectDetailPage() {
 
   return (
     <Container>
-      <HeroSection $hasBackgroundCover={hasBackgroundCover}
-        data-cover-presentation={hasBackgroundCover ? "background" : "none"}>
+      <HeroSection
+        $hasBackgroundCover={hasBackgroundCover}
+        data-cover-presentation={hasBackgroundCover ? "background" : "none"}
+      >
         {cover && hasBackgroundCover && (
           <HeroImage
             src={cover.src}
@@ -134,8 +136,16 @@ export default function ProjectDetailPage() {
 
       <ContentWrapper>
         {cover && !hasBackgroundCover && (
-          <Section aria-label={t("projectsPage.previewTitle")} data-cover-presentation="inline">
-            <InlineCoverImage src={cover.src} alt={cover.alt} fit="contain" loading="eager" />
+          <Section
+            aria-label={t("projectsPage.previewTitle")}
+            data-cover-presentation="inline"
+          >
+            <InlineCoverImage
+              src={cover.src}
+              alt={cover.alt}
+              fit="contain"
+              loading="eager"
+            />
           </Section>
         )}
         <Section>

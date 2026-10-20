@@ -2,9 +2,10 @@ import { useId } from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { useAppTheme } from '../../styles/ThemeProvider';
-import { SettingRow, Label, SubLabel, ToggleSwitch, ColorPicker } from './SettingsAtoms';
+import { SettingRow, Label, SubLabel, ColorPicker } from './SettingsAtoms';
+import ThemeModeSwitch from './ThemeModeSwitch';
 import { focusRing } from '../Shared/controlStyles';
-import type { Theme } from '../../styles/theme';
+import { editableColorKeys } from '../../styles/themeColors';
 import { useLocale } from '../../i18n/useLocale';
 import { locales } from '../../i18n/types';
 
@@ -65,19 +66,19 @@ const LanguageButton = styled.button<{ $isActive: boolean }>`
 
 export default function WebSettings() {
     const { t } = useTranslation('common');
-    const { themeName, toggleTheme, theme, updateColor, resetTheme } = useAppTheme();
+    const { themeName, themePreference, setThemePreference, theme, updateColor, resetTheme } = useAppTheme();
     const { locale, setLocale } = useLocale();
     const controlId = useId();
     const languageLabelId = useId();
+    const themeLabelId = useId();
     const colorsTitleId = useId();
-    const editableColors: (keyof Theme['colors'])[] = ['accent', 'background', 'surface', 'text'];
 
     return (
         <Container>
             <div>
                 <SettingRow>
-                    <Label htmlFor={`${controlId}-theme`}>{t('settings.darkMode.label')}</Label>
-                    <ToggleSwitch id={`${controlId}-theme`} checked={themeName === 'dark'} onChange={toggleTheme} />
+                    <Label as="span" id={themeLabelId}>{t('settings.theme.label')}</Label>
+                    <ThemeModeSwitch value={themePreference} onChange={setThemePreference} labelledBy={themeLabelId} />
                 </SettingRow>
                 <SettingRow>
                     <Label as="span" id={languageLabelId}>{t('settings.language.label')}</Label>
@@ -93,8 +94,8 @@ export default function WebSettings() {
                 </SettingRow>
             </div>
             <section aria-labelledby={colorsTitleId}>
-                <SectionTitle id={colorsTitleId}>{t('settings.colors.title')}</SectionTitle>
-                {editableColors.map(key => (
+                <SectionTitle id={colorsTitleId}>{t(`settings.colors.title.${themeName}`)}</SectionTitle>
+                {editableColorKeys.map(key => (
                     <SettingRow key={key}>
                         <Label htmlFor={`${controlId}-${key}`}>
                             {t(`settings.colors.${key}.label`)}
@@ -105,7 +106,9 @@ export default function WebSettings() {
                     </SettingRow>
                 ))}
             </section>
-            <ResetButton type="button" onClick={resetTheme}>{t('settings.reset')}</ResetButton>
+            <ResetButton type="button" onClick={resetTheme} aria-label={t(`settings.resetLabel.${themeName}`)}>
+                {t('settings.reset')}
+            </ResetButton>
         </Container>
     );
 }

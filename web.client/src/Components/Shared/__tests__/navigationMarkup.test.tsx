@@ -9,7 +9,9 @@ import { darkTheme, lightTheme } from '../../../styles/theme';
 import Header from '../Header';
 import MenuToggle from '../MenuToggle';
 import PreferencesDrawer from '../../Settings/PreferencesDrawer';
-import { NavLinks, RightSection } from '../Header.styles';
+import { NavLinks, RightSection, SocialLink } from '../Header.styles';
+import GitHubIcon from '../../Icons/Github';
+import LinkedInIcon from '../../Icons/Linkedin';
 
 vi.mock('react-dom', () => ({ createPortal: (children: ReactNode) => children }));
 
@@ -25,6 +27,23 @@ async function render(children: ReactNode, locale: 'en' | 'cs') {
 }
 
 describe('navigation markup', () => {
+    it.each([darkTheme, lightTheme])('accents social icons on hover and focus without a background highlight', theme => {
+        const sheet = new ServerStyleSheet();
+        try {
+            const html = renderToStaticMarkup(sheet.collectStyles(<ThemeProvider theme={theme}>
+                <SocialLink href="https://github.com" aria-label="GitHub"><GitHubIcon /></SocialLink>
+                <SocialLink href="https://www.linkedin.com" aria-label="LinkedIn"><LinkedInIcon /></SocialLink>
+            </ThemeProvider>));
+            const css = sheet.getStyleTags();
+            expect(html.match(/fill="currentColor"/g)).toHaveLength(2);
+            expect(css).toMatch(new RegExp(`:hover,[^{]*:focus-visible\\{color:${theme.colors.accent};\\}`));
+            expect(css).not.toContain('background:');
+            expect(css).toContain('outline:2px solid');
+            expect(css).toContain('transition:color 0.2s ease');
+            expect(css).toContain('prefers-reduced-motion');
+        } finally { sheet.seal(); }
+    });
+
     it.each([darkTheme, lightTheme])('keeps the disclosure background joined behind the top icons', theme => {
         const sheet = new ServerStyleSheet();
         try {

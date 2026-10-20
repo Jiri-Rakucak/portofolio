@@ -30,63 +30,6 @@ export const SubLabel = styled.span`
     font-weight: 400;
 `;
 
-const SwitchLabel = styled.label`
-    position: relative;
-    display: inline-block;
-    flex-shrink: 0;
-    width: 48px;
-    height: 28px;
-`;
-
-const SwitchInput = styled.input`
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    opacity: 0;
-    cursor: pointer;
-
-    &:checked + span { background: ${({ theme }) => theme.colors.accent}; }
-    &:checked + span::before { transform: translateX(20px); }
-    &:focus-visible + span { outline: 2px solid ${({ theme }) => theme.colors.text}; outline-offset: 3px; }
-`;
-
-const Slider = styled.span`
-    position: absolute;
-    inset: 0;
-    border: 1px solid color-mix(in srgb, ${({ theme }) => theme.colors.text} 30%, transparent);
-    border-radius: 28px;
-    background: ${({ theme }) => theme.colors.backgroundSecondary};
-    transition: background-color 0.2s ease;
-
-    &::before {
-        position: absolute;
-        content: '';
-        width: 20px;
-        height: 20px;
-        top: 3px;
-        left: 3px;
-        border-radius: 50%;
-        background: ${({ theme }) => theme.colors.text};
-        transition: transform 0.2s ease;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        &, &::before { transition: none; }
-    }
-`;
-
-export function ToggleSwitch({ id, checked, onChange }: { id: string; checked: boolean; onChange: () => void }) {
-    return (
-        <SwitchLabel>
-            <SwitchInput id={id} type="checkbox" role="switch" checked={checked} onChange={onChange} />
-            <Slider aria-hidden="true" />
-        </SwitchLabel>
-    );
-}
-
 const ColorControl = styled.div`
     display: flex;
     align-items: center;

@@ -76,8 +76,11 @@ export const SocialLink = styled.a`
   border-radius: 4px;
   color: ${({ theme }) => theme.colors.text};
   text-decoration: none;
+  transition: color 0.2s ease;
 
-  &:hover { background: color-mix(in srgb, ${({ theme }) => theme.colors.text} 10%, transparent); }
+  &:hover, &:focus-visible { color: ${({ theme }) => theme.colors.accent}; }
+
+  @media (prefers-reduced-motion: reduce) { transition: none; }
 `;
 
 export const DropdownContainer = styled.div`

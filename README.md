@@ -16,7 +16,7 @@ Personal portfolio with bilingual project case studies, a mouse-responsive Three
 - Personal introduction with project browsing as the primary action and DevOS as secondary.
 - Lazy-loaded atom scene with smooth, bounded mouse tilt across the homepage hero. Mouse following respects reduced-motion/input preferences; DevOS retains its own drag controls.
 - A right-aligned header without a logo, with Home in the dropdown, social links, and Preferences.
-- A full-height Preferences drawer aligned with the navigation on wide displays, sliding down from above, with labelled controls, EN/CZ switching, and keyboard-safe dismissal.
+- A full-height Preferences drawer aligned with the navigation on wide displays, sliding down from above, with EN/CZ switching and a three-position System/Light/Dark control. It follows the browser-reported color scheme by default and remembers the selected theme preference and separate custom colors for light/dark.
 - Unframed project previews and a compact text-based skills section, with shared bounded angled transitions across public pages.
 - Project carousel at `/projects` and data-driven case studies at `/projects/:projectId`.
 - Starbounder: a 2D Unity graduation prototype with a real cover, personal motivation, five-image gallery, image viewer, technical notes, and prototype download link. It is not presented as a finished game.
@@ -160,7 +160,7 @@ Legacy mixed-case routes redirect to the lowercase equivalents.
 
 1. Check the desktop experience in a browser and refine spacing and interaction based on the rendered UI.
 2. Add real RAG media and concrete examples/results to its case study; consider a Starbounder gameplay clip later.
-3. Finish Preferences persistence and light-theme consistency; add sharing metadata and assess prerendering once the production URL and preview image are settled.
+3. Add sharing metadata and assess prerendering once the production URL and preview image are settled. Theme preference and per-theme custom-color persistence are implemented.
 4. Return to DevOS and replace the remaining demo behavior in a separate phase.
 5. Redesign mobile after the desktop layout is settled.
 6. Introduce a backend, forms, or an admin editor only when needed; upgrade the parked backend to the latest stable LTS before real backend work.

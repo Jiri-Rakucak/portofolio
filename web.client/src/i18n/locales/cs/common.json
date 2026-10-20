@@ -30,9 +30,11 @@
   "settings": {
     "title": "Nastavení",
     "close": "Zavřít nastavení",
-    "darkMode": {
-      "label": "Tmavý režim",
-      "description": "Přepnutí mezi světlým a tmavým motivem"
+    "theme": {
+      "label": "Motiv",
+      "system": "Systém",
+      "light": "Světlý",
+      "dark": "Tmavý"
     },
     "language": {
       "label": "Jazyk",
@@ -41,7 +43,10 @@
       "cs": "Čeština"
     },
     "colors": {
-      "title": "Barvy",
+      "title": {
+        "light": "Barvy světlého motivu",
+        "dark": "Barvy tmavého motivu"
+      },
       "accent": {
         "label": "Akcent",
         "description": "Hlavní zvýrazňovací barva tlačítek a odkazů"
@@ -59,7 +64,11 @@
         "description": "Primární barva textu"
       }
     },
-    "reset": "Obnovit barvy"
+    "reset": "Obnovit barvy",
+    "resetLabel": {
+      "light": "Obnovit barvy světlého motivu",
+      "dark": "Obnovit barvy tmavého motivu"
+    }
   },
   "servicesPage": {
     "eyebrow": "Rozcestník dovedností",

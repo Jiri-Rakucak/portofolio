@@ -30,9 +30,11 @@
   "settings": {
     "title": "Preferences",
     "close": "Close preferences",
-    "darkMode": {
-      "label": "Dark Mode",
-      "description": "Switch between light and dark theme"
+    "theme": {
+      "label": "Theme",
+      "system": "System",
+      "light": "Light",
+      "dark": "Dark"
     },
     "language": {
       "label": "Language",
@@ -41,7 +43,10 @@
       "cs": "Čeština"
     },
     "colors": {
-      "title": "Colors",
+      "title": {
+        "light": "Light theme colors",
+        "dark": "Dark theme colors"
+      },
       "accent": {
         "label": "Accent Color",
         "description": "Main highlight color for buttons and links"
@@ -59,7 +64,11 @@
         "description": "Primary text color"
       }
     },
-    "reset": "Reset colors"
+    "reset": "Reset colors",
+    "resetLabel": {
+      "light": "Reset colors for the light theme",
+      "dark": "Reset colors for the dark theme"
+    }
   },
   "servicesPage": {
     "eyebrow": "Skills overview",
