@@ -11,13 +11,14 @@ import { ArrowRight, ArrowLeft } from "../Components/Icons/Arrows";
 
 import {
   Page, PageTitle, ArrowScope, CarouselContainer, CarouselViewport, CarouselTrack,
-  Slide, SlideCover, SlideContent, SlideCategory, SlideTitle, SlideDescription, SlideTechRow,
+  Slide, SlideMedia, SlideCover, SlideContent, SlideCategory, SlideTitle, SlideDescription, SlideTechRow,
   SlideTechPill, IntroOverlay, IntroTitle, IntroSubtitle, ArrowButton, DotRow, Dot,
   DetailSection, DetailGrid, DetailMain, DetailBlock, DetailBody, HighlightList,
   HighlightItem, TechList, TechBadge, DetailSide, TerminalPanel, TerminalHeader,
-  TerminalDot, MetaList, MetaItem, MetaTerm, MetaValue, DetailLink,
+  TerminalDot, MetaList, MetaItem, MetaTerm, MetaValue, DetailLink, CarouselControls,
 } from "./ProjectsPages/ProjectsPage.styles";
 import { projectGradients, fallbackGradient } from '../styles/projectMedia';
+import { useCarouselSwipe } from './ProjectsPages/useCarouselSwipe';
 
 export default function ProjectsPage() {
   const { t } = useTranslation("common");
@@ -56,6 +57,7 @@ export default function ProjectsPage() {
   }, [activeIndex, introVisible, goTo]);
 
   const active: PortfolioProject | undefined = projects[activeIndex];
+  const swipeHandlers = useCarouselSwipe(goNext, goPrev);
 
   return (
     <Page>
@@ -77,7 +79,7 @@ export default function ProjectsPage() {
         }}
       >
         <CarouselContainer>
-          <CarouselViewport>
+          <CarouselViewport {...swipeHandlers}>
             {/* Intro overlay */}
             <IntroOverlay $visible={introVisible} inert={!introVisible} aria-hidden={!introVisible}>
               <IntroTitle>{t("projectsPage.title")}</IntroTitle>
@@ -87,7 +89,7 @@ export default function ProjectsPage() {
             </IntroOverlay>
 
             {/* Slides */}
-            <CarouselTrack $offset={-activeIndex * 100}>
+            <CarouselTrack $offset={-activeIndex * 100} $introVisible={introVisible}>
               {projects.map((project, index) => {
                 const cover = project.cover?.src?.trim() && project.cover.presentation !== 'inline'
                   ? project.cover
@@ -98,15 +100,20 @@ export default function ProjectsPage() {
                     key={project.id}
                     $bg={projectGradients[project.id] ?? fallbackGradient}
                     $hasCover={Boolean(cover)}
+                    $active={index === activeIndex}
+                    role="group"
+                    aria-label={project.name}
                     inert={introVisible || index !== activeIndex}
                     aria-hidden={introVisible || index !== activeIndex}
                   >
-                    {cover && (
-                      <SlideCover src={cover.src} alt={cover.alt}
-                        fit="cover" position="75% center"
-                        loading={!introVisible && index === activeIndex ? 'eager' : 'lazy'}
-                        fetchPriority={!introVisible && index === activeIndex ? 'high' : 'low'} />
-                    )}
+                    <SlideMedia $bg={projectGradients[project.id] ?? fallbackGradient} aria-hidden={!cover || undefined}>
+                      {cover && (
+                        <SlideCover src={cover.src} alt={cover.alt}
+                          fit="cover" position="75% center"
+                          loading={!introVisible && index === activeIndex ? 'eager' : 'lazy'}
+                          fetchPriority={!introVisible && index === activeIndex ? 'high' : 'low'} />
+                      )}
+                    </SlideMedia>
                     <SlideContent>
                       <SlideCategory>{project.category}</SlideCategory>
                       <SlideTitle>{project.name}</SlideTitle>
@@ -123,44 +130,41 @@ export default function ProjectsPage() {
                 );
               })}
             </CarouselTrack>
-
-            {/* Dots */}
-            {!introVisible && (
-              <DotRow>
-                {projects.map((p, i) => (
-                  <Dot
-                    key={p.id}
-                    $active={i === activeIndex}
-                    onClick={() => goTo(i)}
-                    aria-label={p.name}
-                    aria-current={i === activeIndex ? "true" : undefined}
-                    type="button"
-                  />
-                ))}
-              </DotRow>
-            )}
           </CarouselViewport>
         </CarouselContainer>
 
-        {/* Arrows */}
-        <ArrowButton
-          $side="left"
-          onClick={goPrev}
-          disabled={introVisible}
-          aria-label={t("projectsPage.previousProject")}
-          type="button"
-        >
-          <ArrowLeft size={24} />
-        </ArrowButton>
-        <ArrowButton
-          $side="right"
-          onClick={goNext}
-          disabled={projects.length === 0 || (!introVisible && activeIndex === projects.length - 1)}
-          aria-label={t("projectsPage.nextProject")}
-          type="button"
-        >
-          <ArrowRight size={24} />
-        </ArrowButton>
+        {/* Persistent controls keep keyboard focus outside changing slides. */}
+        <CarouselControls>
+          <ArrowButton
+            $side="left"
+            onClick={goPrev}
+            disabled={introVisible}
+            aria-label={t("projectsPage.previousProject")}
+            title={t("projectsPage.previousProject")}
+            type="button"
+          >
+            <ArrowLeft size={24} />
+          </ArrowButton>
+          {!introVisible && (
+            <DotRow>
+              {projects.map((project, index) => (
+                <Dot key={project.id} $active={index === activeIndex}
+                  onClick={() => goTo(index)} aria-label={project.name}
+                  aria-current={index === activeIndex ? 'true' : undefined} type="button" />
+              ))}
+            </DotRow>
+          )}
+          <ArrowButton
+            $side="right"
+            onClick={goNext}
+            disabled={projects.length === 0 || (!introVisible && activeIndex === projects.length - 1)}
+            aria-label={t("projectsPage.nextProject")}
+            title={t("projectsPage.nextProject")}
+            type="button"
+          >
+            <ArrowRight size={24} />
+          </ArrowButton>
+        </CarouselControls>
       </ArrowScope>
 
       {/* ---- Detail below ---- */}

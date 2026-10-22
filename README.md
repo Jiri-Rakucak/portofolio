@@ -10,7 +10,7 @@ This is both the source of my portfolio and a place to explore frontend architec
 
 - **English and Czech:** localized interface and project content, with language switching on the same URLs.
 - **Project case studies:** structured stories, technologies, screenshots, and a keyboard-accessible image viewer.
-- **Interactive homepage:** a lazy-loaded atom scene with bounded mouse tilt, a static reduced-motion mode, and rendering paused when the hero is not visible.
+- **Responsive homepage:** shared project and skill sections, a text-first mobile introduction, and an optional desktop atom scene with bounded mouse tilt and reduced-motion support.
 - **Personal preferences:** system/light/dark themes, with separate custom color palettes saved for each theme.
 - **Shared content:** the website and DevOS Explorer, Browser, Terminal, and project windows read from the same typed content model.
 - **DevOS:** draggable and resizable windows, a taskbar, project discovery, a portfolio CLI, and a component lab.
@@ -92,7 +92,7 @@ For content edits, start with `web.client/src/i18n/locales/{en,cs}/content.json`
 
 ## Current Status
 
-The desktop portfolio is the active implementation. Mobile, tablet, and intermediate-width layouts are the next UI phase. Parts of DevOS and the login/admin routes are prototypes, not a working authentication or content-management system.
+The public portfolio has an initial responsive implementation across mobile and desktop. Narrow project layouts separate media from text, and the carousel supports touch gestures alongside buttons and keyboard navigation. Shared action styles keep public CTAs consistent. Device testing and visual refinements remain in progress. Parts of DevOS and the login/admin routes are prototypes, not a working authentication or content-management system.
 
 Desktop appearance and keyboard operation have been manually reviewed. Native browser verification of the latest motion/media changes and broader device coverage remain ongoing. Route-specific prerendering and permanent social-sharing metadata are not implemented yet.
 

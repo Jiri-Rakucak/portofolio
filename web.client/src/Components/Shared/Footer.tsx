@@ -6,6 +6,7 @@ import LinkedInIcon from '../Icons/Linkedin';
 import Text from "./Typography";
 import { Link } from "react-router";
 import { contact } from '../../content/contact';
+import { IconLink } from './Actions';
 
 const StyledFooter = styled.footer`
   background: ${({ theme }) => theme.colors.backgroundSecondary};
@@ -87,27 +88,7 @@ const SocialLinks = styled.div`
   }
 `;
 
-const SocialLink = styled.a`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: ${({ theme }) => theme.colors.background};
-  border-radius: 50%;
-  color: ${({ theme }) => theme.colors.text};
-  transition: all 0.3s ease;
-  text-decoration: none;
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.colors.accent};
-    outline-offset: 4px;
-  }
-  &:hover {
-    background: ${({ theme }) => theme.colors.accent};
-    color: #ffffff;
-    transform: translateY(-2px);
-  }
-`;
+const SocialLink = IconLink;
 
 const FooterList = styled.ul`
   list-style: none;

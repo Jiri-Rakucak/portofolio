@@ -1,7 +1,7 @@
 import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft } from '../Components/Icons/Arrows';
-import { PrimaryLink, SecondaryLink } from '../Components/Desktop/HomeHero.styles';
+import { PrimaryLink, SecondaryLink } from '../Components/Shared/Actions';
 import { Page, Content, ErrorCode, Heading, Message, Actions } from './404Page.styles';
 
 const Page404 = () => {

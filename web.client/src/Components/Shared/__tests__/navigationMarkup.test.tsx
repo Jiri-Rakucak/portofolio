@@ -36,11 +36,13 @@ describe('navigation markup', () => {
             </ThemeProvider>));
             const css = sheet.getStyleTags();
             expect(html.match(/fill="currentColor"/g)).toHaveLength(2);
-            expect(css).toMatch(new RegExp(`:hover,[^{]*:focus-visible\\{color:${theme.colors.accent};\\}`));
-            expect(css).not.toContain('background:');
+            expect(css).toMatch(new RegExp(`:hover,[^{]*:focus-visible\\{color:${theme.colors.accent};border-color:transparent;\\}`));
+            expect(css).toContain('background:transparent;');
+            expect(css).not.toContain(`background:${theme.colors.accent};`);
             expect(css).toContain('outline:2px solid');
             expect(css).toContain('transition:color 0.2s ease');
             expect(css).toContain('prefers-reduced-motion');
+            expect(css).toContain('width:44px;height:44px');
         } finally { sheet.seal(); }
     });
 

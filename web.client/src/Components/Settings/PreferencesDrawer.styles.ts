@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { focusRing } from '../Shared/controlStyles';
+import { IconButton } from '../Shared/Actions';
 import { navigationContentWidth } from '../../styles/layout';
 
 const slideIn = keyframes`
@@ -69,21 +69,7 @@ export const DrawerBody = styled.div`
     @media (max-width: 480px) { padding: 1.25rem; }
 `;
 
-export const DrawerCloseButton = styled.button`
-    ${focusRing}
-    display: grid;
-    place-items: center;
+export const DrawerCloseButton = styled(IconButton)`
     flex-shrink: 0;
-    width: 44px;
-    height: 44px;
-    padding: 0;
-    border: 0;
-    border-radius: 6px;
-    background: transparent;
-    color: ${({ theme }) => theme.colors.text};
-    font: inherit;
     font-size: 1.75rem;
-    cursor: pointer;
-
-    &:hover { background: color-mix(in srgb, ${({ theme }) => theme.colors.text} 10%, transparent); }
 `;

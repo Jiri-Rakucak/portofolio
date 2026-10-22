@@ -5,7 +5,8 @@ import { I18nextProvider } from 'react-i18next';
 import { ServerStyleSheet, ThemeProvider } from 'styled-components';
 import { describe, expect, it } from 'vitest';
 import Header from '../../Components/Shared/Header';
-import { PrimaryLink } from '../../Components/Desktop/HomeHero.styles';
+import { PrimaryLink } from '../../Components/Shared/Actions';
+import { actionForeground } from '../../Components/Shared/actionContrast';
 import { DetailLink } from '../ProjectsPages/ProjectsPage.styles';
 import i18n from '../../i18n';
 import { darkTheme, lightTheme, type Theme } from '../../styles/theme';
@@ -35,7 +36,7 @@ describe.each([
         const interaction = css.match(/:hover,[^{]*:focus-visible\{([^}]+)\}/)?.[1];
 
         expect(interaction).toContain(`background:${theme.colors.text};`);
-        expect(interaction).toContain(`color:${theme.colors.background};`);
+        expect(interaction).toContain(`color:${actionForeground(theme.colors.text)};`);
         expect(interaction).toContain(`border-color:${theme.colors.text};`);
         expect(css).toContain(`outline:2px solid ${theme.colors.accent};`);
         expect(css).not.toContain('filter:brightness');

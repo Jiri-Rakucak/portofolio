@@ -8,6 +8,7 @@ import { focusRing } from '../Shared/controlStyles';
 import { editableColorKeys } from '../../styles/themeColors';
 import { useLocale } from '../../i18n/useLocale';
 import { locales } from '../../i18n/types';
+import { ActionButton } from '../Shared/Actions';
 
 const Container = styled.div`
     display: flex;
@@ -22,19 +23,9 @@ const SectionTitle = styled.h3`
     color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
-const ResetButton = styled.button`
-    ${focusRing}
+const ResetButton = styled(ActionButton).attrs({ $variant: 'secondary' })`
     align-self: flex-start;
-    padding: 0.6rem 0.9rem;
-    border: 1px solid color-mix(in srgb, ${({ theme }) => theme.colors.text} 25%, transparent);
-    border-radius: 6px;
-    background: transparent;
-    color: ${({ theme }) => theme.colors.text};
-    font: inherit;
     font-size: 0.875rem;
-    cursor: pointer;
-
-    &:hover { background: color-mix(in srgb, ${({ theme }) => theme.colors.text} 10%, transparent); }
 `;
 
 const LanguageOptions = styled.div`

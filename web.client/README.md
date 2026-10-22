@@ -63,11 +63,10 @@ src/
 ├── Auth/               # Route protection helpers
 ├── Components/
 │   ├── Applications/   # DevOS window contents
-│   ├── Desktop/        # Desktop home and Three.js scene
+│   ├── Desktop/        # Shared responsive home and optional desktop scene
 │   ├── DevOS/          # Window manager and taskbar UI
-│   ├── Mobile/         # Mobile home layout
 │   ├── Settings/       # Theme settings controls
-│   └── Shared/         # Header, footer, forms, typography
+│   └── Shared/         # Actions, header, footer, forms, typography
 ├── Contexts/           # DevOS state
 ├── content/            # Central projects and services data
 ├── Hooks/              # Shared React hooks
@@ -80,8 +79,9 @@ src/
 
 ## Performance Notes
 
-- `DesktopHomeLayout` is lazy-loaded from the home page.
-- `AtomScene` is lazy-loaded by the desktop hero's `HeroScene` boundary.
+- `DesktopHomeLayout` is the shared responsive composition, lazy-loaded from the home page despite its historical name. The separate mobile placeholder has been removed.
+- `HomeHero` mounts `HeroScene` only above 1000px, using a live media-query subscription. Compact screens do not request the atom chunk unless it was previously loaded at a wider viewport. Widening the viewport mounts the optional scene without replacing homepage content.
+- `AtomScene` is lazy-loaded by `HeroScene`.
 - `/devos` is lazy-loaded as a separate route.
 - The Three.js scene still creates a large chunk, but it is isolated from the main app bundle.
 - The public hero follows reduced motion with a complete static atom and demand rendering. Hidden/offscreen heroes pause the frame loop and pointer tracking; visible full-motion heroes resume with bounded deltas and DPR capped at 1.5. DevOS keeps its own default frame loop, camera, and drag controls.
@@ -103,7 +103,7 @@ Typed helpers expose that data from `src/content/`:
 
 Keep new project/service metadata in the locale JSON first, then consume it through the helper functions. This avoids duplicate content between homepage sections, DevOS Explorer, Browser, ProjectWindow, Terminal, the service directory, and detailed service pages.
 
-The desktop introduction is rendered by `Components/Desktop/HomeHero.tsx`; its copy lives in `common.json`. Projects are the primary hero action. The atom uses `layout="hero"` only here; default DevOS framing is unchanged. Hero camera projection is implemented with Three.js `setViewOffset` and unit-tested independently of WebGL. The optional scene has an error boundary, so its render failures do not remove the introduction or navigation. Mobile home has not been redesigned yet.
+The shared introduction is rendered by `Components/Desktop/HomeHero.tsx`; its copy lives in `common.json`. Projects are the primary hero action. The atom uses `layout="hero"` only here; default DevOS framing is unchanged. Hero camera projection is implemented with Three.js `setViewOffset` and unit-tested independently of WebGL. The optional scene has an error boundary, so its render failures do not remove the introduction or navigation. At 1000px and below, the same copy becomes a left-aligned, text-first introduction without a live scene.
 
 The homepage atom also follows the mouse with a bounded, damped tilt. `HeroPointerRotation` wraps the existing animated atom rather than replacing its rotation. `heroPointerEvents.ts` listens on the whole hero (including overlaid content), and `heroPointer.ts` maps client coordinates and uses Three.js `MathUtils.clamp`/`damp`. There is no per-frame React state update. Mouse follow respects reduced-motion/input preferences and resets when the pointer leaves or the viewport changes. OrbitControls remain exclusive to the default DevOS window layout.
 
@@ -136,6 +136,8 @@ The optional `cover.presentation` controls public project detail and carousel me
 - `background`: the cover fills the detail hero and carousel behind their copy, with the existing readability overlay. This is the backward-compatible default and Starbounder's explicit setting.
 - `inline`: the detail hero uses the normal theme background; the full cover is shown below it, as the first section inside the angled content band. The preview uses a stable 16:9 area with `contain`, no text overlay, darkening, or decorative frame. The carousel omits the screenshot and uses the project gradient. This is RAG's setting.
 
+At 900px and below, background-mode project details and carousel slides put a reserved 16:9 media area above their theme-colored text instead of overlaying it. Inline previews retain their separate detail section. Carousel controls move below the slide; touch swipes supplement buttons, dots, and arrow keys without intercepting vertical scroll. Desktop carousel height can grow for longer copy. No automatic slide rotation is used.
+
 ```json
 "cover": {
   "src": "/projects/ragsystem/ragsystem-preview.png",
@@ -160,6 +162,8 @@ The fixed locale translator avoids a stale-language metadata update while `Langu
 Tests cover localized resolution, central-content changes, missing IDs, real memory-router navigation, managed DOM API updates, duplicate-tag cleanup, and fallback alignment. Browser DOM integration remains to be checked in an unrestricted environment. The static `index.html` title/description stay as an English homepage fallback for initial loading or clients without JavaScript. This is not per-route SSR/prerendering, authorization, or HTTP status handling. Canonical/hreflang tags and Open Graph/social images are deferred until deployment details are supplied.
 
 ### Navigation and Preferences
+
+Public CTAs use `Components/Shared/Actions.ts`: natively typed `ActionLink`, `ActionAnchor`, and `ActionButton`, with `primary`, `secondary`, `link`, and `icon` variants. Primary actions are filled, secondary actions outlined, and link actions unframed; icon actions accent the icon on hover. All share focus, wrapping, reduced-motion behavior, and 44px/48px minimum touch targets. `actionContrast.ts` chooses a black/white foreground for solid accent/hover fills; this is not a contrast guarantee for arbitrary custom palettes. Photo-specific secondary colors apply only on wide project heroes. Navigation disclosures, radios, language segments, gallery thumbnails, and parked forms remain specialized controls rather than CTAs. Do not migrate these indiscriminately or change DevOS styles through this module.
 
 The public header uses native disclosure buttons and normal links. `headerNavigationState.ts` distinguishes a temporary mouse-hover preview from click/keyboard activation; `useHeaderNavigation.ts` handles dismissal and focus. Styles are isolated in `Header.styles.ts`.
 
@@ -204,7 +208,7 @@ DevOS-only profile copy, tooltip text, Lab copy, and terminal text live in `devo
 
 ## Current Known Gaps
 
-- Mobile home is placeholder content.
+- Initial responsive home/carousel/detail layouts are implemented; real-browser mobile/tablet/landscape acceptance and spacing refinements remain pending.
 - Admin, login, and some DevOS apps still contain prototype/demo behavior; client-side route guards are not a working authentication system.
 - Service forms are hidden until a real backend or form provider exists; the services page uses direct contact links for now.
 - Tests cover central content, homepage/project rendering, contact links, camera projection, and shared section styles. Actual browser and WebGL layout verification remains pending in restricted environments.

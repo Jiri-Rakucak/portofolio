@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from 'react-router';
+import { SecondaryLink } from '../../Components/Shared/Actions';
 import { useTranslation } from 'react-i18next';
 import Text from '../../Components/Shared/Typography';
 import { getServiceById } from '../../content/services';
@@ -127,21 +127,7 @@ const RelatedActions = styled.div`
     margin-top: 0.5rem;
 `;
 
-const ServiceLink = styled(Link)`
-    padding: 0.6rem 1.3rem;
-    border-radius: 999px;
-    text-decoration: none;
-    color: ${({ theme }) => theme.colors.text};
-    border: 1px solid ${({ theme }) => theme.colors.accent};
-    transition: all 0.2s ease;
-    font-weight: 700;
-
-    &:hover {
-        background: ${({ theme }) => theme.colors.accent};
-        color: ${({ theme }) => theme.colors.background};
-        transform: translateY(-1px);
-    }
-`;
+const ServiceLink = SecondaryLink;
 
 const Divider = styled.hr`
     border: 0;

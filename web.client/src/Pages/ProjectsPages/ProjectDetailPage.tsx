@@ -110,6 +110,7 @@ export default function ProjectDetailPage() {
           <HeroActions>
             {project.liveUrl && (
               <ExternalAction
+                $variant="primary"
                 href={project.liveUrl}
                 target="_blank"
                 rel="noreferrer"
@@ -119,6 +120,8 @@ export default function ProjectDetailPage() {
             )}
             {project.repoUrl && (
               <ExternalAction
+                $variant={project.liveUrl ? 'secondary' : 'primary'}
+                $onMedia={hasBackgroundCover}
                 href={project.repoUrl}
                 target="_blank"
                 rel="noreferrer"
@@ -236,6 +239,7 @@ export default function ProjectDetailPage() {
               {resources.map((asset) => (
                 <ExternalAction
                   key={asset.src}
+                  $variant="secondary"
                   href={asset.src}
                   target="_blank"
                   rel="noreferrer"

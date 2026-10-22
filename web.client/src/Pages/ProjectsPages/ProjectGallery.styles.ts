@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PortfolioImage from './PortfolioImage';
+import { IconButton as SharedIconButton } from '../../Components/Shared/Actions';
 
 export const GalleryGrid = styled.div`
   display: grid;
@@ -80,29 +81,10 @@ export const Controls = styled.div`
   gap: 0.5rem;
 `;
 
-export const IconButton = styled.button`
-  display: grid;
-  place-items: center;
-  flex: 0 0 40px;
-  width: 40px;
-  height: 40px;
-  padding: 0;
+export const IconButton = styled(SharedIconButton)`
+  --action-text: #ffffff;
   border: 1px solid #ffffff40;
-  border-radius: 4px;
-  background: transparent;
-  color: #fff;
-  cursor: pointer;
   font-size: 1.6rem;
-
-  &:hover:not(:disabled), &:focus-visible {
-    border-color: ${({ theme }) => theme.colors.accent};
-    outline: 2px solid ${({ theme }) => theme.colors.accent};
-    outline-offset: 2px;
-  }
-  &:disabled {
-    opacity: 0.3;
-    cursor: default;
-  }
 `;
 
 export const FullImage = styled(PortfolioImage)`

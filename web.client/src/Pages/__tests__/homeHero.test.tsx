@@ -7,6 +7,9 @@ import i18n from '../../i18n';
 import { darkTheme } from '../../styles/theme';
 import HomeHero from '../../Components/Desktop/HomeHero';
 import HeroScene from '../../Components/Desktop/HeroScene';
+import { useBreakpoint } from '../../Hooks/useBreakpoint';
+
+vi.mock('../../Hooks/useBreakpoint', () => ({ useBreakpoint: vi.fn(() => false) }));
 
 vi.mock('../../Components/Desktop/HeroScene', () => ({
     default: vi.fn(() => <div data-testid="hero-scene" />),
@@ -26,6 +29,21 @@ const renderHero = async (locale: 'en' | 'cs') => {
 afterEach(() => vi.clearAllMocks());
 
 describe('home hero', () => {
+    it('omits the scene on compact screens without removing content or navigation', async () => {
+        vi.mocked(useBreakpoint).mockReturnValueOnce(true);
+        const html = await renderHero('en');
+        expect(HeroScene).not.toHaveBeenCalled();
+        expect(useBreakpoint).toHaveBeenCalledWith(1001);
+        expect(html).not.toContain('hero-scene');
+        expect(html).toContain('Jiří Rakučák');
+        expect(html).toContain('href="/projects"');
+        expect(html).toContain('href="/devos"');
+    });
+
+    it('keeps the optional scene on desktop', async () => {
+        expect(await renderHero('en')).toContain('hero-scene');
+        expect(HeroScene).toHaveBeenCalled();
+    });
     it('introduces the owner and presents projects before DevOS in English', async () => {
         const html = await renderHero('en');
 

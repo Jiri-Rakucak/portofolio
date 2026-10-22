@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router';
 
 export const Hero = styled.section`
   position: relative;
@@ -10,6 +9,7 @@ export const Hero = styled.section`
   align-items: center;
   background: ${({ theme }) => theme.colors.background};
   color: ${({ theme }) => theme.colors.text};
+  @media (max-width: 1000px) { min-height: auto; }
 `;
 
 export const SceneLayer = styled.div`
@@ -30,6 +30,8 @@ export const HeroInner = styled.div`
     padding-top: 2rem;
     padding-bottom: 4rem;
   }
+  @media (max-width: 1000px) { padding: 3rem 2rem 4rem; }
+  @media (max-width: 640px) { padding: 2rem 1.25rem 3rem; }
 `;
 
 export const HeroCopy = styled.div`
@@ -42,7 +44,10 @@ export const HeroCopy = styled.div`
   text-align: right;
   pointer-events: auto;
   @media (max-width: 1000px) {
-    max-width: 320px;
+    max-width: 620px;
+    margin-left: 0;
+    align-items: flex-start;
+    text-align: left;
   }
 `;
 
@@ -79,53 +84,13 @@ export const Actions = styled.div`
   gap: 0.75rem 1.5rem;
   margin-top: 0.75rem;
   @media (max-width: 1000px) {
+    justify-content: flex-start;
+  }
+  @media (max-width: 480px) {
+    width: 100%;
     flex-direction: column;
-    align-items: flex-end;
-  }
-`;
-
-export const PrimaryLink = styled(Link)`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  min-height: 48px;
-  padding: 0.75rem 1.25rem;
-  border: 1px solid ${({ theme }) => theme.colors.accent};
-  border-radius: 6px;
-  background: ${({ theme }) => theme.colors.accent};
-  color: ${({ theme }) => theme.colors.background};
-  font-weight: 700;
-  text-decoration: none;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-  svg { flex-shrink: 0; }
-  &:hover,
-  &:focus-visible {
-    background: ${({ theme }) => theme.colors.text};
-    color: ${({ theme }) => theme.colors.background};
-    border-color: ${({ theme }) => theme.colors.text};
-  }
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.colors.accent};
-    outline-offset: 4px;
-  }
-`;
-
-export const SecondaryLink = styled(Link)`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  min-height: 44px;
-  color: ${({ theme }) => theme.colors.textSecondary};
-  text-decoration: none;
-  font-size: 0.95rem;
-  &:hover {
-    color: ${({ theme }) => theme.colors.text};
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.colors.accent};
-    outline-offset: 4px;
+    align-items: flex-start;
+    gap: 0.5rem;
+    > a:first-child { width: 100%; }
   }
 `;

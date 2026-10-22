@@ -3,15 +3,18 @@ import { useTranslation } from 'react-i18next';
 import { ArrowRight } from '../Icons/Arrows';
 import TerminalIcon from '../Icons/Terminal';
 import HeroScene from './HeroScene';
-import { Hero, HeroInner, HeroCopy, Identity, Role, Intro, Actions, PrimaryLink, SecondaryLink } from './HomeHero.styles';
+import { Hero, HeroInner, HeroCopy, Identity, Role, Intro, Actions } from './HomeHero.styles';
+import { PrimaryLink, TextLink } from '../Shared/Actions';
+import { useBreakpoint } from '../../Hooks/useBreakpoint';
 
 export default function HomeHero() {
   const { t } = useTranslation('common');
   const pointerSource = useRef<HTMLElement>(null);
+  const isCompact = useBreakpoint(1001);
 
   return (
     <Hero ref={pointerSource}>
-      <HeroScene pointerSource={pointerSource} />
+      {!isCompact && <HeroScene pointerSource={pointerSource} />}
       <HeroInner>
         <HeroCopy>
           <Role>{t('home.heroSubtitle')}</Role>
@@ -21,9 +24,9 @@ export default function HomeHero() {
             <PrimaryLink to="/projects" viewTransition>
               {t('home.exploreProjects')} <ArrowRight size={16} />
             </PrimaryLink>
-            <SecondaryLink to="/devos">
+            <TextLink to="/devos">
               <TerminalIcon size={18} /> {t('home.launchDevos')}
-            </SecondaryLink>
+            </TextLink>
           </Actions>
         </HeroCopy>
       </HeroInner>

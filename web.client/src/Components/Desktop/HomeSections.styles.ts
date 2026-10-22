@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router';
 import PortfolioImage from '../../Pages/ProjectsPages/PortfolioImage';
 import { angledSection } from '../../styles/angledSection';
+import { TextLink as SharedTextLink } from '../Shared/Actions';
 
 export const ProjectsSection = styled.section`
   ${angledSection}
@@ -10,6 +11,8 @@ export const ProjectsSection = styled.section`
   padding: calc(var(--section-cut) + 3rem) 2rem calc(var(--section-cut) + 4rem);
   @media (max-width: 640px) {
     padding-inline: 1.25rem;
+    padding-top: calc(var(--section-cut) + 2rem);
+    padding-bottom: calc(var(--section-cut) + 2rem);
   }
 `;
 
@@ -49,30 +52,8 @@ export const Copy = styled.p`
   overflow-wrap: anywhere;
 `;
 
-export const TextLink = styled(Link)`
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.65rem;
-  min-height: 44px;
-  max-width: 100%;
+export const TextLink = styled(SharedTextLink)`
   width: fit-content;
-  padding: 0.5rem 0;
-  color: ${({ theme }) => theme.colors.accent};
-  font-weight: 700;
-  text-decoration: none;
-  transition: color 0.2s ease;
-  svg { flex-shrink: 0; }
-  &:hover,
-  &:focus-visible {
-    color: ${({ theme }) => theme.colors.text};
-    text-decoration: underline;
-    text-underline-offset: 5px;
-  }
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.colors.accent};
-    outline-offset: 4px;
-  }
 `;
 
 export const ProjectList = styled.div`

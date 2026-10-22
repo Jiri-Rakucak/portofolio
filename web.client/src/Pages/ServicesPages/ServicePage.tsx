@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from 'react-router';
+import { ActionAnchor, SecondaryLink } from '../../Components/Shared/Actions';
 import { useTranslation } from 'react-i18next';
 import Text from '../../Components/Shared/Typography';
 import { getServices } from '../../content/services';
@@ -135,23 +135,9 @@ const Tag = styled.span`
     color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
-const ServiceLink = styled(Link)`
+const ServiceLink = styled(SecondaryLink)`
     margin-top: 0.2rem;
     align-self: start;
-    padding: 0.54rem 1.15rem;
-    border-radius: 999px;
-    text-decoration: none;
-    color: ${({ theme }) => theme.colors.text};
-    border: 1px solid ${({ theme }) => theme.colors.accent};
-    transition: all 0.2s ease;
-    font-weight: 700;
-    white-space: nowrap;
-
-    &:hover {
-        background: ${({ theme }) => theme.colors.accent};
-        color: ${({ theme }) => theme.colors.background};
-        transform: translateY(-1px);
-    }
 `;
 
 const Divider = styled.hr`
@@ -197,32 +183,8 @@ const ContactActions = styled.div`
     margin-top: 0.2rem;
 `;
 
-const ContactLink = styled.a`
-    padding: 0.6rem 1.2rem;
-    border-radius: 999px;
-    text-decoration: none;
-    color: ${({ theme }) => theme.colors.background};
-    background: ${({ theme }) => theme.colors.accent};
-    font-weight: 700;
-
-    &:hover {
-        opacity: 0.9;
-    }
-`;
-
-const SecondaryContactLink = styled.a`
-    padding: 0.6rem 1.2rem;
-    border-radius: 999px;
-    text-decoration: none;
-    color: ${({ theme }) => theme.colors.text};
-    border: 1px solid ${({ theme }) => theme.colors.border};
-    font-weight: 700;
-
-    &:hover {
-        border-color: ${({ theme }) => theme.colors.accent};
-        color: ${({ theme }) => theme.colors.accent};
-    }
-`;
+const ContactLink = ActionAnchor;
+const SecondaryContactLink = styled(ActionAnchor).attrs({ $variant: 'secondary' })``;
 
 const highlightIndexes = [0, 1, 2];
 const questionIndexes = [0, 1, 2, 3];

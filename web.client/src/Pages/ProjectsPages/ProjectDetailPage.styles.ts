@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router";
+import { ActionAnchor, PrimaryLink, TextLink } from '../../Components/Shared/Actions';
 import type { ProjectStatus } from "../../content/projects";
 import PortfolioImage from './PortfolioImage';
 import { angledSection } from '../../styles/angledSection';
@@ -41,6 +41,12 @@ export const HeroSection = styled.section<{ $hasBackgroundCover: boolean }>`
       font-size: 2rem;
     }
   }
+  @media (max-width: 900px) {
+    min-height: auto;
+    padding: 0;
+    color: ${({ theme }) => theme.colors.text};
+    &::after { display: none; }
+  }
 `;
 
 export const HeroImage = styled(PortfolioImage)`
@@ -49,6 +55,13 @@ export const HeroImage = styled(PortfolioImage)`
   z-index: -2;
   width: 100%;
   height: 100%;
+  @media (max-width: 900px) {
+    position: relative;
+    inset: auto;
+    z-index: auto;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
 `;
 
 export const InlineCoverImage = styled(PortfolioImage)`
@@ -62,6 +75,8 @@ export const HeroContent = styled.div`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  @media (max-width: 900px) { padding: 2.5rem 2rem 3rem; }
+  @media (max-width: 640px) { padding: 2rem 1.25rem 3rem; }
 `;
 
 export const EyebrowRow = styled.div`
@@ -243,47 +258,8 @@ export const MetadataValue = styled.dd`
 
 
 
-export const PrimaryAction = styled(Link)`
-  display: block;
-  padding: 0.65rem 0.85rem;
-  border-radius: 6px;
-  border: 1px solid ${({ theme }) => theme.colors.accent};
-  color: ${({ theme }) => theme.colors.text};
-  text-decoration: none;
-  font-weight: 700;
-  text-align: center;
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.colors.accent};
-    outline-offset: 3px;
-  }
-  transition: all 0.2s ease;
-
-  &:hover {
-    background: ${({ theme }) => theme.colors.accent};
-    color: ${({ theme }) => theme.colors.background};
-  }
-`;
-
-export const ExternalAction = styled.a`
-  display: block;
-  padding: 0.65rem 0.85rem;
-  border-radius: 6px;
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  color: ${({ theme }) => theme.colors.text};
-  text-decoration: none;
-  font-weight: 700;
-  text-align: center;
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.colors.accent};
-    outline-offset: 3px;
-  }
-  transition: all 0.2s ease;
-
-  &:hover {
-    border-color: ${({ theme }) => theme.colors.accent};
-    color: ${({ theme }) => theme.colors.accent};
-  }
-`;
+export const PrimaryAction = PrimaryLink;
+export const ExternalAction = ActionAnchor;
 
 export const RelatedActions = styled.div`
   display: flex;
@@ -292,20 +268,8 @@ export const RelatedActions = styled.div`
   margin-top: 0.5rem;
 `;
 
-export const RelatedLink = styled(Link)`
+export const RelatedLink = styled(TextLink)`
   align-self: flex-start;
-  max-width: 100%;
-  overflow-wrap: anywhere;
-  padding: 0.6rem 0;
-  text-decoration: none;
-  color: ${({ theme }) => theme.colors.text};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.accent};
-  transition: all 0.2s ease;
-  font-weight: 700;
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.accent};
-  }
 `;
 
 export const HeroActions = styled.div`
@@ -313,10 +277,9 @@ export const HeroActions = styled.div`
   flex-wrap: wrap;
   gap: 0.75rem;
   margin-top: 1.75rem;
-  ${ExternalAction} {
-    color: inherit;
-    border-color: currentColor;
-    padding: 0.75rem 1.25rem;
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: stretch;
   }
 `;
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Link } from "react-router";
 import PortfolioImage from './PortfolioImage';
+import { IconButton, TextLink } from '../../Components/Shared/Actions';
 
 export const Page = styled.div`
   background: ${({ theme }) => theme.colors.background};
@@ -29,27 +29,40 @@ export const CarouselContainer = styled.div`
 
 export const CarouselViewport = styled.section`
   position: relative;
-  height: calc(100svh - 120px);
-  min-height: 520px;
+  display: grid;
+  min-height: max(520px, calc(100svh - 120px));
   width: 100%;
   max-width: 1264px;
   overflow: hidden;
   border-radius: 0 0 12px 12px;
+  touch-action: pan-y pinch-zoom;
+  @media (max-width: 900px) {
+    height: auto;
+    min-height: 0;
+    border-radius: 0;
+  }
 `;
 
-export const CarouselTrack = styled.div<{ $offset: number }>`
+export const CarouselTrack = styled.div<{ $offset: number; $introVisible: boolean }>`
   display: flex;
-  height: 100%;
+  min-width: 0;
+  width: 100%;
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translateX(${({ $offset }) => $offset}%);
   @media (prefers-reduced-motion: reduce) {
     transition: none;
   }
+  @media (max-width: 900px) {
+    display: ${({ $introVisible }) => $introVisible ? 'none' : 'grid'};
+    height: auto;
+    transform: none;
+    transition: none;
+  }
 `;
 
-export const Slide = styled.div<{ $bg: string; $hasCover: boolean }>`
+export const Slide = styled.div<{ $bg: string; $hasCover: boolean; $active: boolean }>`
   flex: 0 0 100%;
-  height: 100%;
+  min-width: 0;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -66,6 +79,25 @@ export const Slide = styled.div<{ $bg: string; $hasCover: boolean }>`
     background: ${({ $hasCover }) => $hasCover ? 'linear-gradient(90deg, rgba(0,0,0,0.75), transparent 85%)' : 'transparent'};
     backdrop-filter: ${({ $hasCover }) => $hasCover ? 'none' : 'blur(40px) saturate(1.4)'};
     -webkit-backdrop-filter: ${({ $hasCover }) => $hasCover ? 'none' : 'blur(40px) saturate(1.4)'};
+  }
+  @media (max-width: 900px) {
+    display: ${({ $active }) => $active ? 'flex' : 'none'};
+    height: auto;
+    min-width: 0;
+    background: ${({ theme }) => theme.colors.background};
+    &::before { display: none; }
+  }
+`;
+
+export const SlideMedia = styled.div<{ $bg: string }>`
+  position: absolute;
+  inset: 0;
+  background: ${({ $bg }) => $bg};
+  @media (max-width: 900px) {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    aspect-ratio: 16 / 9;
   }
 `;
 
@@ -85,10 +117,11 @@ export const SlideContent = styled.div`
   flex-direction: column;
   gap: 1.2rem;
 
-  @media (max-width: 640px) {
-    padding: 2rem 4.5rem 4rem;
+  @media (max-width: 900px) {
+    padding: 2rem;
     gap: 0.8rem;
   }
+  @media (max-width: 640px) { padding: 1.75rem 1.25rem 1rem; }
 `;
 
 export const SlideCategory = styled.span`
@@ -96,6 +129,7 @@ export const SlideCategory = styled.span`
   text-transform: uppercase;
   letter-spacing: 0;
   color: rgba(255, 255, 255, 0.55);
+  @media (max-width: 900px) { color: ${({ theme }) => theme.colors.textSecondary}; }
 `;
 
 export const SlideTitle = styled.h2`
@@ -105,6 +139,7 @@ export const SlideTitle = styled.h2`
   line-height: 1.08;
   color: #fff;
   font-weight: 800;
+  @media (max-width: 900px) { font-size: 2.5rem; color: ${({ theme }) => theme.colors.text}; }
   @media (max-width: 640px) {
     font-size: 2rem;
   }
@@ -115,7 +150,9 @@ export const SlideDescription = styled.p`
   max-width: 560px;
   font-size: 1.05rem;
   line-height: 1.65;
+  overflow-wrap: anywhere;
   color: rgba(255, 255, 255, 0.72);
+  @media (max-width: 900px) { color: ${({ theme }) => theme.colors.textSecondary}; }
 `;
 
 export const SlideTechRow = styled.div`
@@ -132,6 +169,12 @@ export const SlideTechPill = styled.span`
   font-size: 0.76rem;
   color: rgba(255, 255, 255, 0.65);
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+  @media (max-width: 900px) {
+    color: ${({ theme }) => theme.colors.textSecondary};
+    border-color: ${({ theme }) => theme.colors.textMuted};
+  }
 `;
 
 
@@ -155,6 +198,16 @@ export const IntroOverlay = styled.div<{ $visible: boolean }>`
   opacity: ${({ $visible }) => ($visible ? 1 : 0)};
   visibility: ${({ $visible }) => ($visible ? "visible" : "hidden")};
   pointer-events: ${({ $visible }) => ($visible ? "auto" : "none")};
+  @media (max-width: 900px) {
+    display: ${({ $visible }) => $visible ? 'flex' : 'none'};
+    position: relative;
+    inset: auto;
+    min-height: 280px;
+    padding: 3rem 1.25rem 2rem;
+    text-align: left;
+    align-items: flex-start;
+    transition: none;
+  }
 `;
 
 export const IntroTitle = styled.h2`
@@ -162,6 +215,7 @@ export const IntroTitle = styled.h2`
   font-size: 4rem;
   font-weight: 800;
   line-height: 1.1;
+  overflow-wrap: anywhere;
   color: ${({ theme }) => theme.colors.text};
   @media (max-width: 640px) {
     font-size: 2.4rem;
@@ -180,45 +234,36 @@ export const IntroSubtitle = styled.p`
 
 
 
-export const ArrowButton = styled.button<{ $side: "left" | "right" }>`
+export const CarouselControls = styled.div`
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  > * { pointer-events: auto; }
+  @media (max-width: 900px) {
+    position: relative;
+    inset: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.25rem 1.5rem;
+  }
+`;
+
+export const ArrowButton = styled(IconButton)<{ $side: "left" | "right" }>`
   position: absolute;
   top: 50%;
   ${({ $side }) => ($side === "left" ? "left: 1.2rem;" : "right: 1.2rem;")}
   transform: translateY(-50%);
-  padding: 0;
-  padding-left: ${({ $side }) => ($side === "left" ? "0" : "3px")};
-  padding-right: ${({ $side }) => ($side === "right" ? "0" : "3px")};
   z-index: 5;
   width: 52px;
   height: 52px;
-  border-radius: 50%;
   background-color: ${({ theme }) => theme.colors.backgroundSecondary};
-  color: ${({ theme }) => theme.colors.text};
-  font-size: 1.3rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background: ${({ theme }) => theme.colors.surface};
-    border-color: ${({ theme }) => theme.colors.accent};
-    transform: translateY(-50%) scale(1.06);
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.colors.accent};
-    outline-offset: 3px;
-  }
-
-  &:disabled {
-    opacity: 0.25;
-    cursor: default;
-    &:hover {
-      transform: translateY(-50%);
-      background: ${({ theme }) => theme.colors.backgroundSecondary};
-    }
+  @media (max-width: 900px) {
+    position: static;
+    transform: none;
+    width: 44px;
+    height: 44px;
   }
 `;
 
@@ -234,11 +279,20 @@ export const DotRow = styled.div`
   z-index: 5;
   display: flex;
   gap: 1rem;
+  @media (max-width: 900px) {
+    position: static;
+    transform: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0;
+    max-width: calc(100% - 104px);
+  }
 `;
 
 export const Dot = styled.button<{ $active: boolean }>`
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
   padding: 0;
   border-radius: 999px;
   border: none;
@@ -254,7 +308,7 @@ export const Dot = styled.button<{ $active: boolean }>`
     height: 10px;
     border-radius: 50%;
     background: ${({ $active, theme }) =>
-      $active ? theme.colors.text : theme.colors.backgroundSecondary};
+      $active ? theme.colors.accent : theme.colors.textMuted};
   }
 
   &:focus-visible {
@@ -272,26 +326,7 @@ export const PageTitle = styled.h1`
   clip-path: inset(50%);
 `;
 
-export const DetailLink = styled(Link)`
-  color: ${({ theme }) => theme.colors.accent};
-  font-weight: 700;
-  padding: 0.5rem 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
-  transition: color 0.2s ease;
-  &:hover,
-  &:focus-visible {
-    color: ${({ theme }) => theme.colors.text};
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.colors.accent};
-    outline-offset: 3px;
-  }
-`;
+export const DetailLink = TextLink;
 
 
 

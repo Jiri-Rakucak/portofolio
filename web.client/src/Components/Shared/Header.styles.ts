@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { Link } from 'react-router';
 import { focusRing } from './controlStyles';
 import { navigationContentWidth } from '../../styles/layout';
+import { IconLink } from './Actions';
 
 const navigationControl = css`
   ${focusRing}
@@ -67,21 +68,7 @@ export const SocialLinks = styled.div`
   gap: 0.75rem;
 `;
 
-export const SocialLink = styled.a`
-  ${focusRing}
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 44px;
-  border-radius: 4px;
-  color: ${({ theme }) => theme.colors.text};
-  text-decoration: none;
-  transition: color 0.2s ease;
-
-  &:hover, &:focus-visible { color: ${({ theme }) => theme.colors.accent}; }
-
-  @media (prefers-reduced-motion: reduce) { transition: none; }
-`;
+export const SocialLink = IconLink;
 
 export const DropdownContainer = styled.div`
   position: relative;

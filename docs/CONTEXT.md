@@ -8,12 +8,12 @@ The project is a personal portfolio with an interactive operating-system-inspire
 
 ## Current Architecture
 
-The active application is `web.client`, a React/Vite single-page app. It uses React Router in Data Mode and styled-components for theme-aware UI. The homepage switches between a desktop and mobile layout with `useBreakpoint`.
+The active application is `web.client`, a React/Vite single-page app. It uses React Router in Data Mode and styled-components for theme-aware UI. The homepage shares one responsive content tree in the historically named `DesktopHomeLayout`; `useBreakpoint` now gates only the optional atom scene above 1000px, using a live media-query subscription.
 
-The desktop homepage includes:
+The shared homepage includes:
 
 - a personal CZ/EN introduction with projects as the primary action and DevOS as secondary
-- a lazy-loaded full-bleed Three.js atom scene
+- a lazy-loaded full-bleed Three.js atom scene above 1000px, with a text-first introduction below that width
 - selected Starbounder and RAG project rows with large unframed previews and central metadata
 - a compact text-based skills section linking to detailed skill pages, without service cards
 
@@ -125,7 +125,7 @@ General UI translations live in `web.client/src/i18n/locales/*/common.json`. Dev
 - The Nginx template covers deep-link fallback without the `/projects` public-directory conflict, missing asset 404s, caching/compression, and temporary host noindex. Unknown SPA pages still get HTTP 200 plus React's 404, not genuine route-aware server statuses. Permanent SEO/sharing URLs, preview image, HTTPS on the stable origin, and prerendering remain later work.
 - Vite builds no longer generate/read development certificates or invoke .NET. Local serving reuses existing PEM files, otherwise falls back to HTTP; `DEV_HTTPS=false` forces HTTP. This makes frontend CI/builds independent of the parked backend.
 - Tests cover motion policy, listeners/cleanup/fallbacks, frame-rate timing, initialized trails, hero-vs-DevOS boundaries, CSS reduced motion, image hints, and deployment order/failure/dry-run using fake transports. Node-only deployment tests live in `web.client/tests/`. Native screenshots/canvas-pixel checks are still blocked by Chromium sandbox startup restrictions; Vite binding and connections to the live IP also failed from this environment. Nginx is unavailable locally, so its template must be syntax/integration-tested on the host.
-- Next: finish the short real-browser motion/media pass, then implement responsive mobile/tablet/small-screen layouts as a continuous range, not a phone/desktop-only split. Backend and DevOS remain deferred.
+- Initial responsive home/carousel/detail layouts are now implemented. Next verify them in a real browser across mobile/tablet/small-desktop widths, including motion, touch, and media. Backend and DevOS remain deferred.
 
 ## Documentation and Publication
 
@@ -137,7 +137,7 @@ General UI translations live in `web.client/src/i18n/locales/*/common.json`. Dev
 
 ## Next Work Candidates
 
-1. Replace mobile placeholder content.
+1. Review and refine the initial responsive layouts on real mobile/tablet/desktop viewports.
 2. Verify Starbounder's public gallery in a browser, then add real project media and outcomes to the remaining case studies. Consider a gameplay clip later.
 3. Add Testing Library when component tests become necessary.
 4. Refactor remaining DevOS placeholder apps into focused modules, especially Games.
@@ -155,7 +155,14 @@ General UI translations live in `web.client/src/i18n/locales/*/common.json`. Dev
 - Public cover presentation is data-driven through optional `cover.presentation`. `background` is the backward-compatible default and keeps Starbounder's existing hero/carousel image. RAG uses `inline`: a normal detail text hero followed by the full screenshot in a stable 16:9 contained preview inside the content band; the carousel excludes the screenshot to avoid overlapping text. There is no title overlay or darkening on the inline screenshot, and the angled transition clears it. No project-ID special cases were added; homepage/DevOS presentation remains unchanged. Tests cover both modes/locales, older metadata, missing sources, arbitrary project IDs, theme styles, and accessible image fallback. Browser layout verification is still pending in the restricted environment.
 - `index.html` uses the portfolio title, English fallback description, author, theme color, and `/favicon.svg`. The JR monogram uses Inter Black glyph outlines, independent of external fonts; attribution/license are in the SVG and `public/licenses/inter-OFL.txt`. The header stays logo-free. Localized per-route title/description/robots updates are implemented in the browser; sharing previews remain pending and no production URL has been assumed.
 - Footer uses owner-provided email, phone, location, and LinkedIn. The existing GitHub profile URL was preserved as requested; no independent account verification was performed.
-- Mobile remains deferred by the owner's desktop-first preference.
+- Mobile implementation has started after desktop acceptance; actual mobile/tablet acceptance is still pending.
+
+## Responsive Layout and Actions
+
+- The old `Components/Mobile` placeholder was removed. `HomeHero`, `HomeProjects`, and `HomeSkills` now form one responsive homepage. At 1000px and below, the intro is left-aligned without a mounted scene; the main CTA fills narrow phone widths. Project and skills rows stack using their existing open-section design and shared angled cuts.
+- At 900px and below, carousel slides and background-mode detail heroes place a stable 16:9 media area above theme-colored text. RAG retains its separate inline detail screenshot and gray carousel gradient. The carousel no longer relies on a fixed viewport height on narrow screens; desktop height can grow with copy too. Controls sit below narrow slides. Short horizontal touch swipes supplement buttons/dots/arrow keys, while pointer cancellation and vertical-scroll/pinch behavior are preserved. Inactive slides remain inert and hidden.
+- `Components/Shared/Actions.ts` centralizes public filled/outlined/text/icon actions using separate native button, Router Link, and anchor components. Homepage, projects, services, 404, social icons, gallery controls, and settings commands consume these styles; specialized navigation/selection controls and parked forms remain separate. Targets are at least 44px, CTA height is at least 48px, and labels can wrap. `actionContrast.ts` selects a black/white foreground for solid fills; this is not a full custom-color contrast audit.
+- Focused tests cover compact-vs-wide hero scene mounting, shared bilingual content, responsive CSS contracts, action markup/styles, and swipe direction/cancellation/input filtering. SSR/CSS contracts do not verify actual browser geometry, native touch dispatch, or WebGL. Local Vite binding still fails with `EPERM`; Chromium startup fails on a restricted socket operation. No live upload was performed.
 
 ## Localized Page Metadata
 
