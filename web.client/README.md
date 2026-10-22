@@ -2,6 +2,8 @@
 
 Active React/Vite frontend for the portfolio project.
 
+For the project introduction, see the [public-facing root README](../README.md). This guide covers development and implementation details. Before making the source public, review the [publication checklist](../docs/PUBLICATION.md).
+
 ## Stack
 
 - React 19
@@ -29,11 +31,14 @@ npm run build
 npm audit
 ```
 
-The Vite dev server is configured for HTTPS and defaults to:
+The Vite dev server uses existing local HTTPS PEM certificates when available; otherwise it falls back to HTTP. It never generates certificates or invokes .NET. Builds are Node/npm-only. The default port is:
 
 ```text
-https://localhost:60522/
+http://localhost:60522/
+# https://localhost:60522/ when local PEM certificates are present
 ```
+
+Set `DEV_HTTPS=false` to force local HTTP, or `DEV_SERVER_PORT` to change the port. For static hosting and the versioned `deploy/upload.sh` / `deploy/nginx.conf` templates, see [Deployment](../docs/DEPLOYMENT.md). The old ignored `web.client/deploy.sh` is local legacy configuration, not the recommended upload path.
 
 ## Routing
 
@@ -63,7 +68,7 @@ src/
 │   ├── Mobile/         # Mobile home layout
 │   ├── Settings/       # Theme settings controls
 │   └── Shared/         # Header, footer, forms, typography
-├── Contexts/           # App and DevOS state
+├── Contexts/           # DevOS state
 ├── content/            # Central projects and services data
 ├── Hooks/              # Shared React hooks
 ├── i18n/               # Locale config and JSON translation resources
@@ -79,6 +84,9 @@ src/
 - `AtomScene` is lazy-loaded by the desktop hero's `HeroScene` boundary.
 - `/devos` is lazy-loaded as a separate route.
 - The Three.js scene still creates a large chunk, but it is isolated from the main app bundle.
+- The public hero follows reduced motion with a complete static atom and demand rendering. Hidden/offscreen heroes pause the frame loop and pointer tracking; visible full-motion heroes resume with bounded deltas and DPR capped at 1.5. DevOS keeps its own default frame loop, camera, and drag controls.
+- Electron orbit speed uses elapsed time rather than display FPS. `Desktop/atomParticles.ts` initializes full trails for a correct first/static frame; `heroActivity.ts` owns visibility/frame policy. Shared `Hooks/useReducedMotion.ts` listens to live preference changes. Global reduced-motion CSS also disables route view transitions.
+- `PortfolioImage` defaults to lazy/async decoding. The background detail cover and opened gallery image get eager/high hints; the inline preview and below-fold media stay lazy, and inactive carousel slides use low priority. Stable preview dimensions are unchanged. Browser heuristics may still preload nearby lazy images.
 
 ## Content Model
 
@@ -165,7 +173,7 @@ Theme selection defaults to `system` and is exposed as a three-position System/L
 
 The light theme keeps its existing backgrounds, primary text, and accent. Only secondary/muted text tokens are darker to improve readability on gray content bands. Focused default-palette contrast tests cover these text colors on the theme's backgrounds; they do not certify custom overrides or all interactive states. Unit/SSR tests live in `Components/Shared/__tests__/`, `Components/Settings/__tests__/`, and `styles/__tests__/`; native browser interactions and actual ultrawide layout still need browser verification.
 
-DevOS project discovery currently uses this content model in two places:
+DevOS portfolio content is consumed by these views:
 
 - Explorer: project catalog and entry point into ProjectWindow case studies
 - Browser: featured project preview surface with route/source actions and address-bar project search
@@ -197,6 +205,6 @@ DevOS-only profile copy, tooltip text, Lab copy, and terminal text live in `devo
 ## Current Known Gaps
 
 - Mobile home is placeholder content.
-- Dashboard, admin, login, and some DevOS apps still contain prototype/demo behavior.
+- Admin, login, and some DevOS apps still contain prototype/demo behavior; client-side route guards are not a working authentication system.
 - Service forms are hidden until a real backend or form provider exists; the services page uses direct contact links for now.
 - Tests cover central content, homepage/project rendering, contact links, camera projection, and shared section styles. Actual browser and WebGL layout verification remains pending in restricted environments.

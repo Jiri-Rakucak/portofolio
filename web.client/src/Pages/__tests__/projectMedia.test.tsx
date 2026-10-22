@@ -52,15 +52,18 @@ describe('project gallery', () => {
 
 describe('portfolio image', () => {
     it('renders an eager cover with its original source and alt text', () => {
-        const html = render(<PortfolioImage src="/planet.png" alt="Generated planet" fit="cover" loading="eager" />);
+        const html = render(<PortfolioImage src="/planet.png" alt="Generated planet" fit="cover" loading="eager" fetchPriority="high" />);
 
         expect(html).toContain('src="/planet.png"');
         expect(html).toContain('alt="Generated planet"');
         expect(html).toContain('loading="eager"');
+        expect(html).toContain('fetchPriority="high"');
+        expect(html).toContain('decoding="async"');
     });
 
     it('defaults gallery images to lazy loading', () => {
         expect(render(<PortfolioImage src="/planet.png" alt="Planet" />)).toContain('loading="lazy"');
+        expect(render(<PortfolioImage src="/planet.png" alt="Planet" />)).toContain('fetchPriority="auto"');
     });
 
     it('shows a localized accessible fallback instead of an empty image request', async () => {

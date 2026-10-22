@@ -42,6 +42,7 @@ describe('project cover presentation', () => {
         expect(html).toContain(`aria-label="${locale === 'cs' ? 'Náhled projektu' : 'Project preview'}"`);
         expect(html).toContain(`alt="${project.cover!.alt}"`);
         expect(html.match(/<img\b/g)).toHaveLength(1);
+        expect(html).toMatch(/<img[^>]*loading="lazy"[^>]*fetchPriority="auto"/);
     });
 
     it.each(['en', 'cs'] as const)('retains the %s Starbounder image behind its hero text', async locale => {
@@ -52,6 +53,7 @@ describe('project cover presentation', () => {
         expect(hero).toContain('data-cover-presentation="background"');
         expect(hero).toContain(`src="${project.cover!.src}"`);
         expect(hero).toContain('Starbounder');
+        expect(hero).toMatch(/<img[^>]*loading="eager"[^>]*fetchPriority="high"/);
         expect(html).not.toContain('data-cover-presentation="inline"');
     });
 

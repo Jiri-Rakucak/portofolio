@@ -1,166 +1,117 @@
-# Jiri Rakucak Portfolio
+# Jiří Rakučák | Portfolio
 
-Personal portfolio with bilingual project case studies, a mouse-responsive Three.js atom, and an experimental desktop-style experience called DevOS. The React/Vite frontend is the active product; the ASP.NET backend shell is reserved for possible future API work.
+A personal portfolio built with React and TypeScript, combining bilingual project case studies with an interactive Three.js homepage and an experimental desktop environment called **DevOS**.
 
-## Current Status
+This is both the source of my portfolio and a place to explore frontend architecture, accessible interactions, and real-time graphics. The public website is the main product; DevOS is an ongoing experiment.
 
-- Active work focuses on the public desktop portfolio. Mobile redesign and further DevOS work are deferred.
-- The homepage follows introduction -> selected projects -> skills, using open sections rather than glass service cards.
-- Starbounder and Personal Conversation RAG are the selected homepage projects. The unfinished DevOS portfolio is excluded from that selection.
-- English and Czech content use JSON resources and in-app language switching, without `/en` or `/cs` route prefixes.
-- Project/service metadata and owner contacts are centralized and shared across the public website and DevOS.
-- The backend is inactive; public contact actions use direct links rather than unfinished forms.
+[Getting Started](#getting-started) · [Technical Decisions](#technical-decisions) · [Project Structure](#project-structure) · [Documentation](#documentation)
 
-## Current Features
+## Highlights
 
-- Personal introduction with project browsing as the primary action and DevOS as secondary.
-- Lazy-loaded atom scene with smooth, bounded mouse tilt across the homepage hero. Mouse following respects reduced-motion/input preferences; DevOS retains its own drag controls.
-- A right-aligned header without a logo, with Home in the dropdown, social links, and Preferences.
-- A full-height Preferences drawer aligned with the navigation on wide displays, sliding down from above, with EN/CZ switching and a three-position System/Light/Dark control. It follows the browser-reported color scheme by default and remembers the selected theme preference and separate custom colors for light/dark.
-- Unframed project previews and a compact text-based skills section, with shared bounded angled transitions across public pages.
-- Project carousel at `/projects` and data-driven case studies at `/projects/:projectId`.
-- Starbounder: a 2D Unity graduation prototype with a real cover, personal motivation, five-image gallery, image viewer, technical notes, and prototype download link. It is not presented as a finished game.
-- Personal Conversation RAG: a local-first Python retrieval project with a case study and owner-provided interface preview. Answer generation is planned, not implemented.
-- Localized skills directory and detail pages, plus shared email, phone, location, and social contacts.
-- Localized 404 page within the public layout, with explicit home/project links and typography matching the portfolio.
-- Route-specific browser titles and descriptions in English/Czech, with project/skill metadata derived from central content and client-side noindex for missing/private pages.
-- Experimental DevOS with draggable/resizable windows, project Explorer and Browser, an interactive portfolio Terminal, About Me, and Component Lab. Other apps remain partly demo-quality.
+- **English and Czech:** localized interface and project content, with language switching on the same URLs.
+- **Project case studies:** structured stories, technologies, screenshots, and a keyboard-accessible image viewer.
+- **Interactive homepage:** a lazy-loaded atom scene with bounded mouse tilt, a static reduced-motion mode, and rendering paused when the hero is not visible.
+- **Personal preferences:** system/light/dark themes, with separate custom color palettes saved for each theme.
+- **Shared content:** the website and DevOS Explorer, Browser, Terminal, and project windows read from the same typed content model.
+- **DevOS:** draggable and resizable windows, a taskbar, project discovery, a portfolio CLI, and a component lab.
 
-## Tech Stack
+## Built With
 
-Frontend:
+| Area | Technologies |
+| --- | --- |
+| Application | React 19, TypeScript 6, Vite 8 |
+| Navigation | React Router 7 |
+| Styling and localization | styled-components 6, i18next, react-i18next |
+| Graphics | Three.js, React Three Fiber, Drei, React Spring |
+| Quality | Vitest, ESLint 10, TypeScript checks |
 
-- React 19
-- TypeScript 6
-- Vite 8
-- React Router 7
-- i18next / react-i18next
-- styled-components 6
-- Three.js with React Three Fiber and Drei
-- React Spring for atom animation
-- Vitest for unit and server-rendered component tests
-- ESLint 10 with React Hooks rules
+The ASP.NET shell in `Web.Server/` is parked. The portfolio runs as a static frontend and does not need a backend, database, or API keys.
 
-Backend:
+## Technical Decisions
 
-- ASP.NET project shell currently targeting .NET 9
-- Contains template/demo code and is not part of the active workflow
-- If backend work becomes necessary, upgrade it to the latest stable LTS first
+**One content model, multiple views.** Localized JSON holds project and skill content; typed accessors keep public pages and DevOS consumers aligned. Adding a project does not require adding a route or copying metadata into components.
 
-## Repository Structure
+**Keep optional graphics optional.** DevOS and the Three.js scene have separate lazy boundaries. The homepage scene has an error boundary, so a rendering failure does not remove navigation or the introduction. Orbital timing uses elapsed time rather than display refresh rate.
 
-```text
-.
-├── web.client/        # Active React/Vite frontend
-├── Web.Server/        # Parked ASP.NET backend shell
-├── docs/              # Current context, project source notes, and ideas
-├── AGENTS.md          # Instructions for coding agents working in this repo
-├── Web.sln            # Visual Studio solution
-└── README.md          # Main project entry point
-```
+**Use browser primitives.** Navigation uses native buttons and links. Preferences and the image viewer use native dialogs for modal focus containment. The theme selector uses grouped radio inputs; language controls expose their selected state.
 
-## Frontend Commands
+**Respect motion and loading preferences.** Reduced motion disables homepage animation and CSS/view transitions. Images reserve their layout space, load lazily below the fold, and have accessible failure states. Above-the-fold project covers receive explicit loading-priority hints.
 
-Requirements:
+**Make the static deployment explicit.** Browser metadata is localized per route. Deployment templates handle SPA deep links, static-asset errors, and caching; uploads publish assets before the HTML entry point and retain older lazy chunks.
 
-- Node.js `>=20.19.0` and npm.
-- The Vite configuration loads local HTTPS PEM certificates. If they are missing, it invokes `dotnet dev-certs`; a .NET SDK must be available for that step. Running the backend itself is not required for the portfolio.
+## Getting Started
 
-Start the frontend from the repository root:
+Requirements: **Node.js 20.19+ and npm**, using a version supported by the installed Vite release.
+
+From the repository root:
 
 ```bash
 cd web.client
-npm install
+npm ci
 npm run dev
 ```
 
-The default local URL is [https://localhost:60522/](https://localhost:60522/). Set `DEV_SERVER_PORT` to use another port. Local HTTPS uses a development certificate that may need to be trusted by your browser.
+The default port is **60522**. Use the URL printed by Vite: normally `http://localhost:60522/`, or HTTPS when existing local development PEM certificates are available. Set `DEV_HTTPS=false` to force HTTP or `DEV_SERVER_PORT` to change the port.
 
-Run quality checks from `web.client/`:
+No .NET SDK or development certificates are needed to build the frontend.
+
+### Checks and Build
+
+Run from `web.client/`:
 
 ```bash
 npm run lint
 npm run test
 npm run build
-npm audit
+npm run preview
 ```
 
-## Development Notes
+The build produces `web.client/dist/`. `npm run preview` serves that build locally; it is not the production hosting setup. Run `npm audit` separately to check dependency advisories.
 
-- Do not use Yarn or pnpm unless the package manager decision is explicitly changed.
-- Keep `package-lock.json` as the only frontend lockfile.
-- Avoid committing generated directories such as `.vs/`, `bin/`, `obj/`, `dist/`, and `node_modules/`.
-- The DevOS and Three.js scene are lazy-loaded to keep the main bundle smaller.
-- Production builds still warn about the large isolated Three.js chunk; it is not part of the initial application bundle.
-- Portfolio projects and services are loaded from localized JSON resources through `web.client/src/content/`.
-- Tests cover central content, homepage and project rendering, contacts, shared section styles, camera framing, mouse tilt, and event cleanup. They do not replace browser/WebGL visual verification.
-- The backend still includes template WeatherForecast code and should be treated as inactive.
+Tests cover content consistency, route metadata, component markup, theme persistence, motion math and lifecycle policy, and deployment sequencing with fake transports. They do not replace browser, WebGL, or device testing.
 
-## Content Model
+## Project Structure
 
-Project and service metadata are centralized in localized JSON resources:
+```text
+web.client/
+  src/
+    Components/    Public UI, preferences, DevOS, and Three.js scene
+    Pages/         Homepage, projects, skills, and fallback pages
+    content/       Typed access to shared portfolio data
+    i18n/          English/Czech UI and content JSON
+    metadata/      Route-aware browser metadata
+    styles/        Theme state, tokens, and shared styles
+  public/          Project screenshots, favicon, and font attribution
+  tests/           Node-only deployment tests
+deploy/            Static-host configuration and upload script
+docs/              Development context, source notes, and deployment guide
+Web.Server/        Inactive ASP.NET shell
+```
 
-- `web.client/src/i18n/locales/en/content.json`
-- `web.client/src/i18n/locales/cs/content.json`
+For content edits, start with `web.client/src/i18n/locales/{en,cs}/content.json`. Keep project IDs aligned across languages. Contact details live in `web.client/src/content/contact.ts`.
 
-Typed access helpers live in:
+## Current Status
 
-- `web.client/src/content/projects.ts`
-- `web.client/src/content/services.ts`
+The desktop portfolio is the active implementation. Mobile, tablet, and intermediate-width layouts are the next UI phase. Parts of DevOS and the login/admin routes are prototypes, not a working authentication or content-management system.
 
-Owner contacts and social URLs are centralized in `web.client/src/content/contact.ts`.
+Desktop appearance and keyboard operation have been manually reviewed. Native browser verification of the latest motion/media changes and broader device coverage remain ongoing. Route-specific prerendering and permanent social-sharing metadata are not implemented yet.
 
-Homepage project selection is controlled by `getHomeProjects` in `projects.ts`, independently of the general `featured` flag used elsewhere. It currently selects Starbounder first, then RAG. Descriptions, status labels, technologies, and covers come from the central content rather than component-local copies.
+## Related Work
 
-RAG uses `web.client/public/projects/ragsystem/ragsystem-preview.png` as its central cover, with localized alt text in both locale entries. The homepage shows this preview; the carousel uses a neutral gray gradient so screenshot text cannot overlap portfolio copy. The public detail uses `cover.presentation: "inline"` to show the full screenshot below its text introduction; Starbounder uses `"background"` to retain its cinematic hero and carousel image. Omitted presentation fields default to `"background"`. See the [frontend guide](web.client/README.md) for content and gallery details.
+- [Personal Conversation RAG](https://github.com/Jiri-Rakucak/ragsystem): local-first retrieval over conversation exports and notes, featured in the portfolio.
+- [Starbounder](https://jirirakucak.itch.io/starbounder): a 2D Unity graduation prototype, presented as a project case study rather than a finished game.
 
-The JSON shape is intentionally close to what a future admin UI, backend API, CMS, or local content editor could provide. When admin functionality becomes useful, the project can replace the static JSON imports with fetched content while keeping the consuming UI mostly unchanged.
+## Documentation
 
-Public project pages and DevOS Explorer, Browser, Terminal, and ProjectWindow consume the same project data. Optional `caseStudy` content supports the project story, motivation, lessons, technical sections, and media. See [Starbounder source notes](docs/STARBOUNDER.md) for the graduation prototype's scope and verification limits.
+- [Frontend Guide](web.client/README.md): workflow, content model, localization, and implementation details.
+- [Deployment](docs/DEPLOYMENT.md): domain-independent hosting templates, upload procedure, and browser checks.
+- [Project Context](docs/CONTEXT.md): current decisions, verification limits, and next work.
+- [Starbounder Notes](docs/STARBOUNDER.md): case-study sources and prototype scope.
+- [Agent Instructions](AGENTS.md): repository conventions for coding assistants.
+- [Publication Checklist](docs/PUBLICATION.md): checks before changing repository visibility.
 
-General UI translations live in `web.client/src/i18n/locales/*/common.json`; DevOS-specific UI, terminal output, About Me, and Component Lab copy live in `web.client/src/i18n/locales/*/devos.json`. Language selection is stored in `localStorage` under `portfolio.locale` and exposed through Preferences.
+## Credits and Licensing
 
-## Routes
+The JR favicon uses Inter glyph outlines; the [bundled Inter license](web.client/public/licenses/inter-OFL.txt) records the font attribution. Project screenshots are supporting material for their respective case studies.
 
-Canonical frontend routes use lowercase paths:
-
-- `/`
-- `/projects`
-- `/projects/:projectId`
-- `/services`
-- `/services/frontend-development`
-- `/services/game-and-3d-graphics`
-- `/services/backend-and-systems`
-- `/services/ux-ui-design`
-- `/services/consulting`
-- `/devos`
-
-Legacy mixed-case routes redirect to the lowercase equivalents.
-
-`/login` and `/admin` also exist, but still contain prototype/demo behavior. They are not a working content-management solution.
-
-## Known Gaps
-
-- Mobile home remains placeholder-quality; it will be redesigned after the desktop direction is settled.
-- RAG still needs an anonymized CLI example, an architecture visual, and measured indexing/search results.
-- Automated browser verification of the hero, mouse interaction, gallery, drawer, and viewport layout remains pending. The current agent sandbox blocks Vite port binding and Chromium startup/socket operations.
-- Localized route metadata updates in the browser; the static HTML remains an English homepage fallback. Per-route prerendering, deployment HTTP status handling, and social sharing previews remain pending.
-- Several DevOS apps and the login/admin flow remain prototypes.
-- Contact forms, an admin editor, and API-backed content are future possibilities, not implemented features.
-
-## Documentation Index
-
-- [Frontend README](web.client/README.md)
-- [Project Context](docs/CONTEXT.md)
-- [Agent Instructions](AGENTS.md)
-- [Starbounder Source Notes](docs/STARBOUNDER.md)
-- [Ideas](docs/ideas.md): inspiration only, not a committed roadmap
-
-## Next Recommended Work
-
-1. Check the desktop experience in a browser and refine spacing and interaction based on the rendered UI.
-2. Add real RAG media and concrete examples/results to its case study; consider a Starbounder gameplay clip later.
-3. Add sharing metadata and assess prerendering once the production URL and preview image are settled. Theme preference and per-theme custom-color persistence are implemented.
-4. Return to DevOS and replace the remaining demo behavior in a separate phase.
-5. Redesign mobile after the desktop layout is settled.
-6. Introduce a backend, forms, or an admin editor only when needed; upgrade the parked backend to the latest stable LTS before real backend work.
+A project-wide license has not been selected yet. The font license is not a license for the entire repository.

@@ -1,4 +1,3 @@
-// filepath: c:\Users\jirik\Source\Repos\Web\web.client\src\Components\Icons\GitHubIcon.tsx
 interface GitHubIconProps {
   className?: string;
   size?: number;

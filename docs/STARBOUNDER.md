@@ -8,8 +8,7 @@ The portfolio describes implemented exploration, ship/on-foot controls, procedur
 
 ## Reviewed Sources
 
-- Repository: `https://github.com/pslib-cz/MP2025-26_Rakucak-Jiri_Tvorba-vesmirne-2D-hry-v-unity` (internal organization repository).
-- Local checkout: `/home/jiri/projects/school/MP2025-26_Rakucak-Jiri_Tvorba-vesmirne-2D-hry-v-unity`.
+- Source: the author's Unity graduation-project checkout, hosted in an access-restricted school repository at the time of review. Its private URL and machine-specific checkout path are intentionally omitted here. The supplied thesis document is not included in this portfolio repository.
 - Latest local tracked commit at review: `e490a18`, dated 2026-03-23, `aktualizace dokumentace`.
 - Thesis: `MP2026-Rakučák-Jiří-P4A-Tvorba-vesmírné-hry-v-unity.docx`.
 - Local presentation notes supplied additional context, including the itch.io URL and prototype scope.
@@ -40,9 +39,9 @@ EN/CZ cover alt text, screenshot captions, the download label, and the owner's p
 
 The public detail leads with the project cover and CTA, then motivation/overview, screenshots, the challenge/approach/result, and lessons. Highlights, technologies, and additional notes appear once in expandable technical details. Public case-study rendering is separate from DevOS window components.
 
-Yet Another React Lightbox was evaluated through Context7. The npm registry was unavailable, so no dependency was added. The limited full-size viewer uses the native HTML `dialog` for modal focus containment and Escape behavior, with project-specific previous/next controls. It does not implement custom pan/zoom physics. Revisit the library if pinch zoom, panning, or richer media becomes necessary.
+The limited full-size viewer uses the native HTML `dialog` for modal focus containment and Escape behavior, with project-specific previous/next controls. It does not implement custom pan/zoom physics. A lightbox library was considered but no dependency was added. Revisit that choice if pinch zoom, panning, or richer media becomes necessary.
 
-Unit tests cover public page rendering, gallery filtering and optional metadata, empty sources, localization, and image defaults. A Playwright interaction/screenshot check could not run in the current environment because Chromium lacks `libnspr4.so`; the dev server also cannot bind a port (`EPERM`). Browser verification of layout, image failures, keyboard navigation, focus return, and narrow viewports remains a follow-up.
+Unit tests cover public page rendering, gallery filtering and optional metadata, empty sources, localization, and image defaults. Automated browser/WebGL verification is still pending: the latest Chromium attempt failed on sandbox-restricted socket operations, and the dev server could not bind a port (`EPERM`). Earlier attempts also lacked native libraries. The owner has reviewed desktop appearance and keyboard operation, but image-failure, gallery-focus, reduced-motion, and narrow-viewport checks remain separate follow-ups.
 
 ## Follow-up Priorities
 

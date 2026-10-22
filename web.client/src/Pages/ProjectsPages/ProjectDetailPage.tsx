@@ -93,6 +93,7 @@ export default function ProjectDetailPage() {
             fit="cover"
             position="75% center"
             loading="eager"
+            fetchPriority="high"
           />
         )}
         <HeroContent>
@@ -144,7 +145,7 @@ export default function ProjectDetailPage() {
               src={cover.src}
               alt={cover.alt}
               fit="contain"
-              loading="eager"
+              loading="lazy"
             />
           </Section>
         )}

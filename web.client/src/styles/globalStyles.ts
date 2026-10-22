@@ -75,4 +75,15 @@ export const GlobalStyles = createGlobalStyle<{ theme: Theme }>`
   ::view-transition-new(root) {
     animation: 400ms ease both ;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation: none !important;
+      transition: none !important;
+      scroll-behavior: auto !important;
+    }
+    ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) {
+      animation: none !important;
+    }
+  }
 `;

@@ -63,7 +63,7 @@ function ImageViewer({ images, index, onSelect, onClose }: {
           </IconButton>
         </Controls>
       </ViewerToolbar>
-      <FullImage src={image.src} alt={image.alt || image.label} loading="eager" />
+      <FullImage src={image.src} alt={image.alt || image.label} loading="eager" fetchPriority="high" />
       <ViewerCaption>
         <span id={captionId}>{image.label}</span>
         <a href={image.src} target="_blank" rel="noreferrer">{t('projectsPage.gallery.original')}</a>

@@ -70,6 +70,8 @@ Do not run backend upgrades or backend migrations unless the task specifically a
 - DevOS and the Three.js scene are intentionally split into separate lazy chunks.
 - Do not reintroduce static imports from route setup to DevOS or Three.js modules.
 - Large Three.js chunks are acceptable when isolated from the initial bundle.
+- The public hero uses `Hooks/useReducedMotion.ts` and `Desktop/heroActivity.ts`: static/demand rendering for reduced motion, no frame loop when hidden/offscreen, and capped DPR. Keep `animated` propagation through pointer rotation, Atom, and Fragments; a static scene must still show initialized electron trails. `atomParticles.ts` owns elapsed-time orbital updates and bounded deltas. Do not replace this with CSS-only reduced-motion handling.
+- Public `PortfolioImage` defaults to lazy/async. Only the background detail cover, active carousel cover, and explicitly opened viewer use eager/high hints; inline RAG previews and below-fold thumbnails stay lazy. Priority is a browser hint, not a guarantee. Preserve reserved dimensions and failure fallbacks.
 
 ## Testing Expectations
 
@@ -111,7 +113,7 @@ Preferences are a right-side drawer in `Components/Settings/PreferencesDrawer.ts
 
 Desktop home hero lives in `Components/Desktop/HomeHero.tsx`. `HeroScene` keeps the atom lazy and isolates rendering failures from navigation. `AtomScene` defaults to its existing DevOS window layout; only the homepage passes `layout="hero"` for full-bleed rendering and camera framing. Keep project browsing as the primary hero action and DevOS as secondary. Mobile home remains deferred.
 
-Homepage mouse tilt is isolated in `HeroPointerRotation`, `heroPointer.ts`, and `heroPointerEvents.ts`. Listen on the hero DOM ref (including copy/buttons), use client coordinates relative to its bounds, and animate a separate parent group using Three.js damping. Keep angles bounded and disable following for reduced motion or non-mouse input. Hero OrbitControls are removed to avoid competing rotation; DevOS controls and inner atom/electron animation remain unchanged.
+Homepage mouse tilt is isolated in `HeroPointerRotation`, `heroPointer.ts`, and `heroPointerEvents.ts`. Listen on the hero DOM ref (including copy/buttons), use client coordinates relative to its bounds, and animate a separate parent group using Three.js damping. Keep angles bounded and disable following for reduced motion or non-mouse input. Hero OrbitControls are removed to avoid competing rotation. Preserve DevOS controls and the atom's geometry/base pose/orbit appearance; the hero's motion policy pauses all animation when needed, and orbital timing is frame-rate-independent.
 
 The header intentionally has no logo. Keep the Home link in its dropdown and navigation aligned right. The dropdown background extends behind the top icons with a continuous surface and only rounded bottom corners; do not turn it into a detached bordered popover. Starbounder is a 2D game; do not introduce 3D presentation that suggests otherwise.
 
@@ -133,13 +135,23 @@ Do not duplicate project/service metadata inside components. If future admin fun
 
 ## Documentation Map
 
-- `README.md`: main project overview
+- `README.md`: public-facing GitHub overview, quick start, and documentation entry point
 - `web.client/README.md`: frontend workflow and structure
 - `docs/CONTEXT.md`: current state, decisions, and next work
+- `docs/DEPLOYMENT.md`: domain-independent static hosting, upload procedure, and browser checks
+- `docs/PUBLICATION.md`: publication checks, local review limits, and historical privacy findings
 - `AGENTS.md`: instructions for coding agents
+
+## Deployment
+
+- `deploy/nginx.conf` is a reviewable HTTP server-block template, not a verified copy of the live Oracle configuration. It intentionally sends a temporary noindex header; remove it only when publishing on the stable origin. Do not hardcode the temporary IP into metadata or assume the template was applied.
+- `deploy/upload.sh` requires explicit `DEPLOY_HOST` and absolute `DEPLOY_DIR`; optional key/health URL come from the environment. Keep assets-first/index-last publication, upload failure handling, and retention of old hashed chunks. Never run an upload or server reload without the owner's explicit request. The ignored `web.client/deploy.sh` is legacy/local and deletes old output; do not use it as the versioned workflow.
+- Vite builds must work without .NET or certificate files. Dev HTTPS reuses existing PEM files only, with HTTP fallback. Backend configuration remains parked.
+- Node-only deployment tests live in `web.client/tests/`, type-checked by `tsconfig.node.json`, with fake transports; they must not contact a real host. Nginx syntax/integration and native browser/WebGL checks require the appropriate environment.
 
 ## Known Project State
 
+- The repository is still private; a public-facing README does not authorize a visibility change, license selection, or history rewrite. Historical `.vs/`, build metadata, and commit identities need a publication review even though generated files are absent from the current tree. Keep machine-specific paths and restricted-source URLs out of current public-facing docs.
 - Mobile layout is still placeholder-quality.
 - Several pages and DevOS apps are still prototype/demo quality.
 - Service forms are hidden until a real backend or form provider exists.

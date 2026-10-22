@@ -6,6 +6,8 @@ import { useLayoutEffect, type RefObject } from 'react';
 import { PerspectiveCamera } from 'three';
 import { frameHeroCamera } from './heroCamera';
 import HeroPointerRotation from './HeroPointerRotation';
+import { useReducedMotion } from '../../Hooks/useReducedMotion';
+import { useHeroActivity } from './heroActivity';
 
 const Container = styled.div<{ $immersive: boolean }>`
     height: ${({ $immersive }) => $immersive ? '100%' : '550px'};
@@ -39,14 +41,18 @@ type AtomSceneProps = {
 
 const AtomScene = ({ layout = 'window', pointerSource }: AtomSceneProps) => {
     const immersive = layout === 'hero';
+    const reducedMotion = useReducedMotion();
+    const activity = useHeroActivity(pointerSource, immersive, reducedMotion);
+    const animated = !immersive || activity.animated;
     return (
         <Container $immersive={immersive}>
-            <StyledCanvas camera={{position: [0, 0, immersive ? 12 : 10]}} fallback={immersive ? null : undefined}>
+            <StyledCanvas camera={{position: [0, 0, immersive ? 12 : 10]}} fallback={immersive ? null : undefined}
+                frameloop={immersive ? activity.frameloop : 'always'} dpr={immersive ? [1, 1.5] : undefined}>
                 {immersive && <HeroCamera />}
                 <ambientLight intensity={.5} />
                 <pointLight position={[10, 10, 10]} />
                 {immersive ? (
-                    <HeroPointerRotation pointerSource={pointerSource}><Atom /></HeroPointerRotation>
+                    <HeroPointerRotation pointerSource={pointerSource} animated={animated}><Atom animated={animated} /></HeroPointerRotation>
                 ) : (
                     <>
                         <Atom />

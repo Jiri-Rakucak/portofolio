@@ -36,9 +36,10 @@ type PortfolioImageProps = {
   fit?: 'cover' | 'contain';
   position?: string;
   loading?: 'eager' | 'lazy';
+  fetchPriority?: 'high' | 'low' | 'auto';
 };
 
-function ImageContent({ src, alt, className, fit = 'contain', position = 'center', loading = 'lazy' }: PortfolioImageProps) {
+function ImageContent({ src, alt, className, fit = 'contain', position = 'center', loading = 'lazy', fetchPriority = 'auto' }: PortfolioImageProps) {
   const [failed, setFailed] = useState(false);
   const { t } = useTranslation('common');
 
@@ -49,7 +50,7 @@ function ImageContent({ src, alt, className, fit = 'contain', position = 'center
           {t('projectsPage.gallery.unavailable')}
         </Unavailable>
       ) : (
-        <Image src={src} alt={alt} loading={loading} decoding="async"
+        <Image src={src} alt={alt} loading={loading} decoding="async" fetchPriority={fetchPriority}
           $fit={fit} $position={position} onError={() => setFailed(true)} />
       )}
     </Frame>

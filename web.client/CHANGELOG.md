@@ -1,4 +1,8 @@
-This file explains how Visual Studio created the project.
+# Historical Scaffolding Notes
+
+This is the original Visual Studio generation record, not a maintained changelog or current setup guide. Current commands and certificate behavior are documented in [the frontend guide](README.md); implementation decisions live in [Project Context](../docs/CONTEXT.md).
+
+The following records how Visual Studio originally created the project. In particular, the original weather demo and automatic certificate setup are no longer the active frontend workflow.
 
 The following tools were used to generate this project:
 - create-vite

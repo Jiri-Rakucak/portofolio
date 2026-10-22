@@ -103,7 +103,9 @@ export default function ProjectsPage() {
                   >
                     {cover && (
                       <SlideCover src={cover.src} alt={cover.alt}
-                        fit="cover" position="75% center" />
+                        fit="cover" position="75% center"
+                        loading={!introVisible && index === activeIndex ? 'eager' : 'lazy'}
+                        fetchPriority={!introVisible && index === activeIndex ? 'high' : 'low'} />
                     )}
                     <SlideContent>
                       <SlideCategory>{project.category}</SlideCategory>

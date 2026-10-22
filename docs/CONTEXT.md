@@ -4,7 +4,7 @@ This document preserves the current project state for future development session
 
 ## Product Direction
 
-The project is a personal portfolio with an interactive operating-system-inspired experience called DevOS. The portfolio should demonstrate modern frontend engineering, 3D/web interaction, service offerings, and eventually real project case studies.
+The project is a personal portfolio with an interactive operating-system-inspired experience called DevOS. The portfolio demonstrates frontend engineering, 3D/web interaction, skills, and real project case studies.
 
 ## Current Architecture
 
@@ -23,7 +23,8 @@ The DevOS route includes:
 - draggable/resizable windows
 - taskbar
 - portfolio Explorer and Browser apps backed by central project content
-- placeholder app windows such as terminal, games, and lab
+- an interactive portfolio Terminal, About Me, and Component Lab
+- remaining prototype/demo app windows, including Games
 
 The ASP.NET project exists as a future backend placeholder. It should remain out of scope until backend functionality is explicitly needed.
 
@@ -34,8 +35,8 @@ The ASP.NET project exists as a future backend placeholder. It should remain out
 - React Router was kept, upgraded, and moved to current v7 import conventions.
 - DevOS was moved behind a lazy route boundary.
 - `AtomScene` was moved behind a lazy component boundary.
-- The desktop hero is now isolated in `HomeHero` and `HeroScene`, with a bounded left-shifted camera projection and an optional-scene error boundary. Atom geometry and animation are unchanged; the default DevOS window layout retains its previous framing.
-- Homepage atom tilt follows mouse position within the hero through a separate parent group, bounded to 12 degrees of pitch and 20 degrees of yaw with frame-rate-independent Three.js damping. Tracking includes overlaid copy/buttons, resets on leave/cancel/scroll/resize/window blur, and is disabled for reduced motion or non-mouse/coarse input. Hero drag-orbit controls are removed; the DevOS atom window retains OrbitControls, and inner atom/electron animation is unchanged.
+- The desktop hero is now isolated in `HomeHero` and `HeroScene`, with a bounded left-shifted camera projection and an optional-scene error boundary. Atom geometry and base pose are preserved; the default DevOS window layout retains its previous framing. Current motion/timing behavior is recorded below.
+- Homepage atom tilt follows mouse position within the hero through a separate parent group, bounded to 12 degrees of pitch and 20 degrees of yaw with frame-rate-independent Three.js damping. Tracking includes overlaid copy/buttons, resets on leave/cancel/scroll/resize/window blur, and is disabled for reduced motion or non-mouse/coarse input. Hero drag-orbit controls are removed; the DevOS atom window retains OrbitControls. Motion/visibility policies now also pause the inner hero animation when appropriate.
 - The placeholder header logo was removed at the owner's request. Navigation stays right-aligned, with Home in the existing dropdown.
 - Starbounder remains a 2D game. A 3D planet preview is not planned for its current case study because it would misrepresent the game. A future 3D remake is only an owner idea, not portfolio scope.
 - Desktop home now follows introduction -> selected projects -> skills. `getHomeProjects` explicitly selects Starbounder first, then RAG; the unfinished DevOS portfolio is not included here. This selection is independent of the general `featured` flag used elsewhere.
@@ -58,7 +59,7 @@ The ASP.NET project exists as a future backend placeholder. It should remain out
 - DevOS Component Lab was added as a localized design-system showcase for theme tokens, typography, and component states.
 - i18next/react-i18next was added for in-app bilingual content without `/en` or `/cs` URL prefixes.
 - Project and service metadata moved from static TypeScript arrays into localized JSON resources.
-- The `/services` directory was redesigned as a stronger localized service-track grid backed by the same content model.
+- The `/services` directory is a compact localized track list backed by the same content model.
 - Detailed service pages were consolidated into one localized `ServiceDetailPage` fed by service detail content.
 - Canonical routes were moved to lowercase paths with redirects from legacy mixed-case routes.
 - Prototype service forms were hidden and replaced by direct contact CTA links.
@@ -78,11 +79,7 @@ npm run build
 npm audit
 ```
 
-Expected audit state:
-
-```text
-found 0 vulnerabilities
-```
+Run the dependency audit when verifying a release; advisory results are time-dependent. A previous clean audit is not a guarantee about the current registry state.
 
 The production build still reports a large chunk warning for the isolated `AtomScene` chunk. This is acceptable because the chunk contains Three.js dependencies and is loaded only where the 3D scene is used.
 
@@ -117,6 +114,26 @@ Project case-study content is optional per project. Use it when a project needs 
 The `unity-graduation-game` ID remains stable, but its content now describes Starbounder: procedural space exploration, mining, colony building, Jobs/Burst generation, UI Toolkit, and per-galaxy saves. It is explicitly a prototype, not a finished game. See [Starbounder source notes](STARBOUNDER.md) for the reviewed local snapshot, reported performance figures, media provenance, and future work.
 
 General UI translations live in `web.client/src/i18n/locales/*/common.json`. DevOS-specific labels, terminal output, About Me profile copy, and Component Lab copy live in `web.client/src/i18n/locales/*/devos.json`. The current language is stored in `localStorage` as `portfolio.locale` and controlled from Preferences.
+
+## Public Web Readiness
+
+- The owner accepted desktop appearance/colors, spacing, keyboard operation, and ultrawide emulation. Atom loading at roughly 500ms is owner-reported, not an agent benchmark. Physical ultrawide and mobile/tablet acceptance remain separate checks.
+- The public hero now follows live reduced motion with a complete static atom and demand rendering, not just disabled mouse tracking. Hidden/offscreen heroes stop their frame loop; visible full-motion heroes resume with bounded deltas. Hero DPR is capped at 1.5. The DevOS default frame loop/camera/controls are preserved.
+- `atomParticles.ts` owns initialized orbit trails and elapsed-time orbital updates, eliminating refresh-rate-dependent electron speed and the initial zero-position trails. `heroActivity.ts` owns visibility policy/subscriptions. `Hooks/useReducedMotion.ts` uses a live external-store subscription. Global reduced-motion styles disable CSS and native route view-transition animations.
+- Media dimensions/fallbacks are preserved. Background detail covers and opened viewer images use eager/high priority; inline RAG previews and below-fold media are lazy/async, and inactive carousel covers use low priority. Browser thresholds/priorities are hints, not guaranteed request ordering. Responsive image variants can be assessed alongside mobile if needed.
+- The site is already hosted on Oracle via a temporary unreserved IP, with no stable domain yet. `deploy/nginx.conf` and `deploy/upload.sh` are versioned templates/workflows without hardcoded IPs or keys; no live upload/reload was performed. The ignored local `web.client/deploy.sh` was preserved as legacy configuration and should not be used for new uploads because it deletes the old build first. See `docs/DEPLOYMENT.md` for migration and checks.
+- The Nginx template covers deep-link fallback without the `/projects` public-directory conflict, missing asset 404s, caching/compression, and temporary host noindex. Unknown SPA pages still get HTTP 200 plus React's 404, not genuine route-aware server statuses. Permanent SEO/sharing URLs, preview image, HTTPS on the stable origin, and prerendering remain later work.
+- Vite builds no longer generate/read development certificates or invoke .NET. Local serving reuses existing PEM files, otherwise falls back to HTTP; `DEV_HTTPS=false` forces HTTP. This makes frontend CI/builds independent of the parked backend.
+- Tests cover motion policy, listeners/cleanup/fallbacks, frame-rate timing, initialized trails, hero-vs-DevOS boundaries, CSS reduced motion, image hints, and deployment order/failure/dry-run using fake transports. Node-only deployment tests live in `web.client/tests/`. Native screenshots/canvas-pixel checks are still blocked by Chromium sandbox startup restrictions; Vite binding and connections to the live IP also failed from this environment. Nginx is unavailable locally, so its template must be syntax/integration-tested on the host.
+- Next: finish the short real-browser motion/media pass, then implement responsive mobile/tablet/small-screen layouts as a continuous range, not a phone/desktop-only split. Backend and DevOS remain deferred.
+
+## Documentation and Publication
+
+- The root README is now the concise English GitHub-facing overview. Detailed implementation/workflow notes remain in `web.client/README.md`; decisions and verification limits remain here rather than being duplicated as a public changelog.
+- `docs/PUBLICATION.md` records the pre-publication checklist. No visibility change, commit/push, license choice, or history rewrite has been performed. The repository remains private until the owner decides otherwise.
+- Current source notes omit the restricted Unity repository URL and local absolute checkout path while preserving the provenance and prototype limitations. This does not remove the older strings from history.
+- Local history still contains `.vs/` IDE/Copilot databases, generated build data, and author/committer contact identities from the initial commits. These require an explicit publication decision; no actual credential was identified by the limited text-pattern/manual settings review. Binary contents and GitHub-side artifacts were not comprehensively audited.
+- Public contact fields remain intentional owner-supplied content. No project-wide license is present; bundled font attribution does not choose a license for the source or project media. Common key/certificate extensions are now ignored to reduce accidental additions.
 
 ## Next Work Candidates
 
