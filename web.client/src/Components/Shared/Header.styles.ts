@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Link } from 'react-router';
+import PublicLink from './PublicLink';
 import { focusRing } from './controlStyles';
 import { navigationContentWidth } from '../../styles/layout';
 import { IconLink } from './Actions';
@@ -29,6 +29,7 @@ const navigationControl = css`
 `;
 
 export const StyledHeader = styled.header`
+  view-transition-name: portfolio-header;
   position: fixed;
   top: 0;
   left: 0;
@@ -95,7 +96,7 @@ export const NavLinks = styled.div`
   &[hidden] { display: none; }
 `;
 
-export const StyledNavLink = styled(Link)`${navigationControl}`;
+export const StyledNavLink = styled(PublicLink)`${navigationControl}`;
 export const StyledNavButton = styled.button`${navigationControl}`;
 
 export const SubMenuTrigger = styled(StyledNavButton)`
@@ -125,7 +126,7 @@ export const SubMenu = styled.div`
   &[hidden] { display: none; }
 `;
 
-export const SubMenuLink = styled(Link)`
+export const SubMenuLink = styled(PublicLink)`
   ${navigationControl}
   font-size: 0.875rem;
 `;

@@ -265,7 +265,6 @@ export default function ProjectDetailPage() {
                   <RelatedLink
                     key={item.id}
                     to={`/projects/${item.id}`}
-                    viewTransition
                   >
                     {item.name}
                   </RelatedLink>

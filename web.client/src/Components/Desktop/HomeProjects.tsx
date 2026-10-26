@@ -23,7 +23,7 @@ export default function HomeProjects() {
             <SectionTitle id="home-projects-title">{t('home.projectsTitle')}</SectionTitle>
             <Copy>{t('home.projectsDescription')}</Copy>
           </HeadingCopy>
-          <TextLink to="/projects" viewTransition>
+          <TextLink to="/projects">
             {t('home.allProjects')} <ArrowRight size={18} />
           </TextLink>
         </SectionHeading>
@@ -32,7 +32,7 @@ export default function HomeProjects() {
             const path = `/projects/${project.id}`;
             return (
               <ProjectRow key={project.id} aria-labelledby={`home-project-${project.id}`}>
-                <MediaLink to={path} viewTransition
+                <MediaLink to={path}
                   aria-label={t('home.projectDetail', { name: project.name })}
                   $gradient={projectGradients[project.id] ?? fallbackGradient}>
                   {project.cover?.src.trim() && (
@@ -46,7 +46,7 @@ export default function HomeProjects() {
                   <ProjectStack aria-label={t('projectsPage.technologiesTitle')}>
                     {project.technologies.slice(0, 4).map(technology => <li key={technology}>{technology}</li>)}
                   </ProjectStack>
-                  <TextLink to={path} viewTransition aria-label={t('home.projectDetail', { name: project.name })}>
+                  <TextLink to={path} aria-label={t('home.projectDetail', { name: project.name })}>
                     {t('projectsPage.viewDetail')} <ArrowRight size={18} />
                   </TextLink>
                 </ProjectCopy>

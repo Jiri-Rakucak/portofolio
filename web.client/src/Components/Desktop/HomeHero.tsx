@@ -21,10 +21,10 @@ export default function HomeHero() {
           <Identity>{t('home.heroTitle')}</Identity>
           <Intro>{t('home.heroIntro')}</Intro>
           <Actions>
-            <PrimaryLink to="/projects" viewTransition>
+            <PrimaryLink to="/projects">
               {t('home.exploreProjects')} <ArrowRight size={16} />
             </PrimaryLink>
-            <TextLink to="/devos">
+            <TextLink to="/devos" viewTransition={false}>
               <TerminalIcon size={18} /> {t('home.launchDevos')}
             </TextLink>
           </Actions>

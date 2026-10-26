@@ -5,6 +5,7 @@ import Text from '../../Components/Shared/Typography';
 import { getServiceById } from '../../content/services';
 import { useLocale } from '../../i18n/useLocale';
 import { angledSection } from '../../styles/angledSection';
+import { ServiceTitle } from '../../Components/Shared/ServiceTitle';
 
 const Container = styled.div`
     background: ${({ theme }) => theme.colors.background};
@@ -22,12 +23,6 @@ const HeroSection = styled.section`
     flex-direction: column;
     align-items: center;
     text-align: center;
-`;
-
-const HeroTitleWrapper = styled.div<{ $viewTransitionName: string }>`
-    view-transition-name: ${({ $viewTransitionName }) => $viewTransitionName};
-    width: fit-content;
-    display: inline-block;
 `;
 
 const Description = styled.div`
@@ -164,9 +159,9 @@ export default function ServiceDetailPage({ serviceId }: ServiceDetailPageProps)
     return (
         <Container>
             <HeroSection>
-                <HeroTitleWrapper $viewTransitionName={service.viewTransitionName}>
-                    <Text variant="h1">{service.detail.title}</Text>
-                </HeroTitleWrapper>
+                <Text variant="h1" as="h1">
+                    <ServiceTitle $transitionName={service.viewTransitionName}>{service.detail.title}</ServiceTitle>
+                </Text>
                 <Description>
                     <Text variant="h3">{service.detail.subtitle}</Text>
                 </Description>
@@ -220,7 +215,7 @@ export default function ServiceDetailPage({ serviceId }: ServiceDetailPageProps)
                     <Text variant="bodyS">{service.detail.relatedDescription}</Text>
                     <RelatedActions>
                         {service.detail.relatedLinks.map(link => (
-                            <ServiceLink key={link.route} to={link.route} viewTransition>
+                            <ServiceLink key={link.route} to={link.route}>
                                 {link.label}
                             </ServiceLink>
                         ))}

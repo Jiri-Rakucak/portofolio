@@ -34,12 +34,14 @@ describe('public contact information', () => {
         expect(html).not.toContain('{{city}}');
     });
 
-    it('preserves the encoded LinkedIn URL across the header, footer, and service contact', async () => {
+    it('uses the corrected GitHub profile and encoded LinkedIn URL across public contact links', async () => {
+        expect(contact.githubUrl).toBe('https://github.com/Jiri-Rakucak');
         for (const component of [<Header />, <Footer />, <ServicePage />]) {
             const html = await render(component);
 
             expect(html).toContain(`href="${contact.linkedinUrl}"`);
             expect(html).toContain(`href="${contact.githubUrl}"`);
+            expect(html).not.toContain('href="https://github.com/jirirakucak"');
             expect(html).not.toContain('linkedin.com/in/jirirakucak');
         }
     });
@@ -61,6 +63,7 @@ describe('public contact information', () => {
         expect(output).toContain(contact.email);
         expect(output).toContain(contact.phoneDisplay);
         expect(output).toContain(contact.linkedinUrl);
+        expect(output).toContain(contact.githubUrl);
         expect(output).not.toContain('{{');
     });
 });

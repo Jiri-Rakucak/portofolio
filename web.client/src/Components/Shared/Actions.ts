@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Link } from 'react-router';
+import PublicLink from './PublicLink';
 import { actionForeground } from './actionContrast';
 
 export type ActionVariant = 'primary' | 'secondary' | 'link' | 'icon';
@@ -93,7 +93,7 @@ const actionStyles = css<ActionProps>`
 `;
 
 // Keep navigation and commands as distinct, natively typed elements.
-export const ActionLink = styled(Link)<ActionProps>`${actionStyles}`;
+export const ActionLink = styled(PublicLink)<ActionProps>`${actionStyles}`;
 export const ActionAnchor = styled.a<ActionProps>`${actionStyles}`;
 export const ActionButton = styled.button.attrs({ type: 'button' })<ActionProps>`${actionStyles}`;
 export const PrimaryLink = styled(ActionLink).attrs({ $variant: 'primary' })``;

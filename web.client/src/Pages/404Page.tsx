@@ -15,11 +15,11 @@ const Page404 = () => {
         <Heading id={headingId}>{t('notFound.title')}</Heading>
         <Message>{t('notFound.description')}</Message>
         <Actions>
-          <PrimaryLink to="/" viewTransition>
+          <PrimaryLink to="/">
             <span aria-hidden="true"><ArrowLeft size={16} /></span>
             {t('notFound.home')}
           </PrimaryLink>
-          <SecondaryLink to="/projects" viewTransition>{t('notFound.projects')}</SecondaryLink>
+          <SecondaryLink to="/projects">{t('notFound.projects')}</SecondaryLink>
         </Actions>
       </Content>
     </Page>

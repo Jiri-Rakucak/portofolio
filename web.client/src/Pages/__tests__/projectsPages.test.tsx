@@ -141,7 +141,8 @@ describe('project carousel', () => {
 
         expect(html).toContain('aria-label="Předchozí projekt"');
         expect(html).toContain('aria-label="Další projekt"');
-        expect(html.match(/inert=""/g)).toHaveLength(projectContent.getPortfolioProjects('cs').length);
+        expect(html.match(/inert=""/g)).toHaveLength(projectContent.getPortfolioProjects('cs').length + 1);
+        expect(html).not.toContain('aria-current="true"');
     });
 
     it('handles a catalog with only one project', async () => {
@@ -151,7 +152,7 @@ describe('project carousel', () => {
         const html = await renderPage('/projects');
 
         expect(html).toContain(project.name);
-        expect(html.match(/inert=""/g)).toHaveLength(1);
+        expect(html.match(/inert=""/g)).toHaveLength(2);
         expect(html).toMatch(/<button[^>]*aria-label="Next project"/);
     });
 

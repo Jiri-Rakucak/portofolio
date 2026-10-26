@@ -9,7 +9,7 @@ import { LanguageContext } from '../../i18n/LanguageContext';
 import { darkTheme, lightTheme, type Theme } from '../../styles/theme';
 import HomeLayout from '../../Components/Desktop/DesktopHomeLayout';
 import { HeroSection, HeroImage, HeroContent } from '../ProjectsPages/ProjectDetailPage.styles';
-import { CarouselViewport, CarouselTrack, CarouselControls, Slide, SlideMedia, SlideContent } from '../ProjectsPages/ProjectsPage.styles';
+import { CarouselViewport, CarouselTrack, CarouselControls, Slide, SlideMedia, SlideContent, IntroOverlay, DotRow, Dot } from '../ProjectsPages/ProjectsPage.styles';
 
 function render(element: ReactElement, theme: Theme) {
     const sheet = new ServerStyleSheet();
@@ -42,7 +42,7 @@ describe.each([darkTheme, lightTheme])('responsive portfolio style contracts', t
     it('reserves separate media space and removes viewport height constraints on narrow carousels', () => {
         const { css } = render(<>
             <CarouselViewport>
-                <CarouselTrack $offset={-100} $introVisible={false}>
+                <CarouselTrack $offset={-100}>
                     <Slide $bg="#333" $hasCover $active>
                         <SlideMedia $bg="#333" /><SlideContent>Project</SlideContent>
                     </Slide>
@@ -54,10 +54,41 @@ describe.each([darkTheme, lightTheme])('responsive portfolio style contracts', t
         expect(css).toContain('min-height:max(520px, calc(100svh - 120px))');
         expect(css).toContain('touch-action:pan-y pinch-zoom;');
         expect(css).toContain('height:auto;min-height:0;border-radius:0;');
-        expect(css).toContain('display:grid;height:auto;transform:none;transition:none;');
-        expect(css).toContain('position:relative;inset:auto;width:100%;aspect-ratio:16/9;');
-        expect(css).toContain('display:none;height:auto;min-width:0;');
+        expect(css).toContain('display:grid;grid-area:1/1;height:auto;transform:none;transition:none;');
+        expect(css).toContain('position:relative;inset:auto;width:100%;aspect-ratio:16/9;flex-shrink:0;');
+        expect(css).toContain('grid-area:1/1;visibility:hidden;justify-content:flex-start;height:auto;min-width:0;');
         expect(css).toContain('position:relative;inset:auto;display:flex;justify-content:center;');
+    });
+
+    it.each([true, false])('keeps the intro, inactive slides, and hidden dots in layout (intro %s)', introVisible => {
+        const { html, css } = render(<>
+            <CarouselViewport>
+                <IntroOverlay $visible={introVisible} inert={!introVisible} aria-hidden={!introVisible}>
+                    Introduction
+                </IntroOverlay>
+                <CarouselTrack $offset={0}>
+                    <Slide $bg="#333" $hasCover={false} $active={!introVisible} inert={introVisible} aria-hidden={introVisible}>
+                        <SlideMedia $bg="#333" /><SlideContent>Short project</SlideContent>
+                    </Slide>
+                    <Slide $bg="#333" $hasCover={false} $active={false} inert aria-hidden>
+                        <SlideMedia $bg="#333" /><SlideContent>A longer project with wrapping content</SlideContent>
+                    </Slide>
+                </CarouselTrack>
+            </CarouselViewport>
+            <CarouselControls>
+                <DotRow $visible={!introVisible} inert={introVisible} aria-hidden={introVisible}>
+                    <Dot $active={!introVisible} type="button" aria-label="Short project" />
+                </DotRow>
+            </CarouselControls>
+        </>, theme);
+        expect(css).toContain('grid-area:1/1;visibility:hidden;justify-content:flex-start;');
+        expect(css).toContain('grid-area:1/1;position:relative;inset:auto;min-height:280px;');
+        expect(css).toContain(`gap:1rem;visibility:${introVisible ? 'hidden' : 'visible'};`);
+        const removedFromLayout = css.match(/[^{}]*\{[^{}]*display:none;[^{}]*\}/g) ?? [];
+        expect(removedFromLayout.every(rule => rule.includes('::before'))).toBe(true);
+        expect(css).not.toContain('position:fixed');
+        expect(html).toContain('A longer project with wrapping content');
+        expect(html).toContain('aria-label="Short project"');
     });
 
     it('keeps a desktop background cover but places media before text on narrow project details', () => {

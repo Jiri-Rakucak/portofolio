@@ -4,11 +4,12 @@ import { useTranslation } from "react-i18next";
 import GitHubIcon from "../Icons/Github";
 import LinkedInIcon from '../Icons/Linkedin';
 import Text from "./Typography";
-import { Link } from "react-router";
+import PublicLink from './PublicLink';
 import { contact } from '../../content/contact';
 import { IconLink } from './Actions';
 
 const StyledFooter = styled.footer`
+  view-transition-name: portfolio-footer;
   background: ${({ theme }) => theme.colors.backgroundSecondary};
   color: ${({ theme }) => theme.colors.text};
   padding: 60px 0 20px;
@@ -99,7 +100,7 @@ const FooterList = styled.ul`
   gap: 8px;
 `;
 
-const FooterLink = styled(Link)`
+const FooterLink = styled(PublicLink)`
   color: ${({ theme }) => theme.colors.textSecondary};
   text-decoration: none;
   transition:
@@ -204,27 +205,27 @@ const Footer: React.FC = () => {
             <SectionTitle>{t("footer.services")}</SectionTitle>
             <FooterList>
               <li>
-                <FooterLink to="/services/frontend-development" viewTransition>
+                <FooterLink to="/services/frontend-development">
                   <Text variant="bodyS">{t("footer.serviceLinks.web")}</Text>
                 </FooterLink>
               </li>
               <li>
-                <FooterLink to="/services/game-and-3d-graphics" viewTransition>
+                <FooterLink to="/services/game-and-3d-graphics">
                   <Text variant="bodyS">{t("footer.serviceLinks.unity")}</Text>
                 </FooterLink>
               </li>
               <li>
-                <FooterLink to="/services/game-and-3d-graphics" viewTransition>
+                <FooterLink to="/services/game-and-3d-graphics">
                   <Text variant="bodyS">{t("footer.serviceLinks.threeD")}</Text>
                 </FooterLink>
               </li>
               <li>
-                <FooterLink to="/services/ux-ui-design" viewTransition>
+                <FooterLink to="/services/ux-ui-design">
                   <Text variant="bodyS">{t("footer.serviceLinks.design")}</Text>
                 </FooterLink>
               </li>
               <li>
-                <FooterLink to="/services/consulting" viewTransition>
+                <FooterLink to="/services/consulting">
                   <Text variant="bodyS">
                     {t("footer.serviceLinks.consulting")}
                   </Text>

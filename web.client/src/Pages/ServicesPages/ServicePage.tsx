@@ -6,6 +6,7 @@ import { getServices } from '../../content/services';
 import { useLocale } from '../../i18n/useLocale';
 import { contact } from '../../content/contact';
 import { angledSection } from '../../styles/angledSection';
+import { ServiceTitle } from '../../Components/Shared/ServiceTitle';
 
 const Container = styled.div`
     background: ${({ theme }) => theme.colors.background};
@@ -219,10 +220,12 @@ export default function ServicePage() {
                     <ServiceList>
                         {services.map((service, index) => (
                             <ServiceItem key={service.id}>
-                                <ServiceText style={{ viewTransitionName: service.viewTransitionName }}>
+                                <ServiceText>
                                     <TitleRow>
                                         <ServiceIndex>{String(index + 1).padStart(2, '0')}</ServiceIndex>
-                                        <Text variant="h3">{service.title}</Text>
+                                        <Text variant="h3" as="h3">
+                                            <ServiceTitle $transitionName={service.viewTransitionName}>{service.title}</ServiceTitle>
+                                        </Text>
                                     </TitleRow>
 
                                     <ServiceDescription>{service.description}</ServiceDescription>
@@ -234,7 +237,7 @@ export default function ServicePage() {
                                     </TagRow>
                                 </ServiceText>
 
-                                <ServiceLink to={service.route} viewTransition>
+                                <ServiceLink to={service.route}>
                                     {t('servicesPage.exploreDetails')}
                                 </ServiceLink>
                             </ServiceItem>

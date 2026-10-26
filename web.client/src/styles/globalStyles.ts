@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import type { Theme } from './theme';
+import { pageTransitions } from './pageTransitions';
 
 export const GlobalStyles = createGlobalStyle<{ theme: Theme }>`
 
@@ -60,21 +61,7 @@ export const GlobalStyles = createGlobalStyle<{ theme: Theme }>`
     color: #ffffff;
   }
 
-    @keyframes slide-to-left {
-    to { transform: translateX(-20%); opacity: 0; }
-  }
-
-  @keyframes slide-from-right {
-    from { transform: translateX(20%); opacity: 0; }
-  }
-
-  ::view-transition-old(root) {
-    animation: 400ms ease both ;
-  }
-
-  ::view-transition-new(root) {
-    animation: 400ms ease both ;
-  }
+  ${pageTransitions}
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {

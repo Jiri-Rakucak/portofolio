@@ -43,7 +43,7 @@ export const CarouselViewport = styled.section`
   }
 `;
 
-export const CarouselTrack = styled.div<{ $offset: number; $introVisible: boolean }>`
+export const CarouselTrack = styled.div<{ $offset: number }>`
   display: flex;
   min-width: 0;
   width: 100%;
@@ -53,7 +53,9 @@ export const CarouselTrack = styled.div<{ $offset: number; $introVisible: boolea
     transition: none;
   }
   @media (max-width: 900px) {
-    display: ${({ $introVisible }) => $introVisible ? 'none' : 'grid'};
+    /* Hidden slides still contribute their full content height. */
+    display: grid;
+    grid-area: 1 / 1;
     height: auto;
     transform: none;
     transition: none;
@@ -81,7 +83,9 @@ export const Slide = styled.div<{ $bg: string; $hasCover: boolean; $active: bool
     -webkit-backdrop-filter: ${({ $hasCover }) => $hasCover ? 'none' : 'blur(40px) saturate(1.4)'};
   }
   @media (max-width: 900px) {
-    display: ${({ $active }) => $active ? 'flex' : 'none'};
+    grid-area: 1 / 1;
+    visibility: ${({ $active }) => $active ? 'visible' : 'hidden'};
+    justify-content: flex-start;
     height: auto;
     min-width: 0;
     background: ${({ theme }) => theme.colors.background};
@@ -98,6 +102,7 @@ export const SlideMedia = styled.div<{ $bg: string }>`
     inset: auto;
     width: 100%;
     aspect-ratio: 16 / 9;
+    flex-shrink: 0;
   }
 `;
 
@@ -199,7 +204,7 @@ export const IntroOverlay = styled.div<{ $visible: boolean }>`
   visibility: ${({ $visible }) => ($visible ? "visible" : "hidden")};
   pointer-events: ${({ $visible }) => ($visible ? "auto" : "none")};
   @media (max-width: 900px) {
-    display: ${({ $visible }) => $visible ? 'flex' : 'none'};
+    grid-area: 1 / 1;
     position: relative;
     inset: auto;
     min-height: 280px;
@@ -271,7 +276,7 @@ export const ArrowButton = styled(IconButton)<{ $side: "left" | "right" }>`
 
 
 
-export const DotRow = styled.div`
+export const DotRow = styled.div<{ $visible?: boolean }>`
   position: absolute;
   bottom: 2rem;
   left: 50%;
@@ -279,6 +284,7 @@ export const DotRow = styled.div`
   z-index: 5;
   display: flex;
   gap: 1rem;
+  visibility: ${({ $visible = true }) => $visible ? 'visible' : 'hidden'};
   @media (max-width: 900px) {
     position: static;
     transform: none;

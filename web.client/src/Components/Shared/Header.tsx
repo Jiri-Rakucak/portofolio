@@ -45,7 +45,7 @@ const Header = () => {
                                 title={t(isOpen ? 'navigation.closeMenu' : 'navigation.openMenu')}
                                 onClick={activate} />
                             <NavLinks id={menuId} hidden={!isOpen}>
-                                <StyledNavLink to="/" viewTransition onClick={close}>
+                                <StyledNavLink to="/" onClick={close}>
                                     <HomeIcon size={20} /><Text as="span" variant="bodyS">{t('navigation.home')}</Text>
                                 </StyledNavLink>
                                 <div>
@@ -58,21 +58,21 @@ const Header = () => {
                                         <Chevron aria-hidden="true" $expanded={servicesOpen}>▼</Chevron>
                                     </SubMenuTrigger>
                                     <SubMenu id={servicesId} hidden={!servicesOpen}>
-                                        <SubMenuLink to="/services/frontend-development" viewTransition onClick={close}>
+                                        <SubMenuLink to="/services/frontend-development" onClick={close}>
                                             {t('navigation.frontend')}
                                         </SubMenuLink>
-                                        <SubMenuLink to="/services/backend-and-systems" viewTransition onClick={close}>
+                                        <SubMenuLink to="/services/backend-and-systems" onClick={close}>
                                             {t('navigation.backend')}
                                         </SubMenuLink>
-                                        <SubMenuLink to="/services" viewTransition onClick={close}>
+                                        <SubMenuLink to="/services" onClick={close}>
                                             {t('navigation.fullServices')}
                                         </SubMenuLink>
                                     </SubMenu>
                                 </div>
-                                <StyledNavLink to="/projects" viewTransition onClick={close}>
+                                <StyledNavLink to="/projects" onClick={close}>
                                     <DashboardIcon size={24} /><Text as="span" variant="bodyS">{t('navigation.projects')}</Text>
                                 </StyledNavLink>
-                                <StyledNavLink to="/admin" viewTransition onClick={close}>
+                                <StyledNavLink to="/admin" viewTransition={false} onClick={close}>
                                     <AdminIcon size={18} /><Text as="span" variant="bodyS">{t('navigation.admin')}</Text>
                                 </StyledNavLink>
                                 <StyledNavButton type="button" aria-haspopup="dialog" onClick={() => {

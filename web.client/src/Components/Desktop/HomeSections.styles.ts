@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from 'react-router';
+import PublicLink from '../Shared/PublicLink';
 import PortfolioImage from '../../Pages/ProjectsPages/PortfolioImage';
 import { angledSection } from '../../styles/angledSection';
 import { TextLink as SharedTextLink } from '../Shared/Actions';
@@ -76,7 +76,7 @@ export const ProjectRow = styled.article`
   }
 `;
 
-export const MediaLink = styled(Link)<{ $gradient: string }>`
+export const MediaLink = styled(PublicLink)<{ $gradient: string }>`
   display: block;
   position: relative;
   width: 100%;

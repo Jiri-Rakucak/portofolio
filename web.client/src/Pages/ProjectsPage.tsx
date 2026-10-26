@@ -89,7 +89,7 @@ export default function ProjectsPage() {
             </IntroOverlay>
 
             {/* Slides */}
-            <CarouselTrack $offset={-activeIndex * 100} $introVisible={introVisible}>
+            <CarouselTrack $offset={-activeIndex * 100}>
               {projects.map((project, index) => {
                 const cover = project.cover?.src?.trim() && project.cover.presentation !== 'inline'
                   ? project.cover
@@ -100,7 +100,7 @@ export default function ProjectsPage() {
                     key={project.id}
                     $bg={projectGradients[project.id] ?? fallbackGradient}
                     $hasCover={Boolean(cover)}
-                    $active={index === activeIndex}
+                    $active={!introVisible && index === activeIndex}
                     role="group"
                     aria-label={project.name}
                     inert={introVisible || index !== activeIndex}
@@ -145,15 +145,13 @@ export default function ProjectsPage() {
           >
             <ArrowLeft size={24} />
           </ArrowButton>
-          {!introVisible && (
-            <DotRow>
-              {projects.map((project, index) => (
-                <Dot key={project.id} $active={index === activeIndex}
-                  onClick={() => goTo(index)} aria-label={project.name}
-                  aria-current={index === activeIndex ? 'true' : undefined} type="button" />
-              ))}
-            </DotRow>
-          )}
+          <DotRow $visible={!introVisible} inert={introVisible} aria-hidden={introVisible}>
+            {projects.map((project, index) => (
+              <Dot key={project.id} $active={index === activeIndex}
+                onClick={() => goTo(index)} aria-label={project.name}
+                aria-current={!introVisible && index === activeIndex ? 'true' : undefined} type="button" />
+            ))}
+          </DotRow>
           <ArrowButton
             $side="right"
             onClick={goNext}
@@ -175,7 +173,7 @@ export default function ProjectsPage() {
               <DetailBlock>
                 <Text variant="h2" as="h2">{t("projectsPage.overviewTitle")}</Text>
                 <DetailBody>{active.description}</DetailBody>
-                <DetailLink to={`/projects/${active.id}`} viewTransition>
+                <DetailLink to={`/projects/${active.id}`}>
                   {t("projectsPage.viewDetail")} <ArrowRight size={18} />
                 </DetailLink>
               </DetailBlock>
