@@ -31,6 +31,8 @@ npm run build
 npm audit
 ```
 
+The `minimatch@^10.0.0` override temporarily replaces the lint tools' transitive minimatch 10 dependency with patched minimatch 11 for [GHSA-g3hv-75wg-m249](https://github.com/advisories/GHSA-g3hv-75wg-m249). It crosses a major version boundary, so keep lint, tests, and build passing when updating dependencies. Remove the override once the upstream tools use a patched version. Avoid running `npm audit fix --force` blindly: it can downgrade the lint stack to incompatible versions without resolving the underlying advisory.
+
 The Vite dev server uses existing local HTTPS PEM certificates when available; otherwise it falls back to HTTP. It never generates certificates or invokes .NET. Builds are Node/npm-only. The default port is:
 
 ```text
