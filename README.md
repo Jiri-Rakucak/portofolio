@@ -4,16 +4,18 @@ A personal portfolio built with React and TypeScript, combining bilingual projec
 
 This is both the source of my portfolio and a place to explore frontend architecture, accessible interactions, and real-time graphics. The public website is the main product; DevOS is an ongoing experiment.
 
+[**Live demo →**](http://92.5.37.51/) — currently hosted on a temporary IP address, without a domain.
+
+[![Portfolio homepage in English, showing the interactive atom scene, introduction, and project links.](docs/images/portfolio-homepage.png)](http://92.5.37.51/)
+
 [Getting Started](#getting-started) · [Technical Decisions](#technical-decisions) · [Project Structure](#project-structure) · [Documentation](#documentation)
 
 ## Highlights
 
 - **English and Czech:** localized interface and project content, with language switching on the same URLs.
-- **Project case studies:** structured stories, technologies, screenshots, and a keyboard-accessible image viewer.
-- **Responsive homepage:** shared project and skill sections, a text-first mobile introduction, and an optional desktop atom scene with bounded mouse tilt and reduced-motion support.
-- **Personal preferences:** system/light/dark themes, with separate custom color palettes saved for each theme.
-- **Shared content:** the website and DevOS Explorer, Browser, Terminal, and project windows read from the same typed content model.
-- **DevOS:** draggable and resizable windows, a taskbar, project discovery, a portfolio CLI, and a component lab.
+- **Responsive interface:** project case studies and skills, with a text-first mobile introduction.
+- **Optional 3D scene:** an interactive desktop atom scene with bounded mouse tilt and reduced-motion support.
+- **DevOS:** an experimental desktop environment for exploring the portfolio through windows and a terminal.
 
 ## Built With
 
@@ -31,13 +33,9 @@ The ASP.NET shell in `Web.Server/` is parked. The portfolio runs as a static fro
 
 **One content model, multiple views.** Localized JSON holds project and skill content; typed accessors keep public pages and DevOS consumers aligned. Adding a project does not require adding a route or copying metadata into components.
 
-**Keep optional graphics optional.** DevOS and the Three.js scene have separate lazy boundaries. The homepage scene has an error boundary, so a rendering failure does not remove navigation or the introduction. Orbital timing uses elapsed time rather than display refresh rate.
+**Load graphics separately.** DevOS and the Three.js scene are lazy-loaded independently of the public pages. The homepage scene has an error boundary, so a rendering failure does not remove navigation or the introduction.
 
-**Use browser primitives.** Navigation uses native buttons and links. Preferences and the image viewer use native dialogs for modal focus containment. The theme selector uses grouped radio inputs; language controls expose their selected state.
-
-**Respect motion and loading preferences.** Reduced motion disables homepage animation and CSS/view transitions. Images reserve their layout space, load lazily below the fold, and have accessible failure states. Above-the-fold project covers receive explicit loading-priority hints.
-
-**Make the static deployment explicit.** Browser metadata is localized per route. Deployment templates handle SPA deep links, static-asset errors, and caching; uploads publish assets before the HTML entry point and retain older lazy chunks.
+**Build accessible interactions.** Native buttons, links, radio inputs, and dialogs support keyboard navigation and modal focus containment. Reduced-motion preferences disable homepage animation and page transitions.
 
 ## Getting Started
 
@@ -92,9 +90,7 @@ For content edits, start with `web.client/src/i18n/locales/{en,cs}/content.json`
 
 ## Current Status
 
-The public portfolio has an initial responsive implementation across mobile and desktop. Narrow project layouts separate media from text, and the carousel supports touch gestures alongside buttons and keyboard navigation. Shared action styles keep public CTAs consistent. Device testing and visual refinements remain in progress. Parts of DevOS and the login/admin routes are prototypes, not a working authentication or content-management system.
-
-Desktop appearance and keyboard operation have been manually reviewed. Native browser verification of the latest motion/media changes and broader device coverage remain ongoing. Route-specific prerendering and permanent social-sharing metadata are not implemented yet.
+The public portfolio has an initial responsive implementation for mobile and desktop, with device testing and visual refinements still in progress. DevOS and the login/admin routes remain prototypes; authentication and content management are not functional.
 
 ## Related Work
 
@@ -105,10 +101,6 @@ Desktop appearance and keyboard operation have been manually reviewed. Native br
 
 - [Frontend Guide](web.client/README.md): workflow, content model, localization, and implementation details.
 - [Deployment](docs/DEPLOYMENT.md): domain-independent hosting templates, upload procedure, and browser checks.
-- [Project Context](docs/CONTEXT.md): current decisions, verification limits, and next work.
-- [Starbounder Notes](docs/STARBOUNDER.md): case-study sources and prototype scope.
-- [Agent Instructions](AGENTS.md): repository conventions for coding assistants.
-- [Publication Checklist](docs/PUBLICATION.md): checks before changing repository visibility.
 
 ## Credits and Licensing
 
